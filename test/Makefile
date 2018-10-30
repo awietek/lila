@@ -6,7 +6,7 @@ LAPACKLIB = -llapack -lblas
 INCLUDE   = -I..
 
 EXECUTABLE = tests
-OBJECTS    = tests.o test_matrix.o test_special.o test_random.o test_mult.o test_vector.o  
+OBJECTS    = tests.o test_matrix.o test_special.o test_random.o test_mult.o test_vector.o test_solve.o test_matrixstring.o test_qr.o test_eigen.o
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CCARCH) $(CCOPT) -o $(EXECUTABLE) $(OBJECTS) $(LAPACKLIB)   

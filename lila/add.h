@@ -15,35 +15,43 @@
 #ifndef LILA_ADD_H_
 #define LILA_ADD_H_
 
+#include <cassert>
+#include <algorithm>
+
 #include "blaslapack.h"
 
 namespace lila {
+  
+  template <class coeff_t, template<class> class object_t, class function_t>
+  inline void Map(object_t<coeff_t>& X, function_t func)
+  { std::for_each(X.begin(), X.end(), func); }
+
 
   template <class coeff_t, template<class> class object_t>
-  inline void copy(const object_t<coeff_t>& X,  object_t<coeff_t>& Y)
+  inline void Copy(const object_t<coeff_t>& X,  object_t<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
-    const size_type dy = y.size();
+    const size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
     const size_type inc = 1;
-    blaslapack::copy(&dx, X.data(), &inc, X.data(), &inc);
+    blaslapack::copy(&dx, X.data(), &inc, Y.data(), &inc);
   }
 
   template <class coeff_t, template<class> class object_t>
-  inline void add(const object_t<coeff_t>& X,  object_t<coeff_t>& Y, 
+  inline void Add(const object_t<coeff_t>& X,  object_t<coeff_t>& Y, 
 		  coeff_t alpha = static_cast<coeff_t>(1.))
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
-    const size_type dy = y.size();
+    const size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
     const size_type inc = 1;
-    blaslapack::axpy(&dx, &alpha, X.data(), &inc, X.data(), &inc);
+    blaslapack::axpy(&dx, &alpha, X.data(), &inc, Y.data(), &inc);
   }
 
   template <class coeff_t, template<class> class object_t>
-  inline void scale(const coeff_t& alpha,  object_t<coeff_t>& X)
+  inline void Scale(const coeff_t& alpha,  object_t<coeff_t>& X)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
@@ -52,18 +60,18 @@ namespace lila {
   }
 
   template <class coeff_t, template<class> class object_t>
-  inline void dot(const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  inline void Dot(const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
-    const size_type dy = y.size();
+    const size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
     const size_type inc = 1;
     return blaslapack::scal(&dx, X.data(), &inc, Y.data(), &inc);
   }
 
   template <class coeff_t, template<class> class object_t>
-  inline void norm(const object_t<coeff_t>& X)
+  inline void Norm(const object_t<coeff_t>& X)
   {
     // TODO: use proper LAPACK function here
     return sqrt(real(blaslapack::dot(X,X)));

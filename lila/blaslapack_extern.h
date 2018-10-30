@@ -67,12 +67,12 @@ namespace lila {
     extern "C" double ddot_(const blas_size_t* N ,const blas_double_t* x,
 			   const blas_size_t* incx, const blas_double_t* y,
 			   const blas_size_t* incy);
-    extern "C" blas_scomplex_t cdotu_(const blas_size_t* N,
+    extern "C" blas_scomplex_t cdotc_(const blas_size_t* N,
 				      const blas_scomplex_t* x,
 				      const blas_size_t* incx, 
 				      const blas_scomplex_t* y,
 				      const blas_size_t* incy);
-    extern "C" blas_complex_t zdotu_(const blas_size_t* N,
+    extern "C" blas_complex_t zdotc_(const blas_size_t* N,
 				     const blas_complex_t* x,
 				     const blas_size_t* incx, 
 				     const blas_complex_t* y,
@@ -97,7 +97,7 @@ namespace lila {
 			   const  blas_scomplex_t* x, const blas_size_t* incx, 
 			   const blas_scomplex_t* beta, blas_scomplex_t* y, 
 			   const blas_size_t* incy);
-    extern "C" void zgemv_(const char* trans, const blas_size_t* m,c
+    extern "C" void zgemv_(const char* trans, const blas_size_t* m,
 			   const blas_size_t* n, const blas_complex_t* alpha, 
 			   const blas_complex_t* A, const blas_size_t* dima,
 			   const blas_complex_t* x, const blas_size_t* incx, 
@@ -133,6 +133,182 @@ namespace lila {
 			   const blas_complex_t* B, const blas_size_t* dimb, 
 			   const blas_complex_t* beta, blas_complex_t* C,
 			   const blas_size_t* dimc);
+
+    //////////////////////////
+    // Linear Solve
+    // Gesv
+    extern "C" void sgesv_(const blas_size_t* n, const blas_size_t* n_rhs, 
+			   blas_float_t* A, const blas_size_t* lda, 
+			   blas_size_t* ipiv, blas_float_t* B,
+			   const blas_size_t* ldb, int* info);
+    extern "C" void dgesv_(const blas_size_t* n, const blas_size_t* n_rhs, 
+			   blas_double_t* A, const blas_size_t* lda, 
+			   blas_size_t* ipiv, blas_double_t* B,
+			   const blas_size_t* ldb, int* info);
+    extern "C" void cgesv_(const blas_size_t* n, const blas_size_t* n_rhs, 
+			   blas_scomplex_t* A, const blas_size_t* lda, 
+			   blas_size_t* ipiv, blas_scomplex_t* B,
+			   const blas_size_t* ldb, int* info);
+    extern "C" void zgesv_(const blas_size_t* n, const blas_size_t* n_rhs, 
+			   blas_complex_t* A, const blas_size_t* lda, 
+			   blas_size_t* ipiv, blas_complex_t* B,
+			   const blas_size_t* ldb, int* info);
+
+    //////////////////////////
+    // LU Decomposition
+    // Getrf (performs LU Decomposition)
+    extern "C" void sgetrf_(const blas_size_t* M, const blas_size_t* N, 
+			    blas_float_t* A, const blas_size_t* lda,
+			    blas_size_t* ipiv, blas_size_t* info);
+    extern "C" void dgetrf_(const blas_size_t* M, const blas_size_t* N, 
+			    blas_double_t* A, const blas_size_t* lda,
+			    blas_size_t* ipiv, blas_size_t* info);
+    extern "C" void cgetrf_(const blas_size_t* M, const blas_size_t* N, 
+			    blas_scomplex_t* A, const blas_size_t* lda,
+			    blas_size_t* ipiv, blas_size_t* info);
+    extern "C" void zgetrf_(const blas_size_t* M, const blas_size_t* N, 
+			    blas_complex_t* A, const blas_size_t* lda,
+			    blas_size_t* ipiv, blas_size_t* info);
+    
+    // Getrs (solves system of equations from LU Decomposition)
+    extern "C" void sgetrs_(const char* trans, const blas_size_t* n, 
+			    const blas_size_t* n_rhs, const blas_float_t* A,
+			    const blas_size_t* lda, const blas_size_t* ipiv,
+			    blas_float_t* B, const blas_size_t* ldb,
+			    blas_size_t* info);
+    extern "C" void dgetrs_(const char* trans, const blas_size_t* n, 
+			    const blas_size_t* n_rhs, const blas_double_t* A,
+			    const blas_size_t* lda, const blas_size_t* ipiv,
+			    blas_double_t* B, const blas_size_t* ldb,
+			    blas_size_t* info);
+    extern "C" void cgetrs_(const char* trans, const blas_size_t* n, 
+			    const blas_size_t* n_rhs, const blas_scomplex_t* A,
+			    const blas_size_t* lda, const blas_size_t* ipiv,
+			    blas_scomplex_t* B, const blas_size_t* ldb,
+			    blas_size_t* info);
+    extern "C" void zgetrs_(const char* trans, const blas_size_t* n, 
+			    const blas_size_t* n_rhs, const blas_complex_t* A,
+			    const blas_size_t* lda, const blas_size_t* ipiv,
+			    blas_complex_t* B, const blas_size_t* ldb,
+			    blas_size_t* info);
+
+    // Getri (computes inverse from LU Decomposition)
+    extern "C" void sgetri_(const blas_size_t* N, blas_float_t* A, 
+			    const blas_size_t* lda, const blas_size_t* IPIV, 
+			    blas_float_t* WORK, const blas_size_t* lwork, 
+			    blas_size_t* INFO);
+    extern "C" void dgetri_(const blas_size_t* N, blas_double_t* A, 
+			    const blas_size_t* lda, const blas_size_t* IPIV, 
+			    blas_double_t* WORK, const blas_size_t* lwork, 
+			    blas_size_t* INFO);
+    extern "C" void cgetri_(const blas_size_t* N, blas_scomplex_t* A, 
+			    const blas_size_t* lda, const blas_size_t* IPIV, 
+			    blas_scomplex_t* WORK, const blas_size_t* lwork, 
+			    blas_size_t* INFO);
+    extern "C" void zgetri_(const blas_size_t* N, blas_complex_t* A, 
+			    const blas_size_t* lda, const blas_size_t* IPIV, 
+			    blas_complex_t* WORK, const blas_size_t* lwork, 
+			    blas_size_t* INFO);
+
+    //////////////////////////
+    // QR Decomposition
+    // Geqrf (does the QR Decomposition)
+    extern "C" void sgeqrf_(const blas_size_t* m, const blas_size_t* n,	
+			    blas_float_t* A, const blas_size_t* lda,
+			    blas_float_t* tau, blas_float_t* work, 
+			    const blas_size_t* lwork, blas_size_t* info);
+    extern "C" void dgeqrf_(const blas_size_t* m, const blas_size_t* n,	
+			    blas_double_t* A, const blas_size_t* lda,
+			    blas_double_t* tau, blas_double_t* work, 
+			    const blas_size_t* lwork, blas_size_t* info);
+    extern "C" void cgeqrf_(const blas_size_t* m, const blas_size_t* n,	
+			    blas_scomplex_t* A, const blas_size_t* lda,
+			    blas_scomplex_t* tau, blas_scomplex_t* work, 
+			    const blas_size_t* lwork, blas_size_t* info);
+    extern "C" void zgeqrf_(const blas_size_t* m, const blas_size_t* n,	
+			    blas_complex_t* A, const blas_size_t* lda,
+			    blas_complex_t* tau, blas_complex_t* work, 
+			    const blas_size_t* lwork, blas_size_t* info);
+
+    // Orgqr / Ungqr (retrieves the matrix Q of the QR Decomposition)
+    extern "C" void sorgqr_(const blas_size_t* m, const blas_size_t* n,
+			    const blas_size_t* k, blas_float_t* A, 
+			    const blas_size_t* lda, const blas_float_t* tau, 
+			    blas_float_t* work, const blas_size_t* lwork, 
+			    blas_size_t* info);
+    extern "C" void dorgqr_(const blas_size_t* m, const blas_size_t* n,
+			    const blas_size_t* k, blas_double_t* A, 
+			    const blas_size_t* lda, const blas_double_t* tau, 
+			    blas_double_t* work, const blas_size_t* lwork, 
+			    blas_size_t* info);
+    extern "C" void cungqr_(const blas_size_t* m, const blas_size_t* n,
+			    const blas_size_t* k, blas_scomplex_t* A, 
+			    const blas_size_t* lda, const blas_scomplex_t* tau, 
+			    blas_scomplex_t* work, const blas_size_t* lwork, 
+			    blas_size_t* info);
+    extern "C" void zungqr_(const blas_size_t* m, const blas_size_t* n,
+			    const blas_size_t* k, blas_complex_t* A, 
+			    const blas_size_t* lda, const blas_complex_t* tau, 
+			    blas_complex_t* work, const blas_size_t* lwork, 
+			    blas_size_t* info);
+
+    //////////////////////////
+    // Eigenvalues
+
+    // symmetric/hermitian
+    extern "C" void ssyev_(const char* jobz, const char* uplo, 
+			   const blas_size_t* n, blas_float_t* a, 
+			   const blas_size_t* lda, blas_float_t* w, 
+			   blas_float_t* work, const blas_size_t* lwork, 
+			   blas_size_t* info);
+    
+    extern "C" void dsyev_(const char* jobz, const char* uplo, 
+			   const blas_size_t* n, blas_double_t* a, 
+			   const blas_size_t* lda, blas_double_t* w, 
+			   blas_double_t* work, const blas_size_t* lwork, 
+			   blas_size_t* info);
+
+    extern "C" void cheev_(const char* jobz, const char* uplo, 
+			   const blas_size_t* n, blas_scomplex_t* a, 
+			   const blas_size_t* lda, blas_float_t* w, 
+			   blas_scomplex_t* work, const blas_size_t* lwork, 
+			   blas_float_t* rwork, blas_size_t* info);
+    
+    extern "C" void zheev_(const char* jobz, const char* uplo, 
+			   const blas_size_t* n, blas_complex_t* a, 
+			   const blas_size_t* lda, blas_double_t* w, 
+			   blas_complex_t* work, const blas_size_t* lwork, 
+			   blas_double_t* rwork, blas_size_t* info);
+
+    // generic
+    extern "C" void sgeev_(const char* jobvl, const char* jobvr,
+			   const blas_size_t* n, blas_float_t* a, 
+			   const blas_size_t* lda, blas_float_t* wr, 
+			   blas_float_t* wi, blas_float_t* vl,
+			   const blas_size_t* ldvl, blas_float_t* vr,
+			   const blas_size_t* ldvr, blas_float_t* work,
+			   const blas_size_t* lwork, blas_size_t* info);
+    extern "C" void dgeev_(const char* jobvl, const char* jobvr,
+			   const blas_size_t* n, blas_double_t* a, 
+			   const blas_size_t* lda, blas_double_t* wr, 
+			   blas_double_t* wi, blas_double_t* vl,
+			   const blas_size_t* ldvl, blas_double_t* vr,
+			   const blas_size_t* ldvr, blas_double_t* work,
+			   const blas_size_t* lwork, blas_size_t* info);
+    extern "C" void cgeev_(const char* jobvl, const char* jobvr,
+			   const blas_size_t* n, blas_scomplex_t* a, 
+			   const blas_size_t* lda, blas_scomplex_t* w, 
+			   blas_scomplex_t* vl, const blas_size_t* ldvl, 
+			   blas_scomplex_t* vr, const blas_size_t* ldvr, 
+			   blas_scomplex_t* work, const blas_size_t* lwork, 
+			   blas_float_t* rwork, blas_size_t* info);
+    extern "C" void zgeev_(const char* jobvl, const char* jobvr,
+			   const blas_size_t* n, blas_complex_t* a, 
+			   const blas_size_t* lda, blas_complex_t* w, 
+			   blas_complex_t* vl, const blas_size_t* ldvl, 
+			   blas_complex_t* vr, const blas_size_t* ldvr, 
+			   blas_complex_t* work, const blas_size_t* lwork, 
+			   blas_double_t* rwork, blas_size_t* info);
     
 
   }  // namespace lila

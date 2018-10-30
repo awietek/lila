@@ -15,7 +15,12 @@
 #ifndef LILA_MATRIX_H_
 #define LILA_MATRIX_H_
 
+#include <cassert>
+#include <sstream>
+#include <iomanip>
+
 #include <vector>
+#include <iterator>
 
 #include "common.h"
 #include "range.h"
@@ -81,6 +86,67 @@ namespace lila {
     size_type size_;
     vector_type data_;
   };
+
+  template <class coeff_t>
+  coeff_t Trace(const Matrix<coeff_t>& mat) 
+  {
+    // TODO: optimize ??
+    coeff_t res = 0;
+    for (size_type i : range<size_type>(std::min(mat.nrows(), mat.ncols())) )
+      res += mat(i,i);
+    return res;
+  }
+  
+  template <class coeff_t>
+  Matrix<coeff_t> Transpose(const Matrix<coeff_t>& mat) 
+  {
+    Matrix<coeff_t> mat_t(mat.ncols(), mat.nrows());
+    for (auto i : mat.rows())
+      for (auto j : mat.cols())
+	mat_t(j, i) = mat(i, j);
+    return mat_t;
+  }
+
+  template <class coeff_t>
+  Matrix<coeff_t> ParseMatrix(const std::string& str)
+  {
+    using size_type = lila::size_type; 
+
+    std::istringstream stream(str);
+    std::vector<std::string> split(std::istream_iterator<std::string>{stream},
+				   std::istream_iterator<std::string>());
+    std::string dimstring = split[0];
+    unsigned open = dimstring.find('[');
+    unsigned comma = dimstring.find(',');   
+    unsigned close = dimstring.find(']');  
+    
+    size_type m = std::stoi(dimstring.substr(open+1, comma - open));
+    size_type n = std::stoi(dimstring.substr(comma+1, close - comma));    
+    
+    unsigned dim = static_cast<unsigned>(m*n);
+    assert(split.size() == dim + 1);
+
+    Matrix<coeff_t> matrix(m,n);
+    for (auto i : range<size_type>(m))
+      for (auto j : range<size_type>(n))
+	{
+	  std::istringstream is(split[i*m + j + 1]);
+	  is >> matrix(i,j);
+	}      
+    return matrix;
+  }
+
+  template <class coeff_t>
+  std::string WriteMatrix(const Matrix<coeff_t>& matrix)
+  {
+    std::stringstream ss;
+    ss << " [" << matrix.nrows() << "," << matrix.ncols() << "] "; 
+    ss << std::setprecision(18);
+    for (auto i : matrix.rows())
+      for (auto j : matrix.cols())
+	ss << matrix(i,j) << " ";
+    return ss.str();
+  }
 
 }
 

@@ -30,6 +30,16 @@ namespace lila {
       typedef coeff_t type;
     };
 
+    template <class coeff_t>
+    struct complex_type_struct {
+      typedef std::complex<coeff_t> type;
+    };
+
+    template <class coeff_t>
+    struct complex_type_struct<std::complex<coeff_t> > {
+      typedef std::complex<coeff_t> type;
+    };
+
   }
 
 }

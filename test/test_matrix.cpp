@@ -29,7 +29,10 @@ TEST_CASE( "Basic Matrix test", "[Matrix]" ) {
   fmat(1,0) = 6.54;
   fmat(1,1) = 4.56;
   fmat(1,2) = 7.89;     
-  // Print(fmat);  
+  // LilaPrint(fmat);  
+  // LilaPrint(Transpose(fmat));  
+  // LilaPrint(Conj(fmat));  
+  // LilaPrint(Herm(fmat));  
   lila::Matrix<float> fmat2(fmat);  
   REQUIRE(close(fmat, fmat2));
   
@@ -40,7 +43,10 @@ TEST_CASE( "Basic Matrix test", "[Matrix]" ) {
   dmat(1,0) = 6.54;
   dmat(1,1) = 4.56;
   dmat(1,2) = 7.89;     
-  // Print(dmat);  
+  // LilaPrint(dmat);  
+  // LilaPrint(Transpose(dmat));  
+  // LilaPrint(Conj(dmat));  
+  // LilaPrint(Herm(dmat));  
   lila::Matrix<double> dmat2(dmat);  
   REQUIRE(close(dmat, dmat2));
 
@@ -51,7 +57,10 @@ TEST_CASE( "Basic Matrix test", "[Matrix]" ) {
   cmat(1,0) = {6.54, 4.65};
   cmat(1,1) = {4.56, 6.45};
   cmat(1,2) = {7.89, 9.78};     
-  // Print(cmat);  
+  // LilaPrint(cmat);  
+  // LilaPrint(Transpose(cmat));  
+  // LilaPrint(Conj(cmat));  
+  // LilaPrint(Herm(cmat));   
   lila::Matrix<std::complex<float>> cmat2(cmat);  
   REQUIRE(close(cmat, cmat2));
 
@@ -62,7 +71,10 @@ TEST_CASE( "Basic Matrix test", "[Matrix]" ) {
   zmat(1,0) = {6.54, 4.65};
   zmat(1,1) = {4.56, 6.45};
   zmat(1,2) = {7.89, 9.78};     
-  // Print(zmat);  
+  // LilaPrint(zmat);  
+  // LilaPrint(Transpose(zmat));  
+  // LilaPrint(Conj(zmat));  
+  // LilaPrint(Herm(zmat));  
   lila::Matrix<std::complex<double>> zmat2(zmat);  
   REQUIRE(close(zmat, zmat2));
 }

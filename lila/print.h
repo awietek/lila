@@ -20,7 +20,7 @@
 #include "matrix.h"
 #include "vector.h"
 
-#define Print(X) lila::PrintPretty(#X,X)
+#define LilaPrint(X) lila::PrintPretty(#X,X)
 
 namespace lila {
 

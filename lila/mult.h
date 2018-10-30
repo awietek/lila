@@ -16,8 +16,11 @@
 #define LILA_MULT_H_
 
 #include "matrix.h"
+#include "vector.h"
 #include "blaslapack.h"
 #include "special.h" 
+#include "complex.h"
+#include "range.h"
 
 namespace lila {
 
@@ -60,14 +63,35 @@ namespace lila {
 
     assert(n == X.size()); // Check if valid multiplication dimensions
 
-    if (Y.size() != n) Y.resize(n);
+    if (Y.size() != m) Y.resize(n);
 
     // leading dimensions
     const size_type lda = A.nrows();
-
-    blaslapack::gemv(&transa, &transb, &m, &n, &ka, &alpha,
-		     A.data(), &lda, B.data(), &ldb, &beta, C.data(), &ldc);
+    const size_type inc = 1;
+    blaslapack::gemv(&trans, &m, &n, &alpha, A.data(), &lda, X.data(), &inc, 
+		     &beta, Y.data(), &inc);
   }
+
+  template <class coeff_t>
+  inline void Kron(const Matrix<coeff_t>& A, const Matrix<coeff_t>& B, 
+		   Matrix<coeff_t>& C)
+  {
+    using size_type = blaslapack::blas_size_t;
+    const size_type m = A.nrows();
+    const size_type n = A.ncols();
+    const size_type p = B.nrows();
+    const size_type q = B.ncols();
+
+    const size_type mc = m*p;
+    const size_type nc = n*q;
+    C.resize(mc, nc);
+    for (int s : range<int>(n))
+      for (int r : range<int>(m))
+	for (int w : range<int>(q))
+	  for (int v : range<int>(p))
+	    C(p*r+v, q*s+w) = A(r, s)*B(v,w);
+  }
+
 
 }
 

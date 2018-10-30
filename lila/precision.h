@@ -15,42 +15,81 @@
 #ifndef LILA_PRECISION_H_
 #define LILA_PRECISION_H_
 
+#include <limits>
 #include "complex.h"
 
 namespace lila {
   
-  // Predifined relative precision for comparisions
-  static constexpr float float_precision_c = 1e-4;
-  static constexpr double double_precision_c = 1e-12;
+  // Predifined absolute precision for comparisions
+  static constexpr float float_atol = 
+    1000.*std::numeric_limits<float>::epsilon();
+  static constexpr double double_atol = 
+    1000.*std::numeric_limits<double>::epsilon();
 
   template<class T> 
-  struct precision_c {
+  struct atol {
     static constexpr lila::real_t<T> val();
   };
 
   template<> 
-  struct precision_c<float> {
+  struct atol<float> {
     static constexpr lila::real_t<float> val() 
-    { return float_precision_c; }
+    { return float_atol; }
   };
 
   template<> 
-  struct precision_c<double> {
+  struct atol<double> {
     static constexpr lila::real_t<double> val() 
-    { return double_precision_c; }
+    { return double_atol; }
   };
   
   template<> 
-  struct precision_c<std::complex<float>> {
+  struct atol<std::complex<float>> {
     static constexpr lila::real_t<std::complex<float>> val() 
-    { return float_precision_c; }
+    { return float_atol; }
   };
 
   template<> 
-  struct precision_c<std::complex<double>> {
+  struct atol<std::complex<double>> {
     static constexpr lila::real_t<std::complex<double>> val() 
-    { return double_precision_c; }
+    { return double_atol; }
   };
+ 
+  // Predifined relative precision for comparisions
+  static constexpr float float_rtol = 
+    10000.*std::numeric_limits<float>::epsilon();
+  static constexpr double double_rtol = 
+    10000.*std::numeric_limits<double>::epsilon();
+
+  template<class T> 
+  struct rtol {
+    static constexpr lila::real_t<T> val();
+  };
+
+  template<> 
+  struct rtol<float> {
+    static constexpr lila::real_t<float> val() 
+    { return float_rtol; }
+  };
+
+  template<> 
+  struct rtol<double> {
+    static constexpr lila::real_t<double> val() 
+    { return double_rtol; }
+  };
+  
+  template<> 
+  struct rtol<std::complex<float>> {
+    static constexpr lila::real_t<std::complex<float>> val() 
+    { return float_rtol; }
+  };
+
+  template<> 
+  struct rtol<std::complex<double>> {
+    static constexpr lila::real_t<std::complex<double>> val() 
+    { return double_rtol; }
+  };
+  
   
 
 }

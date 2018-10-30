@@ -19,6 +19,7 @@
 
 #include "common.h"
 #include "matrix.h"
+#include "range.h"
 
 namespace lila {
 
@@ -30,6 +31,14 @@ namespace lila {
   inline void Ones(matrix_t& mat)
   { std::fill(mat.begin(), mat.end(), 1.); }
   
+  template <class matrix_t>
+  inline void Identity(matrix_t& mat)
+  { 
+    Zeros(mat);
+    for (auto i : range<int>(std::min(mat.nrows(), mat.ncols())))
+      mat(i,i) = 1.;
+  }
+
 }
 
 #endif

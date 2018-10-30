@@ -18,20 +18,41 @@
 #include <cmath>  
 #include <cassert>
 
+#include "matrix.h"
+#include "vector.h"
 #include "complex.h"
 #include "precision.h"
 
 namespace lila {
   
-  template <class coeff_t, template<class> class object_t>
-  inline bool close(const object_t<coeff_t>& mat1, const object_t<coeff_t>& mat2)
+  template <class coeff_t>
+  inline bool close(const coeff_t& x, const coeff_t& y,
+		    real_t<coeff_t> atol = atol<coeff_t>::val(), 
+		    real_t<coeff_t> rtol = rtol<coeff_t>::val())
+  { return (std::abs(x - y) <= ( atol + rtol * std::abs(y))); }
+  
+  template <class coeff_t>
+  inline bool close(const Matrix<coeff_t>& mat1, const Matrix<coeff_t>& mat2, 
+		    real_t<coeff_t> atol = atol<coeff_t>::val(), 
+		    real_t<coeff_t> rtol = rtol<coeff_t>::val())
   {
-    assert(mat1.size() == mat2.size());
-    return std::equal(mat1.begin(), mat1.end(), mat2.begin(), 
-		      [](coeff_t x, coeff_t y) {
-			// Floating point comparision to close zero
-			return std::abs(x - y) <= 
-			  precision_c<coeff_t>::val() * std::abs(x); 
+    assert(mat1.nrows() == mat2.nrows());
+    assert(mat1.ncols() == mat2.ncols());
+    return std::equal(mat1.begin(), mat1.end(), mat2.begin(),
+		      [&atol, &rtol](coeff_t x, coeff_t y) {
+		      	return close(x, y, atol, rtol); 
+		      });
+  }
+
+  template <class coeff_t>
+  inline bool close(const Vector<coeff_t>& vec1, const Vector<coeff_t>& vec2, 
+		    real_t<coeff_t> atol = atol<coeff_t>::val(), 
+		    real_t<coeff_t> rtol = rtol<coeff_t>::val())
+  {
+    assert(vec1.size() == vec2.size());
+    return std::equal(vec1.begin(), vec1.end(), vec2.begin(),
+		      [&atol, &rtol](coeff_t x, coeff_t y) {
+		      	return close(x, y, atol, rtol); 
 		      });
   }
   

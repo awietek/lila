@@ -19,6 +19,7 @@
 
 #include "complex.h"
 
+#include "solve.h"
 #include "detail/random_detail.h"
 
 namespace lila {
@@ -58,9 +59,27 @@ namespace lila {
 					 coeff_t>; 
 
   template <class matrix_t, class gen_t>
-  void Random(matrix_t& mat, gen_t& gen)
-  { std::generate(mat.data(), mat.data() + mat.size(), gen); }
-  
+  void Random(matrix_t& mat, gen_t& gen, bool alter_generator=true)
+  { 
+    using coeff_t = typename matrix_t::coeff_type;
+    if(alter_generator) std::for_each(mat.begin(), mat.end(), 
+				      [&gen](coeff_t& c){ c = gen(); });
+    else std::generate(mat.data(), mat.data() + mat.size(), gen); 
+  }
+
+  template <class matrix_t, class gen_t>
+  void RandomUnitary(matrix_t& mat, gen_t& gen, bool alter_generator=true)
+  { 
+    assert(mat.nrows() == mat.ncols()); // Could be dropped eventually
+    using coeff_t = typename matrix_t::coeff_type;
+    Random(mat, gen, alter_generator);
+    std::vector<coeff_t> tau = QRDecompose(mat);
+    mat = QRGetQ(mat, tau);    
+    // TODO: get uniform Haar measure here !!!!
+    // i.e. correct diagonal
+    // cf. e.g. arxiv:math-ph/0609050v2
+  }
+
 }
 
 #endif
