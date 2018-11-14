@@ -95,14 +95,14 @@ namespace lila {
 		      const blas_size_t* incx, const blas_double_t* y,
 		      const blas_size_t* incy)
     { return __LAPACK_ROUTINE_NAME(ddot)(N, x, incx, y, incy); }
-    // inline blas_scomplex_t dot(const blas_size_t* N, const blas_scomplex_t* x,
-    // 			       const blas_size_t* incx, const blas_scomplex_t* y,
-    // 			       const blas_size_t* incy)
-    // { return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
-    // inline blas_complex_t dot(const blas_size_t* N, const blas_complex_t* x,
-    // 			      const blas_size_t* incx, const blas_complex_t* y,
-    // 			      const blas_size_t* incy)
-    // { return __LAPACK_ROUTINE_NAME(zdotc)(N, x, incx, y, incy); }
+    inline blas_scomplex_t dot(const blas_size_t* N, const blas_scomplex_t* x,
+    			       const blas_size_t* incx, const blas_scomplex_t* y,
+    			       const blas_size_t* incy)
+    { return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
+    inline blas_complex_t dot(const blas_size_t* N, const blas_complex_t* x,
+    			      const blas_size_t* incx, const blas_complex_t* y,
+    			      const blas_size_t* incy)
+    { return __LAPACK_ROUTINE_NAME(zdotc)(N, x, incx, y, incy); }
         
     // Gemv
     inline void gemv(const char* trans, const blas_size_t* m, 

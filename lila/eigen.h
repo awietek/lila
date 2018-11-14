@@ -15,6 +15,8 @@
 #ifndef LILA_EIGEN_H_
 #define LILA_EIGEN_H_
 
+#include "complex.h"
+
 namespace lila {
 
   template <class coeff_t>
@@ -76,7 +78,7 @@ namespace lila {
 
   template <class coeff_t>
   inline Vector<real_t<coeff_t>> 
-  EigenH(Matrix<coeff_t>& A, bool do_eigenvectors=false, char uplo='U')
+  EigenH(Matrix<coeff_t>& A, bool do_eigenvectors=true, char uplo='U')
   {
     using size_type = blaslapack::blas_size_t;
     assert(A.nrows() == A.ncols());
@@ -105,8 +107,9 @@ namespace lila {
 
   template <class coeff_t>
   inline Vector<real_t<coeff_t>> 
-  EigenvaluesH(Matrix<coeff_t>& A, char uplo='U') {
-    return EigenH(A, false, uplo);
+  EigenvaluesH(const Matrix<coeff_t>& A, char uplo='U') {
+    Matrix<coeff_t> A_copy = A;
+    return EigenH(A_copy, false, uplo);
   }
 
 }

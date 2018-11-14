@@ -51,17 +51,17 @@ void test_eigen()
     Add(Herm(A4), A4);
     auto v4 = lila::EigenvaluesH(A4);
     
-    LilaPrint(Real(v1.eigenvalues));
-    LilaPrint(v2);
-    LilaPrint(Real(v3));
-    LilaPrint(v4);
+    // LilaPrint(Real(v1.eigenvalues));
+    // LilaPrint(v2);
+    // LilaPrint(Real(v3));
+    // LilaPrint(v4);
   }
 }
 
 
 TEST_CASE( "Eigen test", "[Eigen]" ) {
-  // test_eigen<float>();
-  // test_eigen<double>();
+  test_eigen<float>();
+  test_eigen<double>();
   test_eigen<std::complex<float>>();
   test_eigen<std::complex<double>>();
 }

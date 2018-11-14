@@ -49,6 +49,15 @@ namespace lila {
     blaslapack::gemm(&transa, &transb, &m, &n, &ka, &alpha,
 		     A.data(), &lda, B.data(), &ldb, &beta, C.data(), &ldc);
   }
+  
+  
+  template <class coeff_t>
+  inline Matrix<coeff_t> Mult(const Matrix<coeff_t>& A, const Matrix<coeff_t>& B)
+  {
+    Matrix<coeff_t> C;
+    Mult(A, B, C);
+    return C;
+  }
 
   template <class coeff_t>
   inline void Mult(const Matrix<coeff_t>& A, const Vector<coeff_t>& X, 
@@ -70,6 +79,14 @@ namespace lila {
     const size_type inc = 1;
     blaslapack::gemv(&trans, &m, &n, &alpha, A.data(), &lda, X.data(), &inc, 
 		     &beta, Y.data(), &inc);
+  }
+  
+  template <class coeff_t>
+  inline Vector<coeff_t> Mult(const Matrix<coeff_t>& A, const Vector<coeff_t>& X)
+  {
+    Vector<coeff_t> Y;
+    Mult(A, X, Y);
+    return Y;
   }
 
   template <class coeff_t>

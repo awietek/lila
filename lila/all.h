@@ -7,6 +7,7 @@
 #include "lila/complex.h"
 #include "lila/eigen.h"
 #include "matrix.h"
+#include "matrixfunction.h"
 #include "mult.h"
 #include "precision.h"
 #include "print.h"

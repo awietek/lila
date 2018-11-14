@@ -22,6 +22,9 @@
 #include "solve.h"
 #include "detail/random_detail.h"
 
+#include "matrix.h"
+#include "vector.h"
+
 namespace lila {
  
   template <class coeff_t>
@@ -65,6 +68,22 @@ namespace lila {
     if(alter_generator) std::for_each(mat.begin(), mat.end(), 
 				      [&gen](coeff_t& c){ c = gen(); });
     else std::generate(mat.data(), mat.data() + mat.size(), gen); 
+  }
+
+  template <class coeff_t, class gen_t>
+  Vector<coeff_t> Random(int m, gen_t& gen, bool alter_generator=true)
+  { 
+    Vector<coeff_t> vec(m);
+    Random(vec, gen, alter_generator);
+    return vec;
+  }
+
+  template <class coeff_t, class gen_t>
+  Matrix<coeff_t> Random(int m, int n, gen_t& gen, bool alter_generator=true)
+  { 
+    Matrix<coeff_t> mat(m, n);
+    Random(mat, gen, alter_generator);
+    return mat;
   }
 
   template <class matrix_t, class gen_t>

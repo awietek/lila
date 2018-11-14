@@ -18,14 +18,23 @@
 #include <cassert>
 #include <algorithm>
 
+#include "complex.h"
+#include "matrix.h"
+#include "vector.h"
 #include "blaslapack.h"
 
 namespace lila {
   
-  template <class coeff_t, template<class> class object_t, class function_t>
-  inline void Map(object_t<coeff_t>& X, function_t func)
-  { std::for_each(X.begin(), X.end(), func); }
+  // template <class object_t, class function_t>
+  // inline void Map(object_t& X, function_t func)
+  // { std::for_each(X.begin(), X.end(), func); }
 
+  template <class object_t, class function_t>
+  inline object_t Map(object_t&& X, function_t func)
+  { 
+    std::for_each(X.begin(), X.end(), func);
+    return X;
+  }
 
   template <class coeff_t, template<class> class object_t>
   inline void Copy(const object_t<coeff_t>& X,  object_t<coeff_t>& Y)
@@ -60,23 +69,95 @@ namespace lila {
   }
 
   template <class coeff_t, template<class> class object_t>
-  inline void Dot(const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  inline coeff_t Dot(const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
     const size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
     const size_type inc = 1;
-    return blaslapack::scal(&dx, X.data(), &inc, Y.data(), &inc);
+    return blaslapack::dot(&dx, X.data(), &inc, Y.data(), &inc);
   }
 
   template <class coeff_t, template<class> class object_t>
-  inline void Norm(const object_t<coeff_t>& X)
+  inline real_t<coeff_t> Norm(const object_t<coeff_t>& X)
   {
     // TODO: use proper LAPACK function here
-    return sqrt(real(blaslapack::dot(X,X)));
+    return sqrt(real(Dot(X,X)));
   }
 
+  template <class coeff_t, template<class> class object_t>
+  inline coeff_t Sum(const object_t<coeff_t>& X)
+  { return std::accumulate(X.begin(), X.end(), 0.); }
+
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator+
+  (const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  {
+    object_t<coeff_t> res(Y);
+    Add(X, res);
+    return res;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator-
+  (const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  {
+    object_t<coeff_t> res(X);
+    Add(Y, res, static_cast<coeff_t>(-1.));
+    return res;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator+
+  (const object_t<coeff_t>& X, const coeff_t& c)
+  {
+    object_t<coeff_t> res(X);
+    Map(res, [&c](coeff_t& x) { x = x + c; } );
+    return res;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator-
+  (const object_t<coeff_t>& X, const coeff_t& c)
+  {
+    object_t<coeff_t> res(X);
+    Map(res, [&c](coeff_t& x) { x = x - c; } );
+    return res;
+  }
+
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator-(const object_t<coeff_t>& X)
+  {
+    object_t<coeff_t> res(X);
+    Scale(static_cast<coeff_t>(-1.), res);
+    return res;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator*
+  (const coeff_t& alpha,  const object_t<coeff_t>& X)
+  {
+    object_t<coeff_t> res(X);
+    Scale(alpha, res);
+    return res;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator*
+  (const object_t<coeff_t>& X, const coeff_t& alpha)
+  { return operator*(alpha, X); }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator/
+  (const object_t<coeff_t>& X, const coeff_t& alpha)
+  {
+    assert(!close(alpha, static_cast<coeff_t>(0.)));
+    coeff_t invalpha = static_cast<coeff_t>(1.) / alpha; 
+    return operator*(invalpha, X); 
+  }
 }
 
 #endif
