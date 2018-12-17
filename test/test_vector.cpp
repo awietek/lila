@@ -64,5 +64,7 @@ TEST_CASE( "Basic Vector test", "[Vector]" ) {
   REQUIRE(equal(zvec, zvec2));
   // Print(zvec2); 
   
+  auto zvec3 = lila::String2Vector<std::complex<double>>(lila::Vector2String(zvec));
+  REQUIRE(equal(zvec, zvec3));
 
 }

@@ -310,7 +310,6 @@ namespace lila {
 			   blas_complex_t* work, const blas_size_t* lwork, 
 			   blas_double_t* rwork, blas_size_t* info);
     
-
   }  // namespace lila
 }  // namespace blaslapack
 

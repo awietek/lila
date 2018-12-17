@@ -16,9 +16,15 @@
 #define LILA_VECTOR_H_
 
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <iterator>
+#include <iostream>
+#include <iomanip>
 
 #include "common.h"
 #include "range.h"
+#include "strings.h"
 
 namespace lila {
   
@@ -72,6 +78,68 @@ namespace lila {
     size_type size_;
     vector_type data_;
   };
+
+  template <class coeff_t>
+  Vector<coeff_t> String2Vector(const std::string& str)
+  {
+    std::istringstream stream(str);
+    std::vector<std::string> split(std::istream_iterator<std::string>{stream},
+				   std::istream_iterator<std::string>());
+
+    Vector<coeff_t> vector(split.size());
+    int i=0;
+    for (auto str : split)
+      vector(i++) = string2number<coeff_t>(str);
+    return vector;
+  }
+
+  template <class coeff_t>
+  std::string Vector2String(const Vector<coeff_t>& vector, bool vertical = true)
+  {
+    char whitespace = vertical ? '\n' : ' ';
+    std::stringstream ss;
+    ss << std::setprecision(16);
+    for (auto i : vector.rows())
+      ss << vector(i) << whitespace;
+    return ss.str();
+  }
+
+  template <class coeff_t>
+  Vector<coeff_t> ReadVector(const std::string& filename)
+  {
+    std::ifstream t(filename);
+
+    if(t.fail()) 
+      {
+	std::cerr << "Lila, Error in ReadVector: " 
+		  << "Could not open file with filename ["
+		  << filename << "] given. Abort." << std::endl;
+	exit(EXIT_FAILURE);
+      }
+
+    std::string str((std::istreambuf_iterator<char>(t)),
+		    std::istreambuf_iterator<char>());
+    return String2Vector<coeff_t>(str);
+  }
+
+  template <class coeff_t>
+  void WriteVector(const Vector<coeff_t>& vector, std::string filename, 
+		   bool vertical = true)
+  {
+    std::ofstream t;
+    t.open(filename);
+
+    if(t.fail()) 
+      {
+	std::cerr << "Lila, Error in WriteVector: " 
+		  << "Could not open file with filename ["
+		  << filename << "] given. Abort." << std::endl;
+	exit(EXIT_FAILURE);
+      }
+
+    t << Vector2String(vector, vertical);
+    t.close();
+  }
 
 }
 
