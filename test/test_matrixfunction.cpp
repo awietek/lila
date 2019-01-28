@@ -44,7 +44,7 @@ void test_matrixfunction()
     // LilaPrint(Aret);
     REQUIRE(close(A1, Aret));
 
-    auto v2 = EigenH(Aexp);
+    auto v2 = EigenvaluesH(Aexp);
     for (auto e : v2)
       REQUIRE(e >= 0);
     

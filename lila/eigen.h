@@ -76,9 +76,37 @@ namespace lila {
     return res.eigenvalues;
   }
 
+  /*! @brief Struct holding results of symmetric (or hermitian) eigenvalue
+             problems
+   */
+  template <class coeff_t>
+  struct EigenHResults {
+    Vector<real_t<coeff_t>> eigenvalues;
+    Matrix<coeff_t> eigenvectors;
+  };
+
+
+  template <class coeff_t>
+  inline EigenHResults<coeff_t>
+  EigenH(const Matrix<coeff_t>& A, bool do_eigenvectors=false, char uplo='U')
+  {
+    EigenHResults<coeff_t> result;
+    result.eigenvectors = A;
+    result.eigenvalues = EigenHDestroy(result.eigenvectors, do_eigenvectors, uplo);
+    return result;  
+  }
+
   template <class coeff_t>
   inline Vector<real_t<coeff_t>> 
-  EigenH(Matrix<coeff_t>& A, bool do_eigenvectors=true, char uplo='U')
+  EigenvaluesH(const Matrix<coeff_t>& A, char uplo='U') {
+    Matrix<coeff_t> A_copy = A;
+    return EigenHDestroy(A_copy, false, uplo);
+  }
+
+
+  template <class coeff_t>
+  inline Vector<real_t<coeff_t>> 
+  EigenHDestroy(Matrix<coeff_t>& A, bool do_eigenvectors=false, char uplo='U')
   {
     using size_type = blaslapack::blas_size_t;
     assert(A.nrows() == A.ncols());
@@ -103,13 +131,6 @@ namespace lila {
 		     work.data(), &lwork, &info);
     assert(info == 0);
     return w;
-  }
-
-  template <class coeff_t>
-  inline Vector<real_t<coeff_t>> 
-  EigenvaluesH(const Matrix<coeff_t>& A, char uplo='U') {
-    Matrix<coeff_t> A_copy = A;
-    return EigenH(A_copy, false, uplo);
   }
 
 }

@@ -15,11 +15,11 @@
 #ifndef LILA_ALL_H_
 #define LILA_ALL_H_
 
-#include "lila/add.h"
-#include "lila/common.h"
-#include "lila/compare.h"
-#include "lila/complex.h"
-#include "lila/eigen.h"
+#include "add.h"
+#include "common.h"
+#include "compare.h"
+#include "complex.h"
+#include "eigen.h"
 #include "matrix.h"
 #include "matrixfunction.h"
 #include "mult.h"
@@ -30,5 +30,7 @@
 #include "solve.h"
 #include "special.h"
 #include "vector.h"
+#include "sparse/tmatrix.h"
+#include "sparse/lanczos.h"
 
 #endif

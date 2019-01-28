@@ -34,7 +34,7 @@ namespace lila {
     assert(matrix.nrows() == matrix.ncols());
     const size_type n = matrix.nrows();
     Matrix<coeff_t> Qmat = matrix;
-    Vector<real_t<coeff_t>> eigs = EigenH(Qmat, true, uplo);
+    Vector<real_t<coeff_t>> eigs = EigenHDestroy(Qmat, true, uplo);
     Matrix<coeff_t> Bmat = Qmat;
 
     // Multiply with diagonal matrix, where function has been applied

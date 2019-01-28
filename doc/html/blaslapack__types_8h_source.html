@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -75,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">blaslapack_types.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
+<a href="blaslapack__types_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
@@ -111,18 +113,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef LILA_BLASLAPACK_TYPES_H_</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LILA_BLASLAPACK_TYPES_H_</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span>    </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;common.h&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">common.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>lila { </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">namespace </span>blaslapack {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> blas_size_t = lila::size_type;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> blas_float_t = float;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">using</span> blas_double_t = double;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">using</span> blas_scomplex_t = std::complex&lt;float&gt;;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">using</span> blas_complex_t = std::complex&lt;double&gt;;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifdef LILA_USE_MKL // Using the Intel MKL</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;mkl.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">blas_size_t</a> = <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a61998f4cb27a43b03c13204f376e9d92">blas_float_t</a> = float;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a2f1b03c36824aa590e180803c098a1ce">blas_double_t</a> = double;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a2b577a9453f3d34bd9462ee1451cc2f3">blas_scomplex_t</a> = MKL_Complex8;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a6cfb63723e2d1409b4bd34e27dcc155a">blas_complex_t</a> = MKL_Complex16;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#else  // Using normal LAPACK  </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">   31</a></span>&#160;<span class="preprocessor"></span>    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">blas_size_t</a> = <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespacelila_1_1blaslapack.html#a61998f4cb27a43b03c13204f376e9d92">   32</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a61998f4cb27a43b03c13204f376e9d92">blas_float_t</a> = float;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacelila_1_1blaslapack.html#a2f1b03c36824aa590e180803c098a1ce">   33</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a2f1b03c36824aa590e180803c098a1ce">blas_double_t</a> = double;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespacelila_1_1blaslapack.html#a2b577a9453f3d34bd9462ee1451cc2f3">   34</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a2b577a9453f3d34bd9462ee1451cc2f3">blas_scomplex_t</a> = std::complex&lt;float&gt;;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespacelila_1_1blaslapack.html#a6cfb63723e2d1409b4bd34e27dcc155a">   35</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila_1_1blaslapack.html#a6cfb63723e2d1409b4bd34e27dcc155a">blas_complex_t</a> = std::complex&lt;double&gt;;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span>  }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_a6cfb63723e2d1409b4bd34e27dcc155a"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#a6cfb63723e2d1409b4bd34e27dcc155a">lila::blaslapack::blas_complex_t</a></div><div class="ttdeci">std::complex&lt; double &gt; blas_complex_t</div><div class="ttdef"><b>Definition:</b> blaslapack_types.h:35</div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_a2b577a9453f3d34bd9462ee1451cc2f3"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#a2b577a9453f3d34bd9462ee1451cc2f3">lila::blaslapack::blas_scomplex_t</a></div><div class="ttdeci">std::complex&lt; float &gt; blas_scomplex_t</div><div class="ttdef"><b>Definition:</b> blaslapack_types.h:34</div></div>
+<div class="ttc" id="namespacelila_html_a133f4432ee25066d7f9faf3c5b661b94"><div class="ttname"><a href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a></div><div class="ttdeci">int size_type</div><div class="ttdef"><b>Definition:</b> common.h:19</div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_a2f1b03c36824aa590e180803c098a1ce"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#a2f1b03c36824aa590e180803c098a1ce">lila::blaslapack::blas_double_t</a></div><div class="ttdeci">double blas_double_t</div><div class="ttdef"><b>Definition:</b> blaslapack_types.h:33</div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_a61998f4cb27a43b03c13204f376e9d92"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#a61998f4cb27a43b03c13204f376e9d92">lila::blaslapack::blas_float_t</a></div><div class="ttdeci">float blas_float_t</div><div class="ttdef"><b>Definition:</b> blaslapack_types.h:32</div></div>
+<div class="ttc" id="common_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_ae6b33198efc1992c27dd6f3ee07a49f1"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">lila::blaslapack::blas_size_t</a></div><div class="ttdeci">lila::size_type blas_size_t</div><div class="ttdef"><b>Definition:</b> blaslapack_types.h:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

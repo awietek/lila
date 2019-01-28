@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -69,6 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -76,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -87,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>lila</b></li><li class="navelem"><a class="el" href="classlila_1_1random__generator.html">random_generator</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacelila.html">lila</a></li><li class="navelem"><a class="el" href="classlila_1_1random__generator.html">random_generator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -98,19 +100,107 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">lila::random_generator&lt; random_engine_t, distribution_t, coeff_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="random_8h_source.html">random.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a22187568a5c3ad3c8c09e5c3b1afd0bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22187568a5c3ad3c8c09e5c3b1afd0bf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>random_generator</b> (distribution_t distribution, int seed)</td></tr>
+<tr class="memitem:a22187568a5c3ad3c8c09e5c3b1afd0bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlila_1_1random__generator.html#a22187568a5c3ad3c8c09e5c3b1afd0bf">random_generator</a> (distribution_t distribution, int <a class="el" href="classlila_1_1random__generator.html#ab7cf9fc3a349e8fcbad99ea4c721854b">seed</a>)</td></tr>
 <tr class="separator:a22187568a5c3ad3c8c09e5c3b1afd0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5256e3eb81dc1a1a4772c44e2eeb34f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5256e3eb81dc1a1a4772c44e2eeb34f"></a>
-coeff_t&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> ()</td></tr>
+<tr class="memitem:ab5256e3eb81dc1a1a4772c44e2eeb34f"><td class="memItemLeft" align="right" valign="top">coeff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlila_1_1random__generator.html#ab5256e3eb81dc1a1a4772c44e2eeb34f">operator()</a> ()</td></tr>
 <tr class="separator:ab5256e3eb81dc1a1a4772c44e2eeb34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7cf9fc3a349e8fcbad99ea4c721854b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7cf9fc3a349e8fcbad99ea4c721854b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>seed</b> (int seed)</td></tr>
+<tr class="memitem:ab7cf9fc3a349e8fcbad99ea4c721854b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlila_1_1random__generator.html#ab7cf9fc3a349e8fcbad99ea4c721854b">seed</a> (int seed)</td></tr>
 <tr class="separator:ab7cf9fc3a349e8fcbad99ea4c721854b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a22187568a5c3ad3c8c09e5c3b1afd0bf"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class random_engine_t , class distribution_t , class coeff_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlila_1_1random__generator.html">lila::random_generator</a>&lt; random_engine_t, distribution_t, coeff_t &gt;::<a class="el" href="classlila_1_1random__generator.html">random_generator</a> </td>
+          <td>(</td>
+          <td class="paramtype">distribution_t&#160;</td>
+          <td class="paramname"><em>distribution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ab5256e3eb81dc1a1a4772c44e2eeb34f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class random_engine_t , class distribution_t , class coeff_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">coeff_t <a class="el" href="classlila_1_1random__generator.html">lila::random_generator</a>&lt; random_engine_t, distribution_t, coeff_t &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab7cf9fc3a349e8fcbad99ea4c721854b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class random_engine_t , class distribution_t , class coeff_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlila_1_1random__generator.html">lila::random_generator</a>&lt; random_engine_t, distribution_t, coeff_t &gt;::seed </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/mnt/home/awietek/Research/Software/lila/lila/<a class="el" href="random_8h_source.html">random.h</a></li>
 </ul>

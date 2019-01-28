@@ -18,20 +18,22 @@
 #include <cstdlib>
 #include <complex>
 
-#include "blaslapack_types.h"
 
-#ifdef PLATFORM_MKL  // Using the Intel MKL
-
+#ifdef LILA_USE_MKL // Using the Intel MKL
 #define MKL_Complex8 std::complex<float>
 #define MKL_Complex16 std::complex<double>
+#include "blaslapack_types.h"
 #include "mkl_types.h"
 #include "mkl.h"
 #define __LAPACK_ROUTINE_NAME(x) x
 
 #else  // Using normal LAPACK  
+#include "blaslapack_types.h"
 #include "blaslapack_extern.h"
 #define __LAPACK_ROUTINE_NAME(x) x##_
 #endif
+
+
 
 namespace lila { 
   namespace blaslapack {
@@ -98,11 +100,27 @@ namespace lila {
     inline blas_scomplex_t dot(const blas_size_t* N, const blas_scomplex_t* x,
     			       const blas_size_t* incx, const blas_scomplex_t* y,
     			       const blas_size_t* incy)
-    { return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
+    { 
+#ifdef LILA_USE_MKL
+      blas_scomplex_t res;
+      __LAPACK_ROUTINE_NAME(cdotc)(&res, N, x, incx, y, incy);
+      return res;
+#else
+      return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
+#endif
+    }
     inline blas_complex_t dot(const blas_size_t* N, const blas_complex_t* x,
     			      const blas_size_t* incx, const blas_complex_t* y,
     			      const blas_size_t* incy)
-    { return __LAPACK_ROUTINE_NAME(zdotc)(N, x, incx, y, incy); }
+    { 
+#ifdef LILA_USE_MKL
+      blas_complex_t res;
+      __LAPACK_ROUTINE_NAME(zdotc)(&res, N, x, incx, y, incy);
+      return res;
+#else
+      return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
+#endif
+    }
         
     // Gemv
     inline void gemv(const char* trans, const blas_size_t* m, 
@@ -415,7 +433,7 @@ namespace lila {
       geev(jobvl, jobvr, n, a, lda, wr.data(), wi.data(), vl, ldvl, vr, 
 	   ldvr, work, lwork, info); 
       for (blas_size_t i=0; i<*n; ++i)
-	w[i] = blas_scomplex_t(wr[i], wi[i]);      
+	w[i] = blas_scomplex_t({wr[i], wi[i]});      
     }
 
     inline void geev(const char* jobvl, const char* jobvr,
@@ -431,7 +449,7 @@ namespace lila {
       geev(jobvl, jobvr, n, a, lda, wr.data(), wi.data(), vl, ldvl, vr, 
 	   ldvr, work, lwork, info); 
       for (blas_size_t i=0; i<*n; ++i)
-	w[i] = blas_scomplex_t(wr[i], wi[i]);  
+	w[i] = blas_complex_t({wr[i], wi[i]});  
     }
 
     inline void geev(const char* jobvl, const char* jobvr,
@@ -459,6 +477,20 @@ namespace lila {
       __LAPACK_ROUTINE_NAME(zgeev)(jobvl, jobvr, n, a, lda, w, vl, ldvl,
 				   vr, ldvr, work, lwork, rwork.data(), info); 
     }
+
+
+    // Real symmetric tridiagonal eigensolvers
+    inline void stev(const char* jobz, const blas_size_t* N, 
+		     blas_float_t* D, blas_float_t* E, blas_float_t* Z,
+		     const blas_size_t* ldz, blas_float_t* work, 
+		     blas_size_t* info)
+    { __LAPACK_ROUTINE_NAME(sstev)(jobz, N, D, E, Z, ldz, work, info); }
+
+    inline void stev(const char* jobz, const blas_size_t* N, 
+		     blas_double_t* D, blas_double_t* E, blas_double_t* Z,
+		     const blas_size_t* ldz, blas_double_t* work, 
+		     blas_size_t* info)
+    { __LAPACK_ROUTINE_NAME(dstev)(jobz, N, D, E, Z, ldz, work, info); }
     
   }  // namespace lila
 }  // namespace blaslapack

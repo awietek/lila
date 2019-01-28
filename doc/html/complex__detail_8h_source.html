@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -75,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">complex_detail.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
+<a href="complex__detail_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
@@ -114,34 +116,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;complex&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>lila {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="namespacelila_1_1detail.html">   21</a></span>&#160;  <span class="keyword">namespace </span>detail {</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1real__type__struct.html">   24</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlila_1_1detail_1_1real__type__struct.html">real_type_struct</a> {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keyword">typedef</span> coeff_t type;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1real__type__struct.html#aa7fe81a6adbab0249bd9c8ac6fa66cb8">   25</a></span>&#160;      <span class="keyword">typedef</span> coeff_t <a class="code" href="structlila_1_1detail_1_1real__type__struct.html#aa7fe81a6adbab0249bd9c8ac6fa66cb8">type</a>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    };</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1real__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html">   29</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlila_1_1detail_1_1real__type__struct.html">real_type_struct</a>&lt;std::complex&lt;coeff_t&gt; &gt; {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <span class="keyword">typedef</span> coeff_t type;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1real__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html#a554509f681a37bc1a3cbb7a80a5cc964">   30</a></span>&#160;      <span class="keyword">typedef</span> coeff_t <a class="code" href="structlila_1_1detail_1_1real__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html#a554509f681a37bc1a3cbb7a80a5cc964">type</a>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1complex__type__struct.html">   34</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlila_1_1detail_1_1complex__type__struct.html">complex_type_struct</a> {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keyword">typedef</span> std::complex&lt;coeff_t&gt; type;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1complex__type__struct.html#aca0f844c7263cf465d6366e2820955d6">   35</a></span>&#160;      <span class="keyword">typedef</span> std::complex&lt;coeff_t&gt; <a class="code" href="structlila_1_1detail_1_1complex__type__struct.html#aca0f844c7263cf465d6366e2820955d6">type</a>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    };</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1complex__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html">   39</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlila_1_1detail_1_1complex__type__struct.html">complex_type_struct</a>&lt;std::complex&lt;coeff_t&gt; &gt; {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      <span class="keyword">typedef</span> std::complex&lt;coeff_t&gt; type;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structlila_1_1detail_1_1complex__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html#a760b90c6c278d192627de07de694b951">   40</a></span>&#160;      <span class="keyword">typedef</span> std::complex&lt;coeff_t&gt; <a class="code" href="structlila_1_1detail_1_1complex__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html#a760b90c6c278d192627de07de694b951">type</a>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    };</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif  // LILA_DETAIL_COMPLEX_DETAIL_H_</span></div>
+<div class="ttc" id="structlila_1_1detail_1_1complex__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4_html_a760b90c6c278d192627de07de694b951"><div class="ttname"><a href="structlila_1_1detail_1_1complex__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html#a760b90c6c278d192627de07de694b951">lila::detail::complex_type_struct&lt; std::complex&lt; coeff_t &gt; &gt;::type</a></div><div class="ttdeci">std::complex&lt; coeff_t &gt; type</div><div class="ttdef"><b>Definition:</b> complex_detail.h:40</div></div>
+<div class="ttc" id="structlila_1_1detail_1_1real__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4_html_a554509f681a37bc1a3cbb7a80a5cc964"><div class="ttname"><a href="structlila_1_1detail_1_1real__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html#a554509f681a37bc1a3cbb7a80a5cc964">lila::detail::real_type_struct&lt; std::complex&lt; coeff_t &gt; &gt;::type</a></div><div class="ttdeci">coeff_t type</div><div class="ttdef"><b>Definition:</b> complex_detail.h:30</div></div>
 <div class="ttc" id="structlila_1_1detail_1_1complex__type__struct_html"><div class="ttname"><a href="structlila_1_1detail_1_1complex__type__struct.html">lila::detail::complex_type_struct</a></div><div class="ttdef"><b>Definition:</b> complex_detail.h:34</div></div>
+<div class="ttc" id="structlila_1_1detail_1_1complex__type__struct_html_aca0f844c7263cf465d6366e2820955d6"><div class="ttname"><a href="structlila_1_1detail_1_1complex__type__struct.html#aca0f844c7263cf465d6366e2820955d6">lila::detail::complex_type_struct::type</a></div><div class="ttdeci">std::complex&lt; coeff_t &gt; type</div><div class="ttdef"><b>Definition:</b> complex_detail.h:35</div></div>
 <div class="ttc" id="structlila_1_1detail_1_1real__type__struct_html"><div class="ttname"><a href="structlila_1_1detail_1_1real__type__struct.html">lila::detail::real_type_struct</a></div><div class="ttdef"><b>Definition:</b> complex_detail.h:24</div></div>
+<div class="ttc" id="structlila_1_1detail_1_1real__type__struct_html_aa7fe81a6adbab0249bd9c8ac6fa66cb8"><div class="ttname"><a href="structlila_1_1detail_1_1real__type__struct.html#aa7fe81a6adbab0249bd9c8ac6fa66cb8">lila::detail::real_type_struct::type</a></div><div class="ttdeci">coeff_t type</div><div class="ttdef"><b>Definition:</b> complex_detail.h:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

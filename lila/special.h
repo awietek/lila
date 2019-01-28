@@ -62,6 +62,49 @@ namespace lila {
   }
 
   template <class coeff_t>
+  inline Matrix<coeff_t> Identity(int m)
+  { 
+    auto id = Zeros<coeff_t>(m, m);
+    Identity(id);
+    return id;
+  }
+
+  template <class coeff_t>
+  inline Vector<complex_t<coeff_t>> Complex(Vector<coeff_t>& vec)
+  { 
+    printf("tytyt %d\n", vec.nrows());
+    auto complex_vec = Zeros<complex_t<coeff_t>>(vec.nrows());
+    for (auto j : vec.rows())
+      complex_vec(j) = (complex_t<coeff_t>)vec(j);
+    printf("uiuiu\n");
+    return complex_vec;
+  }
+
+  template <class coeff_t>
+  inline Matrix<complex_t<coeff_t>> Complex(Matrix<coeff_t>& mat)
+  { 
+    auto complex_mat = Zeros<complex_t<coeff_t>>(mat.nrows(), mat.ncols());
+    for (auto i : mat.rows())
+      for (auto j : mat.cols())
+	complex_mat(i, j) = (complex_t<coeff_t>)mat(i, j);
+    return complex_mat;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> Diag(const Vector<coeff_t>& diag, int offset=0)
+  { 
+    int absoffset = std::abs(offset);
+    int dim = diag.size() + std::abs(offset);
+    Matrix<coeff_t> mat = Zeros<coeff_t>(dim, dim);
+    for (int i : diag.rows())
+      {
+	if (offset < 0) mat(i + absoffset, i) = diag(i);
+	else mat(i, i + absoffset) = diag(i);
+      }
+    return mat;
+  }
+
+  template <class coeff_t>
   inline Matrix<coeff_t> Unitary(int n, 
 				 const Vector<real_t<coeff_t>>& params)
   { 

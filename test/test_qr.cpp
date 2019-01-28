@@ -50,12 +50,6 @@ void test_qr(int m, int n)
     Mult(Q, R, Prod);
     REQUIRE(lila::close<coeff_t>(A_save, Prod));
 
-
-    // Print(A_save);
-    // Print(Prod);
-    // Print(Q);
-    // Print(R);
-
     // check if R is upper trapezoidal
     int k = std::min(m, n);
     for (int row=0; row < k; ++row)
@@ -68,8 +62,6 @@ void test_qr(int m, int n)
     lila::Matrix<coeff_t> Prod3(k, k);
     Mult(Q, Q, Prod3, coeff_t(1.), coeff_t(0.), 'N', 'C');
 
-    // Print(Prod2);
-    // Print(Prod3);
  
     lila::Matrix<coeff_t> Id2(Prod2);
     Identity(Id2);

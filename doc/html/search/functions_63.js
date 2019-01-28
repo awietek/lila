@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['caxpy_5f',['caxpy_',['../namespacelila_1_1blaslapack.html#a817a0cbffa0075c3d4c41bbc4f7c77fa',1,'lila::blaslapack']]],
+  ['cbegin',['cbegin',['../classlila_1_1Matrix.html#a25ee2b16d87885aeb9c9f57022c51ab8',1,'lila::Matrix::cbegin()'],['../classlila_1_1Vector.html#a89793763606910791f06873a758cee90',1,'lila::Vector::cbegin()']]],
+  ['ccopy_5f',['ccopy_',['../namespacelila_1_1blaslapack.html#a9319775fb8f34d3919aa52bde56d4562',1,'lila::blaslapack']]],
+  ['cdotc_5f',['cdotc_',['../namespacelila_1_1blaslapack.html#afda42738fcc782618502de54544b4a8e',1,'lila::blaslapack']]],
+  ['cend',['cend',['../classlila_1_1Matrix.html#ac9e03a41f6a92f44b7c6ae158e089c9e',1,'lila::Matrix::cend()'],['../classlila_1_1Vector.html#a67c010886a79627d947959a956e67831',1,'lila::Vector::cend()']]],
+  ['cgeev_5f',['cgeev_',['../namespacelila_1_1blaslapack.html#ac1770c3c7f88f5029550700b0a0affe0',1,'lila::blaslapack']]],
+  ['cgemm_5f',['cgemm_',['../namespacelila_1_1blaslapack.html#a994c5768d6fbebb7de0fc7130f33f423',1,'lila::blaslapack']]],
+  ['cgemv_5f',['cgemv_',['../namespacelila_1_1blaslapack.html#ae889d9d22f9d98c311de900d298cc8d8',1,'lila::blaslapack']]],
+  ['cgeqrf_5f',['cgeqrf_',['../namespacelila_1_1blaslapack.html#a5cfc5eb4c5d4c668d11c00cf2a560118',1,'lila::blaslapack']]],
+  ['cgesv_5f',['cgesv_',['../namespacelila_1_1blaslapack.html#aba6a0e614b397187c0a281fc9301d9dc',1,'lila::blaslapack']]],
+  ['cgetrf_5f',['cgetrf_',['../namespacelila_1_1blaslapack.html#aed008da51c70a53f14bfa8035f3e608a',1,'lila::blaslapack']]],
+  ['cgetri_5f',['cgetri_',['../namespacelila_1_1blaslapack.html#a0325d40ca3a872d6afaa620614ce5173',1,'lila::blaslapack']]],
+  ['cgetrs_5f',['cgetrs_',['../namespacelila_1_1blaslapack.html#ab248bb34be58d32531a43401ec7e7594',1,'lila::blaslapack']]],
+  ['cheev_5f',['cheev_',['../namespacelila_1_1blaslapack.html#a54015b8fdb2515752fdf5585e4d0e877',1,'lila::blaslapack']]],
+  ['clear',['clear',['../classlila_1_1Matrix.html#a792ac830e1f5ffe28ec5043fa6537488',1,'lila::Matrix::clear()'],['../classlila_1_1Vector.html#aef4d0734811d467e9f54f3bc5995c0b2',1,'lila::Vector::clear()']]],
+  ['close',['close',['../namespacelila.html#a0ea201517f26cdddf31e34827d857e4e',1,'lila::close(const coeff_t &amp;x, const coeff_t &amp;y, real_t&lt; coeff_t &gt; atol=atol&lt; coeff_t &gt;::val(), real_t&lt; coeff_t &gt; rtol=rtol&lt; coeff_t &gt;::val())'],['../namespacelila.html#af467618c97bebf54fdcaec266bb07b11',1,'lila::close(const Matrix&lt; coeff_t &gt; &amp;mat1, const Matrix&lt; coeff_t &gt; &amp;mat2, real_t&lt; coeff_t &gt; atol=atol&lt; coeff_t &gt;::val(), real_t&lt; coeff_t &gt; rtol=rtol&lt; coeff_t &gt;::val())'],['../namespacelila.html#a9755784a6168448e652c1c7d9e642c10',1,'lila::close(const Vector&lt; coeff_t &gt; &amp;vec1, const Vector&lt; coeff_t &gt; &amp;vec2, real_t&lt; coeff_t &gt; atol=atol&lt; coeff_t &gt;::val(), real_t&lt; coeff_t &gt; rtol=rtol&lt; coeff_t &gt;::val())']]],
+  ['col',['col',['../classlila_1_1Matrix.html#a883eb08c7022d3e3ec1454f083661cda',1,'lila::Matrix']]],
+  ['cols',['cols',['../classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123',1,'lila::Matrix']]],
+  ['conj',['conj',['../namespacelila.html#a852babfdd142ea7204a5594cf291c12e',1,'lila::conj(float x)'],['../namespacelila.html#a0542d3a099436ab9e7ee5f48bb0be9e4',1,'lila::conj(double x)'],['../namespacelila.html#aafb6d4133a0e0f7bf47e4163d5d7207f',1,'lila::conj(std::complex&lt; float &gt; x)'],['../namespacelila.html#a4238f27dd64497f73a780031fcdff315',1,'lila::conj(std::complex&lt; double &gt; x)'],['../namespacelila.html#a682c5ba0ca32fcf5a8da9f280b4f09c5',1,'lila::Conj(const Matrix&lt; coeff_t &gt; &amp;mat)']]],
+  ['copy',['copy',['../namespacelila_1_1blaslapack.html#af5cdc504e42a78c33f84d988f9108a73',1,'lila::blaslapack::copy(const blas_size_t *N, const blas_float_t *x, const blas_size_t *incx, blas_float_t *y, const blas_size_t *incy)'],['../namespacelila_1_1blaslapack.html#a3c3b1fc4f5f0390a300273f574d17b9d',1,'lila::blaslapack::copy(const blas_size_t *N, const blas_double_t *x, const blas_size_t *incx, blas_double_t *y, const blas_size_t *incy)'],['../namespacelila_1_1blaslapack.html#a3bd8202fe193d969435031b6e51bbc44',1,'lila::blaslapack::copy(const blas_size_t *N, const blas_scomplex_t *x, const blas_size_t *incx, blas_scomplex_t *y, const blas_size_t *incy)'],['../namespacelila_1_1blaslapack.html#a6e83d689612094102850840a0aa3a2fd',1,'lila::blaslapack::copy(const blas_size_t *N, const blas_complex_t *x, const blas_size_t *incx, blas_complex_t *y, const blas_size_t *incy)'],['../namespacelila.html#aab3cd44c50936de429be90116bb10ea0',1,'lila::Copy()']]],
+  ['cscal_5f',['cscal_',['../namespacelila_1_1blaslapack.html#a8ad68b144b503905a9a5d15823ab9e37',1,'lila::blaslapack']]],
+  ['cungqr_5f',['cungqr_',['../namespacelila_1_1blaslapack.html#ad247fbf8c1e571e9003a0951a5a70ec3',1,'lila::blaslapack']]]
+];

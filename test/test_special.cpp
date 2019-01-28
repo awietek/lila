@@ -48,22 +48,18 @@ TEST_CASE( "Special Matrix test", "[Special]" ) {
   {
     lila::Matrix<float> fmat(m, n);
     Zeros(fmat);
-    // Print(fmat);
     REQUIRE(all_zero(fmat));
 
     lila::Matrix<double> dmat(m, n);
     Zeros(dmat);
-    // Print(dmat);
     REQUIRE(all_zero(dmat));
 
     lila::Matrix<std::complex<float>> cmat(m, n);
     Zeros(cmat);
-    // Print(cmat);
     REQUIRE(all_zero(cmat));
 
     lila::Matrix<std::complex<double>> zmat(m, n);
     Zeros(zmat);
-    // Print(zmat);
     REQUIRE(all_zero(zmat));
   }
 
@@ -71,22 +67,18 @@ TEST_CASE( "Special Matrix test", "[Special]" ) {
   {
     lila::Matrix<float> fmat(m, n);
     Ones(fmat);
-    // Print(fmat);
     REQUIRE(all_one(fmat));
 
     lila::Matrix<double> dmat(m, n);
     Ones(dmat);
-    // Print(dmat);
     REQUIRE(all_one(dmat));
 
     lila::Matrix<std::complex<float>> cmat(m, n);
     Ones(cmat);
-    // Print(cmat);
     REQUIRE(all_one(cmat));
 
     lila::Matrix<std::complex<double>> zmat(m, n);
     Ones(zmat);
-    // Print(zmat);
     REQUIRE(all_one(zmat));
   }
   
@@ -96,7 +88,7 @@ TEST_CASE( "Special Matrix test", "[Special]" ) {
   for (int i : lila::range<int>(N*N))
     params(i) = 0.1 * (i+1);
   auto unitary = lila::Unitary<std::complex<double>>(N, params);
-  LilaPrint(unitary);
+  // LilaPrint(unitary);
   REQUIRE(IsUnitary(unitary));
 
 }

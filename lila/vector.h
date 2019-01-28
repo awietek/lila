@@ -32,7 +32,8 @@ namespace lila {
   class Vector {
   public:
     using size_type = lila::size_type; 
-    using coeff_type = coeff_t;    
+    using coeff_type = coeff_t; 
+    using value_type = coeff_t;   
     using vector_type = std::vector<coeff_t>;
     using iterator_t = typename vector_type::iterator;
     using const_iterator_t = typename vector_type::const_iterator;
@@ -45,10 +46,12 @@ namespace lila {
     Vector& operator=(Vector&&) = default;
 
     explicit Vector(size_type size) 
-      : size_(size), data_(size) { }
+      : size_(size), data_(size, 0) { }
     
     coeff_t operator()(size_type i) const { return data_[i]; }
     coeff_t& operator()(size_type i) { return data_[i]; }
+
+    operator std::vector<coeff_t> () const { return data_; }
 
     void resize(size_type size) {
       size_= size;
@@ -73,6 +76,11 @@ namespace lila {
     const_iterator_t end() const { return data_.end(); }
     const_iterator_t cbegin() const { return data_.cbegin(); }
     const_iterator_t cend() const { return data_.cend(); }
+
+    void push_back(const coeff_t& c) { 
+      ++size_;
+      data_.push_back(c);
+    }
     
   private:
     size_type size_;

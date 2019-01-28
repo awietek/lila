@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/*!
+  @file add.h
+  @brief Basic routines for manipulating Vectors and Matrices.
+ */
+
 #ifndef LILA_ADD_H_
 #define LILA_ADD_H_
 
@@ -22,13 +27,24 @@
 #include "matrix.h"
 #include "vector.h"
 #include "blaslapack.h"
+#include "compare.h"
 
 namespace lila {
-  
-  // template <class object_t, class function_t>
-  // inline void Map(object_t& X, function_t func)
-  // { std::for_each(X.begin(), X.end(), func); }
 
+  /*! @brief Maps a function onto a lila::Matrix or lila::Vector.
+
+    __Usage example (to square entries of vector)__
+    @code
+      auto sq_vec = vec;
+      lila::Map(sq_vec, [](double& e) { e = e*e; });
+    @endcode
+
+    @param X lila::Matrix / lila::Vector on which the function is applied
+    @param func function object to be applied to the Matrix/Vector
+    @tparam object_t either lila::Matrix or lila::Vector
+    @tparam function_t function object type
+    @return Matrix/Vector after function has been applied
+   */
   template <class object_t, class function_t>
   inline object_t Map(object_t&& X, function_t func)
   { 
@@ -36,6 +52,13 @@ namespace lila {
     return X;
   }
 
+  /*! @brief copies one lila::Matrix or lila::Vector to another
+
+    @param X lila::Matrix / lila::Vector which is copied
+    @param Y lila::Matrix / lila::Vector that is overwritten
+    @tparam object_t either lila::Matrix or lila::Vector
+    @tparam coeff_t type of coefficients of object 
+   */
   template <class coeff_t, template<class> class object_t>
   inline void Copy(const object_t<coeff_t>& X,  object_t<coeff_t>& Y)
   {
@@ -47,6 +70,19 @@ namespace lila {
     blaslapack::copy(&dx, X.data(), &inc, Y.data(), &inc);
   }
 
+  /*! @brief Add a scalar multiple of lila::Matrix or lila::Vector to another
+
+    Performs the following operation:
+    \f$ \alpha X + Y \rightarrow Y \f$
+
+    @param X lila::Matrix / lila::Vector 
+    @param Y lila::Matrix / lila::Vector 
+    @param alpha coeff_t scalar multiple of X
+
+    @param func function object to be applied to the Matrix/Vector
+    @tparam object_t either lila::Matrix or lila::Vector
+    @tparam coeff_t type of coefficients of object 
+   */
   template <class coeff_t, template<class> class object_t>
   inline void Add(const object_t<coeff_t>& X,  object_t<coeff_t>& Y, 
 		  coeff_t alpha = static_cast<coeff_t>(1.))
@@ -59,6 +95,18 @@ namespace lila {
     blaslapack::axpy(&dx, &alpha, X.data(), &inc, Y.data(), &inc);
   }
 
+  /*! @brief Multiplies object by a scalar
+
+    Performs the following operation:
+    \f$ \alpha X \rightarrow X \f$
+
+    @param alpha coeff_t scalar multiple of X
+    @param X lila::Matrix / lila::Vector which is scaled
+
+    @param func function object to be applied to the Matrix/Vector
+    @tparam object_t either lila::Matrix or lila::Vector
+    @tparam coeff_t type of coefficients of object 
+   */
   template <class coeff_t, template<class> class object_t>
   inline void Scale(const coeff_t& alpha,  object_t<coeff_t>& X)
   {
@@ -68,6 +116,18 @@ namespace lila {
     blaslapack::scal(&dx, &alpha, X.data(), &inc);
   }
 
+  /*! @brief Dot product between two objects
+    
+    Performs the following operation:
+    \f$ \left< X | Y \right> \f$
+    the vector X is conjugated in the complex case.
+
+    @param X lila::Matrix / lila::Vector 
+    @param Y lila::Matrix / lila::Vector
+    @return dot product
+    @tparam object_t either lila::Matrix or lila::Vector
+    @tparam coeff_t type of coefficients of object 
+   */
   template <class coeff_t, template<class> class object_t>
   inline coeff_t Dot(const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
   {
@@ -119,6 +179,21 @@ namespace lila {
   }
 
   template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t>& operator +=
+  (object_t<coeff_t>& a, const object_t<coeff_t>& b)
+  {
+    a = a + b;
+    return a;
+  }
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t>& operator -=
+  (object_t<coeff_t>& a, const object_t<coeff_t>& b)
+  {
+    a = a - b;
+    return a;
+  }
+
+  template <class coeff_t, template<class> class object_t>
   inline object_t<coeff_t> operator-
   (const object_t<coeff_t>& X, const coeff_t& c)
   {
@@ -143,6 +218,22 @@ namespace lila {
     object_t<coeff_t> res(X);
     Scale(alpha, res);
     return res;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator*=
+  ( object_t<coeff_t>& X, const coeff_t& alpha)
+  {
+    X = alpha*X;
+    return X;
+  }
+
+  template <class coeff_t, template<class> class object_t>
+  inline object_t<coeff_t> operator/=
+  ( object_t<coeff_t>& X, const coeff_t& alpha)
+  {
+    X = X / alpha;
+    return X;
   }
 
   template <class coeff_t, template<class> class object_t>

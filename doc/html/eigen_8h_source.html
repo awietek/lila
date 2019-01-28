@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -75,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">eigen.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
+<a href="eigen_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
@@ -111,55 +113,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef LILA_EIGEN_H_</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LILA_EIGEN_H_</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;complex.h&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="complex_8h.html">complex.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>lila {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structlila_1_1EigenResults.html">   23</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structlila_1_1EigenResults.html">EigenResults</a> {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;complex_t&lt;coeff_t&gt;</a>&gt; eigenvalues;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> left_eigenvectors;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> right_eigenvectors;    </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structlila_1_1EigenResults.html#ae1e0995e4d02ef35eeac1c9e7a2a00f7">   24</a></span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;complex_t&lt;coeff_t&gt;</a>&gt; <a class="code" href="structlila_1_1EigenResults.html#ae1e0995e4d02ef35eeac1c9e7a2a00f7">eigenvalues</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structlila_1_1EigenResults.html#a0dfab4b38245f674570f14a1928a8d50">   25</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> <a class="code" href="structlila_1_1EigenResults.html#a0dfab4b38245f674570f14a1928a8d50">left_eigenvectors</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca">   26</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> <a class="code" href="structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca">right_eigenvectors</a>;    </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  };</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">inline</span> <a class="code" href="structlila_1_1EigenResults.html">EigenResults&lt;coeff_t&gt;</a> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  Eigen(<a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; A, <span class="keywordtype">bool</span> do_right_eigenvectors=<span class="keyword">false</span>, </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacelila.html#addb5cbe5c3997a2db5173b117da9e1ac">   31</a></span>&#160;  <a class="code" href="namespacelila.html#addb5cbe5c3997a2db5173b117da9e1ac">Eigen</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; A, <span class="keywordtype">bool</span> do_right_eigenvectors=<span class="keyword">false</span>, </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> do_left_eigenvectors=<span class="keyword">false</span>)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">using</span> size_type = blaslapack::blas_size_t;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    assert(A.nrows() == A.ncols());</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> = <a class="code" href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">blaslapack::blas_size_t</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    assert(A.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>() == A.<a class="code" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">ncols</a>());</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> jobvl = do_left_eigenvectors ? <span class="charliteral">&#39;V&#39;</span> : <span class="charliteral">&#39;N&#39;</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> jobvr = do_right_eigenvectors ? <span class="charliteral">&#39;V&#39;</span> : <span class="charliteral">&#39;N&#39;</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> size_type n = A.nrows();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> size_type lda = n;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> n = A.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> lda = n;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">const</span> size_type ldvl = do_left_eigenvectors ? n : 1;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> size_type ldvr = do_right_eigenvectors ? n : 1;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> ldvl = do_left_eigenvectors ? n : 1;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> ldvr = do_right_eigenvectors ? n : 1;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="structlila_1_1EigenResults.html">EigenResults&lt;coeff_t&gt;</a> result;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    result.eigenvalues.resize(n);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (do_left_eigenvectors) result.left_eigenvectors.resize(ldvl, n);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (do_right_eigenvectors) result.right_eigenvectors.resize(ldvr, n);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    result.<a class="code" href="structlila_1_1EigenResults.html#ae1e0995e4d02ef35eeac1c9e7a2a00f7">eigenvalues</a>.<a class="code" href="classlila_1_1Vector.html#a22c751fc427ad159e65cfa0bdf398502">resize</a>(n);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (do_left_eigenvectors) result.<a class="code" href="structlila_1_1EigenResults.html#a0dfab4b38245f674570f14a1928a8d50">left_eigenvectors</a>.resize(ldvl, n);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (do_right_eigenvectors) result.<a class="code" href="structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca">right_eigenvectors</a>.resize(ldvr, n);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// get optimal work size</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;complex_t&lt;coeff_t&gt;</a>&gt;&amp; w = result.eigenvalues;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    size_type lwork = -1;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;complex_t&lt;coeff_t&gt;</a>&gt;&amp; w = result.<a class="code" href="structlila_1_1EigenResults.html#ae1e0995e4d02ef35eeac1c9e7a2a00f7">eigenvalues</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> lwork = -1;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::vector&lt;coeff_t&gt; work(1);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> info = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    blaslapack::geev(&amp;jobvl, &amp;jobvr, &amp;n, A.data(), &amp;lda, w.data(), </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;             result.left_eigenvectors.data(), &amp;ldvl,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;             result.right_eigenvectors.data(), &amp;ldvr, </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="namespacelila_1_1blaslapack.html#a924f4a6909a6b76fca13179433b7f0b9">blaslapack::geev</a>(&amp;jobvl, &amp;jobvr, &amp;n, A.<a class="code" href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">data</a>(), &amp;lda, w.<a class="code" href="classlila_1_1Vector.html#a414a0a1cd4b3807f090062305e90df37">data</a>(), </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;             result.<a class="code" href="structlila_1_1EigenResults.html#a0dfab4b38245f674570f14a1928a8d50">left_eigenvectors</a>.data(), &amp;ldvl,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;             result.<a class="code" href="structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca">right_eigenvectors</a>.data(), &amp;ldvr, </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;             work.data(), &amp;lwork, &amp;info);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    assert(info == 0);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    lwork = <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(real(work[0]));</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    lwork = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a><span class="keyword">&gt;</span>(<a class="code" href="namespacelila.html#a67479f9cb07ee91fa5b7a0228586cbb1">real</a>(work[0]));</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    work.resize(lwork);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// Run eigenvalue computation</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    blaslapack::geev(&amp;jobvl, &amp;jobvr, &amp;n, A.data(), &amp;lda, w.data(), </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;             result.left_eigenvectors.data(), &amp;ldvl,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;             result.right_eigenvectors.data(), &amp;ldvr, </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="namespacelila_1_1blaslapack.html#a924f4a6909a6b76fca13179433b7f0b9">blaslapack::geev</a>(&amp;jobvl, &amp;jobvr, &amp;n, A.<a class="code" href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">data</a>(), &amp;lda, w.<a class="code" href="classlila_1_1Vector.html#a414a0a1cd4b3807f090062305e90df37">data</a>(), </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;             result.<a class="code" href="structlila_1_1EigenResults.html#a0dfab4b38245f674570f14a1928a8d50">left_eigenvectors</a>.data(), &amp;ldvl,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;             result.<a class="code" href="structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca">right_eigenvectors</a>.data(), &amp;ldvr, </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;             work.data(), &amp;lwork, &amp;info);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    assert(info == 0);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -167,35 +169,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">inline</span> Vector&lt;complex_t&lt;coeff_t&gt;&gt; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  Eigenvalues(Matrix&lt;coeff_t&gt;&amp; A) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    EigenResults&lt;coeff_t&gt; res = Eigen(A);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> res.eigenvalues;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="namespacelila.html#a93e5093dca8fd27b1a923c615ef562ba">   74</a></span>&#160;  <a class="code" href="namespacelila.html#a93e5093dca8fd27b1a923c615ef562ba">Eigenvalues</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; A) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="structlila_1_1EigenResults.html">EigenResults&lt;coeff_t&gt;</a> res = <a class="code" href="namespacelila.html#addb5cbe5c3997a2db5173b117da9e1ac">Eigen</a>(A);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> res.<a class="code" href="structlila_1_1EigenResults.html#ae1e0995e4d02ef35eeac1c9e7a2a00f7">eigenvalues</a>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">inline</span> Vector&lt;real_t&lt;coeff_t&gt;&gt; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  EigenH(Matrix&lt;coeff_t&gt;&amp; A, <span class="keywordtype">bool</span> do_eigenvectors=<span class="keyword">true</span>, <span class="keywordtype">char</span> uplo=<span class="charliteral">&#39;U&#39;</span>)</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="namespacelila.html#a123bc395c5ffdbd6b9729ce494a93364">   81</a></span>&#160;  <a class="code" href="namespacelila.html#a123bc395c5ffdbd6b9729ce494a93364">EigenH</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; A, <span class="keywordtype">bool</span> do_eigenvectors=<span class="keyword">true</span>, <span class="keywordtype">char</span> uplo=<span class="charliteral">&#39;U&#39;</span>)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">using</span> size_type = blaslapack::blas_size_t;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    assert(A.nrows() == A.ncols());</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> = <a class="code" href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">blaslapack::blas_size_t</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    assert(A.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>() == A.<a class="code" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">ncols</a>());</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> jobz = do_eigenvectors ? <span class="charliteral">&#39;V&#39;</span> : <span class="charliteral">&#39;N&#39;</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">const</span> size_type n = A.nrows();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">const</span> size_type lda = n; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> n = A.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> lda = n; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">// get optimal work size</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    Vector&lt;real_t&lt;coeff_t&gt;&gt; w(n);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    size_type lwork = -1;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;real_t&lt;coeff_t&gt;</a>&gt; w(n);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> lwork = -1;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    std::vector&lt;coeff_t&gt; work(1);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> info = 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    blaslapack::syev(&amp;jobz, &amp;uplo, &amp;n, A.data(), &amp;lda, w.data(), </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="namespacelila_1_1blaslapack.html#a1425c17dbd0a1069fc63981aa7a42f1f">blaslapack::syev</a>(&amp;jobz, &amp;uplo, &amp;n, A.<a class="code" href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">data</a>(), &amp;lda, w.<a class="code" href="classlila_1_1Vector.html#a414a0a1cd4b3807f090062305e90df37">data</a>(), </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;             work.data(), &amp;lwork, &amp;info);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    assert(info == 0);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    lwork = <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(real(work[0]));</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    lwork = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a><span class="keyword">&gt;</span>(<a class="code" href="namespacelila.html#a67479f9cb07ee91fa5b7a0228586cbb1">real</a>(work[0]));</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    work.resize(lwork);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">// Run eigenvalue computation</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    blaslapack::syev(&amp;jobz, &amp;uplo, &amp;n, A.data(), &amp;lda, w.data(), </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="namespacelila_1_1blaslapack.html#a1425c17dbd0a1069fc63981aa7a42f1f">blaslapack::syev</a>(&amp;jobz, &amp;uplo, &amp;n, A.<a class="code" href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">data</a>(), &amp;lda, w.<a class="code" href="classlila_1_1Vector.html#a414a0a1cd4b3807f090062305e90df37">data</a>(), </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;             work.data(), &amp;lwork, &amp;info);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    assert(info == 0);</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">return</span> w;</div>
@@ -203,16 +205,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="keyword">inline</span> Vector&lt;real_t&lt;coeff_t&gt;&gt; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  EigenvaluesH(<span class="keyword">const</span> Matrix&lt;coeff_t&gt;&amp; A, <span class="keywordtype">char</span> uplo=<span class="charliteral">&#39;U&#39;</span>) {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    Matrix&lt;coeff_t&gt; A_copy = A;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> EigenH(A_copy, <span class="keyword">false</span>, uplo);</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="namespacelila.html#a23e0ff283c091fc244600d06f6d29d07">  110</a></span>&#160;  <a class="code" href="namespacelila.html#a23e0ff283c091fc244600d06f6d29d07">EigenvaluesH</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; A, <span class="keywordtype">char</span> uplo=<span class="charliteral">&#39;U&#39;</span>) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> A_copy = A;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacelila.html#a123bc395c5ffdbd6b9729ce494a93364">EigenH</a>(A_copy, <span class="keyword">false</span>, uplo);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  }</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="namespacelila_html_a93e5093dca8fd27b1a923c615ef562ba"><div class="ttname"><a href="namespacelila.html#a93e5093dca8fd27b1a923c615ef562ba">lila::Eigenvalues</a></div><div class="ttdeci">Vector&lt; complex_t&lt; coeff_t &gt; &gt; Eigenvalues(Matrix&lt; coeff_t &gt; &amp;A)</div><div class="ttdef"><b>Definition:</b> eigen.h:74</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_aec45f82b93ad01cde710519c40d7cff0"><div class="ttname"><a href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">lila::Matrix::nrows</a></div><div class="ttdeci">size_type nrows() const </div><div class="ttdef"><b>Definition:</b> matrix.h:85</div></div>
+<div class="ttc" id="complex_8h_html"><div class="ttname"><a href="complex_8h.html">complex.h</a></div></div>
+<div class="ttc" id="structlila_1_1EigenResults_html_ae1e0995e4d02ef35eeac1c9e7a2a00f7"><div class="ttname"><a href="structlila_1_1EigenResults.html#ae1e0995e4d02ef35eeac1c9e7a2a00f7">lila::EigenResults::eigenvalues</a></div><div class="ttdeci">Vector&lt; complex_t&lt; coeff_t &gt; &gt; eigenvalues</div><div class="ttdef"><b>Definition:</b> eigen.h:24</div></div>
+<div class="ttc" id="namespacelila_html_addb5cbe5c3997a2db5173b117da9e1ac"><div class="ttname"><a href="namespacelila.html#addb5cbe5c3997a2db5173b117da9e1ac">lila::Eigen</a></div><div class="ttdeci">EigenResults&lt; coeff_t &gt; Eigen(Matrix&lt; coeff_t &gt; &amp;A, bool do_right_eigenvectors=false, bool do_left_eigenvectors=false)</div><div class="ttdef"><b>Definition:</b> eigen.h:31</div></div>
+<div class="ttc" id="classlila_1_1Vector_html_a22c751fc427ad159e65cfa0bdf398502"><div class="ttname"><a href="classlila_1_1Vector.html#a22c751fc427ad159e65cfa0bdf398502">lila::Vector::resize</a></div><div class="ttdeci">void resize(size_type size)</div><div class="ttdef"><b>Definition:</b> vector.h:53</div></div>
+<div class="ttc" id="namespacelila_html_a67479f9cb07ee91fa5b7a0228586cbb1"><div class="ttname"><a href="namespacelila.html#a67479f9cb07ee91fa5b7a0228586cbb1">lila::real</a></div><div class="ttdeci">float real(float x)</div><div class="ttdef"><b>Definition:</b> complex.h:32</div></div>
+<div class="ttc" id="structlila_1_1EigenResults_html_a8a03644e21f1a0d5f1e09c7e320233ca"><div class="ttname"><a href="structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca">lila::EigenResults::right_eigenvectors</a></div><div class="ttdeci">Matrix&lt; coeff_t &gt; right_eigenvectors</div><div class="ttdef"><b>Definition:</b> eigen.h:26</div></div>
+<div class="ttc" id="namespacelila_html_a133f4432ee25066d7f9faf3c5b661b94"><div class="ttname"><a href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a></div><div class="ttdeci">int size_type</div><div class="ttdef"><b>Definition:</b> common.h:19</div></div>
+<div class="ttc" id="namespacelila_html_a123bc395c5ffdbd6b9729ce494a93364"><div class="ttname"><a href="namespacelila.html#a123bc395c5ffdbd6b9729ce494a93364">lila::EigenH</a></div><div class="ttdeci">Vector&lt; real_t&lt; coeff_t &gt; &gt; EigenH(Matrix&lt; coeff_t &gt; &amp;A, bool do_eigenvectors=true, char uplo='U')</div><div class="ttdef"><b>Definition:</b> eigen.h:81</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a00b442fdddd98f741bc87e948797874b"><div class="ttname"><a href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">lila::Matrix::ncols</a></div><div class="ttdeci">size_type ncols() const </div><div class="ttdef"><b>Definition:</b> matrix.h:86</div></div>
+<div class="ttc" id="namespacelila_html_a23e0ff283c091fc244600d06f6d29d07"><div class="ttname"><a href="namespacelila.html#a23e0ff283c091fc244600d06f6d29d07">lila::EigenvaluesH</a></div><div class="ttdeci">Vector&lt; real_t&lt; coeff_t &gt; &gt; EigenvaluesH(const Matrix&lt; coeff_t &gt; &amp;A, char uplo='U')</div><div class="ttdef"><b>Definition:</b> eigen.h:110</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a5039d5482bea83c244eadfc724230fda"><div class="ttname"><a href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">lila::Matrix::data</a></div><div class="ttdeci">coeff_t * data()</div><div class="ttdef"><b>Definition:</b> matrix.h:89</div></div>
+<div class="ttc" id="classlila_1_1Vector_html_a414a0a1cd4b3807f090062305e90df37"><div class="ttname"><a href="classlila_1_1Vector.html#a414a0a1cd4b3807f090062305e90df37">lila::Vector::data</a></div><div class="ttdeci">coeff_t * data()</div><div class="ttdef"><b>Definition:</b> vector.h:67</div></div>
+<div class="ttc" id="structlila_1_1EigenResults_html_a0dfab4b38245f674570f14a1928a8d50"><div class="ttname"><a href="structlila_1_1EigenResults.html#a0dfab4b38245f674570f14a1928a8d50">lila::EigenResults::left_eigenvectors</a></div><div class="ttdeci">Matrix&lt; coeff_t &gt; left_eigenvectors</div><div class="ttdef"><b>Definition:</b> eigen.h:25</div></div>
 <div class="ttc" id="structlila_1_1EigenResults_html"><div class="ttname"><a href="structlila_1_1EigenResults.html">lila::EigenResults</a></div><div class="ttdef"><b>Definition:</b> eigen.h:23</div></div>
-<div class="ttc" id="classlila_1_1Matrix_html"><div class="ttname"><a href="classlila_1_1Matrix.html">lila::Matrix</a></div><div class="ttdef"><b>Definition:</b> matrix.h:31</div></div>
-<div class="ttc" id="classlila_1_1Vector_html"><div class="ttname"><a href="classlila_1_1Vector.html">lila::Vector</a></div><div class="ttdef"><b>Definition:</b> vector.h:28</div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_a1425c17dbd0a1069fc63981aa7a42f1f"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#a1425c17dbd0a1069fc63981aa7a42f1f">lila::blaslapack::syev</a></div><div class="ttdeci">void syev(const char *jobz, const char *uplo, const blas_size_t *n, blas_float_t *a, const blas_size_t *lda, blas_float_t *w, blas_float_t *work, const blas_size_t *lwork, blas_size_t *info)</div><div class="ttdef"><b>Definition:</b> blaslapack.h:333</div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_a924f4a6909a6b76fca13179433b7f0b9"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#a924f4a6909a6b76fca13179433b7f0b9">lila::blaslapack::geev</a></div><div class="ttdeci">void geev(const char *jobvl, const char *jobvr, const blas_size_t *n, blas_float_t *a, const blas_size_t *lda, blas_float_t *wr, blas_float_t *wi, blas_float_t *vl, const blas_size_t *ldvl, blas_float_t *vr, const blas_size_t *ldvr, blas_float_t *work, const blas_size_t *lwork, blas_size_t *info)</div><div class="ttdef"><b>Definition:</b> blaslapack.h:387</div></div>
+<div class="ttc" id="namespacelila_1_1blaslapack_html_ae6b33198efc1992c27dd6f3ee07a49f1"><div class="ttname"><a href="namespacelila_1_1blaslapack.html#ae6b33198efc1992c27dd6f3ee07a49f1">lila::blaslapack::blas_size_t</a></div><div class="ttdeci">lila::size_type blas_size_t</div><div class="ttdef"><b>Definition:</b> blaslapack_types.h:31</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html"><div class="ttname"><a href="classlila_1_1Matrix.html">lila::Matrix</a></div><div class="ttdef"><b>Definition:</b> matrix.h:32</div></div>
+<div class="ttc" id="classlila_1_1Vector_html"><div class="ttname"><a href="classlila_1_1Vector.html">lila::Vector</a></div><div class="ttdef"><b>Definition:</b> vector.h:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

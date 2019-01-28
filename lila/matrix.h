@@ -22,6 +22,7 @@
 #include <vector>
 #include <iterator>
 
+#include "vector.h"
 #include "common.h"
 #include "range.h"
 
@@ -31,7 +32,8 @@ namespace lila {
   class Matrix {
   public:
     using size_type = lila::size_type; 
-    using coeff_type = coeff_t;    
+    using coeff_type = coeff_t;
+    using value_type = coeff_t;        
     using vector_type = std::vector<coeff_t>;
     using iterator_t = typename vector_type::iterator;
     using const_iterator_t = typename vector_type::const_iterator;
@@ -39,13 +41,13 @@ namespace lila {
     Matrix() : m_(0), n_(0), size_(0), data_() { };
     ~Matrix() = default;
     Matrix(const Matrix&) = default;
-    Matrix& operator=(Matrix&) = default; 
+    Matrix& operator=(const Matrix&) = default; 
     Matrix(Matrix&&) = default;
     Matrix& operator=(Matrix&&) = default;
 
     Matrix(size_type m, size_type n) 
-      : m_(m), n_(n), size_(m*n), data_(size_) { }
-    
+      : m_(m), n_(n), size_(m*n), data_(size_, 0) { }
+
     coeff_t operator()(size_type i, size_type j) const { return data_[i + j*m_]; }
     coeff_t& operator()(size_type i, size_type j) { return (data_[i + j*m_]); }
 
@@ -61,6 +63,21 @@ namespace lila {
       n_ = 0;
       size_= 0;
       data_.clear();
+    }
+
+    Vector<coeff_t> row(const int& i) const
+    {
+      Vector<coeff_t> rowi(n_);
+      for (auto j : cols())
+	rowi(j) = (*this)(i, j);
+      return rowi;
+    }
+    Vector<coeff_t> col(const int& j) const
+    {
+      Vector<coeff_t> coli(n_);
+      for (auto i : rows())
+	coli(i) = (*this)(i, j);
+      return coli;
     }
 
     range<size_type> rows() const { return range<size_type>(m_); }
@@ -106,6 +123,7 @@ namespace lila {
 	mat_t(j, i) = mat(i, j);
     return mat_t;
   }
+
 
   template <class coeff_t>
   Matrix<coeff_t> ParseMatrix(const std::string& str)

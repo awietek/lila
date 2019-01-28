@@ -36,7 +36,7 @@ namespace lila {
   template <class random_engine_t, class distribution_t, class coeff_t>
   class random_generator {
   public:
-    random_generator(distribution_t distribution, int seed)
+    random_generator(distribution_t& distribution, int seed)
       : distribution_(distribution)
     { engine_.seed(seed); }
 

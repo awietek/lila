@@ -17,10 +17,11 @@
 
 #include "blaslapack_types.h"
 
-#ifndef PLATFORM_MKL
+#ifndef LILA_USE_MKL
 
 namespace lila { 
   namespace blaslapack {
+
     
     // Copy
     extern "C" void scopy_(const blas_size_t* N, const blas_float_t* x, 
@@ -310,8 +311,19 @@ namespace lila {
 			   blas_complex_t* work, const blas_size_t* lwork, 
 			   blas_double_t* rwork, blas_size_t* info);
     
-  }  // namespace lila
-}  // namespace blaslapack
+    // Real symmetric tridiagonal eigensolvers
+    extern "C" void sstev_(const char* jobz, const blas_size_t* N, 
+			   blas_float_t* D, blas_float_t* E, blas_float_t* Z,
+			   const blas_size_t* ldz, blas_float_t* work, 
+			   blas_size_t* info);
+
+    extern "C" void dstev_(const char* jobz, const blas_size_t* N, 
+			   blas_double_t* D, blas_double_t* E, blas_double_t* Z,
+			   const blas_size_t* ldz, blas_double_t* work, 
+			   blas_size_t* info);
+
+  }  // namespace blaslapack
+}  // namespace lila
 
 #endif
 

@@ -19,11 +19,21 @@
 
 namespace lila { 
   namespace blaslapack {
+
+#ifdef LILA_USE_MKL // Using the Intel MKL
+#include "mkl.h"
+    using blas_size_t = lila::size_type;
+    using blas_float_t = float;
+    using blas_double_t = double;
+    using blas_scomplex_t = MKL_Complex8;
+    using blas_complex_t = MKL_Complex16;
+#else  // Using normal LAPACK  
     using blas_size_t = lila::size_type;
     using blas_float_t = float;
     using blas_double_t = double;
     using blas_scomplex_t = std::complex<float>;
     using blas_complex_t = std::complex<double>;
+#endif
   }
 }
 #endif

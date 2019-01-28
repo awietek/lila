@@ -1,12 +1,28 @@
 var searchData=
 [
+  ['random',['Random',['../namespacelila.html#a62b3bf63b549011e0f66e4c1a1c40f53',1,'lila::Random(matrix_t &amp;mat, gen_t &amp;gen, bool alter_generator=true)'],['../namespacelila.html#a3b90a17bbef8fb444dbf0ede0ea8d1d8',1,'lila::Random(int m, gen_t &amp;gen, bool alter_generator=true)'],['../namespacelila.html#a3b1308a40bde9cfb55003d0eb4508f28',1,'lila::Random(int m, int n, gen_t &amp;gen, bool alter_generator=true)']]],
+  ['random_2eh',['random.h',['../random_8h.html',1,'']]],
+  ['random_5fdetail_2eh',['random_detail.h',['../random__detail_8h.html',1,'']]],
   ['random_5fgenerator',['random_generator',['../classlila_1_1random__generator.html',1,'lila']]],
+  ['random_5fgenerator',['random_generator',['../classlila_1_1random__generator.html#a22187568a5c3ad3c8c09e5c3b1afd0bf',1,'lila::random_generator']]],
+  ['random_5fnumber',['random_number',['../namespacelila_1_1detail.html#ad1d7b91e743876ec78198457bf12b921',1,'lila::detail::random_number(random_engine_t &amp;engine, distribution_t &amp;distribution, float &amp;number)'],['../namespacelila_1_1detail.html#a84c99e3482647afbecbf0caa228beb99',1,'lila::detail::random_number(random_engine_t &amp;engine, distribution_t &amp;distribution, double &amp;number)'],['../namespacelila_1_1detail.html#aac453c0c90008bcab5dbb331bdc5c0ff',1,'lila::detail::random_number(random_engine_t &amp;engine, distribution_t &amp;distribution, std::complex&lt; float &gt; &amp;number)'],['../namespacelila_1_1detail.html#a3f4ff09ab791d6ff508f906460bd2fba',1,'lila::detail::random_number(random_engine_t &amp;engine, distribution_t &amp;distribution, std::complex&lt; double &gt; &amp;number)']]],
+  ['randomunitary',['RandomUnitary',['../namespacelila.html#a985434e99c3db8773334d02a3dcd53d9',1,'lila']]],
   ['range',['range',['../classlila_1_1range.html',1,'lila']]],
+  ['range',['range',['../classlila_1_1range.html#afb4dd0f7ce0db45103f69b83124030d6',1,'lila::range::range(size_type e)'],['../classlila_1_1range.html#a65dc6c05f86d204269d2fc47534d3ac8',1,'lila::range::range(size_type b, size_type e)']]],
+  ['range_2eh',['range.h',['../range_8h.html',1,'']]],
+  ['readvector',['ReadVector',['../namespacelila.html#aa522bdaa7d2e8ce6560a1bfce5c5ba18',1,'lila']]],
+  ['real',['real',['../namespacelila.html#a67479f9cb07ee91fa5b7a0228586cbb1',1,'lila::real(float x)'],['../namespacelila.html#a0f6750eb5224f465767f2d78d06a2c2e',1,'lila::real(double x)'],['../namespacelila.html#ae8d530bd1047b4af2cd97c8b495aa68c',1,'lila::real(std::complex&lt; float &gt; x)'],['../namespacelila.html#aede02567d4d2bb7394b7d8817f780e7c',1,'lila::real(std::complex&lt; double &gt; x)'],['../namespacelila.html#a82cb0ac926f3d44208be74ee707615b7',1,'lila::Real(const Matrix&lt; coeff_t &gt; &amp;X)'],['../namespacelila.html#ac3c24debb40a67e921babc07d8f49e6b',1,'lila::Real(const Vector&lt; coeff_t &gt; &amp;X)']]],
+  ['real_5ft',['real_t',['../namespacelila.html#a7bc5dd6e2d345cbd74145d5a0acbc5ce',1,'lila']]],
   ['real_5ftype_5fstruct',['real_type_struct',['../structlila_1_1detail_1_1real__type__struct.html',1,'lila::detail']]],
   ['real_5ftype_5fstruct_3c_20std_3a_3acomplex_3c_20coeff_5ft_20_3e_20_3e',['real_type_struct&lt; std::complex&lt; coeff_t &gt; &gt;',['../structlila_1_1detail_1_1real__type__struct_3_01std_1_1complex_3_01coeff__t_01_4_01_4.html',1,'lila::detail']]],
+  ['resize',['resize',['../classlila_1_1Matrix.html#a9f73bb1d0e1ab9faeac721392be28f8b',1,'lila::Matrix::resize()'],['../classlila_1_1Vector.html#a22c751fc427ad159e65cfa0bdf398502',1,'lila::Vector::resize()']]],
+  ['right_5feigenvectors',['right_eigenvectors',['../structlila_1_1EigenResults.html#a8a03644e21f1a0d5f1e09c7e320233ca',1,'lila::EigenResults']]],
+  ['row',['row',['../classlila_1_1Matrix.html#a9d968347b13d63a85bb5b0354bae6ade',1,'lila::Matrix']]],
+  ['rows',['rows',['../classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d',1,'lila::Matrix::rows()'],['../classlila_1_1Vector.html#a90821c9cec114e32d4c4af763568a943',1,'lila::Vector::rows()']]],
   ['rtol',['rtol',['../structlila_1_1rtol.html',1,'lila']]],
   ['rtol_3c_20double_20_3e',['rtol&lt; double &gt;',['../structlila_1_1rtol_3_01double_01_4.html',1,'lila']]],
   ['rtol_3c_20float_20_3e',['rtol&lt; float &gt;',['../structlila_1_1rtol_3_01float_01_4.html',1,'lila']]],
   ['rtol_3c_20std_3a_3acomplex_3c_20double_20_3e_20_3e',['rtol&lt; std::complex&lt; double &gt; &gt;',['../structlila_1_1rtol_3_01std_1_1complex_3_01double_01_4_01_4.html',1,'lila']]],
-  ['rtol_3c_20std_3a_3acomplex_3c_20float_20_3e_20_3e',['rtol&lt; std::complex&lt; float &gt; &gt;',['../structlila_1_1rtol_3_01std_1_1complex_3_01float_01_4_01_4.html',1,'lila']]]
+  ['rtol_3c_20std_3a_3acomplex_3c_20float_20_3e_20_3e',['rtol&lt; std::complex&lt; float &gt; &gt;',['../structlila_1_1rtol_3_01std_1_1complex_3_01float_01_4_01_4.html',1,'lila']]],
+  ['run',['run',['../namespacelila.html#affb5b73b4a91cf80d383636d60ffe087',1,'lila']]]
 ];

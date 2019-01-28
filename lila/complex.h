@@ -22,6 +22,8 @@
 #include "detail/complex_detail.h"
 
 namespace lila {
+  using scomplex = std::complex<float>;
+  using complex = std::complex<double>;
   
   template <class coeff_t>
   using real_t = typename detail::real_type_struct<coeff_t>::type;
@@ -50,7 +52,7 @@ namespace lila {
     Matrix<real_t<coeff_t>> Y(X.nrows(), Y.ncols());
     for (auto i : X.rows())
       for (auto j : X.cols())
-	Y(i, j) = real(X(i, j));
+	Y(i, j) = lila::real(X(i, j));
     return Y;
   }
 
@@ -59,7 +61,7 @@ namespace lila {
   {
     Vector<real_t<coeff_t>> Y(X.nrows());
     for (auto i : X.rows())
-	Y(i) = real(X(i));
+	Y(i) = lila::real(X(i));
     return Y;
   }
  
@@ -69,7 +71,7 @@ namespace lila {
     Matrix<real_t<coeff_t>> Y(X.nrows(), Y.ncols());
     for (auto i : X.rows())
       for (auto j : X.cols())
-	Y(i, j) = imag(X(i, j));
+	Y(i, j) = lila::imag(X(i, j));
     return Y;
   }
 
@@ -78,7 +80,7 @@ namespace lila {
   {
     Vector<real_t<coeff_t>> Y(X.nrows());
     for (auto i : X.rows())
-	Y(i) = imag(X(i));
+	Y(i) = lila::imag(X(i));
     return Y;
   }  
   
@@ -88,7 +90,7 @@ namespace lila {
     Matrix<coeff_t> mat_c(mat.nrows(), mat.ncols());
     for (auto i : mat.rows())
       for (auto j : mat.cols())
-	mat_c(i, j) = conj(mat(i, j));
+	mat_c(i, j) = lila::conj(mat(i, j));
     return mat_c;
   }
 

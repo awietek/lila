@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -75,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">range.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
+<a href="range_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
@@ -117,32 +119,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classlila_1_1range.html">   21</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classlila_1_1range.html">range</a></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    constexpr <a class="code" href="classlila_1_1range.html">range</a>(size_type e)</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#afb4dd0f7ce0db45103f69b83124030d6">   24</a></span>&#160;    constexpr <a class="code" href="classlila_1_1range.html#afb4dd0f7ce0db45103f69b83124030d6">range</a>(<a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> e)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      : range(0, e)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    { }</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    constexpr range(size_type b, size_type e)</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#a65dc6c05f86d204269d2fc47534d3ac8">   28</a></span>&#160;    constexpr <a class="code" href="classlila_1_1range.html#a65dc6c05f86d204269d2fc47534d3ac8">range</a>(<a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> b, <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> e)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      : current_(b),</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        end_(e)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    { }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    size_type <span class="keyword">const</span>&amp;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> current_; }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> <span class="keyword">const</span>&amp;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#ab09d9fb547ffa1f4e98829b0467d16b1">   34</a></span>&#160;    <a class="code" href="classlila_1_1range.html#ab09d9fb547ffa1f4e98829b0467d16b1">operator*</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> current_; }</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    range&amp; operator++() { </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#aa9e7ff8300bc3487c758cb560ba8a2bc">   36</a></span>&#160;    <a class="code" href="classlila_1_1range.html">range</a>&amp; <a class="code" href="classlila_1_1range.html#aa9e7ff8300bc3487c758cb560ba8a2bc">operator++</a>() { </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      ++current_; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> range&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#a8ed84f5364d589df07d43404ff31e871">   41</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classlila_1_1range.html#a8ed84f5364d589df07d43404ff31e871">operator!=</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1range.html">range</a>&amp; other)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">    </span>{ <span class="keywordflow">return</span> current_ != other.current_; }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    range begin()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> range(current_, end_); }</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#af3d56b14b170b9545274e5b160ee5cf7">   44</a></span>&#160;    <a class="code" href="classlila_1_1range.html">range</a> <a class="code" href="classlila_1_1range.html#af3d56b14b170b9545274e5b160ee5cf7">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classlila_1_1range.html#afb4dd0f7ce0db45103f69b83124030d6">range</a>(current_, end_); }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    range end()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> range(end_, end_); }</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classlila_1_1range.html#a2f5c07720364efe80aa2475f3646a783">   46</a></span>&#160;    <a class="code" href="classlila_1_1range.html">range</a> <a class="code" href="classlila_1_1range.html#a2f5c07720364efe80aa2475f3646a783">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classlila_1_1range.html#afb4dd0f7ce0db45103f69b83124030d6">range</a>(end_, end_); }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    size_type current_;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    size_type end_;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> current_;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> end_;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  };</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
@@ -150,6 +152,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classlila_1_1range_html"><div class="ttname"><a href="classlila_1_1range.html">lila::range</a></div><div class="ttdef"><b>Definition:</b> range.h:21</div></div>
+<div class="ttc" id="classlila_1_1range_html_aa9e7ff8300bc3487c758cb560ba8a2bc"><div class="ttname"><a href="classlila_1_1range.html#aa9e7ff8300bc3487c758cb560ba8a2bc">lila::range::operator++</a></div><div class="ttdeci">range &amp; operator++()</div><div class="ttdef"><b>Definition:</b> range.h:36</div></div>
+<div class="ttc" id="classlila_1_1range_html_af3d56b14b170b9545274e5b160ee5cf7"><div class="ttname"><a href="classlila_1_1range.html#af3d56b14b170b9545274e5b160ee5cf7">lila::range::begin</a></div><div class="ttdeci">range begin() const </div><div class="ttdef"><b>Definition:</b> range.h:44</div></div>
+<div class="ttc" id="classlila_1_1range_html_a65dc6c05f86d204269d2fc47534d3ac8"><div class="ttname"><a href="classlila_1_1range.html#a65dc6c05f86d204269d2fc47534d3ac8">lila::range::range</a></div><div class="ttdeci">constexpr range(size_type b, size_type e)</div><div class="ttdef"><b>Definition:</b> range.h:28</div></div>
+<div class="ttc" id="namespacelila_html_a133f4432ee25066d7f9faf3c5b661b94"><div class="ttname"><a href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a></div><div class="ttdeci">int size_type</div><div class="ttdef"><b>Definition:</b> common.h:19</div></div>
+<div class="ttc" id="classlila_1_1range_html_ab09d9fb547ffa1f4e98829b0467d16b1"><div class="ttname"><a href="classlila_1_1range.html#ab09d9fb547ffa1f4e98829b0467d16b1">lila::range::operator*</a></div><div class="ttdeci">size_type const &amp; operator*() const </div><div class="ttdef"><b>Definition:</b> range.h:34</div></div>
+<div class="ttc" id="classlila_1_1range_html_afb4dd0f7ce0db45103f69b83124030d6"><div class="ttname"><a href="classlila_1_1range.html#afb4dd0f7ce0db45103f69b83124030d6">lila::range::range</a></div><div class="ttdeci">constexpr range(size_type e)</div><div class="ttdef"><b>Definition:</b> range.h:24</div></div>
+<div class="ttc" id="classlila_1_1range_html_a8ed84f5364d589df07d43404ff31e871"><div class="ttname"><a href="classlila_1_1range.html#a8ed84f5364d589df07d43404ff31e871">lila::range::operator!=</a></div><div class="ttdeci">bool operator!=(const range &amp;other) const </div><div class="ttdef"><b>Definition:</b> range.h:41</div></div>
+<div class="ttc" id="classlila_1_1range_html_a2f5c07720364efe80aa2475f3646a783"><div class="ttname"><a href="classlila_1_1range.html#a2f5c07720364efe80aa2475f3646a783">lila::range::end</a></div><div class="ttdeci">range end() const </div><div class="ttdef"><b>Definition:</b> range.h:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

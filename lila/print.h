@@ -19,12 +19,53 @@
 
 #include "matrix.h"
 #include "vector.h"
+#include "common.h"
 
 #define LilaPrint(X) lila::PrintPretty(#X,X)
 
 namespace lila {
 
   // TODO: allow for different precision outputs
+  inline void PrintPretty(const char* identifier, const float& number) {
+    printf("%s:\n", identifier);
+    printf("%10.8g\n", number);
+  }
+
+  inline void PrintPretty(const char* identifier, const double& number) {
+    printf("%s:\n", identifier);
+    printf("%18.16g\n", number);
+  }
+
+  inline void PrintPretty(const char* identifier, const std::complex<float>& number) {
+    printf("%s:\n", identifier);
+    printf("%10.8g%-+8.8gj\n", number.real(), number.imag());
+  }
+
+  inline void PrintPretty(const char* identifier, const std::complex<double>& number) {
+    printf("%s:\n", identifier);
+    printf("%18.16g%-+18.16gj\n", number.real(), number.imag());
+  }
+
+  inline void PrintPretty(const char* identifier, const int32& number) {
+    printf("%s:\n", identifier);
+    printf("%d\n", number);
+  }
+
+  inline void PrintPretty(const char* identifier, const uint32& number) {
+    printf("%s:\n", identifier);
+    printf("%d\n", number);
+  }
+
+  inline void PrintPretty(const char* identifier, const int64& number) {
+    printf("%s:\n", identifier);
+    printf("%ld\n", number);
+  }
+
+  inline void PrintPretty(const char* identifier, const uint64& number) {
+    printf("%s:\n", identifier);
+    printf("%ld\n", number);
+  }
+
   inline void PrintPretty(const char* identifier, const Matrix<float>& mat) {
     printf("%s:\n", identifier);
     for (auto i : mat.rows())

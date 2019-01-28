@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -75,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">matrix.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
+<a href="matrix_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2018 Alexander Wietek - All Rights Reserved.</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
@@ -118,137 +120,192 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;common.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;range.h&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>lila {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html">   31</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classlila_1_1Matrix.html">Matrix</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">using</span> size_type = lila::size_type; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">using</span> coeff_type = coeff_t;    </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> vector_type = std::vector&lt;coeff_t&gt;;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> iterator_t = <span class="keyword">typename</span> vector_type::iterator;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> const_iterator_t = <span class="keyword">typename</span> vector_type::const_iterator;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>() : m_(0), n_(0), size_(0), data_() { };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ~<a class="code" href="classlila_1_1Matrix.html">Matrix</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp; operator=(<a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;) = <span class="keywordflow">default</span>; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp; operator=(<a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>(size_type m, size_type n) </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      : m_(m), n_(n), size_(m*n), data_(size_) { }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    coeff_t operator()(size_type i, size_type j)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_[i + j*m_]; }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    coeff_t&amp; operator()(size_type i, size_type j) { <span class="keywordflow">return</span> (data_[i + j*m_]); }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> resize(size_type m, size_type n) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      m_ = m;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      n_ = n;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      size_= m*n;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      data_.resize(size_);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> clear() {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      m_ = 0;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      n_ = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      size_= 0;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      data_.clear();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a> rows()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(m_); }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a> cols()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(n_); }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    size_type nrows()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_; }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    size_type ncols()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> n_; }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    size_type size()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> size_; }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    coeff_t* data() { <span class="keywordflow">return</span> data_.data(); }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> coeff_t* data()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.data(); }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    iterator_t begin() { <span class="keywordflow">return</span> data_.begin(); }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    iterator_t end() { <span class="keywordflow">return</span> data_.end(); }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    const_iterator_t begin()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.begin(); }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    const_iterator_t end()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.end(); }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    const_iterator_t cbegin()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.cbegin(); }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    const_iterator_t cend()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.cend(); }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    size_type m_;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    size_type n_;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    size_type size_;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    vector_type data_;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  };</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  coeff_t Trace(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; mat) </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// TODO: optimize ??</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    coeff_t res = 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">for</span> (size_type i : <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(std::min(mat.nrows(), mat.ncols())) )</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      res += mat(i,i);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> res;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  Matrix&lt;coeff_t&gt; Transpose(<span class="keyword">const</span> Matrix&lt;coeff_t&gt;&amp; mat) </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    Matrix&lt;coeff_t&gt; mat_t(mat.ncols(), mat.nrows());</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : mat.rows())</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : mat.cols())</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    mat_t(j, i) = mat(i, j);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">return</span> mat_t;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  Matrix&lt;coeff_t&gt; ParseMatrix(<span class="keyword">const</span> std::string&amp; str)</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">using</span> size_type = lila::size_type; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::istringstream stream(str);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    std::vector&lt;std::string&gt; split(std::istream_iterator&lt;std::string&gt;{stream},</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                   std::istream_iterator&lt;std::string&gt;());</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    std::string dimstring = split[0];</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">unsigned</span> open = dimstring.find(<span class="charliteral">&#39;[&#39;</span>);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">unsigned</span> comma = dimstring.find(<span class="charliteral">&#39;,&#39;</span>);   </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">unsigned</span> close = dimstring.find(<span class="charliteral">&#39;]&#39;</span>);  </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    size_type m = std::stoi(dimstring.substr(open+1, comma - open));</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    size_type n = std::stoi(dimstring.substr(comma+1, close - comma));    </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">unsigned</span> dim = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span><span class="keyword">&gt;</span>(m*n);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    assert(split.size() == dim + 1);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    Matrix&lt;coeff_t&gt; matrix(m,n);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : range&lt;size_type&gt;(m))</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : range&lt;size_type&gt;(n))</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      std::istringstream is(split[i*m + j + 1]);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      is &gt;&gt; matrix(i,j);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }      </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordflow">return</span> matrix;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  std::string WriteMatrix(<span class="keyword">const</span> Matrix&lt;coeff_t&gt;&amp; matrix)</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    std::stringstream ss;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    ss &lt;&lt; <span class="stringliteral">&quot; [&quot;</span> &lt;&lt; matrix.nrows() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; matrix.ncols() &lt;&lt; <span class="stringliteral">&quot;] &quot;</span>; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    ss &lt;&lt; std::setprecision(18);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : matrix.rows())</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : matrix.cols())</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    ss &lt;&lt; matrix(i,j) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">return</span> ss.str();</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  }</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vector_8h.html">vector.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">common.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="range_8h.html">range.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span>lila {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html">   32</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classlila_1_1Matrix.html">Matrix</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">   34</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> = <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a>; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a433b7b591482a37d8c0d07359837acf2">   35</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classlila_1_1Matrix.html#a433b7b591482a37d8c0d07359837acf2">coeff_type</a> = coeff_t;    </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#aaf565187c5b53d59743dc64649775e11">   36</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classlila_1_1Matrix.html#aaf565187c5b53d59743dc64649775e11">vector_type</a> = std::vector&lt;coeff_t&gt;;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#af681178e71f881cd5a5fb37bbcf599d2">   37</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classlila_1_1Matrix.html#af681178e71f881cd5a5fb37bbcf599d2">iterator_t</a> = <span class="keyword">typename</span> vector_type::iterator;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">   38</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">const_iterator_t</a> = <span class="keyword">typename</span> vector_type::const_iterator;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a9c520c3fcc23e44e72f2b578870bb18e">   40</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a9c520c3fcc23e44e72f2b578870bb18e">Matrix</a>() : m_(0), n_(0), size_(0), data_() { };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a7dba9dd27319f3e90146fa3a4dcf8830">~Matrix</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a9c520c3fcc23e44e72f2b578870bb18e">Matrix</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp; <a class="code" href="classlila_1_1Matrix.html#abac5dcd08e44ccdd181be14a56066537">operator=</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;) = <span class="keywordflow">default</span>; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a9c520c3fcc23e44e72f2b578870bb18e">Matrix</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp; <a class="code" href="classlila_1_1Matrix.html#abac5dcd08e44ccdd181be14a56066537">operator=</a>(<a class="code" href="classlila_1_1Matrix.html">Matrix</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a9fd1b4666e322b92115224d05fb06d90">   47</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a9fd1b4666e322b92115224d05fb06d90">Matrix</a>(<a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> m, <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> n) </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      : m_(m), n_(n), size_(m*n), data_(size_) { }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a083c08d37cefb0e15eb019a4bf20f543">   50</a></span>&#160;    coeff_t <a class="code" href="classlila_1_1Matrix.html#a083c08d37cefb0e15eb019a4bf20f543">operator()</a>(<a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> i, <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> j)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_[i + j*m_]; }</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#aea95918a7d3d032c8d24f301bf8f4150">   51</a></span>&#160;    coeff_t&amp; <a class="code" href="classlila_1_1Matrix.html#aea95918a7d3d032c8d24f301bf8f4150">operator()</a>(<a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> i, <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> j) { <span class="keywordflow">return</span> (data_[i + j*m_]); }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a9f73bb1d0e1ab9faeac721392be28f8b">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classlila_1_1Matrix.html#a9f73bb1d0e1ab9faeac721392be28f8b">resize</a>(<a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> m, <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> n) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      m_ = m;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      n_ = n;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      size_= m*n;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      data_.resize(size_);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a792ac830e1f5ffe28ec5043fa6537488">   60</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classlila_1_1Matrix.html#a792ac830e1f5ffe28ec5043fa6537488">clear</a>() {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      m_ = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      n_ = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      size_= 0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      data_.clear();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a9d968347b13d63a85bb5b0354bae6ade">   67</a></span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;coeff_t&gt;</a> <a class="code" href="classlila_1_1Matrix.html#a9d968347b13d63a85bb5b0354bae6ade">row</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; i)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <a class="code" href="classlila_1_1Vector.html">Vector&lt;coeff_t&gt;</a> rowi(n_);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : <a class="code" href="classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123">cols</a>())</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    rowi(j) = (*this)(i, j);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">return</span> rowi;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a883eb08c7022d3e3ec1454f083661cda">   74</a></span>&#160;    <a class="code" href="classlila_1_1Vector.html">Vector&lt;coeff_t&gt;</a> <a class="code" href="classlila_1_1Matrix.html#a883eb08c7022d3e3ec1454f083661cda">col</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; j)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <a class="code" href="classlila_1_1Vector.html">Vector&lt;coeff_t&gt;</a> coli(n_);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : <a class="code" href="classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d">rows</a>())</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    coli(i) = (*this)(i, j);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keywordflow">return</span> coli;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d">   82</a></span>&#160;    <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a> <a class="code" href="classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d">rows</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(m_); }</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123">   83</a></span>&#160;    <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a> <a class="code" href="classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123">cols</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(n_); }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">   85</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> <a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_; }</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">   86</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> <a class="code" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">ncols</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> n_; }</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a640326a1ec73862d4e848e8656076d3d">   87</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">size_type</a> <a class="code" href="classlila_1_1Matrix.html#a640326a1ec73862d4e848e8656076d3d">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> size_; }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">   89</a></span>&#160;    coeff_t* <a class="code" href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">data</a>() { <span class="keywordflow">return</span> data_.data(); }</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a4bef5c2c8b4f8ac78a767d3301dae71b">   90</a></span>&#160;    <span class="keyword">const</span> coeff_t* <a class="code" href="classlila_1_1Matrix.html#a4bef5c2c8b4f8ac78a767d3301dae71b">data</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.data(); }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#aab289fc5048c5852516833fc7fc73980">   92</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#af681178e71f881cd5a5fb37bbcf599d2">iterator_t</a> <a class="code" href="classlila_1_1Matrix.html#aab289fc5048c5852516833fc7fc73980">begin</a>() { <span class="keywordflow">return</span> data_.begin(); }</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#aa261e7b66eb07d64fe091fc00ba94b82">   93</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#af681178e71f881cd5a5fb37bbcf599d2">iterator_t</a> <a class="code" href="classlila_1_1Matrix.html#aa261e7b66eb07d64fe091fc00ba94b82">end</a>() { <span class="keywordflow">return</span> data_.end(); }</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#ac7d19daa103e0cfb81cc055626d20f75">   94</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">const_iterator_t</a> <a class="code" href="classlila_1_1Matrix.html#ac7d19daa103e0cfb81cc055626d20f75">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.begin(); }</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a6fef165a29f2055afa064257116a195f">   95</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">const_iterator_t</a> <a class="code" href="classlila_1_1Matrix.html#a6fef165a29f2055afa064257116a195f">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.end(); }</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#a25ee2b16d87885aeb9c9f57022c51ab8">   96</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">const_iterator_t</a> <a class="code" href="classlila_1_1Matrix.html#a25ee2b16d87885aeb9c9f57022c51ab8">cbegin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.cbegin(); }</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classlila_1_1Matrix.html#ac9e03a41f6a92f44b7c6ae158e089c9e">   97</a></span>&#160;    <a class="code" href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">const_iterator_t</a> <a class="code" href="classlila_1_1Matrix.html#ac9e03a41f6a92f44b7c6ae158e089c9e">cend</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.cend(); }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> m_;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> n_;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> size_;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="classlila_1_1Matrix.html#aaf565187c5b53d59743dc64649775e11">vector_type</a> data_;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  };</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="namespacelila.html#ae80d260675d2ba0403be98834857f0f9">  107</a></span>&#160;  coeff_t <a class="code" href="namespacelila.html#ae80d260675d2ba0403be98834857f0f9">Trace</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; mat) </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">// TODO: optimize ??</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    coeff_t res = 0;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> i : <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(std::min(mat.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>(), mat.<a class="code" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">ncols</a>())) )</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      res += mat(i,i);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="namespacelila.html#a7403aceddc4bf33bff2d2ca0fd2f7213">  117</a></span>&#160;  <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> <a class="code" href="namespacelila.html#a7403aceddc4bf33bff2d2ca0fd2f7213">Transpose</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; mat) </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> mat_t(mat.<a class="code" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">ncols</a>(), mat.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>());</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : mat.<a class="code" href="classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d">rows</a>())</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : mat.<a class="code" href="classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123">cols</a>())</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    mat_t(j, i) = mat(i, j);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> mat_t;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="namespacelila.html#a9a03e956a0654845e5e8bd3f657625e7">  128</a></span>&#160;  <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> <a class="code" href="namespacelila.html#a9a03e956a0654845e5e8bd3f657625e7">ParseMatrix</a>(<span class="keyword">const</span> std::string&amp; str)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> = <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a>; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    std::istringstream stream(str);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    std::vector&lt;std::string&gt; split(std::istream_iterator&lt;std::string&gt;{stream},</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                   std::istream_iterator&lt;std::string&gt;());</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    std::string dimstring = split[0];</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">unsigned</span> open = dimstring.find(<span class="charliteral">&#39;[&#39;</span>);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">unsigned</span> comma = dimstring.find(<span class="charliteral">&#39;,&#39;</span>);   </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="namespacelila.html#a0ea201517f26cdddf31e34827d857e4e">close</a> = dimstring.find(<span class="charliteral">&#39;]&#39;</span>);  </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> m = std::stoi(dimstring.substr(open+1, comma - open));</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <a class="code" href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">size_type</a> n = std::stoi(dimstring.substr(comma+1, close - comma));    </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordtype">unsigned</span> dim = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span><span class="keyword">&gt;</span>(m*n);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    assert(split.size() == dim + 1);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a> matrix(m,n);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(m))</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : <a class="code" href="classlila_1_1range.html">range&lt;size_type&gt;</a>(n))</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      std::istringstream is(split[i*m + j + 1]);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      is &gt;&gt; matrix(i,j);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }      </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> matrix;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  }</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> coeff_t&gt;</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="namespacelila.html#a2464cf4e19be2b351faecb265627658a">  157</a></span>&#160;  std::string <a class="code" href="namespacelila.html#a2464cf4e19be2b351faecb265627658a">WriteMatrix</a>(<span class="keyword">const</span> <a class="code" href="classlila_1_1Matrix.html">Matrix&lt;coeff_t&gt;</a>&amp; matrix)</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    std::stringstream ss;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    ss &lt;&lt; <span class="stringliteral">&quot; [&quot;</span> &lt;&lt; matrix.<a class="code" href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">nrows</a>() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; matrix.<a class="code" href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">ncols</a>() &lt;&lt; <span class="stringliteral">&quot;] &quot;</span>; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    ss &lt;&lt; std::setprecision(18);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : matrix.<a class="code" href="classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d">rows</a>())</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : matrix.<a class="code" href="classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123">cols</a>())</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    ss &lt;&lt; matrix(i,j) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordflow">return</span> ss.str();</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a792ac830e1f5ffe28ec5043fa6537488"><div class="ttname"><a href="classlila_1_1Matrix.html#a792ac830e1f5ffe28ec5043fa6537488">lila::Matrix::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> matrix.h:60</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_ac7d19daa103e0cfb81cc055626d20f75"><div class="ttname"><a href="classlila_1_1Matrix.html#ac7d19daa103e0cfb81cc055626d20f75">lila::Matrix::begin</a></div><div class="ttdeci">const_iterator_t begin() const </div><div class="ttdef"><b>Definition:</b> matrix.h:94</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_aec45f82b93ad01cde710519c40d7cff0"><div class="ttname"><a href="classlila_1_1Matrix.html#aec45f82b93ad01cde710519c40d7cff0">lila::Matrix::nrows</a></div><div class="ttdeci">size_type nrows() const </div><div class="ttdef"><b>Definition:</b> matrix.h:85</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a9f73bb1d0e1ab9faeac721392be28f8b"><div class="ttname"><a href="classlila_1_1Matrix.html#a9f73bb1d0e1ab9faeac721392be28f8b">lila::Matrix::resize</a></div><div class="ttdeci">void resize(size_type m, size_type n)</div><div class="ttdef"><b>Definition:</b> matrix.h:53</div></div>
+<div class="ttc" id="namespacelila_html_a0ea201517f26cdddf31e34827d857e4e"><div class="ttname"><a href="namespacelila.html#a0ea201517f26cdddf31e34827d857e4e">lila::close</a></div><div class="ttdeci">bool close(const coeff_t &amp;x, const coeff_t &amp;y, real_t&lt; coeff_t &gt; atol=atol&lt; coeff_t &gt;::val(), real_t&lt; coeff_t &gt; rtol=rtol&lt; coeff_t &gt;::val())</div><div class="ttdef"><b>Definition:</b> compare.h:29</div></div>
+<div class="ttc" id="namespacelila_html_ae80d260675d2ba0403be98834857f0f9"><div class="ttname"><a href="namespacelila.html#ae80d260675d2ba0403be98834857f0f9">lila::Trace</a></div><div class="ttdeci">coeff_t Trace(const Matrix&lt; coeff_t &gt; &amp;mat)</div><div class="ttdef"><b>Definition:</b> matrix.h:107</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_ac9e03a41f6a92f44b7c6ae158e089c9e"><div class="ttname"><a href="classlila_1_1Matrix.html#ac9e03a41f6a92f44b7c6ae158e089c9e">lila::Matrix::cend</a></div><div class="ttdeci">const_iterator_t cend() const </div><div class="ttdef"><b>Definition:</b> matrix.h:97</div></div>
 <div class="ttc" id="classlila_1_1range_html"><div class="ttname"><a href="classlila_1_1range.html">lila::range</a></div><div class="ttdef"><b>Definition:</b> range.h:21</div></div>
-<div class="ttc" id="classlila_1_1Matrix_html"><div class="ttname"><a href="classlila_1_1Matrix.html">lila::Matrix</a></div><div class="ttdef"><b>Definition:</b> matrix.h:31</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a4bef5c2c8b4f8ac78a767d3301dae71b"><div class="ttname"><a href="classlila_1_1Matrix.html#a4bef5c2c8b4f8ac78a767d3301dae71b">lila::Matrix::data</a></div><div class="ttdeci">const coeff_t * data() const </div><div class="ttdef"><b>Definition:</b> matrix.h:90</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_aaf565187c5b53d59743dc64649775e11"><div class="ttname"><a href="classlila_1_1Matrix.html#aaf565187c5b53d59743dc64649775e11">lila::Matrix::vector_type</a></div><div class="ttdeci">std::vector&lt; coeff_t &gt; vector_type</div><div class="ttdef"><b>Definition:</b> matrix.h:36</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a9d968347b13d63a85bb5b0354bae6ade"><div class="ttname"><a href="classlila_1_1Matrix.html#a9d968347b13d63a85bb5b0354bae6ade">lila::Matrix::row</a></div><div class="ttdeci">Vector&lt; coeff_t &gt; row(const int &amp;i) const </div><div class="ttdef"><b>Definition:</b> matrix.h:67</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a9c520c3fcc23e44e72f2b578870bb18e"><div class="ttname"><a href="classlila_1_1Matrix.html#a9c520c3fcc23e44e72f2b578870bb18e">lila::Matrix::Matrix</a></div><div class="ttdeci">Matrix()</div><div class="ttdef"><b>Definition:</b> matrix.h:40</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_aa261e7b66eb07d64fe091fc00ba94b82"><div class="ttname"><a href="classlila_1_1Matrix.html#aa261e7b66eb07d64fe091fc00ba94b82">lila::Matrix::end</a></div><div class="ttdeci">iterator_t end()</div><div class="ttdef"><b>Definition:</b> matrix.h:93</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a25ee2b16d87885aeb9c9f57022c51ab8"><div class="ttname"><a href="classlila_1_1Matrix.html#a25ee2b16d87885aeb9c9f57022c51ab8">lila::Matrix::cbegin</a></div><div class="ttdeci">const_iterator_t cbegin() const </div><div class="ttdef"><b>Definition:</b> matrix.h:96</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_aea95918a7d3d032c8d24f301bf8f4150"><div class="ttname"><a href="classlila_1_1Matrix.html#aea95918a7d3d032c8d24f301bf8f4150">lila::Matrix::operator()</a></div><div class="ttdeci">coeff_t &amp; operator()(size_type i, size_type j)</div><div class="ttdef"><b>Definition:</b> matrix.h:51</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a883eb08c7022d3e3ec1454f083661cda"><div class="ttname"><a href="classlila_1_1Matrix.html#a883eb08c7022d3e3ec1454f083661cda">lila::Matrix::col</a></div><div class="ttdeci">Vector&lt; coeff_t &gt; col(const int &amp;j) const </div><div class="ttdef"><b>Definition:</b> matrix.h:74</div></div>
+<div class="ttc" id="range_8h_html"><div class="ttname"><a href="range_8h.html">range.h</a></div></div>
+<div class="ttc" id="namespacelila_html_a2464cf4e19be2b351faecb265627658a"><div class="ttname"><a href="namespacelila.html#a2464cf4e19be2b351faecb265627658a">lila::WriteMatrix</a></div><div class="ttdeci">std::string WriteMatrix(const Matrix&lt; coeff_t &gt; &amp;matrix)</div><div class="ttdef"><b>Definition:</b> matrix.h:157</div></div>
+<div class="ttc" id="namespacelila_html_a133f4432ee25066d7f9faf3c5b661b94"><div class="ttname"><a href="namespacelila.html#a133f4432ee25066d7f9faf3c5b661b94">lila::size_type</a></div><div class="ttdeci">int size_type</div><div class="ttdef"><b>Definition:</b> common.h:19</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_aab289fc5048c5852516833fc7fc73980"><div class="ttname"><a href="classlila_1_1Matrix.html#aab289fc5048c5852516833fc7fc73980">lila::Matrix::begin</a></div><div class="ttdeci">iterator_t begin()</div><div class="ttdef"><b>Definition:</b> matrix.h:92</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a00b442fdddd98f741bc87e948797874b"><div class="ttname"><a href="classlila_1_1Matrix.html#a00b442fdddd98f741bc87e948797874b">lila::Matrix::ncols</a></div><div class="ttdeci">size_type ncols() const </div><div class="ttdef"><b>Definition:</b> matrix.h:86</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a5039d5482bea83c244eadfc724230fda"><div class="ttname"><a href="classlila_1_1Matrix.html#a5039d5482bea83c244eadfc724230fda">lila::Matrix::data</a></div><div class="ttdeci">coeff_t * data()</div><div class="ttdef"><b>Definition:</b> matrix.h:89</div></div>
+<div class="ttc" id="namespacelila_html_a9a03e956a0654845e5e8bd3f657625e7"><div class="ttname"><a href="namespacelila.html#a9a03e956a0654845e5e8bd3f657625e7">lila::ParseMatrix</a></div><div class="ttdeci">Matrix&lt; coeff_t &gt; ParseMatrix(const std::string &amp;str)</div><div class="ttdef"><b>Definition:</b> matrix.h:128</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a640326a1ec73862d4e848e8656076d3d"><div class="ttname"><a href="classlila_1_1Matrix.html#a640326a1ec73862d4e848e8656076d3d">lila::Matrix::size</a></div><div class="ttdeci">size_type size() const </div><div class="ttdef"><b>Definition:</b> matrix.h:87</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a6fef165a29f2055afa064257116a195f"><div class="ttname"><a href="classlila_1_1Matrix.html#a6fef165a29f2055afa064257116a195f">lila::Matrix::end</a></div><div class="ttdeci">const_iterator_t end() const </div><div class="ttdef"><b>Definition:</b> matrix.h:95</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a04cb5d23c0b76f2f95428b7caab9b123"><div class="ttname"><a href="classlila_1_1Matrix.html#a04cb5d23c0b76f2f95428b7caab9b123">lila::Matrix::cols</a></div><div class="ttdeci">range&lt; size_type &gt; cols() const </div><div class="ttdef"><b>Definition:</b> matrix.h:83</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a9fd1b4666e322b92115224d05fb06d90"><div class="ttname"><a href="classlila_1_1Matrix.html#a9fd1b4666e322b92115224d05fb06d90">lila::Matrix::Matrix</a></div><div class="ttdeci">Matrix(size_type m, size_type n)</div><div class="ttdef"><b>Definition:</b> matrix.h:47</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a3448c09c4fd4e719d5be4a2223906bb9"><div class="ttname"><a href="classlila_1_1Matrix.html#a3448c09c4fd4e719d5be4a2223906bb9">lila::Matrix::const_iterator_t</a></div><div class="ttdeci">typename vector_type::const_iterator const_iterator_t</div><div class="ttdef"><b>Definition:</b> matrix.h:38</div></div>
+<div class="ttc" id="vector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a94514c34abe520fdf052623092b59f3d"><div class="ttname"><a href="classlila_1_1Matrix.html#a94514c34abe520fdf052623092b59f3d">lila::Matrix::rows</a></div><div class="ttdeci">range&lt; size_type &gt; rows() const </div><div class="ttdef"><b>Definition:</b> matrix.h:82</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_abac5dcd08e44ccdd181be14a56066537"><div class="ttname"><a href="classlila_1_1Matrix.html#abac5dcd08e44ccdd181be14a56066537">lila::Matrix::operator=</a></div><div class="ttdeci">Matrix &amp; operator=(Matrix &amp;)=default</div></div>
+<div class="ttc" id="namespacelila_html_a7403aceddc4bf33bff2d2ca0fd2f7213"><div class="ttname"><a href="namespacelila.html#a7403aceddc4bf33bff2d2ca0fd2f7213">lila::Transpose</a></div><div class="ttdeci">Matrix&lt; coeff_t &gt; Transpose(const Matrix&lt; coeff_t &gt; &amp;mat)</div><div class="ttdef"><b>Definition:</b> matrix.h:117</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a083c08d37cefb0e15eb019a4bf20f543"><div class="ttname"><a href="classlila_1_1Matrix.html#a083c08d37cefb0e15eb019a4bf20f543">lila::Matrix::operator()</a></div><div class="ttdeci">coeff_t operator()(size_type i, size_type j) const </div><div class="ttdef"><b>Definition:</b> matrix.h:50</div></div>
+<div class="ttc" id="common_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a7dba9dd27319f3e90146fa3a4dcf8830"><div class="ttname"><a href="classlila_1_1Matrix.html#a7dba9dd27319f3e90146fa3a4dcf8830">lila::Matrix::~Matrix</a></div><div class="ttdeci">~Matrix()=default</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_af681178e71f881cd5a5fb37bbcf599d2"><div class="ttname"><a href="classlila_1_1Matrix.html#af681178e71f881cd5a5fb37bbcf599d2">lila::Matrix::iterator_t</a></div><div class="ttdeci">typename vector_type::iterator iterator_t</div><div class="ttdef"><b>Definition:</b> matrix.h:37</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html"><div class="ttname"><a href="classlila_1_1Matrix.html">lila::Matrix</a></div><div class="ttdef"><b>Definition:</b> matrix.h:32</div></div>
+<div class="ttc" id="classlila_1_1Vector_html"><div class="ttname"><a href="classlila_1_1Vector.html">lila::Vector</a></div><div class="ttdef"><b>Definition:</b> vector.h:32</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a433b7b591482a37d8c0d07359837acf2"><div class="ttname"><a href="classlila_1_1Matrix.html#a433b7b591482a37d8c0d07359837acf2">lila::Matrix::coeff_type</a></div><div class="ttdeci">coeff_t coeff_type</div><div class="ttdef"><b>Definition:</b> matrix.h:35</div></div>
+<div class="ttc" id="classlila_1_1Matrix_html_a7c1b38a39dfb121ed377115a5856c699"><div class="ttname"><a href="classlila_1_1Matrix.html#a7c1b38a39dfb121ed377115a5856c699">lila::Matrix::size_type</a></div><div class="ttdeci">lila::size_type size_type</div><div class="ttdef"><b>Definition:</b> matrix.h:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

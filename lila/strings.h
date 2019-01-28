@@ -22,6 +22,12 @@
 
 namespace lila {
 
+  /*! @brief Converts a string tu a real/complex number.
+
+    @param str string to be converted
+    @return real/complex number generated form string
+    @tparam coeff_t type of returned number 
+   */
   template <class coeff_t>
   inline coeff_t string2number(const std::string& str);
 
