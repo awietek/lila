@@ -51,7 +51,7 @@ namespace lila {
     coeff_t operator()(size_type i) const { return data_[i]; }
     coeff_t& operator()(size_type i) { return data_[i]; }
 
-    operator std::vector<coeff_t> () const { return data_; }
+    operator std::vector<coeff_t>& () { return data_; }
 
     void resize(size_type size) {
       size_= size;
@@ -62,6 +62,7 @@ namespace lila {
       size_= 0;
       data_.clear();
     }
+    void shrink_to_fit() { data_.shrink_to_fit(); }
 
     range<size_type> rows() const { return range<size_type>(size_); }
     size_type nrows() const { return size_; }

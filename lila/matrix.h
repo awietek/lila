@@ -18,6 +18,7 @@
 #include <cassert>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 #include <vector>
 #include <iterator>
@@ -52,10 +53,17 @@ namespace lila {
     coeff_t& operator()(size_type i, size_type j) { return (data_[i + j*m_]); }
 
     void resize(size_type m, size_type n) {
-      m_ = m;
-      n_ = n;
+      std::vector<coeff_t> data_copy = data_;
       size_= m*n;
       data_.resize(size_);
+      std::fill(data_.begin(), data_.end(), 0.);
+
+      for (int i=0; i < std::min(m_, m); ++i)
+      	for (int j=0; j < std::min(n_, n); ++j)
+      	  data_[i + j*m] = data_copy[i + j*m_];
+
+      m_ = m;
+      n_ = n;
     }
 
     void clear() {

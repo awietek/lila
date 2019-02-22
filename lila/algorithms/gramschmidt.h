@@ -12,17 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef LILA_COMMON_H_
-#define LILA_COMMON_H_
+#ifndef LILA_ALGORITHM_GRAMSCHMIDT_H_
+#define LILA_ALGORITHM_GRAMSCHMIDT_H_
+
+#include <vector>
 
 namespace lila {
-  using int32 = int;
-  using uint32 = unsigned int;
-  using int64 = long;
-  using uint64 = unsigned long;
-
-  using size_type = long;
-
+  template <class vector_t>
+  std::vector<vector_t> gramschmidt(std::vector<vector_t>& ws)
+  {
+    auto es = ws;
+    for (int i=0; i<(int)ws.size(); ++i)
+      {
+	auto v = ws[i];
+	for (int k=0; k<i; ++k)
+	  v -= Dot(es[k], ws[i])*es[k];
+	v /= (typename vector_t::coeff_type)Norm(v);
+	es[i] = v;
+      }
+    return es;   
+  }
 }
 
 #endif

@@ -21,7 +21,6 @@
 
 namespace lila { 
   namespace blaslapack {
-
     
     // Copy
     extern "C" void scopy_(const blas_size_t* N, const blas_float_t* x, 

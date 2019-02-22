@@ -249,6 +249,7 @@ namespace lila {
     coeff_t invalpha = static_cast<coeff_t>(1.) / alpha; 
     return operator*(invalpha, X); 
   }
+
 }
 
 #endif

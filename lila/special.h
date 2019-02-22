@@ -72,11 +72,9 @@ namespace lila {
   template <class coeff_t>
   inline Vector<complex_t<coeff_t>> Complex(Vector<coeff_t>& vec)
   { 
-    printf("tytyt %d\n", vec.nrows());
     auto complex_vec = Zeros<complex_t<coeff_t>>(vec.nrows());
     for (auto j : vec.rows())
       complex_vec(j) = (complex_t<coeff_t>)vec(j);
-    printf("uiuiu\n");
     return complex_vec;
   }
 

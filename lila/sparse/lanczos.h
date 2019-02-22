@@ -22,14 +22,9 @@
 
 namespace lila {
     
-  /////////////////////////////////////////////////////
-  // BUG: float gives wrong results in test, FIX THIS
-
-
-  template <class coeff_t, class multiply_f>
+  template <class coeff_t, class multiply_f, class vector_t = Vector<coeff_t>>
   class Lanczos
   {
-    using vector_t = Vector<coeff_t>;
 
   public:
     Lanczos(uint64 dimension, int random_seed, int max_iterations, 
@@ -52,7 +47,7 @@ namespace lila {
       return Tmatrix<double>(alphas_, betas_short); 
     }
 
-    void set_init_state(Vector<coeff_t>& init_state)
+    void set_init_state(vector_t& init_state)
     { 
       assert(init_state.size() == dimension_);
       init_state_ = &init_state; 
@@ -70,9 +65,11 @@ namespace lila {
       if (iter <= num_eigenvalue_) return false;
       else
 	{
+
 	  Matrix<double> evecs = Eigen(tmatrix()).eigenvectors;
 	  double e = evecs(iter-1, num_eigenvalue_);
 	  double b = betas_(iter-1);
+	  if (close(b, 0.)) return true;
 
 	  double residue = std::abs(e * b); 
 	  // printf("beta: %f, ev: %f\n", b, e);
@@ -84,9 +81,9 @@ namespace lila {
     Vector<double> eigenvalues()
     {
       // Initialize Lanczos vectors
-      vector_t v0 = Vector<coeff_t>(dimension_);
-      vector_t v1 = Vector<coeff_t>(dimension_);
-      vector_t w = Vector<coeff_t>(dimension_);
+      vector_t v0(dimension_);
+      vector_t v1(dimension_);
+      vector_t w(dimension_);
       if (!init_state_)
 	{
 	  lila::normal_dist_t<real_t<coeff_t>> ddist(0., 1.);
@@ -94,7 +91,9 @@ namespace lila {
 	  Random(v1, gen);
 	}
       else v1 = *init_state_;
-      v1 /= (coeff_t)Norm(v1);
+      // v1 /= (coeff_t)Norm(v1);
+      coeff_t norm = Norm(v1);
+      Scale((coeff_t)1./norm, v1);
 
       double alpha, beta;
       int iter = 0;
@@ -122,13 +121,13 @@ namespace lila {
       for (int k=0; k < (int)num_eigenvectors.size(); ++k)
 	{
 	  assert(num_eigenvectors[k] < tmat_dim);
-	  evecs.push_back(Vector<coeff_t>(dimension_));
+	  evecs.push_back(vector_t(dimension_));
 	}
 
       // Initialize Lanczos vectors
-      vector_t v0 = Vector<coeff_t>(dimension_);
-      vector_t v1 = Vector<coeff_t>(dimension_);
-      vector_t w = Vector<coeff_t>(dimension_);
+      vector_t v0(dimension_);
+      vector_t v1(dimension_);
+      vector_t w(dimension_);
 
       if (!init_state_)
 	{
@@ -137,7 +136,9 @@ namespace lila {
 	  Random(v1, gen);
 	}
       else v1 = *init_state_;
-      v1 /= (coeff_t)Norm(v1);
+      // v1 /= (coeff_t)Norm(v1);
+      coeff_t norm = Norm(v1);
+      Scale((coeff_t)1./norm, v1);
 
       // Reiterate to construct eigenvectors
       double alpha, beta;
@@ -161,12 +162,22 @@ namespace lila {
       beta = (iter==0) ? 0. : betas_(iter-1);
       multiply_(v1, w);
       alpha = (double)real(Dot(v1, w));
-      w -= (coeff_t)alpha*v1;
-      w -= (coeff_t)beta*v0;
+
+      // w -= (coeff_t)alpha*v1;
+      Add(v1, w, -(coeff_t)alpha);
+
+      // w -= (coeff_t)beta*v0;
+      Add(v0, w, -(coeff_t)beta);
+
       v0 = v1;
       beta = Norm(w);
       v1 = w;
-      v1 /= (coeff_t)beta;
+
+      if (!close(beta, 0.))
+	{
+	  // v1 /= (coeff_t)beta;
+	  Scale((coeff_t)(1./beta), v1);
+	}
     }
     
     uint64 dimension_;
@@ -179,7 +190,7 @@ namespace lila {
     Vector<double> alphas_;
     Vector<double> betas_;
 
-    Vector<coeff_t>* init_state_;
+    vector_t* init_state_;
   };
       
 }

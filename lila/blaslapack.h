@@ -18,7 +18,6 @@
 #include <cstdlib>
 #include <complex>
 
-
 #ifdef LILA_USE_MKL // Using the Intel MKL
 #define MKL_Complex8 std::complex<float>
 #define MKL_Complex16 std::complex<double>
@@ -33,10 +32,11 @@
 #define __LAPACK_ROUTINE_NAME(x) x##_
 #endif
 
-
-
 namespace lila { 
   namespace blaslapack {
+
+    // using blas_size_t = int;
+    // using blas_complex_t = lila::blaslapack::blas_complex_t;
 
     // Copy
     inline void copy(const blas_size_t* N, const blas_float_t* x, 
@@ -87,6 +87,8 @@ namespace lila {
     inline void scal(const blas_size_t* N,const blas_complex_t* alpha, 
 		     blas_complex_t* x, const blas_size_t* incx)
     { __LAPACK_ROUTINE_NAME(zscal)(N, alpha, x, incx); }
+
+
     
     // Dot
     inline float dot(const blas_size_t* N ,const blas_float_t* x,
@@ -97,6 +99,7 @@ namespace lila {
 		      const blas_size_t* incx, const blas_double_t* y,
 		      const blas_size_t* incy)
     { return __LAPACK_ROUTINE_NAME(ddot)(N, x, incx, y, incy); }
+
     inline blas_scomplex_t dot(const blas_size_t* N, const blas_scomplex_t* x,
     			       const blas_size_t* incx, const blas_scomplex_t* y,
     			       const blas_size_t* incy)
@@ -106,19 +109,20 @@ namespace lila {
       __LAPACK_ROUTINE_NAME(cdotc)(&res, N, x, incx, y, incy);
       return res;
 #else
-      return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
+      return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); 
 #endif
     }
+    
     inline blas_complex_t dot(const blas_size_t* N, const blas_complex_t* x,
-    			      const blas_size_t* incx, const blas_complex_t* y,
-    			      const blas_size_t* incy)
+			      const blas_size_t* incx, const blas_complex_t* y,
+			      const blas_size_t* incy)
     { 
 #ifdef LILA_USE_MKL
       blas_complex_t res;
       __LAPACK_ROUTINE_NAME(zdotc)(&res, N, x, incx, y, incy);
       return res;
 #else
-      return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy); }
+      return __LAPACK_ROUTINE_NAME(zdotc)(N, x, incx, y, incy); 
 #endif
     }
         

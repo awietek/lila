@@ -32,5 +32,8 @@
 #include "vector.h"
 #include "sparse/tmatrix.h"
 #include "sparse/lanczos.h"
+#include "sparse/bandlanczos.h"
+#include "algorithms/gramschmidt.h"
+
 
 #endif

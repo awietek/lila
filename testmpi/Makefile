@@ -1,12 +1,12 @@
-CC        = icpc
-CCARCH    = -std=c++11
+CC        = mpicxx
+CCARCH    = -cxx=icpc -std=c++11
 CCOPT     = -O3 -Wall -Wextra -pedantic
 # LAPACKLIB = -llapack -lblas
 LAPACKLIB = -mkl -DLILA_USE_MKL
 INCLUDE   = -I..
 
 EXECUTABLE = tests
-OBJECTS    = tests.o test_matrix.o test_special.o test_random.o test_mult.o test_vector.o test_solve.o test_matrixstring.o test_qr.o test_eigen.o test_matrixfunction.o test_tmatrix.o test_lanczos.o test_dot.o test_resize.o test_bandlanczos.o test_gramschmidt.o
+OBJECTS    = tests.o  test_mpi.o test_dot.o test_add.o
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CCARCH) $(CCOPT) -o $(EXECUTABLE) $(OBJECTS) $(LAPACKLIB)   

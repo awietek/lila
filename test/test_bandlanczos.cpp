@@ -18,18 +18,19 @@
 
 
 template <class coeff_t>
-void test_lanczos()
+void test_bandlanczos()
 {
   using namespace lila;
 
-  int n=50;
-  double precision = 1e-4;
-  int max_iterations = n;
-  int n_lowest = 1;
+  int n=500;
+  double precision = 1e-5;
+  int max_iterations = 100;
+  int n_lowest = 2;
   int num_eigenvalue = n_lowest;
+  int n_bands = 3;
 
-  // Test Lanczos
-  for (int random_seed : range<int>(3)) {
+  // Test Bandlanczos
+  for (int random_seed : range<int>(1)) {
   
     uniform_dist_t<coeff_t> fdist(-1., 1.);
     uniform_gen_t<coeff_t> fgen(fdist, random_seed);
@@ -39,43 +40,37 @@ void test_lanczos()
     A += Herm(A);
 
     REQUIRE(close(A, Herm(A)));
-    auto true_eigs = EigenvaluesH(A);
-
     
     uint64 dim = A.nrows();
     auto multiply = [&A](const Vector<coeff_t>& v, Vector<coeff_t>& w) {
       w = Mult(A, v);
     };
-    auto lzs = Lanczos<coeff_t, decltype(multiply)>
-      (dim, random_seed, max_iterations, precision, num_eigenvalue, multiply);
+    auto lzs = BandLanczos<coeff_t, decltype(multiply)>
+      (dim, random_seed, max_iterations, precision, num_eigenvalue, multiply, n_bands);
     auto lzs_eigenvalues = lzs.eigenvalues();
    
-    std::vector<int> num_eigenvectors;
-    for (int k = 0; k<n_lowest; ++k)
-      num_eigenvectors.push_back(k);
+    auto true_eigs = EigenvaluesH(A);
+    // LilaPrint(true_eigs);
+    // LilaPrint(lzs_eigenvalues.eigenvalues);
+    // for (int i=0; i<lzs_eigenvalues.eigenvalues.size(); ++i)
+    //   printf("%f %d\n", lzs_eigenvalues.eigenvalues(i), lzs_eigenvalues.multiplicity[i]);
 
-    // LilaPrint(lzs.alphas().size());
-    auto eigenvectors = lzs.eigenvectors(num_eigenvectors);
+    REQUIRE(lzs_eigenvalues.eigenvalues.size() == lzs_eigenvalues.eigenvectors.size());
+    REQUIRE(lzs_eigenvalues.multiplicity.size() == lzs_eigenvalues.eigenvectors.size());    
+
     for (int k = 0; k<=n_lowest; ++k)
       {
-	// LilaPrint(k);
-	// LilaPrint(random_seed);
-	// printf("k: %d\n", k);
-	// LilaPrint(true_eigs(k));
-	// LilaPrint(lzs_eigenvalues(k));
-	// printf("\n\n\n");
-	// LilaPrint(Dot(eigenvectors[k], Mult(A, eigenvectors[k])));
-	// LilaPrint(Norm(Mult(A, eigenvectors[k]) - (coeff_t)lzs_eigenvalues(k)*eigenvectors[k]));
-	// REQUIRE(Norm(Mult(A, eigenvectors[k]) - lzs_eigenvalues(k)*eigenvectors[k]) < precision);
-	REQUIRE(std::abs(true_eigs(k) - lzs_eigenvalues(k)) < 10*precision);
+	REQUIRE(std::abs(true_eigs(k) - lzs_eigenvalues.eigenvalues(k)) / 
+		std::abs(true_eigs(k)) < precision);
       }
   }
 }
 
 
-TEST_CASE( "Lanczos test", "[Lanczos]" ) {
-  test_lanczos<float>();
-  test_lanczos<double>();
-  test_lanczos<std::complex<float>>();
-  test_lanczos<std::complex<double>>();
+
+TEST_CASE( "Bandlanczos test", "[Bandlanczos]" ) {
+  test_bandlanczos<float>();
+  test_bandlanczos<double>();
+  test_bandlanczos<std::complex<float>>();
+  test_bandlanczos<std::complex<double>>();
 }
