@@ -49,7 +49,7 @@ namespace lila {
 
     void set_init_state(vector_t& init_state)
     { 
-      assert(init_state.size() == dimension_);
+      assert((uint64)init_state.size() == dimension_);
       init_state_ = &init_state; 
     }
 

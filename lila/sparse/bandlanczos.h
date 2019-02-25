@@ -53,7 +53,7 @@ namespace lila {
 	lastvec_++;
 	do {
 	  lastloc_++;
-	  if (lastloc_ == location_.size() )
+	  if (lastloc_ == (int)location_.size() )
 	    lastloc_=0;
 	} while (deflated_[lastloc_]);
 	location_[lastloc_] = lastvec_;
@@ -109,7 +109,7 @@ namespace lila {
     { 
       assert((int)init_states.size() == n_bands_);
       for (int k = 0; k < (int)init_states.size(); ++k)
-	assert(init_states[k].size() == dimension_);
+	assert((uint64)init_states[k].size() == dimension_);
       init_states_ = &init_states; 
     }
 
@@ -141,7 +141,7 @@ namespace lila {
 		    }
 		  else 
 		    {
-		      assert((*init_states_)[k].size() == dimension_);
+		      assert((uint64)(*init_states_)[k].size() == dimension_);
 		      std::swap(v[k], (*init_states_)[k]);
 		    }
 		}
@@ -212,7 +212,7 @@ namespace lila {
 	  std::sort(I.begin(),I.end());
 	  for (int i=0; i < (int)I.size()+1; ++i) 
 	    {            
-	      int k = (i==I.size()) ? j : I[i];	     
+	      int k = (i==(int)I.size()) ? j : I[i];	     
 	      coeff_t dot = Dot(v[index.cnv(k)], v[index.cnv(j+pc)]);
 	      tmatrix_(k,j) = dot;
 	      Add(v[index.cnv(k)], v[index.cnv(j+pc)], -dot);

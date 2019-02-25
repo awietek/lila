@@ -22,6 +22,7 @@
 
 #include <cassert>
 #include <algorithm>
+#include <numeric>
 
 #include "complex.h"
 #include "matrix.h"

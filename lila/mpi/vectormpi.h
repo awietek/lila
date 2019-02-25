@@ -44,7 +44,10 @@ namespace lila {
     
     explicit VectorMPI(Vector<coeff_t>& vec) 
       : size_(0), vector_local_(vec) 
-    { MPI_Allreduce(&size_local, &size_, 1, MPI_LONG, MPI_SUM, MPI_COMM_WORLD); }
+    { 
+      int64 size_local = (int64)vec.size();
+      MPI_Allreduce(&size_local, &size_, 1, MPI_LONG, MPI_SUM, MPI_COMM_WORLD); 
+    }
 
     coeff_t operator()(size_type i) const { return vector_local_(i); }
     coeff_t& operator()(size_type i) { return vector_local_(i); }
