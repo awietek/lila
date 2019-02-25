@@ -62,18 +62,31 @@ namespace lila {
     bool converged() const 
     { 
       int iter = alphas_.size();
-      if (iter <= num_eigenvalue_) return false;
+      if (iter <= std::max(2, num_eigenvalue_)) return false;
       else
 	{
+	  // // total norm distance
+	  // Matrix<double> evecs = Eigen(tmatrix()).eigenvectors;
+	  // double e = evecs(iter-1, num_eigenvalue_);
+	  // double b = betas_(iter-1);
+	  // if (close(b, 0.)) return true;
+	  // double residue = std::abs(e * b); 
 
-	  Matrix<double> evecs = Eigen(tmatrix()).eigenvectors;
-	  double e = evecs(iter-1, num_eigenvalue_);
-	  double b = betas_(iter-1);
-	  if (close(b, 0.)) return true;
 
-	  double residue = std::abs(e * b); 
-	  // printf("beta: %f, ev: %f\n", b, e);
-	  // printf("iter: %d, residue: %f, prec: %f\n", iter, residue, precision_);
+	  // eigenvalue convergence
+	  auto tmat = tmatrix();
+	  Vector<double> alphas_short = alphas_;
+	  alphas_short.resize(alphas_.size()-1);
+	  auto eigs = Eigenvalues(tmat);
+
+	  Vector<double> betas_short = betas_;
+	  betas_short.resize(betas_.size()-2);
+	  auto prev_tmat = Tmatrix<double>(alphas_short, betas_short); 
+	  auto prev_eigs = Eigenvalues(prev_tmat);
+	  
+	  double residue = std::abs(prev_eigs(num_eigenvalue_) - 
+				    eigs(num_eigenvalue_));
+
 	  return (residue < precision_);
 	}
     }
