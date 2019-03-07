@@ -437,7 +437,7 @@ namespace lila {
       geev(jobvl, jobvr, n, a, lda, wr.data(), wi.data(), vl, ldvl, vr, 
 	   ldvr, work, lwork, info); 
       for (blas_size_t i=0; i<*n; ++i)
-	w[i] = blas_scomplex_t({wr[i], wi[i]});      
+	w[i] = blas_scomplex_t(wr[i], wi[i]);      
     }
 
     inline void geev(const char* jobvl, const char* jobvr,
@@ -453,7 +453,7 @@ namespace lila {
       geev(jobvl, jobvr, n, a, lda, wr.data(), wi.data(), vl, ldvl, vr, 
 	   ldvr, work, lwork, info); 
       for (blas_size_t i=0; i<*n; ++i)
-	w[i] = blas_complex_t({wr[i], wi[i]});  
+	w[i] = blas_complex_t(wr[i], wi[i]);  
     }
 
     inline void geev(const char* jobvl, const char* jobvr,

@@ -152,99 +152,199 @@ namespace lila {
   { return std::accumulate(X.begin(), X.end(), 0.); }
 
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator+
-  (const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  
+  template <class coeff_t>
+  inline Vector<coeff_t> operator+
+  (const Vector<coeff_t>& X, const Vector<coeff_t>& Y)
   {
-    object_t<coeff_t> res(Y);
+    Vector<coeff_t> res(Y);
     Add(X, res);
     return res;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator-
-  (const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator-
+  (const Vector<coeff_t>& X, const Vector<coeff_t>& Y)
   {
-    object_t<coeff_t> res(X);
+    Vector<coeff_t> res(X);
     Add(Y, res, static_cast<coeff_t>(-1.));
     return res;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator+
-  (const object_t<coeff_t>& X, const coeff_t& c)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator+
+  (const Vector<coeff_t>& X, const coeff_t& c)
   {
-    object_t<coeff_t> res(X);
+    Vector<coeff_t> res(X);
     Map(res, [&c](coeff_t& x) { x = x + c; } );
     return res;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t>& operator +=
-  (object_t<coeff_t>& a, const object_t<coeff_t>& b)
+  template <class coeff_t>
+  inline Vector<coeff_t>& operator +=
+  (Vector<coeff_t>& a, const Vector<coeff_t>& b)
   {
     a = a + b;
     return a;
   }
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t>& operator -=
-  (object_t<coeff_t>& a, const object_t<coeff_t>& b)
+  template <class coeff_t>
+  inline Vector<coeff_t>& operator -=
+  (Vector<coeff_t>& a, const Vector<coeff_t>& b)
   {
     a = a - b;
     return a;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator-
-  (const object_t<coeff_t>& X, const coeff_t& c)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator-
+  (const Vector<coeff_t>& X, const coeff_t& c)
   {
-    object_t<coeff_t> res(X);
+    Vector<coeff_t> res(X);
     Map(res, [&c](coeff_t& x) { x = x - c; } );
     return res;
   }
 
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator-(const object_t<coeff_t>& X)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator-(const Vector<coeff_t>& X)
   {
-    object_t<coeff_t> res(X);
+    Vector<coeff_t> res(X);
     Scale(static_cast<coeff_t>(-1.), res);
     return res;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator*
-  (const coeff_t& alpha,  const object_t<coeff_t>& X)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator*
+  (const coeff_t& alpha,  const Vector<coeff_t>& X)
   {
-    object_t<coeff_t> res(X);
+    Vector<coeff_t> res(X);
     Scale(alpha, res);
     return res;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator*=
-  ( object_t<coeff_t>& X, const coeff_t& alpha)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator*=
+  ( Vector<coeff_t>& X, const coeff_t& alpha)
   {
     X = alpha*X;
     return X;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator/=
-  ( object_t<coeff_t>& X, const coeff_t& alpha)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator/=
+  ( Vector<coeff_t>& X, const coeff_t& alpha)
   {
     X = X / alpha;
     return X;
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator*
-  (const object_t<coeff_t>& X, const coeff_t& alpha)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator*
+  (const Vector<coeff_t>& X, const coeff_t& alpha)
   { return operator*(alpha, X); }
 
-  template <class coeff_t, template<class> class object_t>
-  inline object_t<coeff_t> operator/
-  (const object_t<coeff_t>& X, const coeff_t& alpha)
+  template <class coeff_t>
+  inline Vector<coeff_t> operator/
+  (const Vector<coeff_t>& X, const coeff_t& alpha)
+  {
+    assert(!close(alpha, static_cast<coeff_t>(0.)));
+    coeff_t invalpha = static_cast<coeff_t>(1.) / alpha; 
+    return operator*(invalpha, X); 
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator+
+  (const Matrix<coeff_t>& X, const Matrix<coeff_t>& Y)
+  {
+    Matrix<coeff_t> res(Y);
+    Add(X, res);
+    return res;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator-
+  (const Matrix<coeff_t>& X, const Matrix<coeff_t>& Y)
+  {
+    Matrix<coeff_t> res(X);
+    Add(Y, res, static_cast<coeff_t>(-1.));
+    return res;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator+
+  (const Matrix<coeff_t>& X, const coeff_t& c)
+  {
+    Matrix<coeff_t> res(X);
+    Map(res, [&c](coeff_t& x) { x = x + c; } );
+    return res;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t>& operator +=
+  (Matrix<coeff_t>& a, const Matrix<coeff_t>& b)
+  {
+    a = a + b;
+    return a;
+  }
+  template <class coeff_t>
+  inline Matrix<coeff_t>& operator -=
+  (Matrix<coeff_t>& a, const Matrix<coeff_t>& b)
+  {
+    a = a - b;
+    return a;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator-
+  (const Matrix<coeff_t>& X, const coeff_t& c)
+  {
+    Matrix<coeff_t> res(X);
+    Map(res, [&c](coeff_t& x) { x = x - c; } );
+    return res;
+  }
+
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator-(const Matrix<coeff_t>& X)
+  {
+    Matrix<coeff_t> res(X);
+    Scale(static_cast<coeff_t>(-1.), res);
+    return res;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator*
+  (const coeff_t& alpha,  const Matrix<coeff_t>& X)
+  {
+    Matrix<coeff_t> res(X);
+    Scale(alpha, res);
+    return res;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator*=
+  ( Matrix<coeff_t>& X, const coeff_t& alpha)
+  {
+    X = alpha*X;
+    return X;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator/=
+  ( Matrix<coeff_t>& X, const coeff_t& alpha)
+  {
+    X = X / alpha;
+    return X;
+  }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator*
+  (const Matrix<coeff_t>& X, const coeff_t& alpha)
+  { return operator*(alpha, X); }
+
+  template <class coeff_t>
+  inline Matrix<coeff_t> operator/
+  (const Matrix<coeff_t>& X, const coeff_t& alpha)
   {
     assert(!close(alpha, static_cast<coeff_t>(0.)));
     coeff_t invalpha = static_cast<coeff_t>(1.) / alpha; 

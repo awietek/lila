@@ -43,9 +43,9 @@ namespace lila {
       }      
 
       int cnv(int j)
-      { 
-	return std::find(location_.begin(),location_.end(),j) - 
-	  location_.begin();
+      {
+	const auto it = std::find(location_.begin(),location_.end(),j);
+	return std::distance(location_.begin(), it);
       }
 
       void next()
@@ -62,8 +62,8 @@ namespace lila {
       void deflate(int old)
       {
 	pc_--;
-	int place = std::find(location_.begin(),location_.end(),old) - 
-	  location_.begin();
+	const auto it = std::find(location_.begin(),location_.end(),old);
+	int place = std::distance(location_.begin(), it);
 	deflated_[place] = true;
       }  
 
@@ -190,7 +190,7 @@ namespace lila {
 
 	  // Orthogonalize against previous vectors
 	  for (int k=j+1; k < j+pc; ++k) 
-	    {               
+	    {
 	      coeff_t alpha = Dot(v[index.cnv(j)], v[index.cnv(k)]);
 	      if (k-pc>=0)
 	        tmatrix_(j, k-pc) = alpha;
@@ -295,7 +295,7 @@ namespace lila {
 			{
 			  // printf("ghost found!\n");
 			  ghost[i]=true;
-			  eigenvecs.erase(eigenvecs.begin() + i - num_ghosts);
+			  eigenvecs.erase(eigenvecs.begin()+i-num_ghosts);
 			  ++num_ghosts;
 			}
 		    }
