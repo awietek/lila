@@ -85,7 +85,7 @@ namespace lila {
 	  auto prev_eigs = Eigenvalues(prev_tmat);
 	  
 	  double residue = std::abs(prev_eigs(num_eigenvalue_) - 
-				    eigs(num_eigenvalue_));
+	  			    eigs(num_eigenvalue_));
 
 	  return (residue < precision_);
 	}

@@ -146,6 +146,106 @@ namespace lila {
     else std::generate(vec.vector_local().begin(), vec.vector_local().end(), gen); 
   }
 
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator+
+  (const VectorMPI<coeff_t>& X, const VectorMPI<coeff_t>& Y)
+  {
+    VectorMPI<coeff_t> res(Y);
+    Add(X, res);
+    return res;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator-
+  (const VectorMPI<coeff_t>& X, const VectorMPI<coeff_t>& Y)
+  {
+    VectorMPI<coeff_t> res(X);
+    Add(Y, res, static_cast<coeff_t>(-1.));
+    return res;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator+
+  (const VectorMPI<coeff_t>& X, const coeff_t& c)
+  {
+    VectorMPI<coeff_t> res(X);
+    Map(res, [&c](coeff_t& x) { x = x + c; } );
+    return res;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t>& operator +=
+  (VectorMPI<coeff_t>& a, const VectorMPI<coeff_t>& b)
+  {
+    a = a + b;
+    return a;
+  }
+  template <class coeff_t>
+  inline VectorMPI<coeff_t>& operator -=
+  (VectorMPI<coeff_t>& a, const VectorMPI<coeff_t>& b)
+  {
+    a = a - b;
+    return a;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator-
+  (const VectorMPI<coeff_t>& X, const coeff_t& c)
+  {
+    VectorMPI<coeff_t> res(X);
+    Map(res, [&c](coeff_t& x) { x = x - c; } );
+    return res;
+  }
+
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator-(const VectorMPI<coeff_t>& X)
+  {
+    VectorMPI<coeff_t> res(X);
+    Scale(static_cast<coeff_t>(-1.), res);
+    return res;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator*
+  (const coeff_t& alpha,  const VectorMPI<coeff_t>& X)
+  {
+    VectorMPI<coeff_t> res(X);
+    Scale(alpha, res);
+    return res;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator*=
+  ( VectorMPI<coeff_t>& X, const coeff_t& alpha)
+  {
+    X = alpha*X;
+    return X;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator/=
+  ( VectorMPI<coeff_t>& X, const coeff_t& alpha)
+  {
+    X = X / alpha;
+    return X;
+  }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator*
+  (const VectorMPI<coeff_t>& X, const coeff_t& alpha)
+  { return operator*(alpha, X); }
+
+  template <class coeff_t>
+  inline VectorMPI<coeff_t> operator/
+  (const VectorMPI<coeff_t>& X, const coeff_t& alpha)
+  {
+    assert(!close(alpha, static_cast<coeff_t>(0.)));
+    coeff_t invalpha = static_cast<coeff_t>(1.) / alpha; 
+    return operator*(invalpha, X); 
+  }
+
 }
 
 #endif
