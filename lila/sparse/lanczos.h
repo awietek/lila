@@ -25,7 +25,6 @@ namespace lila {
   template <class coeff_t, class multiply_f, class vector_t = Vector<coeff_t>>
   class Lanczos
   {
-
   public:
     Lanczos(uint64 dimension, int random_seed, int max_iterations, 
 	    double precision, int num_eigenvalue, multiply_f multiply) 
@@ -62,7 +61,13 @@ namespace lila {
     bool converged() const 
     { 
       int iter = alphas_.size();
-      if (iter <= std::max(2, num_eigenvalue_)) return false;
+      if (iter > 0)
+	{
+	  double b = betas_(iter-1);
+	  if (close(b, 0.)) return true;
+	}
+
+      if (iter < std::max(2, num_eigenvalue_)) return false;
       else
 	{
 	  // // total norm distance
@@ -72,7 +77,7 @@ namespace lila {
 	  // if (close(b, 0.)) return true;
 	  // double residue = std::abs(e * b); 
 
-
+	  
 	  // eigenvalue convergence
 	  auto tmat = tmatrix();
 	  Vector<double> alphas_short = alphas_;
@@ -115,6 +120,9 @@ namespace lila {
       while (!finished())
 	{	  
 	  lanczos_step(v0, v1, w, alpha, beta, iter);
+	  // printf("alpha: %f, beta: %f\n", alpha, beta);
+	  // LilaPrint(v0);
+	  // LilaPrint(v1);
 	  alphas_.push_back(alpha);
 	  betas_.push_back(beta);
 	  ++iter;

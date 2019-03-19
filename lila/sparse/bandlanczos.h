@@ -113,8 +113,28 @@ namespace lila {
       init_states_ = &init_states; 
     }
 
+    bool converged() const
+    {
+      auto tmat = tmatrix();
+      if ((tmat.nrows() == 0) || (tmat.nrows() == n_bands_)) return false;
 
-    lanczos_eigen_t<coeff_t> eigenvalues(double deflation_tol = 1e-10)
+      // Iteration count multible of number of bands
+      if (tmat.nrows() % n_bands_ == 0)
+	{ 
+	  auto prev_tmat = tmat;
+	  int size = tmat.nrows() - n_bands_;
+	  prev_tmat.resize(size, size);
+	  auto eigs = Eigenvalues(tmat);
+	  auto prev_eigs = Eigenvalues(prev_tmat);
+	  double residue = std::abs(prev_eigs(num_eigenvalue_) - 
+	  			    eigs(num_eigenvalue_));
+	  return (residue < precision_);
+	}
+      else return false;
+    }
+
+
+    lanczos_eigen_t<coeff_t> eigenvalues(double deflation_tol = 1e-12)
     {
       using detail::indexer;
 
@@ -163,7 +183,7 @@ namespace lila {
 	  // Deflate if necessary
 	  if (norm < deflation_tol)
 	    {
-	      // printf("deflate\n");
+	      printf("deflate\n");
 	      if (j-pc >= 0)
 		{
 		  I.push_back(j-pc);
@@ -225,6 +245,7 @@ namespace lila {
 	    }
 
 	  index.next();
+	  if (converged()) break;
 	}  // main Lanczos loop
 
       return eigenvalue_approx();
