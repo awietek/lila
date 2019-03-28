@@ -17,6 +17,8 @@
 #ifndef LILA_SPARSE_BANDLANCZOS_H_
 #define LILA_SPARSE_BANDLANCZOS_H_
 
+#include <utility>
+
 #include "../matrix.h"
 #include "../vector.h"
 #include "../common.h"
@@ -107,34 +109,42 @@ namespace lila {
 
     void set_init_states(std::vector<vector_t>& init_states)
     { 
+      if (!has_full_rank(init_states))
+	{
+	  printf("Error in lila::BandLanczos: start states do not have full rank!\n");
+	  exit(EXIT_FAILURE);
+	}
       assert((int)init_states.size() == n_bands_);
       for (int k = 0; k < (int)init_states.size(); ++k)
 	assert((uint64)init_states[k].size() == dimension_);
       init_states_ = &init_states; 
     }
 
+
     bool converged() const
     {
       auto tmat = tmatrix();
-      if ((tmat.nrows() == 0) || (tmat.nrows() == n_bands_)) return false;
+      int current_size = tmat.nrows();
+      if ((current_size == 0) || (current_size == n_bands_)) return false;
+
 
       // Iteration count multible of number of bands
-      if (tmat.nrows() % n_bands_ == 0)
-	{ 
+      if (current_size % n_bands_  == 0)
+	{
 	  auto prev_tmat = tmat;
-	  int size = tmat.nrows() - n_bands_;
-	  prev_tmat.resize(size, size);
-	  auto eigs = Eigenvalues(tmat);
-	  auto prev_eigs = Eigenvalues(prev_tmat);
-	  double residue = std::abs(prev_eigs(num_eigenvalue_) - 
-	  			    eigs(num_eigenvalue_));
+	  int prev_size = current_size - n_bands_;
+	  prev_tmat.resize(prev_size, prev_size);
+	  auto eigs = EigenvaluesH(tmat);
+	  auto prev_eigs = EigenvaluesH(prev_tmat);
+	  double residue = std::abs((prev_eigs(num_eigenvalue_) - 
+				     eigs(num_eigenvalue_)) / eigs(num_eigenvalue_));
 	  return (residue < precision_);
 	}
       else return false;
     }
 
 
-    lanczos_eigen_t<coeff_t> eigenvalues(double deflation_tol = 1e-12)
+    lanczos_eigen_t<coeff_t> eigenvalues(double deflation_tol = 1e-8)
     {
       using detail::indexer;
 
@@ -245,7 +255,10 @@ namespace lila {
 	    }
 
 	  index.next();
+
 	  if (converged()) break;
+	   
+	
 	}  // main Lanczos loop
 
       return eigenvalue_approx();
@@ -354,6 +367,7 @@ namespace lila {
     Matrix<coeff_t> tmatrix_;
 
     std::vector<vector_t>* init_states_;
+
   };
 
       

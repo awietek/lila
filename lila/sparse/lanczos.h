@@ -70,27 +70,25 @@ namespace lila {
       if (iter < std::max(2, num_eigenvalue_)) return false;
       else
 	{
-	  // // total norm distance
-	  // Matrix<double> evecs = Eigen(tmatrix()).eigenvectors;
-	  // double e = evecs(iter-1, num_eigenvalue_);
-	  // double b = betas_(iter-1);
-	  // if (close(b, 0.)) return true;
-	  // double residue = std::abs(e * b); 
-
+	  // total norm distance
+	  Matrix<double> evecs = Eigen(tmatrix()).eigenvectors;
+	  double b = betas_(iter-1);
+	  if (close(b, 0.)) return true;
+	  double residue = std::abs(evecs(iter-1, iter-1) * betas_(iter-1)); 
 	  
-	  // eigenvalue convergence
-	  auto tmat = tmatrix();
-	  Vector<double> alphas_short = alphas_;
-	  alphas_short.resize(alphas_.size()-1);
-	  auto eigs = Eigenvalues(tmat);
+	  // // eigenvalue convergence
+	  // auto tmat = tmatrix();
+	  // Vector<double> alphas_short = alphas_;
+	  // alphas_short.resize(alphas_.size()-1);
+	  // auto eigs = Eigenvalues(tmat);
 
-	  Vector<double> betas_short = betas_;
-	  betas_short.resize(betas_.size()-2);
-	  auto prev_tmat = Tmatrix<double>(alphas_short, betas_short); 
-	  auto prev_eigs = Eigenvalues(prev_tmat);
+	  // Vector<double> betas_short = betas_;
+	  // betas_short.resize(betas_.size()-2);
+	  // auto prev_tmat = Tmatrix<double>(alphas_short, betas_short); 
+	  // auto prev_eigs = Eigenvalues(prev_tmat);
 	  
-	  double residue = std::abs(prev_eigs(num_eigenvalue_) - 
-	  			    eigs(num_eigenvalue_));
+	  // double residue = std::abs(prev_eigs(num_eigenvalue_) - 
+	  // 			    eigs(num_eigenvalue_));
 
 	  return (residue < precision_);
 	}

@@ -32,6 +32,28 @@ namespace lila {
       }
     return es;   
   }
+
+  template <class vector_t>
+  bool has_full_rank(std::vector<vector_t>& ws)
+  {
+    int size = (int)ws.size();
+    auto ovlps = lila::Zeros<typename vector_t::coeff_type>(size, size);
+    for (int i=0; i<size; ++i)
+      {
+	ovlps(i, i) = lila::Dot(ws[i], ws[i]);
+	for (int j=i+1; j<size; ++j)
+	  {
+	    ovlps(i, j) = lila::Dot(ws[i], ws[j]);
+	    ovlps(j, i) = lila::conj(ovlps(i, j));
+	  }
+      }
+    auto eigs = EigenvaluesH(ovlps);
+    for (auto e : eigs)
+      if (close(e, 0.)) return false;
+    return true;
+  }
+
+
 }
 
 #endif
