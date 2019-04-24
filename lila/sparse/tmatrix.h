@@ -70,6 +70,7 @@ namespace lila {
     Tmatrix(const coeff_t& alpha0)
     { diag_.push_back(alpha0); }
     
+    size_type size() const { return diag_.size(); }
     Vector<coeff_t> diag() const { return diag_; }
     Vector<coeff_t> offdiag() const { return offdiag_; }
     void push_back(const coeff_t& alpha, const coeff_t& beta)

@@ -60,8 +60,19 @@ namespace lila {
     @tparam object_t either lila::Matrix or lila::Vector
     @tparam coeff_t type of coefficients of object 
    */
-  template <class coeff_t, template<class> class object_t>
-  inline void Copy(const object_t<coeff_t>& X,  object_t<coeff_t>& Y)
+  template <class coeff_t>
+  inline void Copy(const Vector<coeff_t>& X,  Vector<coeff_t>& Y)
+  {
+    using size_type = blaslapack::blas_size_t;
+    const size_type dx = X.size();
+    const size_type dy = Y.size();
+    assert(dx == dy); // Check if valid dimensions
+    const size_type inc = 1;
+    blaslapack::copy(&dx, X.data(), &inc, Y.data(), &inc);
+  }
+
+  template <class coeff_t>
+  inline void Copy(const Matrix<coeff_t>& X,  Matrix<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
@@ -84,8 +95,20 @@ namespace lila {
     @tparam object_t either lila::Matrix or lila::Vector
     @tparam coeff_t type of coefficients of object 
    */
-  template <class coeff_t, template<class> class object_t>
-  inline void Add(const object_t<coeff_t>& X,  object_t<coeff_t>& Y, 
+  template <class coeff_t>
+  inline void Add(const Vector<coeff_t>& X, Vector<coeff_t>& Y, 
+		  coeff_t alpha = static_cast<coeff_t>(1.))
+  {
+    using size_type = blaslapack::blas_size_t;
+    const size_type dx = X.size();
+    const size_type dy = Y.size();
+    assert(dx == dy); // Check if valid dimensions
+    const size_type inc = 1;
+    blaslapack::axpy(&dx, &alpha, X.data(), &inc, Y.data(), &inc);
+  }
+
+  template <class coeff_t>
+  inline void Add(const Matrix<coeff_t>& X,  Matrix<coeff_t>& Y, 
 		  coeff_t alpha = static_cast<coeff_t>(1.))
   {
     using size_type = blaslapack::blas_size_t;
@@ -108,8 +131,16 @@ namespace lila {
     @tparam object_t either lila::Matrix or lila::Vector
     @tparam coeff_t type of coefficients of object 
    */
-  template <class coeff_t, template<class> class object_t>
-  inline void Scale(const coeff_t& alpha,  object_t<coeff_t>& X)
+  template <class coeff_t>
+  inline void Scale(const coeff_t& alpha,  Vector<coeff_t>& X)
+  {
+    using size_type = blaslapack::blas_size_t;
+    const size_type dx = X.size();
+    const size_type inc = 1;
+    blaslapack::scal(&dx, &alpha, X.data(), &inc);
+  }
+  template <class coeff_t>
+  inline void Scale(const coeff_t& alpha,  Matrix<coeff_t>& X)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
@@ -117,20 +148,21 @@ namespace lila {
     blaslapack::scal(&dx, &alpha, X.data(), &inc);
   }
 
+
   /*! @brief Dot product between two objects
     
     Performs the following operation:
     \f$ \left< X | Y \right> \f$
     the vector X is conjugated in the complex case.
 
-    @param X lila::Matrix / lila::Vector 
-    @param Y lila::Matrix / lila::Vector
+    @param X lila::Vector 
+    @param Y lila::Vector
     @return dot product
     @tparam object_t either lila::Matrix or lila::Vector
     @tparam coeff_t type of coefficients of object 
    */
-  template <class coeff_t, template<class> class object_t>
-  inline coeff_t Dot(const object_t<coeff_t>& X, const object_t<coeff_t>& Y)
+  template <class coeff_t>
+  inline coeff_t Dot(const Vector<coeff_t>& X, const Vector<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
     const size_type dx = X.size();
@@ -140,15 +172,38 @@ namespace lila {
     return blaslapack::dot(&dx, X.data(), &inc, Y.data(), &inc);
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline real_t<coeff_t> Norm(const object_t<coeff_t>& X)
+  template <class coeff_t>
+  inline coeff_t Dot(const Matrix<coeff_t>& X, const Matrix<coeff_t>& Y)
+  {
+    using size_type = blaslapack::blas_size_t;
+    const size_type dx = X.size();
+    const size_type dy = Y.size();
+    assert(dx == dy); // Check if valid dimensions
+    const size_type inc = 1;
+    return blaslapack::dot(&dx, X.data(), &inc, Y.data(), &inc);
+  }
+
+
+
+  template <class coeff_t>
+  inline real_t<coeff_t> Norm(const Vector<coeff_t>& X)
   {
     // TODO: use proper LAPACK function here
     return sqrt(real(Dot(X,X)));
   }
 
-  template <class coeff_t, template<class> class object_t>
-  inline coeff_t Sum(const object_t<coeff_t>& X)
+  template <class coeff_t>
+  inline real_t<coeff_t> Norm(const Matrix<coeff_t>& X)
+  {
+    // TODO: use proper LAPACK function here
+    return sqrt(real(Dot(X,X)));
+  }
+
+  template <class coeff_t>
+  inline coeff_t Sum(const Vector<coeff_t>& X)
+  { return std::accumulate(X.begin(), X.end(), 0.); }
+  template <class coeff_t>
+  inline coeff_t Sum(const Matrix<coeff_t>& X)
   { return std::accumulate(X.begin(), X.end(), 0.); }
 
 

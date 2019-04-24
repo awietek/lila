@@ -50,6 +50,7 @@ namespace lila {
     Zeros(matrix);
     Mult(Bmat, Qmat, matrix, (coeff_t)1., (coeff_t)0., 'N', 'C');
   }
+
   template<class coeff_t>
   inline void ExpH(Matrix<coeff_t>& matrix, coeff_t alpha=1., char uplo='U')
   { 

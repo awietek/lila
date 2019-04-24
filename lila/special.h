@@ -34,7 +34,7 @@ namespace lila {
   { std::fill(mat.begin(), mat.end(), 0.); }
 
   template <class coeff_t>
-  Vector<coeff_t> Zeros(int m)
+  Vector<coeff_t> Zeros(size_type m)
   { 
     Vector<coeff_t> vec(m);
     Zeros(vec);
@@ -42,7 +42,7 @@ namespace lila {
   }
 
   template <class coeff_t>
-  Matrix<coeff_t> Zeros(int m, int n)
+  Matrix<coeff_t> Zeros(size_type m, size_type n)
   { 
     Matrix<coeff_t> mat(m, n);
     Zeros(mat);
@@ -57,12 +57,12 @@ namespace lila {
   inline void Identity(matrix_t& mat)
   { 
     Zeros(mat);
-    for (auto i : range<int>(std::min(mat.nrows(), mat.ncols())))
+    for (auto i : range<size_type>(std::min(mat.nrows(), mat.ncols())))
       mat(i,i) = 1.;
   }
 
   template <class coeff_t>
-  inline Matrix<coeff_t> Identity(int m)
+  inline Matrix<coeff_t> Identity(size_type m)
   { 
     auto id = Zeros<coeff_t>(m, m);
     Identity(id);
@@ -103,7 +103,7 @@ namespace lila {
   }
 
   template <class coeff_t>
-  inline Matrix<coeff_t> Unitary(int n, 
+  inline Matrix<coeff_t> Unitary(size_type n, 
 				 const Vector<real_t<coeff_t>>& params)
   { 
     assert(n>0);

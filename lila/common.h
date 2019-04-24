@@ -15,6 +15,8 @@
 #ifndef LILA_COMMON_H_
 #define LILA_COMMON_H_
 
+#include <complex>
+
 namespace lila {
   using int32 = int;
   using uint32 = unsigned int;
@@ -23,6 +25,8 @@ namespace lila {
 
   using size_type = long;
 
+  using scomplex = std::complex<float>;
+  using complex = std::complex<double>;
 }
 
 #endif

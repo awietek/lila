@@ -17,7 +17,8 @@
 
 #include <mpi.h>
 
-#include "all.h"
 #include "mpi/vectormpi.h"
+#include "all.h"
+
 
 #endif

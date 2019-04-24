@@ -20,11 +20,10 @@
 #include "matrix.h"
 #include "vector.h"
 #include "detail/complex_detail.h"
+#include "common.h"
 
 namespace lila {
-  using scomplex = std::complex<float>;
-  using complex = std::complex<double>;
-  
+ 
   template <class coeff_t>
   using real_t = typename detail::real_type_struct<coeff_t>::type;
 

@@ -19,6 +19,9 @@
 
 #include "../vector.h"
 #include "../common.h"
+#include "../complex.h"
+#include "../compare.h"
+#include "../blaslapack.h"
 #include "stable_dot_product.h"
 
 namespace lila {

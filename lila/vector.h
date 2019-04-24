@@ -47,6 +47,8 @@ namespace lila {
 
     explicit Vector(size_type size) 
       : size_(size), data_(size, 0) { }
+    explicit Vector(const vector_type& vec) 
+      : size_(vec.size()), data_(vec) { }
     
     coeff_t operator()(size_type i) const { return data_[i]; }
     coeff_t& operator()(size_type i) { return data_[i]; }
