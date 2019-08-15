@@ -17,7 +17,7 @@
 
 #include "matrix.h"
 #include "vector.h"
-#include "blaslapack.h"
+#include "blaslapack/blaslapack.h"
 #include "special.h" 
 #include "complex.h"
 #include "range.h"

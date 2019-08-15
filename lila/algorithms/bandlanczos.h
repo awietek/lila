@@ -134,8 +134,8 @@ namespace lila {
 	  auto prev_tmat = tmat;
 	  int prev_size = current_size - n_bands_;
 	  prev_tmat.resize(prev_size, prev_size);
-	  auto eigs = EigenvaluesH(tmat);
-	  auto prev_eigs = EigenvaluesH(prev_tmat);
+	  auto eigs = EigenvaluesSym(tmat);
+	  auto prev_eigs = EigenvaluesSym(prev_tmat);
 	  double residue = std::abs((prev_eigs(num_eigenvalue_) - 
 				     eigs(num_eigenvalue_)) / eigs(num_eigenvalue_));
 	  return (residue < precision_);
@@ -278,7 +278,7 @@ namespace lila {
       std::vector<int> ev_pos(dim, 0); // position of n_th eigenvector
       std::vector<bool> ghost(dim, false); 
  
-      auto tmat_eigen = EigenH(tmatrix_);
+      auto tmat_eigen = EigenSym(tmatrix_);
       auto tmat_eigs = tmat_eigen.eigenvalues;
 
       // Check for degeneracies and compute number of distinct eigenvalues
@@ -314,7 +314,7 @@ namespace lila {
 	  for(int i=0; i<dim-1; ++i)
 	    for(int j=0; j<dim-1; ++j)
 	      T2(i, j) = tmatrix_(i+1, j+1);
-	  Vector<real_t<coeff_t>> t2_eigs = EigenvaluesH(T2);
+	  Vector<real_t<coeff_t>> t2_eigs = EigenvaluesSym(T2);
       
 
 	  // Check whether eigenvalues of T2 are close to T

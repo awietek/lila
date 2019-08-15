@@ -21,7 +21,7 @@
 #include "../common.h"
 #include "../complex.h"
 #include "../compare.h"
-#include "../blaslapack.h"
+#include "../blaslapack/blaslapack.h"
 #include "stable_dot_product.h"
 
 namespace lila {
@@ -31,7 +31,10 @@ namespace lila {
   public:
     using size_type = int64; 
     using coeff_type = coeff_t; 
-    using value_type = coeff_t;   
+    using value_type = coeff_t; 
+    using vector_type = std::vector<coeff_t>;
+    using iterator_t = typename vector_type::iterator;
+    using const_iterator_t = typename vector_type::const_iterator;  
 
     VectorMPI() : size_(0), vector_local_(0)
     { }
@@ -76,11 +79,21 @@ namespace lila {
     coeff_t* data() { return vector_local_.data(); }
     const coeff_t* data() const { return vector_local_.data(); }
     
+    iterator_t begin() { return vector_local_.begin(); }
+    iterator_t end() { return vector_local_.end(); }
+    const_iterator_t begin() const { return vector_local_.begin(); }
+    const_iterator_t end() const { return vector_local_.end(); }
+    const_iterator_t cbegin() const { return vector_local_.cbegin(); }
+    const_iterator_t cend() const { return vector_local_.cend(); }
+
   private:
     uint64 size_;
     lila::Vector<coeff_t> vector_local_;
   };
 
+  template <class coeff_t>
+  inline void Zeros(VectorMPI<coeff_t>& vec)
+  { std::fill(vec.begin(), vec.end(), 0.); }
 
   template <class coeff_t, class function_t>
   inline VectorMPI<coeff_t> Map(const VectorMPI<coeff_t>& X, function_t func)
@@ -131,7 +144,6 @@ namespace lila {
     const uint64 dx = (uint64)X.size();
     const uint64 dy = (uint64)Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
     return stable_dot_product(dx, X.data(), Y.data());
   }
 
@@ -139,6 +151,15 @@ namespace lila {
   template <class coeff_t>
   inline real_t<coeff_t> Norm(const VectorMPI<coeff_t>& X)
   { return sqrt(real(Dot(X, X))); }
+
+
+  template <class coeff_t>
+  inline void Normalize(VectorMPI<coeff_t>& X)
+  {
+    coeff_t nrm = Norm(X);
+    Scale(1./nrm, X);
+  }
+
 
   template <class coeff_t, class gen_t>
   void Random(VectorMPI<coeff_t>& vec, gen_t& gen, bool alter_generator=true)

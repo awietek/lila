@@ -15,6 +15,7 @@
 #ifndef LILA_ALL_H_
 #define LILA_ALL_H_
 
+#include "logger.h"
 #include "add.h"
 #include "common.h"
 #include "compare.h"
@@ -28,12 +29,15 @@
 #include "random.h"
 #include "range.h"
 #include "solve.h"
+#include "cholesky.h"
 #include "special.h"
 #include "vector.h"
-#include "sparse/tmatrix.h"
-#include "sparse/lanczos.h"
-#include "sparse/bandlanczos.h"
+#include "tmatrix.h"
+#include "algorithms/expsymv.h"
+#include "algorithms/lanczos.h"
+#include "algorithms/bandlanczos.h"
+#include "algorithms/lobpcg.h"
 #include "algorithms/gramschmidt.h"
-
+#include "timing.h"
 
 #endif

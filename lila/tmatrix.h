@@ -15,10 +15,10 @@
 #ifndef LILA_SPARSE_TMATRIX_H_
 #define LILA_SPARSE_TMATRIX_H_
 
-#include "../vector.h"
-#include "../matrix.h"
-#include "../special.h"
-#include "../eigen.h"
+#include "vector.h"
+#include "matrix.h"
+#include "special.h"
+#include "eigen.h"
 
 namespace lila {
 
@@ -60,6 +60,11 @@ namespace lila {
   class Tmatrix 
   {
   public:
+    using size_type = lila::size_type; 
+    using coeff_type = coeff_t;
+    using value_type = coeff_t;        
+    using vector_type = std::vector<coeff_t>;
+
     Tmatrix() = default;
     Tmatrix(const Vector<coeff_t>& diag, 
 	    const Vector<coeff_t>& offdiag)
@@ -79,6 +84,14 @@ namespace lila {
       offdiag_.push_back(beta);
     }
 
+    void resize(size_type size) {
+      diag_.resize(size);
+      if (size > 0)
+	offdiag_.resize(size-1);
+      else
+	offdiag_.resize(0);
+    }
+
     /// conversion to a regular lila::Matrix
     operator Matrix<coeff_t>() const
     { 
@@ -86,6 +99,7 @@ namespace lila {
 	Diag<coeff_t>(offdiag_, 1);
     }
     
+
   private:
     Vector<coeff_t> diag_;
     Vector<coeff_t> offdiag_;
@@ -112,9 +126,9 @@ namespace lila {
 
   /// Calculates eigenvalues and eigenvectors of T matrix
   template <class coeff_t>
-  inline EigenHResults<coeff_t> Eigen(const Tmatrix<coeff_t>& tmat)
+  inline EigenSymResults<coeff_t> Eigen(const Tmatrix<coeff_t>& tmat)
   {
-    EigenHResults<coeff_t> results;
+    EigenSymResults<coeff_t> results;
     results.eigenvalues = tmat.diag();
     Vector<coeff_t> offdiag = tmat.offdiag();
     

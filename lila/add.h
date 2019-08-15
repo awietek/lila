@@ -23,11 +23,12 @@
 #include <cassert>
 #include <algorithm>
 #include <numeric>
+#include <limits>
 
 #include "complex.h"
 #include "matrix.h"
 #include "vector.h"
-#include "blaslapack.h"
+#include "blaslapack/blaslapack.h"
 #include "compare.h"
 
 namespace lila {
@@ -198,6 +199,71 @@ namespace lila {
     // TODO: use proper LAPACK function here
     return sqrt(real(Dot(X,X)));
   }
+
+
+  template <class coeff_t>
+  inline void Normalize(Vector<coeff_t>& X)
+  {
+    coeff_t nrm = Norm(X);
+    Scale((coeff_t)1. / nrm, X);
+  }
+
+  template <class coeff_t>
+  inline void Normalize(Matrix<coeff_t>& X)
+  {
+    coeff_t nrm = Norm(X);
+    Scale((coeff_t)1. / nrm, X);
+  }
+
+  
+  /*! @brief Computes Matrix L-oo norm
+
+    L-oo norm of a matrix is defined by
+    max ( 1 <= I <= M ) sum ( 1 <= J <= N ) abs ( A(I,J) ).
+
+    @param X lila::Matrix 
+
+    @tparam coeff_t type of coefficients of object 
+   */
+  template <class coeff_t>
+  inline real_t<coeff_t> NormLi(const Matrix<coeff_t>& X)
+  {
+    real_t<coeff_t> value = 0.0;
+    for (int i = 0; i < X.nrows(); i++ )
+      {
+	real_t<coeff_t> row_sum = 0.0;
+	for (int j = 0; j < X.ncols(); j++ )
+	  {
+	    row_sum += std::abs ( X(i, j) );
+	  }
+	value = std::max( value, row_sum );
+      }
+    return value;
+  }
+
+  /*! @brief Computes log with base 2 of absolute value
+
+    @param X coeff_t value
+
+    @tparam coeff_t type of variable
+   */
+  template <class coeff_t>
+  inline real_t<coeff_t> log2abs(const coeff_t& x )
+  {
+    real_t<coeff_t> value;
+
+    if ( x == 0.0 )
+      {
+	value = -1e30;
+      }
+    else
+      {
+	value = log ( std::abs ( x ) ) / log ( 2.0 );
+      }
+
+    return value;
+  }
+
 
   template <class coeff_t>
   inline coeff_t Sum(const Vector<coeff_t>& X)

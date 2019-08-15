@@ -14,17 +14,13 @@
 
 #include "catch.hpp"
 
-#include <lila/matrixfunction.h>
-#include <lila/print.h>
-#include <lila/random.h>
-#include <lila/add.h>
-#include <lila/compare.h>
+#include <lila/all.h>
 
 template <class coeff_t>
-void test_matrixfunction()
+void test_expm()
 {
   using namespace lila;
-  int n=5;
+  int n=10;
   coeff_t alpha=1.23;
   for (int seed : range<int>(10)) {
   
@@ -33,28 +29,35 @@ void test_matrixfunction()
   
     Matrix<coeff_t> A(n, n);
     Random(A, fgen);
+    auto Aexp = ExpM(A, alpha);
+
+    // Check whether hermitian gives same result
     auto A1 = A;
     Add(Herm(A1), A1);
-    auto Aexp = A1;
-    ExpSym(Aexp, alpha);
-    auto Aret = Aexp;
-    LogSym(Aret, alpha);
 
-    // LilaPrint(A1);
-    // LilaPrint(Aret);
-    REQUIRE(close(A1, Aret));
+    // auto LILA_CLK(t1);
+    Aexp = ExpM(A1, alpha);
+    // auto LILA_CLK(t2);
+    // LILA_TIME_MICRO("pade", t1, t2);
 
-    auto v2 = EigenvaluesSym(Aexp);
-    for (auto e : v2)
-      REQUIRE(e >= 0);
+    auto Aexp2 = A1;
+    // LILA_CLK(t1);
+    ExpSym(Aexp2, alpha);
+    // LILA_CLK(t2);
+    // LILA_TIME_MICRO("herm", t1, t2);
+    // LilaPrint(Aexp);
+    // LilaPrint(Aexp2);
+    REQUIRE(close(Aexp2, Aexp));
+
+    // Pade from EXPOKIT is actually really good in timing!!
     
   }
 }
 
 
-TEST_CASE( "Matrix function test", "[matrixfunction]" ) {
-  test_matrixfunction<float>();
-  test_matrixfunction<double>();
-  test_matrixfunction<std::complex<float>>();
-  test_matrixfunction<std::complex<double>>();
+TEST_CASE( "Matrix ExpM test", "[expm]" ) {
+  test_expm<float>();
+  test_expm<double>();
+  test_expm<std::complex<float>>();
+  test_expm<std::complex<double>>();
 }

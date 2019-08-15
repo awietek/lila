@@ -49,14 +49,16 @@ void test_bandlanczos()
       (dim, random_seed, max_iterations, precision, num_eigenvalue, multiply, n_bands);
     auto lzs_eigenvalues = lzs.eigenvalues();
    
-    auto true_eigs = EigenvaluesH(A);
+    auto true_eigs = EigenvaluesSym(A);
     // LilaPrint(true_eigs);
     // LilaPrint(lzs_eigenvalues.eigenvalues);
     // for (int i=0; i<lzs_eigenvalues.eigenvalues.size(); ++i)
     //   printf("%f %d\n", lzs_eigenvalues.eigenvalues(i), lzs_eigenvalues.multiplicity[i]);
 
-    REQUIRE(lzs_eigenvalues.eigenvalues.size() == lzs_eigenvalues.eigenvectors.size());
-    REQUIRE(lzs_eigenvalues.multiplicity.size() == lzs_eigenvalues.eigenvectors.size());    
+    REQUIRE((int)lzs_eigenvalues.eigenvalues.size() == 
+	    (int)lzs_eigenvalues.eigenvectors.size());
+    REQUIRE((int)lzs_eigenvalues.multiplicity.size() == 
+	    (int)lzs_eigenvalues.eigenvectors.size());    
 
     // for (int k = 0; k<=n_lowest; ++k)
     //   {

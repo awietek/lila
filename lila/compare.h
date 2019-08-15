@@ -56,6 +56,29 @@ namespace lila {
 		      });
   }
   
+  template <class coeff_t>
+  inline bool close(const Matrix<coeff_t>& mat, const coeff_t& val, 
+		    real_t<coeff_t> atol = lila::atol<coeff_t>::val(), 
+		    real_t<coeff_t> rtol = lila::rtol<coeff_t>::val())
+  {
+    return std::all_of(mat.begin(), mat.end(), 
+		       [&atol, &rtol, &val](coeff_t x) {
+		      	return close(x, val, atol, rtol); 
+		      });
+  }
+
+  template <class coeff_t>
+  inline bool close(const Vector<coeff_t>& vec, const coeff_t& val, 
+		    real_t<coeff_t> atol = lila::atol<coeff_t>::val(), 
+		    real_t<coeff_t> rtol = lila::rtol<coeff_t>::val())
+  {
+    return std::all_of(vec.begin(), vec.end(),
+		       [&atol, &rtol, &val](coeff_t x) {
+			 return close(x, val, atol, rtol); 
+		       });
+  }
+
+
   template <class coeff_t, template<class> class object_t>
   inline bool equal(const object_t<coeff_t>& mat1,
 		    const object_t<coeff_t>& mat2)

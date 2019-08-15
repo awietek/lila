@@ -1,8 +1,8 @@
 CC        = mpicxx
-CCARCH    = -cxx=icpc -std=c++11
+CCARCH    =  -std=c++11
 CCOPT     = -O3 -Wall -Wextra -pedantic
 # LAPACKLIB = -llapack -lblas
-LAPACKLIB = -mkl -DLILA_USE_MKL
+LAPACKLIB = -lmkl_rt -DLILA_USE_MKL
 INCLUDE   = -I..
 
 EXECUTABLE = tests

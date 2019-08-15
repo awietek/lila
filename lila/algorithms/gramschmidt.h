@@ -19,16 +19,28 @@
 
 namespace lila {
   template <class vector_t>
-  std::vector<vector_t> gramschmidt(std::vector<vector_t>& ws)
+  std::vector<vector_t> gramschmidt(std::vector<vector_t>& ws, 
+				    bool iterate=true)
   {
     auto es = ws;
-    for (int i=0; i<(int)ws.size(); ++i)
+
+    // Iterations for higher precision on orthogonality
+    int n_iters = (iterate) ? 3 : 1;
+    for (int iter=0; iter<n_iters; ++iter)
       {
-	auto v = ws[i];
-	for (int k=0; k<i; ++k)
-	  v -= Dot(es[k], ws[i])*es[k];
-	v /= (typename vector_t::coeff_type)Norm(v);
-	es[i] = v;
+	
+	// Modified Gram-Schmidt
+	for (int i=0; i<(int)ws.size(); ++i)
+	  {
+	    for (int k=0; k<i; ++k)
+	      {
+		auto rki = Dot(es[k], es[i]);
+		es[i] -= rki * es[k];
+	      }
+	    auto rii = (typename vector_t::coeff_type)Norm(es[i]);
+	    es[i] /= rii;
+	  }
+
       }
     return es;   
   }
@@ -36,8 +48,10 @@ namespace lila {
   template <class vector_t>
   bool has_full_rank(std::vector<vector_t>& ws)
   {
+    using coeff_t = typename vector_t::coeff_type;
+
     int size = (int)ws.size();
-    auto ovlps = lila::Zeros<typename vector_t::coeff_type>(size, size);
+    auto ovlps = lila::Zeros<coeff_t>(size, size);
     for (int i=0; i<size; ++i)
       {
     	ovlps(i, i) = lila::Dot(ws[i], ws[i]);
@@ -47,9 +61,9 @@ namespace lila {
     	    ovlps(j, i) = lila::conj(ovlps(i, j));
     	  }
       }
-    auto eigs = EigenvaluesH(ovlps);
+    auto eigs = EigenvaluesSym(ovlps);
     for (auto e : eigs)
-      if (close(e, 0.)) return false;
+      if (close<coeff_t>(e, (coeff_t)0.)) return false;
     return true;
   }
 

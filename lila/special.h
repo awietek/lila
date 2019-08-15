@@ -19,7 +19,6 @@
 
 #include "common.h"
 #include "matrix.h"
-#include "matrixfunction.h"
 #include "vector.h"
 #include "range.h"
 #include "complex.h"
@@ -29,8 +28,12 @@
 
 namespace lila {
 
-  template <class matrix_t>
-  inline void Zeros(matrix_t& mat)
+  template <class coeff_t>
+  inline void Zeros(Vector<coeff_t>& vec)
+  { std::fill(vec.begin(), vec.end(), 0.); }
+
+  template <class coeff_t>
+  inline void Zeros(Matrix<coeff_t>& mat)
   { std::fill(mat.begin(), mat.end(), 0.); }
 
   template <class coeff_t>
@@ -42,6 +45,14 @@ namespace lila {
   }
 
   template <class coeff_t>
+  Matrix<coeff_t> ZerosLike(const Vector<coeff_t>& vec)
+  { 
+    Matrix<coeff_t> res(vec.nrows(), vec.ncols());
+    Zeros(res);
+    return res;
+  }
+
+  template <class coeff_t>
   Matrix<coeff_t> Zeros(size_type m, size_type n)
   { 
     Matrix<coeff_t> mat(m, n);
@@ -49,12 +60,20 @@ namespace lila {
     return mat;
   }
 
+  template <class coeff_t>
+  Matrix<coeff_t> ZerosLike(const Matrix<coeff_t>& mat)
+  { 
+    Matrix<coeff_t> res(mat.nrows(), mat.ncols());
+    Zeros(res);
+    return res;
+  }
+
   template <class matrix_t>
   inline void Ones(matrix_t& mat)
   { std::fill(mat.begin(), mat.end(), 1.); }
   
-  template <class matrix_t>
-  inline void Identity(matrix_t& mat)
+  template <class coeff_t>
+  inline void Identity(Matrix<coeff_t>& mat)
   { 
     Zeros(mat);
     for (auto i : range<size_type>(std::min(mat.nrows(), mat.ncols())))
@@ -102,66 +121,6 @@ namespace lila {
     return mat;
   }
 
-  template <class coeff_t>
-  inline Matrix<coeff_t> Unitary(size_type n, 
-				 const Vector<real_t<coeff_t>>& params)
-  { 
-    assert(n>0);
-    assert(params.size() == n*n);
-    
-    Matrix<coeff_t> unitary(n, n);
-    Zeros(unitary);
-    
-    // Set diagonal elements
-    for (int i : range<int>(n))
-      unitary(i, i) = params(i);
-    
-    int param_offset = 0;
-    for (int n_offdiag=1; n_offdiag < n; ++n_offdiag)
-      for (int j : range<int>(n - n_offdiag))
-    	{	  
-    	  // Construct hermitian elementary matrix
-    	  coeff_t entry = coeff_t(params(n + param_offset), 
-    				  params(n + param_offset + 1));
-	  
-    	  unitary(j, n_offdiag + j) = entry;
-    	  unitary(n_offdiag + j, j) = lila::conj(entry);
-
-    	  // // IMPROVEMENT: do exponentiation without full matrix exponentiation
-	  // Zeros(elementary_2x2);
-	  // elementary_2x2(0, 1) = entry;
-	  // elementary_2x2(0, 1) = lila::conj(entry);
-	  // ExpH(elementary_2x2, coeff_t(0., 1.), 'U');
-
-    	  // elementary(j, j) = elementary_2x2(0, 0);
-    	  // elementary(n_offdiag + j, n_offdiag + j) = elementary_2x2(1, 1);
-	  // elementary(j, n_offdiag + j) = elementary_2x2(0, 1);
-    	  // elementary(n_offdiag + j, j) = elementary_2x2(1, 0);
-
-    	  // Matrix<coeff_t> unitary_copy = unitary;
-    	  // Mult(unitary_copy, elementary, unitary);
-    	  param_offset += 2;
-    	}   
-    ExpH(unitary, coeff_t(0., 1.), 'U');
-
-    assert(param_offset == n*(n-1));
-    return unitary;
-  }
-
-  
-  
-  
-
-  template <class coeff_t>
-  inline bool IsUnitary(const Matrix<coeff_t>& mat)
-  {
-    Matrix<coeff_t> p(mat);
-    Zeros(p);
-    Mult(mat, mat, p, coeff_t(1.), coeff_t(0.), 'C', 'N');
-    Matrix<coeff_t> Id(p);
-    Identity(Id);
-    return close(Id, p);
-  }
 
 
   template <class coeff_t>

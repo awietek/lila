@@ -17,11 +17,21 @@
 
 #include "matrix.h"
 #include "vector.h"
-#include "blaslapack.h"
+#include "blaslapack/blaslapack.h"
 #include "special.h" 
 
 namespace lila {
 
+  /*! @brief Solves a system of linear equations with matrix r.h.s
+
+    Performs the following operation:
+    \f$ A^{-1}B \rightarrow B \f$
+
+    @param A lila::Matrix (overwritten, contains factors L, U LU factorization) 
+    @param B lila::Matrix (overwritten, contains solution matrix A^{-1}B)
+
+    @tparam coeff_t type of coefficients of object 
+   */
   template <class coeff_t>
   inline std::vector<int> Solve(Matrix<coeff_t>& A, Matrix<coeff_t>& B)
   {
@@ -42,6 +52,16 @@ namespace lila {
     return ipiv;
   }
 
+  /*! @brief Solves a system of linear equations with vector r.h.s
+
+    Performs the following operation:
+    \f$ A^{-1}b \rightarrow b \f$
+
+    @param A lila::Matrix (overwritten, contains factors L, U LU factorization) 
+    @param B lila::Vector (overwritten, contains solution matrix A^{-1}b)
+
+    @tparam coeff_t type of coefficients of object 
+   */
   template <class coeff_t>
   inline std::vector<int> Solve(Matrix<coeff_t>& A, Vector<coeff_t>& X)
   {

@@ -68,6 +68,7 @@ namespace lila {
 
     range<size_type> rows() const { return range<size_type>(size_); }
     size_type nrows() const { return size_; }
+    int nblocks() const { return 1; }    
     size_type size() const { return size_; }
     
     coeff_t* data() { return data_.data(); }

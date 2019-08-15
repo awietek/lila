@@ -252,6 +252,21 @@ namespace lila {
 			    blas_complex_t* work, const blas_size_t* lwork, 
 			    blas_size_t* info);
 
+
+    //////////////////////////
+    // Cholesky Decomposition
+    extern "C" void spotrf_(const char* uplo, const blas_size_t* n, blas_float_t* A,
+			    const blas_size_t* lda, blas_size_t* info);
+
+    extern "C" void dpotrf_(const char* uplo, const blas_size_t* n, blas_double_t* A,
+			    const blas_size_t* lda, blas_size_t* info);
+
+    extern "C" void cpotrf_(const char* uplo, const blas_size_t* n, blas_scomplex_t* A,
+			    const blas_size_t* lda, blas_size_t* info);
+
+    extern "C" void zpotrf_(const char* uplo, const blas_size_t* n, blas_complex_t* A,
+			    const blas_size_t* lda, blas_size_t* info);
+
     //////////////////////////
     // Eigenvalues
 
@@ -320,6 +335,40 @@ namespace lila {
 			   blas_double_t* D, blas_double_t* E, blas_double_t* Z,
 			   const blas_size_t* ldz, blas_double_t* work, 
 			   blas_size_t* info);
+
+
+    ///////////////////////////////////
+    // Generalized eigenvalue problems
+    extern "C" void ssygv_(const blas_size_t* itype, const char* jobz, 
+			   const char* uplo, const blas_size_t* N, 
+			   blas_float_t* A, const blas_size_t* lda, 
+			   blas_float_t* B, const blas_size_t* ldb,
+			   blas_float_t* W, blas_float_t* work, 
+			   const blas_size_t* lwork, blas_size_t* info);
+
+    extern "C" void dsygv_(const blas_size_t* itype, const char* jobz, 
+			   const char* uplo, const blas_size_t* N, 
+			   blas_double_t* A, const blas_size_t* lda, 
+			   blas_double_t* B, const blas_size_t* ldb, 
+			   blas_double_t* W, blas_double_t* work, 
+			   const blas_size_t* lwork, blas_size_t* info);
+
+    extern "C" void chegv_(const blas_size_t* itype, const char* jobz, 
+			   const char* uplo, const blas_size_t* N, 
+			   blas_scomplex_t* A, const blas_size_t* lda, 
+			   blas_scomplex_t* B, const blas_size_t* ldb,
+			   blas_float_t* W, blas_scomplex_t* work, 
+			   const blas_size_t* lwork, blas_float_t* rwork, 
+			   blas_size_t* info);
+    
+    extern "C" void zhegv_(const blas_size_t* itype, const char* jobz, 
+			   const char* uplo, const blas_size_t* N, 
+			   blas_complex_t* A, const blas_size_t* lda, 
+			   blas_complex_t* B, const blas_size_t* ldb, 
+			   blas_double_t* W, blas_complex_t* work, 
+			   const blas_size_t* lwork, blas_double_t* rwork, 
+			   blas_size_t* info);
+
 
   }  // namespace blaslapack
 }  // namespace lila

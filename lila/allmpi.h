@@ -17,8 +17,9 @@
 
 #include <mpi.h>
 
+#include "mpi/mpiutils.h"
+#include "mpi/loggermpi.h"
 #include "mpi/vectormpi.h"
 #include "all.h"
-
 
 #endif

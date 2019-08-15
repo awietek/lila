@@ -25,7 +25,6 @@
 #include "mkl_types.h"
 #include "mkl.h"
 #define __LAPACK_ROUTINE_NAME(x) x
-
 #else  // Using normal LAPACK  
 #include "blaslapack_types.h"
 #include "blaslapack_extern.h"
@@ -346,6 +345,27 @@ namespace lila {
 		      blas_size_t* info)
     { __LAPACK_ROUTINE_NAME(zungqr)(m, n, k, A, lda, tau, work, lwork, info); }
       
+
+
+    //////////////////////////
+    // Cholesky Decomposition
+    inline void potrf(const char* uplo, const blas_size_t* n, blas_float_t* A,
+		      const blas_size_t* lda, blas_size_t* info)
+    { __LAPACK_ROUTINE_NAME(spotrf)(uplo, n, A, lda, info); }
+
+    inline void potrf(const char* uplo, const blas_size_t* n, blas_double_t* A,
+		      const blas_size_t* lda, blas_size_t* info)
+    { __LAPACK_ROUTINE_NAME(dpotrf)(uplo, n, A, lda, info); }
+
+    inline void potrf(const char* uplo, const blas_size_t* n, blas_scomplex_t* A,
+		      const blas_size_t* lda, blas_size_t* info)
+    { __LAPACK_ROUTINE_NAME(cpotrf)(uplo, n, A, lda, info); }
+
+    inline void potrf(const char* uplo, const blas_size_t* n, blas_complex_t* A,
+		      const blas_size_t* lda, blas_size_t* info)
+    { __LAPACK_ROUTINE_NAME(zpotrf)(uplo, n, A, lda, info); }
+
+
     //////////////////////////
     // Eigenvalues
 
@@ -437,7 +457,10 @@ namespace lila {
       geev(jobvl, jobvr, n, a, lda, wr.data(), wi.data(), vl, ldvl, vr, 
 	   ldvr, work, lwork, info); 
       for (blas_size_t i=0; i<*n; ++i)
-	w[i] = blas_scomplex_t(wr[i], wi[i]);      
+	{
+	  // w[i] = blas_scomplex_t(wr[i], wi[i]);      
+	  w[i] = {wr[i], wi[i]};      
+	}
     }
 
     inline void geev(const char* jobvl, const char* jobvr,
@@ -453,7 +476,10 @@ namespace lila {
       geev(jobvl, jobvr, n, a, lda, wr.data(), wi.data(), vl, ldvl, vr, 
 	   ldvr, work, lwork, info); 
       for (blas_size_t i=0; i<*n; ++i)
-	w[i] = blas_complex_t(wr[i], wi[i]);  
+	{
+	  // w[i] = blas_complex_t(wr[i], wi[i]);  
+	  w[i] = {wr[i], wi[i]};
+	}
     }
 
     inline void geev(const char* jobvl, const char* jobvr,
@@ -464,7 +490,7 @@ namespace lila {
 		     blas_scomplex_t* work, const blas_size_t* lwork, 
 		     blas_size_t* info)
     { 
-      std::vector<blas_float_t> rwork(*n * 2);
+      std::vector<blas_float_t> rwork(std::max(1, *n * 2));
       __LAPACK_ROUTINE_NAME(cgeev)(jobvl, jobvr, n, a, lda, w, vl, ldvl, 
 				   vr, ldvr, work, lwork, rwork.data(),info); 
     }
@@ -477,7 +503,7 @@ namespace lila {
 		     blas_complex_t* work, const blas_size_t* lwork, 
 		     blas_size_t* info)
     {
-      std::vector<blas_double_t> rwork(*n * 2);  
+      std::vector<blas_double_t> rwork(std::max(1, *n * 2));  
       __LAPACK_ROUTINE_NAME(zgeev)(jobvl, jobvr, n, a, lda, w, vl, ldvl,
 				   vr, ldvr, work, lwork, rwork.data(), info); 
     }
@@ -495,8 +521,59 @@ namespace lila {
 		     const blas_size_t* ldz, blas_double_t* work, 
 		     blas_size_t* info)
     { __LAPACK_ROUTINE_NAME(dstev)(jobz, N, D, E, Z, ldz, work, info); }
-    
-  }  // namespace lila
-}  // namespace blaslapack
+
+
+    /////////////////////////////////////////////////////////////////////////
+    // Generalized eigenvalue problems 
+    // (use sy.. instead of he.. for complex routines)
+    inline void sygv(const blas_size_t* itype, const char* jobz, 
+		     const char* uplo, const blas_size_t* N, 
+		     blas_float_t* A, const blas_size_t* lda, 
+		     blas_float_t* B, const blas_size_t* ldb,
+		     blas_float_t* W, blas_float_t* work, 
+		     const blas_size_t* lwork, blas_size_t* info)
+    { 
+      __LAPACK_ROUTINE_NAME(ssygv)(itype, jobz, uplo, N, A, lda, B, ldb, W, 
+				   work, lwork, info); 
+    }
+
+    inline void sygv(const blas_size_t* itype, const char* jobz, 
+		     const char* uplo, const blas_size_t* N, 
+		     blas_double_t* A, const blas_size_t* lda, 
+		     blas_double_t* B, const blas_size_t* ldb, 
+		     blas_double_t* W, blas_double_t* work, 
+		     const blas_size_t* lwork, blas_size_t* info)
+    { 
+      __LAPACK_ROUTINE_NAME(dsygv)(itype, jobz, uplo, N, A, lda, B, ldb, W, 
+				   work, lwork, info); 
+    }
+
+    inline void sygv(const blas_size_t* itype, const char* jobz, 
+		     const char* uplo, const blas_size_t* N, 
+		     blas_scomplex_t* A, const blas_size_t* lda, 
+		     blas_scomplex_t* B, const blas_size_t* ldb,
+		     blas_float_t* W, blas_scomplex_t* work, 
+		     const blas_size_t* lwork, blas_size_t* info)
+    { 
+      std::vector<blas_float_t> rwork(std::max(1, *N * 3 - 2));
+      __LAPACK_ROUTINE_NAME(chegv)(itype, jobz, uplo, N, A, lda, B, ldb, W, 
+				   work, lwork, rwork.data(), info); 
+    }    
+
+
+    inline void sygv(const blas_size_t* itype, const char* jobz, 
+		     const char* uplo, const blas_size_t* N, 
+		     blas_complex_t* A, const blas_size_t* lda, 
+		     blas_complex_t* B, const blas_size_t* ldb, 
+		     blas_double_t* W, blas_complex_t* work, 
+		     const blas_size_t* lwork, blas_size_t* info)
+    { 
+      std::vector<blas_double_t> rwork(std::max(1, *N * 3 - 2));
+      __LAPACK_ROUTINE_NAME(zhegv)(itype, jobz, uplo, N, A, lda, B, ldb, W, 
+				   work, lwork, rwork.data(), info); 
+    }    
+
+  }  // Namespace Lila
+}  // Namespace Blaslapack
 
 #endif

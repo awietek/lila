@@ -16,7 +16,7 @@
 #define LILA_BLASLAPACK_TYPES_H_
     
 #include <complex>
-#include "common.h"
+#include "../common.h"
 
 namespace lila { 
   namespace blaslapack {
@@ -37,4 +37,5 @@ namespace lila {
 #endif
   }
 }
+
 #endif

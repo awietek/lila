@@ -16,7 +16,7 @@
 #define LILA_SPARSE_LANCZOS_H_
 
 #include "../matrix.h"
-#include "tmatrix.h"
+#include "../tmatrix.h"
 #include "../vector.h"
 #include "../common.h"
 
@@ -141,6 +141,12 @@ namespace lila {
 	{
 	  assert(num_eigenvectors[k] < tmat_dim);
 	  evecs.push_back(vector_t(dimension_));
+
+	  // // Debug:
+	  // double norm = 0;
+	  // for (int j =0; j<tmat_dim; ++j)
+	  //   norm += t_evecs(j, num_eigenvectors[k])*t_evecs(j, num_eigenvectors[k]);
+	  // printf("tvnorm: %.17g\n", norm);
 	}
 
       // Initialize Lanczos vectors

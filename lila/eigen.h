@@ -19,6 +19,127 @@
 
 namespace lila {
 
+
+  /*! @brief Struct holding results of symmetric (or hermitian) eigenvalue
+             problems
+   */
+  template <class coeff_t>
+  struct EigenSymResults {
+    Vector<real_t<coeff_t>> eigenvalues;
+    Matrix<coeff_t> eigenvectors;
+  };
+
+  template <class coeff_t>
+  inline Vector<real_t<coeff_t>> 
+  EigenSymInplace(Matrix<coeff_t>& A, bool do_eigenvectors=true, char uplo='U')
+  {
+    using size_type = blaslapack::blas_size_t;
+    assert(A.nrows() == A.ncols());
+
+    const char jobz = do_eigenvectors ? 'V' : 'N';
+    const size_type n = A.nrows();
+    const size_type lda = n; 
+
+    // get optimal work size
+    Vector<real_t<coeff_t>> w(n);
+    size_type lwork = -1;
+    std::vector<coeff_t> work(1);
+    int info = 0;
+    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
+		     work.data(), &lwork, &info);
+    assert(info == 0);
+    lwork = static_cast<size_type>(real(work[0]));
+    work.resize(lwork);
+    
+    // Run eigenvalue computation
+    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
+		     work.data(), &lwork, &info);
+    assert(info == 0);
+    return w;
+  }
+
+  template <class coeff_t>
+  inline EigenSymResults<coeff_t>
+  EigenSym(const Matrix<coeff_t>& A, char uplo='U')
+  {
+    EigenSymResults<coeff_t> result;
+    result.eigenvectors = A;
+    result.eigenvalues = EigenSymInplace(result.eigenvectors, true, uplo);
+    return result;  
+  }
+
+  template <class coeff_t>
+  inline Vector<real_t<coeff_t>> 
+  EigenvaluesSym(const Matrix<coeff_t>& A, char uplo='U') {
+    Matrix<coeff_t> A_copy = A;
+    return EigenSymInplace(A_copy, false, uplo);
+  }
+
+
+
+  template <class coeff_t>
+  inline Vector<real_t<coeff_t>> 
+  EigenGenSymDefInplace(Matrix<coeff_t>& A, Matrix<coeff_t>& B, 
+			bool do_eigenvectors=true, char uplo='U', 
+			int itype = 1)
+  {
+    using size_type = blaslapack::blas_size_t;
+
+    // check / get dimensions
+    assert(A.nrows() == A.ncols());
+    assert(B.nrows() == B.ncols());
+    assert(A.nrows() == B.nrows());
+
+    const char jobz = do_eigenvectors ? 'V' : 'N';
+    const size_type n = A.nrows();
+    const size_type lda = n;
+    const size_type ldb = n;
+    int info = 0;
+
+    // get optimal work size
+    Vector<real_t<coeff_t>> w(n);
+    size_type lwork = -1;
+    std::vector<coeff_t> work(1);
+    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
+		     work.data(), &lwork, &info);
+    assert(info == 0);
+    lwork = static_cast<size_type>(real(work[0]));
+    work.resize(lwork);
+
+    // Run eigenvalue computation
+    blaslapack::sygv(&itype, &jobz, &uplo, &n, A.data(), &lda, B.data(), &ldb,
+		     w.data(), work.data(), &lwork, &info);
+    assert(info == 0);
+    return w;
+  }
+
+  template <class coeff_t>
+  inline EigenSymResults<coeff_t>
+  EigenGenSymDef(const Matrix<coeff_t>& A, const Matrix<coeff_t>& B,
+		 char uplo='U', int itype = 1)
+  {
+    EigenSymResults<coeff_t> result;
+    result.eigenvectors = A;
+    Matrix<coeff_t> B_copy = B;
+    result.eigenvalues = EigenGenSymDefInplace(result.eigenvectors, B_copy,
+					       true, uplo, itype);
+    return result;  
+  }
+
+  template <class coeff_t>
+  inline Vector<real_t<coeff_t>>
+  EigenvaluesGenSymDef(const Matrix<coeff_t>& A, const Matrix<coeff_t>& B,
+		     char uplo='U', int itype = 1)
+  {
+    Matrix<coeff_t> A_copy = A;
+    Matrix<coeff_t> B_copy = B;
+    return EigenGenSymDefInplace(A_copy, B_copy, false, uplo, itype);
+
+  }
+
+
+
+  
   template <class coeff_t>
   struct EigenResults {
     Vector<complex_t<coeff_t>> eigenvalues;
@@ -28,8 +149,8 @@ namespace lila {
 
   template <class coeff_t>
   inline EigenResults<coeff_t> 
-  Eigen(Matrix<coeff_t>& A, bool do_right_eigenvectors=false, 
-	bool do_left_eigenvectors=false)
+  Eigen(Matrix<coeff_t>& A, bool do_right_eigenvectors=true, 
+	bool do_left_eigenvectors=true)
   {
     using size_type = blaslapack::blas_size_t;
     assert(A.nrows() == A.ncols());
@@ -74,63 +195,6 @@ namespace lila {
   Eigenvalues(Matrix<coeff_t>& A) {
     EigenResults<coeff_t> res = Eigen(A);
     return res.eigenvalues;
-  }
-
-  /*! @brief Struct holding results of symmetric (or hermitian) eigenvalue
-             problems
-   */
-  template <class coeff_t>
-  struct EigenHResults {
-    Vector<real_t<coeff_t>> eigenvalues;
-    Matrix<coeff_t> eigenvectors;
-  };
-
-
-  template <class coeff_t>
-  inline EigenHResults<coeff_t>
-  EigenH(const Matrix<coeff_t>& A, bool do_eigenvectors=false, char uplo='U')
-  {
-    EigenHResults<coeff_t> result;
-    result.eigenvectors = A;
-    result.eigenvalues = EigenHDestroy(result.eigenvectors, do_eigenvectors, uplo);
-    return result;  
-  }
-
-  template <class coeff_t>
-  inline Vector<real_t<coeff_t>> 
-  EigenvaluesH(const Matrix<coeff_t>& A, char uplo='U') {
-    Matrix<coeff_t> A_copy = A;
-    return EigenHDestroy(A_copy, false, uplo);
-  }
-
-
-  template <class coeff_t>
-  inline Vector<real_t<coeff_t>> 
-  EigenHDestroy(Matrix<coeff_t>& A, bool do_eigenvectors=false, char uplo='U')
-  {
-    using size_type = blaslapack::blas_size_t;
-    assert(A.nrows() == A.ncols());
-
-    const char jobz = do_eigenvectors ? 'V' : 'N';
-    const size_type n = A.nrows();
-    const size_type lda = n; 
-
-    // get optimal work size
-    Vector<real_t<coeff_t>> w(n);
-    size_type lwork = -1;
-    std::vector<coeff_t> work(1);
-    int info = 0;
-    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
-		     work.data(), &lwork, &info);
-    assert(info == 0);
-    lwork = static_cast<size_type>(real(work[0]));
-    work.resize(lwork);
-    
-    // Run eigenvalue computation
-    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
-		     work.data(), &lwork, &info);
-    assert(info == 0);
-    return w;
   }
 
 }

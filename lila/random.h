@@ -61,10 +61,17 @@ namespace lila {
   using normal_gen_t = random_generator<std::mt19937, normal_dist_t<coeff_t>, 
 					 coeff_t>; 
 
-  template <class matrix_t, class gen_t>
-  void Random(matrix_t& mat, gen_t& gen, bool alter_generator=true)
+  template <class coeff_t, class gen_t>
+  void Random(Vector<coeff_t>& vec, gen_t& gen, bool alter_generator=true)
   { 
-    using coeff_t = typename matrix_t::coeff_type;
+    if(alter_generator) std::for_each(vec.begin(), vec.end(), 
+				      [&gen](coeff_t& c){ c = gen(); });
+    else std::generate(vec.data(), vec.data() + vec.size(), gen); 
+  }
+
+  template <class coeff_t, class gen_t>
+  void Random(Matrix<coeff_t>& mat, gen_t& gen, bool alter_generator=true)
+  { 
     if(alter_generator) std::for_each(mat.begin(), mat.end(), 
 				      [&gen](coeff_t& c){ c = gen(); });
     else std::generate(mat.data(), mat.data() + mat.size(), gen); 

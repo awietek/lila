@@ -14,10 +14,7 @@
 
 #include "catch.hpp"
 
-#include <lila/matrix.h>
-#include <lila/special.h>
-#include <lila/print.h>
-#include <lila/range.h>
+#include <lila/all.h>
 
 template <class matrix_t>
 bool all_zero(const matrix_t& mat)
