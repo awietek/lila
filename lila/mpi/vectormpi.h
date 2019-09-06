@@ -166,7 +166,7 @@ namespace lila {
   { 
     if(alter_generator) std::for_each(vec.vector_local().begin(), 
 				      vec.vector_local().end(), 
-				      [&gen](coeff_t& c){ c = gen(); });
+				      [&gen](coeff_t& c){ c = gen();});
     else std::generate(vec.vector_local().begin(), vec.vector_local().end(), gen); 
   }
 

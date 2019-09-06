@@ -45,10 +45,18 @@ namespace lila {
     Vector(Vector&&) = default;
     Vector& operator=(Vector&&) = default;
 
+
     explicit Vector(size_type size) 
       : size_(size), data_(size, 0) { }
     explicit Vector(const vector_type& vec) 
       : size_(vec.size()), data_(vec) { }
+    Vector& operator=(std::vector<coeff_t>& vec)
+    {
+      data_ = vec;
+      size_ = (int)vec.size();
+      return *this;
+    }; 
+
     
     coeff_t operator()(size_type i) const { return data_[i]; }
     coeff_t& operator()(size_type i) { return data_[i]; }
