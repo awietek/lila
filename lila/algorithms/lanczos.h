@@ -61,7 +61,7 @@ namespace lila {
       { Vector<real_type>(), Tmatrix<real_type>(), 0, std::vector<vector_t>()};
 
     // Initialize linear combination vectors (e.g. eigenvectors / time evo)
-    for (auto lin_combo : linear_combinations)
+    for (int i=0; i<(int)linear_combinations.size(); ++i)
       res.vectors.push_back(v0);
 
     // Main Lanczos loop

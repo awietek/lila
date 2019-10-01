@@ -24,9 +24,10 @@
 namespace lila {
     
   template <class multiply_f, class vector_t>
-  void ExpSymVInplace(multiply_f A, vector_t& X, 
-		      typename vector_t::coeff_type alpha, 
-		      double precision)
+  real_t<typename vector_t::coeff_type>
+  ExpSymVInplace(multiply_f A, vector_t& X, 
+		 typename vector_t::coeff_type alpha, 
+		 double precision, bool shift=false)
   {
     using coeff_type = typename vector_t::coeff_type;
     using real_type = real_t<coeff_type>;
@@ -48,11 +49,20 @@ namespace lila {
     auto tmat = Matrix<real_type>(res_first.tmatrix);
     int n_iterations = tmat.nrows();
 
+    real_type e0 = EigenvaluesSym(tmat)(0);
+    
     // Cast to complex (TODO: make this generic)
     auto tmatc = Zeros<coeff_type>(n_iterations, n_iterations);
     for (auto i : tmat.rows())
       for (auto j : tmat.cols())
 	tmatc(i,j) = (coeff_type)tmat(i,j);
+
+    if (shift)
+      {
+	for (auto i : tmat.rows())
+	  tmatc(i,i) -= e0;
+      }
+    
     auto texp = ExpM(alpha * tmatc);
     std::vector<Vector<coeff_type>> linear_combinations = {texp.col(0)};
 
@@ -63,6 +73,7 @@ namespace lila {
     };
     auto res = Lanczos(A, X, converged_fixed, linear_combinations);
     X = res.vectors[0] * (coeff_type)norm;
+    return e0;
   }
 
 

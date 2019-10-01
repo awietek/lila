@@ -2,7 +2,8 @@ CC        = g++
 CCARCH    = -std=c++11
 CCOPT     = -O3 -Wall -Wextra -pedantic
 # LAPACKLIB = -llapack -lblas
-LAPACKLIB = -lmkl_rt -DLILA_USE_MKL
+# LAPACKLIB = -lmkl_rt -DLILA_USE_MKL
+LAPACKLIB =  -framework accelerate
 INCLUDE   = -I..
 
 EXECUTABLE = tests
