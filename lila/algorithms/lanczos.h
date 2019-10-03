@@ -18,6 +18,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
+#include <mpi.h>
 
 #include "../matrix.h"
 #include "../tmatrix.h"
@@ -76,7 +77,7 @@ namespace lila {
 	    Add(v1, res.vectors[lin_combo_idx], lin_combo(iteration));
 	    ++lin_combo_idx;
 	  }
-
+  
 	// Lanczos recursion
 	A(v1, w);                  // MVM
 	alpha = real(Dot(v1, w));
@@ -97,7 +98,7 @@ namespace lila {
 	
 	++iteration;
       }
-    
+
     res.eigenvalues = Eigenvalues(res.tmatrix);
     res.beta = beta;
 
