@@ -41,7 +41,7 @@ namespace lila {
     Vector() : size_(0), data_() { };
     ~Vector() = default;
     Vector(const Vector&) = default;
-    Vector& operator=(Vector&) = default; 
+    Vector& operator=(const Vector&) = default; 
     Vector(Vector&&) = default;
     Vector& operator=(Vector&&) = default;
 

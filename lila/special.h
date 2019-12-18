@@ -45,9 +45,9 @@ namespace lila {
   }
 
   template <class coeff_t>
-  Matrix<coeff_t> ZerosLike(const Vector<coeff_t>& vec)
+  Vector<coeff_t> ZerosLike(const Vector<coeff_t>& vec)
   { 
-    Matrix<coeff_t> res(vec.nrows(), vec.ncols());
+    Vector<coeff_t> res(vec.size());
     Zeros(res);
     return res;
   }

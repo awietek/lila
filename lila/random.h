@@ -77,6 +77,24 @@ namespace lila {
     else std::generate(mat.data(), mat.data() + mat.size(), gen); 
   }
 
+  template <class coeff_t>
+  void Random(Vector<coeff_t>& vec)
+  { 
+    std::random_device rd{};
+    lila::normal_dist_t<coeff_t> dist(0., 1.);
+    lila::normal_gen_t<coeff_t> gen(dist, rd());
+    Random(vec, gen);
+  }
+
+  template <class coeff_t>
+  void Random(Matrix<coeff_t>& mat)
+  { 
+    std::random_device rd{};
+    lila::normal_dist_t<coeff_t> dist(0., 1.);
+    lila::normal_gen_t<coeff_t> gen(dist, rd());
+    Random(mat, gen);
+  }
+
   template <class coeff_t, class gen_t>
   Vector<coeff_t> Random(int m, gen_t& gen, bool alter_generator=true)
   { 
@@ -90,6 +108,22 @@ namespace lila {
   { 
     Matrix<coeff_t> mat(m, n);
     Random(mat, gen, alter_generator);
+    return mat;
+  }
+
+  template <class coeff_t>
+  Vector<coeff_t> Random(int m)
+  { 
+    Vector<coeff_t> vec(m);
+    Random(vec);
+    return vec;
+  }
+
+  template <class coeff_t>
+  Matrix<coeff_t> Random(int m, int n)
+  { 
+    Matrix<coeff_t> mat(m, n);
+    Random(mat);
     return mat;
   }
 

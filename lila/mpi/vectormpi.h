@@ -51,7 +51,7 @@ namespace lila {
     explicit VectorMPI(Vector<coeff_t>& vec) 
       : size_(0), vector_local_(vec) 
     { 
-      int64 size_local = (int64)vec.size();
+      size_type size_local = (size_type)vec.size();
       MPI_Allreduce(&size_local, &size_, 1, MPI_LONG, MPI_SUM, MPI_COMM_WORLD); 
     }
 
@@ -87,7 +87,7 @@ namespace lila {
     const_iterator_t cend() const { return vector_local_.cend(); }
 
   private:
-    uint64 size_;
+    size_type size_;
     lila::Vector<coeff_t> vector_local_;
   };
 
@@ -169,6 +169,7 @@ namespace lila {
 				      [&gen](coeff_t& c){ c = gen();});
     else std::generate(vec.vector_local().begin(), vec.vector_local().end(), gen); 
   }
+
 
 
   template <class coeff_t>

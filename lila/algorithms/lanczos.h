@@ -18,7 +18,6 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
-#include <mpi.h>
 
 #include "../matrix.h"
 #include "../tmatrix.h"
@@ -53,7 +52,7 @@ namespace lila {
     // Initialize Lanczos vectors and tmatrix
     vector_t v1 = v0;
     vector_t w = v0;
-    Normalize(v1);
+
     Zeros(v0);
     Zeros(w);
     real_type alpha = 0; 
@@ -64,6 +63,18 @@ namespace lila {
     // Initialize linear combination vectors (e.g. eigenvectors / time evo)
     for (int i=0; i<(int)linear_combinations.size(); ++i)
       res.vectors.push_back(v0);
+
+    // Normalize start vector or return if norm is zero
+    double v1_norm = Norm(v1);
+    if (!close(v1_norm, (real_type)0.)) 
+      Normalize(v1);
+    else
+      {
+	res.tmatrix = Tmatrix<real_type>(0);
+	res.eigenvalues = Eigenvalues(res.tmatrix);
+	res.beta = 0;
+	return res;
+      }
 
     // Main Lanczos loop
     int iteration = 0;
@@ -93,15 +104,17 @@ namespace lila {
 	  res.tmatrix.push_back(alpha, beta);
 
 	beta = Norm(v1);
+
+	// Finish if Lanczos sequence is exhausted
 	if (!close(beta, (real_type)0.)) 
 	  Normalize(v1);
-	
+	else break;
+
 	++iteration;
       }
 
     res.eigenvalues = Eigenvalues(res.tmatrix);
     res.beta = beta;
-
     return res;
   }
 
