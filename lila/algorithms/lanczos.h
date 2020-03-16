@@ -36,7 +36,10 @@ namespace lila {
     Vector<real_type> eigenvalues;
     Tmatrix<real_type> tmatrix;
     real_type beta;
-    
+
+    bool exhausted;
+    bool converged;
+
     std::vector<vector_t> vectors;
   };
 
@@ -44,7 +47,7 @@ namespace lila {
   LanczosResults<vector_t>
   Lanczos(multiply_f A, vector_t& v0, convergence_f converged, 
 	  const std::vector<Vector<typename vector_t::coeff_type>>& 
-	  linear_combinations = {})
+	  linear_combinations = {}, int max_iterations=1000)
   {
     using coeff_type = typename vector_t::coeff_type;
     using real_type = real_t<coeff_type>;
@@ -58,7 +61,7 @@ namespace lila {
     real_type alpha = 0; 
     real_type beta = 0;
     LanczosResults<vector_t> res = 
-      { Vector<real_type>(), Tmatrix<real_type>(), 0, std::vector<vector_t>()};
+      { Vector<real_type>(), Tmatrix<real_type>(), 0, false, false, std::vector<vector_t>()};
 
     // Initialize linear combination vectors (e.g. eigenvectors / time evo)
     for (int i=0; i<(int)linear_combinations.size(); ++i)
@@ -111,7 +114,11 @@ namespace lila {
 	else break;
 
 	++iteration;
+	if (iteration >= max_iterations) break;
       }
+
+    if (close(beta, (real_type)0.)) res.exhausted = true;
+    res.converged = converged(res.tmatrix, beta);
 
     res.eigenvalues = Eigenvalues(res.tmatrix);
     res.beta = beta;
@@ -123,7 +130,7 @@ namespace lila {
   LanczosEigenvalues(multiply_f A, vector_t& v0,
 		     real_t<typename vector_t::coeff_type> precision = 1e-12,
 		     int n_eigenvalue = 0, 
-		     std::string criterion = "Eigenvalues")
+		     std::string criterion = "Eigenvalues", int max_iterations=1000)
   {
     using real_type = real_t<typename vector_t::coeff_type>;
     using tmatrix_t = Tmatrix<real_type>;
@@ -137,7 +144,7 @@ namespace lila {
 	    return LanczosConvergedEigenvalues(tmat, beta, n_eigenvalue, 
 					       precision);
 	  };
-	res = Lanczos(A, v0, converged);
+	res = Lanczos(A, v0, converged, {}, max_iterations);
       }
 
     else if (criterion == "Ritz")
@@ -147,7 +154,7 @@ namespace lila {
 	    return LanczosConvergedRitz(tmat, beta, n_eigenvalue, 
 					precision);
 	};
-       res = Lanczos(A, v0, converged);
+	res = Lanczos(A, v0, converged, {}, max_iterations);
       }
 
     else
@@ -165,7 +172,7 @@ namespace lila {
 		      gen_t& gen, bool alter_generator,
 		      real_t<typename vector_t::coeff_type> precision = 1e-12,
 		      std::vector<int> num_eigenvectors = {0}, 
-		      std::string criterion = "Ritz")
+		      std::string criterion = "Ritz", int max_iterations=1000)
   {
     using coeff_type = typename vector_t::coeff_type;
     using real_type = real_t<coeff_type>;
@@ -204,7 +211,7 @@ namespace lila {
 
     // reset initial vector and rerun with linear combination
     Random(v0, gen, alter_generator);
-    return Lanczos(A, v0, converged, linear_combinations);
+    return Lanczos(A, v0, converged, linear_combinations, max_iterations);
 
   }
 }
