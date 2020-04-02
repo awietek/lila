@@ -36,9 +36,9 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
     assert(A.nrows() == A.ncols());
 
-    const char jobz = do_eigenvectors ? 'V' : 'N';
-    const size_type n = A.nrows();
-    const size_type lda = n; 
+    char jobz = do_eigenvectors ? 'V' : 'N';
+    size_type n = A.nrows();
+    size_type lda = n; 
 
     // get optimal work size
     Vector<real_t<coeff_t>> w(n);
@@ -90,10 +90,10 @@ namespace lila {
     assert(B.nrows() == B.ncols());
     assert(A.nrows() == B.nrows());
 
-    const char jobz = do_eigenvectors ? 'V' : 'N';
-    const size_type n = A.nrows();
-    const size_type lda = n;
-    const size_type ldb = n;
+    char jobz = do_eigenvectors ? 'V' : 'N';
+    size_type n = A.nrows();
+    size_type lda = n;
+    size_type ldb = n;
     int info = 0;
 
     // get optimal work size
@@ -155,13 +155,13 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
     assert(A.nrows() == A.ncols());
 
-    const char jobvl = do_left_eigenvectors ? 'V' : 'N';
-    const char jobvr = do_right_eigenvectors ? 'V' : 'N';
-    const size_type n = A.nrows();
-    const size_type lda = n;
+    char jobvl = do_left_eigenvectors ? 'V' : 'N';
+    char jobvr = do_right_eigenvectors ? 'V' : 'N';
+    size_type n = A.nrows();
+    size_type lda = n;
  
-    const size_type ldvl = do_left_eigenvectors ? n : 1;
-    const size_type ldvr = do_right_eigenvectors ? n : 1;
+    size_type ldvl = do_left_eigenvectors ? n : 1;
+    size_type ldvr = do_right_eigenvectors ? n : 1;
     
     EigenResults<coeff_t> result;
     result.eigenvalues.resize(n);

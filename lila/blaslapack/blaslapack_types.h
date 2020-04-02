@@ -18,23 +18,49 @@
 #include <complex>
 #include "../common.h"
 
+#ifdef LILA_USE_MKL
+#include "mkl.h"
+#endif
+#ifdef LILA_USE_ACCELERATE
+#include <Accelerate/Accelerate.h>
+#endif
+
 namespace lila { 
   namespace blaslapack {
 
 #ifdef LILA_USE_MKL // Using the Intel MKL
-#include "mkl.h"
     using blas_size_t = int;
     using blas_float_t = float;
     using blas_double_t = double;
     using blas_scomplex_t = MKL_Complex8;
     using blas_complex_t = MKL_Complex16;
-#else  // Using normal LAPACK  
+#define LAPACK_CONST const
+#define __LAPACK_ROUTINE_NAME(x) x
+#endif
+    
+#ifdef LILA_USE_LAPACK  // Using normal LAPACK  
     using blas_size_t = int;
     using blas_float_t = float;
     using blas_double_t = double;
     using blas_scomplex_t = std::complex<float>;
     using blas_complex_t = std::complex<double>;
+    using lapack_ret_t = void;
+#define LAPACK_CONST const
+#define __LAPACK_ROUTINE_NAME(x) x##_
 #endif
+
+
+#ifdef LILA_USE_ACCELERATE  // Using OSX Accellerate
+    using blas_size_t = int;
+    using blas_float_t = float;
+    using blas_double_t = double;
+    using blas_scomplex_t = __CLPK_complex;
+    using blas_complex_t = __CLPK_doublecomplex;
+    using lapack_ret_t = int;
+#define LAPACK_CONST
+#define __LAPACK_ROUTINE_NAME(x) x##_
+#endif
+    
   }
 }
 

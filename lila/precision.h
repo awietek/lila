@@ -28,30 +28,30 @@ namespace lila {
 
   template<class T> 
   struct atol {
-    static constexpr lila::real_t<T> val();
+    static constexpr real_t<T> val();
   };
 
   template<> 
   struct atol<float> {
-    static constexpr lila::real_t<float> val() 
+    static constexpr real_t<float> val() 
     { return float_atol; }
   };
 
   template<> 
   struct atol<double> {
-    static constexpr lila::real_t<double> val() 
+    static constexpr real_t<double> val() 
     { return double_atol; }
   };
   
   template<> 
   struct atol<std::complex<float>> {
-    static constexpr lila::real_t<std::complex<float>> val() 
+    static constexpr real_t<std::complex<float>> val() 
     { return float_atol; }
   };
 
   template<> 
   struct atol<std::complex<double>> {
-    static constexpr lila::real_t<std::complex<double>> val() 
+    static constexpr real_t<std::complex<double>> val() 
     { return double_atol; }
   };
  
@@ -63,34 +63,32 @@ namespace lila {
 
   template<class T> 
   struct rtol {
-    static constexpr lila::real_t<T> val();
+    static constexpr real_t<T> val();
   };
 
   template<> 
   struct rtol<float> {
-    static constexpr lila::real_t<float> val() 
+    static constexpr real_t<float> val() 
     { return float_rtol; }
   };
 
   template<> 
   struct rtol<double> {
-    static constexpr lila::real_t<double> val() 
+    static constexpr real_t<double> val() 
     { return double_rtol; }
   };
   
   template<> 
   struct rtol<std::complex<float>> {
-    static constexpr lila::real_t<std::complex<float>> val() 
+    static constexpr real_t<std::complex<float>> val() 
     { return float_rtol; }
   };
 
   template<> 
   struct rtol<std::complex<double>> {
-    static constexpr lila::real_t<std::complex<double>> val() 
+    static constexpr real_t<std::complex<double>> val() 
     { return double_rtol; }
   };
-  
-  
 
 }
 

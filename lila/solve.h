@@ -40,10 +40,10 @@ namespace lila {
     // check / get dimensions
     assert(A.nrows() == A.ncols());
     assert(A.nrows() == B.nrows());
-    const size_type n = A.nrows();
-    const size_type n_rhs = B.ncols();
-    const size_type lda = n;
-    const size_type ldb = n;
+    size_type n = A.nrows();
+    size_type n_rhs = B.ncols();
+    size_type lda = n;
+    size_type ldb = n;
 
     std::vector<int> ipiv(n); 
     int info = 0;
@@ -69,10 +69,10 @@ namespace lila {
 
     // check / get dimensions
     assert(A.nrows() == X.nrows());
-    const size_type n = A.nrows();
-    const size_type n_rhs = 1;
-    const size_type lda = n;
-    const size_type ldb = n;
+    size_type n = A.nrows();
+    size_type n_rhs = 1;
+    size_type lda = n;
+    size_type ldb = n;
 
     std::vector<int> ipiv(n); 
     int info = 0;
@@ -89,9 +89,9 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // check / get dimensions
-    const size_type m = A.nrows();
-    const size_type n = A.ncols();
-    const size_type lda = m;
+    size_type m = A.nrows();
+    size_type n = A.ncols();
+    size_type lda = m;
 
     std::vector<int> ipiv(n); 
     int info = 0;
@@ -110,10 +110,10 @@ namespace lila {
     // check / get dimensions
     assert(A.nrows() == A.ncols());
     assert(A.nrows() == B.nrows());
-    const size_type n = A.nrows();
-    const size_type n_rhs = B.ncols();
-    const size_type lda = n;
-    const size_type ldb = n;
+    size_type n = A.nrows();
+    size_type n_rhs = B.ncols();
+    size_type lda = n;
+    size_type ldb = n;
 
     int info = 0;
     blaslapack::getrs(&trans, &n, &n_rhs, A.data(), &lda, ipiv.data(), B.data(),
@@ -129,10 +129,10 @@ namespace lila {
 
     // check / get dimensions
     assert(A.nrows() == X.nrows());
-    const size_type n = A.nrows();
-    const size_type n_rhs = 1;
-    const size_type lda = n;
-    const size_type ldb = n;
+    size_type n = A.nrows();
+    size_type n_rhs = 1;
+    size_type lda = n;
+    size_type ldb = n;
 
     int info = 0;
     blaslapack::getrs(&trans, &n, &n_rhs, A.data(), &lda, ipiv.data(), X.data(),
@@ -167,9 +167,9 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // check / get dimensions
-    const size_type m = A.nrows();
-    const size_type n = A.ncols();
-    const size_type lda = m;
+    size_type m = A.nrows();
+    size_type n = A.ncols();
+    size_type lda = m;
 
     std::vector<coeff_t> tau(std::min(m, n)); 
     int info = 0;
@@ -198,9 +198,9 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // check / get dimensions
-    const size_type m = A.nrows();
-    const size_type k = tau.size();
-    const size_type lda = m;
+    size_type m = A.nrows();
+    size_type k = tau.size();
+    size_type lda = m;
 
     Matrix<coeff_t> Q(A);
     int info = 0;
@@ -226,9 +226,9 @@ namespace lila {
   template <class coeff_t>
   inline Matrix<coeff_t> GetUpper(Matrix<coeff_t>& A)
   {
-    const size_type m = A.nrows();
-    const size_type n = A.ncols();
-    const size_type k = std::min(m, n);
+    size_type m = A.nrows();
+    size_type n = A.ncols();
+    size_type k = std::min(m, n);
     
     Matrix<coeff_t> R(k, n);
     Zeros(R);
