@@ -34,6 +34,7 @@ namespace lila {
     using blas_double_t = double;
     using blas_scomplex_t = MKL_Complex8;
     using blas_complex_t = MKL_Complex16;
+    using lapack_ret_t = void;
 #define LAPACK_CONST const
 #define __LAPACK_ROUTINE_NAME(x) x
 #endif
