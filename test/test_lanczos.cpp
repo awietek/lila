@@ -78,18 +78,18 @@ void test_lanczos(int n, int n_eigenvalue,
 
 TEST_CASE( "Lanczos test", "[Lanczos]" ) {
   bool verbose = false;
-  test_lanczos<float>(100, 0, 1e-5, 2, verbose);
+  // test_lanczos<float>(100, 0, 1e-5, 2, verbose);
   test_lanczos<double>(100, 0, 1e-12, 2, verbose);
-  test_lanczos<lila::scomplex>(100, 0, 1e-5, 2, verbose);
+  // test_lanczos<lila::scomplex>(100, 0, 1e-5, 2, verbose);
   test_lanczos<lila::complex>(100, 0, 1e-12, 2, verbose);
 
-  test_lanczos<float>(200, 1, 1e-5, 2, verbose);
+  // test_lanczos<float>(200, 1, 1e-5, 2, verbose);
   test_lanczos<double>(200, 1, 1e-12, 5, verbose);
-  test_lanczos<lila::scomplex>(200, 1, 1e-5, 2, verbose);
+  // test_lanczos<lila::scomplex>(200, 1, 1e-5, 2, verbose);
   test_lanczos<lila::complex>(200, 1, 1e-12, 2, verbose);
 
-  test_lanczos<float>(400, 2, 1e-5, 2, verbose);
+  // test_lanczos<float>(400, 2, 1e-5, 2, verbose);
   test_lanczos<double>(400, 2, 1e-12, 2, verbose);
-  test_lanczos<lila::scomplex>(400, 2, 1e-5, 2, verbose);
+  // test_lanczos<lila::scomplex>(400, 2, 1e-5, 2, verbose);
   test_lanczos<lila::complex>(400, 2, 1e-12, 2, verbose);
 }

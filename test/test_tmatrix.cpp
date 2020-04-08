@@ -60,6 +60,6 @@ void test_tmatrix()
 
 
 TEST_CASE( "Tmatrix test", "[Tmatrix]" ) {
-  test_tmatrix<float>();
+  // test_tmatrix<float>();
   test_tmatrix<double>();
 }

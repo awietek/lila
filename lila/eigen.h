@@ -16,6 +16,7 @@
 #define LILA_EIGEN_H_
 
 #include "complex.h"
+#include "print.h"
 
 namespace lila {
 
@@ -45,15 +46,32 @@ namespace lila {
     size_type lwork = -1;
     std::vector<coeff_t> work(1);
     int info = 0;
-    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
-		     work.data(), &lwork, &info);
+    
+    blaslapack::syev(&jobz,
+		     &uplo,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CAST(real_t<coeff_t>,w.data()), 
+		     LILA_BLAS_CAST(coeff_t,work.data()),
+		     &lwork,
+		     &info);
+    
     assert(info == 0);
     lwork = static_cast<size_type>(real(work[0]));
     work.resize(lwork);
     
     // Run eigenvalue computation
-    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
-		     work.data(), &lwork, &info);
+    blaslapack::syev(&jobz,
+		     &uplo,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CAST(real_t<coeff_t>,w.data()), 
+		     LILA_BLAS_CAST(coeff_t,work.data()),
+		     &lwork,
+		     &info);
+    
     assert(info == 0);
     return w;
   }
@@ -100,15 +118,33 @@ namespace lila {
     Vector<real_t<coeff_t>> w(n);
     size_type lwork = -1;
     std::vector<coeff_t> work(1);
-    blaslapack::syev(&jobz, &uplo, &n, A.data(), &lda, w.data(), 
-		     work.data(), &lwork, &info);
+    blaslapack::syev(&jobz,
+		     &uplo,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CAST(real_t<coeff_t>,w.data()), 
+		     LILA_BLAS_CAST(coeff_t,work.data()),
+		     &lwork,
+		     &info);
     assert(info == 0);
     lwork = static_cast<size_type>(real(work[0]));
     work.resize(lwork);
 
     // Run eigenvalue computation
-    blaslapack::sygv(&itype, &jobz, &uplo, &n, A.data(), &lda, B.data(), &ldb,
-		     w.data(), work.data(), &lwork, &info);
+    blaslapack::sygv(&itype,
+		     &jobz,
+		     &uplo,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CAST(coeff_t,B.data()),
+		     &ldb,
+		     LILA_BLAS_CAST(real_t<coeff_t>,w.data()),
+		     LILA_BLAS_CAST(coeff_t,work.data()),
+		     &lwork,
+		     &info);
+
     assert(info == 0);
     return w;
   }
@@ -173,19 +209,37 @@ namespace lila {
     size_type lwork = -1;
     std::vector<coeff_t> work(1);
     int info = 0;
-    blaslapack::geev(&jobvl, &jobvr, &n, A.data(), &lda, w.data(), 
-		     result.left_eigenvectors.data(), &ldvl,
-		     result.right_eigenvectors.data(), &ldvr, 
-		     work.data(), &lwork, &info);
+    blaslapack::geev(&jobvl,
+		     &jobvr,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CAST(complex_t<coeff_t>,w.data()), 
+		     LILA_BLAS_CAST(coeff_t, result.left_eigenvectors.data()),
+		     &ldvl,
+		     LILA_BLAS_CAST(coeff_t, result.right_eigenvectors.data()),
+		     &ldvr, 
+		     LILA_BLAS_CAST(coeff_t, work.data()),
+		     &lwork,
+		     &info);
     assert(info == 0);
     lwork = static_cast<size_type>(real(work[0]));
     work.resize(lwork);
 
     // Run eigenvalue computation
-    blaslapack::geev(&jobvl, &jobvr, &n, A.data(), &lda, w.data(), 
-		     result.left_eigenvectors.data(), &ldvl,
-		     result.right_eigenvectors.data(), &ldvr, 
-		     work.data(), &lwork, &info);
+    blaslapack::geev(&jobvl,
+		     &jobvr,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CAST(complex_t<coeff_t>,w.data()), 
+		     LILA_BLAS_CAST(coeff_t,result.left_eigenvectors.data()),
+		     &ldvl,
+		     LILA_BLAS_CAST(coeff_t,result.right_eigenvectors.data()),
+		     &ldvr, 
+		     LILA_BLAS_CAST(coeff_t,work.data()),
+		     &lwork,
+		     &info);
     assert(info == 0);
     return result;
   }

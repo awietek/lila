@@ -94,7 +94,7 @@ namespace lila {
     			       const blas_size_t* incx, const blas_scomplex_t* y,
     			       const blas_size_t* incy)
     { 
-#ifdef LILA_USE_MKL
+#if defined(LILA_USE_MKL) || defined(LILA_USE_ACCELERATE)
       blas_scomplex_t res;
       __LAPACK_ROUTINE_NAME(cdotc)(&res, N, x, incx, y, incy);
       return res;
@@ -107,7 +107,7 @@ namespace lila {
 			      const blas_size_t* incx, const blas_complex_t* y,
 			      const blas_size_t* incy)
     { 
-#ifdef LILA_USE_MKL
+#if defined(LILA_USE_MKL) || defined(LILA_USE_ACCELERATE)
       blas_complex_t res;
       __LAPACK_ROUTINE_NAME(zdotc)(&res, N, x, incx, y, incy);
       return res;

@@ -73,6 +73,14 @@ extern "C" float sdot_(const blas_size_t* N ,const blas_float_t* x,
 extern "C" double ddot_(const blas_size_t* N ,const blas_double_t* x,
 			const blas_size_t* incx, const blas_double_t* y,
 			const blas_size_t* incy);
+#ifdef LILA_USE_ACCELERATE
+extern "C" void cdotc_(blas_scomplex_t* ret, const blas_size_t* N,
+		       const blas_scomplex_t* x, const blas_size_t* incx, 
+		       const blas_scomplex_t* y, const blas_size_t* incy);
+extern "C" void zdotc_(blas_complex_t* ret, const blas_size_t* N,
+		       const blas_complex_t* x, const blas_size_t* incx, 
+		       const blas_complex_t* y, const blas_size_t* incy);
+#else
 extern "C" blas_scomplex_t cdotc_(const blas_size_t* N,
 				  const blas_scomplex_t* x,
 				  const blas_size_t* incx, 
@@ -83,6 +91,7 @@ extern "C" blas_complex_t zdotc_(const blas_size_t* N,
 				 const blas_size_t* incx, 
 				 const blas_complex_t* y,
 				 const blas_size_t* incy);
+#endif
 
 // Gemv
 extern "C" void sgemv_(const char* trans, const blas_size_t* m, 

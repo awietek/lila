@@ -32,22 +32,33 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // matrix dimensions
-    const size_type m = (transa == 'N') ? A.nrows() : A.ncols();
-    const size_type n = (transb == 'N') ? B.ncols() : B.nrows();
-    const size_type ka = (transa == 'N') ? A.ncols() : A.nrows();
-    const size_type kb = (transb == 'N') ? B.nrows() : B.ncols();
+    size_type m = (transa == 'N') ? A.nrows() : A.ncols();
+    size_type n = (transb == 'N') ? B.ncols() : B.nrows();
+    size_type ka = (transa == 'N') ? A.ncols() : A.nrows();
+    size_type kb = (transb == 'N') ? B.nrows() : B.ncols();
 
     assert(ka == kb); // Check if valid multiplication dimensions
 
     if ((C.nrows() != m) || (C.ncols() != n)) C.resize(m, n);
 
     // leading dimensions
-    const size_type lda = (transa == 'N') ? m : ka;
-    const size_type ldb = (transb == 'N') ? ka : n;
-    const size_type ldc = m;
+    size_type lda = (transa == 'N') ? m : ka;
+    size_type ldb = (transb == 'N') ? ka : n;
+    size_type ldc = m;
 
-    blaslapack::gemm(&transa, &transb, &m, &n, &ka, &alpha,
-		     A.data(), &lda, B.data(), &ldb, &beta, C.data(), &ldc);
+    blaslapack::gemm(&transa,
+		     &transb,
+		     &m,
+		     &n,
+		     &ka,
+		     LILA_BLAS_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CONST_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CONST_CAST(coeff_t,B.data()),
+		     &ldb,
+		     LILA_BLAS_CAST(coeff_t,&beta),
+		     LILA_BLAS_CAST(coeff_t,C.data()),
+		     &ldc);
   }
   
   
@@ -67,18 +78,27 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // matrix dimensions
-    const size_type m = (trans == 'N') ? A.nrows() : A.ncols();
-    const size_type n = (trans == 'N') ? A.ncols() : A.nrows();
+    size_type m = (trans == 'N') ? A.nrows() : A.ncols();
+    size_type n = (trans == 'N') ? A.ncols() : A.nrows();
 
     assert(n == X.size()); // Check if valid multiplication dimensions
 
     if (Y.size() != m) Y.resize(n);
 
     // leading dimensions
-    const size_type lda = A.nrows();
-    const size_type inc = 1;
-    blaslapack::gemv(&trans, &m, &n, &alpha, A.data(), &lda, X.data(), &inc, 
-		     &beta, Y.data(), &inc);
+    size_type lda = A.nrows();
+    size_type inc = 1;
+    blaslapack::gemv(&trans,
+		     &m,
+		     &n,
+		     LILA_BLAS_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CONST_CAST(coeff_t,A.data()),
+		     &lda,
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc, 
+		     LILA_BLAS_CAST(coeff_t,&beta),
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
   
   template <class coeff_t>
@@ -94,13 +114,13 @@ namespace lila {
 		   Matrix<coeff_t>& C)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type m = A.nrows();
-    const size_type n = A.ncols();
-    const size_type p = B.nrows();
-    const size_type q = B.ncols();
+    size_type m = A.nrows();
+    size_type n = A.ncols();
+    size_type p = B.nrows();
+    size_type q = B.ncols();
 
-    const size_type mc = m*p;
-    const size_type nc = n*q;
+    size_type mc = m*p;
+    size_type nc = n*q;
     C.resize(mc, nc);
     for (int s : range<int>(n))
       for (int r : range<int>(m))

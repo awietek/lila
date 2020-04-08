@@ -78,16 +78,16 @@ void test_qr(int m, int n)
 
 
 TEST_CASE( "QR Decomposition test", "[QR]" ) {
-  test_qr<float>(6,5);
+  // test_qr<float>(6,5);
   test_qr<double>(6,5);
-  test_qr<std::complex<float>>(6,5);
+  // test_qr<std::complex<float>>(6,5);
   test_qr<std::complex<double>>(6,5);
-  test_qr<float>(6,6);
+  // test_qr<float>(6,6);
   test_qr<double>(6,6);
-  test_qr<std::complex<float>>(6,6);
+  // test_qr<std::complex<float>>(6,6);
   test_qr<std::complex<double>>(6,6);
-  test_qr<float>(5,6);
+  // test_qr<float>(5,6);
   test_qr<double>(5,6);
-  test_qr<std::complex<float>>(5,6);
+  // test_qr<std::complex<float>>(5,6);
   test_qr<std::complex<double>>(5,6);
 }

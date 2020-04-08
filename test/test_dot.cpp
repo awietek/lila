@@ -39,16 +39,15 @@ void test_dot()
     coeff_t dot_test = 0;
     for (int i = 0; i < n; ++i)
       dot_test += lila::conj(v1(i)) * v2(i);
-    // LilaPrint(dot_lila);
-    // LilaPrint(dot_test);
+
     REQUIRE(close(dot_lila, dot_test));
   }
 }
 
 
 TEST_CASE( "Dot test", "[Dot]" ) {
-  test_dot<float>();
+  // test_dot<float>();
   test_dot<double>();
-  test_dot<std::complex<float>>();
+  // test_dot<std::complex<float>>();
   test_dot<std::complex<double>>();
 }

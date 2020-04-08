@@ -47,7 +47,13 @@ namespace lila {
 
     std::vector<int> ipiv(n); 
     int info = 0;
-    blaslapack::gesv(&n, &n_rhs, A.data(), &lda, ipiv.data(), B.data(), &ldb, 
+    blaslapack::gesv(&n,
+		     &n_rhs,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     ipiv.data(),
+		     LILA_BLAS_CAST(coeff_t,B.data()),
+		     &ldb, 
 		     &info);
     return ipiv;
   }
@@ -76,7 +82,13 @@ namespace lila {
 
     std::vector<int> ipiv(n); 
     int info = 0;
-    blaslapack::gesv(&n, &n_rhs, A.data(), &lda, ipiv.data(), X.data(), &ldb, 
+    blaslapack::gesv(&n,
+		     &n_rhs,
+		     LILA_BLAS_CAST(coeff_t,A.data()),
+		     &lda,
+		     ipiv.data(),
+		     LILA_BLAS_CAST(coeff_t,X.data()),
+		     &ldb, 
 		     &info);
     assert(info == 0);
 
@@ -95,7 +107,12 @@ namespace lila {
 
     std::vector<int> ipiv(n); 
     int info = 0;
-    blaslapack::getrf(&m, &n, A.data(), &lda, ipiv.data(), &info);
+    blaslapack::getrf(&m,
+		      &n,
+		      LILA_BLAS_CAST(coeff_t,A.data()),
+		      &lda,
+		      ipiv.data(),
+		      &info);
     assert(info == 0);
 
     return ipiv;
@@ -116,8 +133,15 @@ namespace lila {
     size_type ldb = n;
 
     int info = 0;
-    blaslapack::getrs(&trans, &n, &n_rhs, A.data(), &lda, ipiv.data(), B.data(),
-		      &ldb, &info);
+    blaslapack::getrs(&trans,
+		      &n,
+		      &n_rhs,
+		      LILA_BLAS_CONST_CAST(coeff_t,A.data()),
+		      &lda,
+		      LILA_BLAS_CONST_CAST(int, ipiv.data()),
+		      LILA_BLAS_CAST(coeff_t,B.data()),
+		      &ldb,
+		      &info);
     assert(info == 0);
   }
 
@@ -135,8 +159,15 @@ namespace lila {
     size_type ldb = n;
 
     int info = 0;
-    blaslapack::getrs(&trans, &n, &n_rhs, A.data(), &lda, ipiv.data(), X.data(),
-		      &ldb, &info);
+    blaslapack::getrs(&trans,
+		      &n,
+		      &n_rhs,
+		      LILA_BLAS_CONST_CAST(coeff_t, A.data()),
+		      &lda,
+		      LILA_BLAS_CONST_CAST(int, ipiv.data()),
+		      LILA_BLAS_CAST(coeff_t, X.data()),
+		      &ldb,
+		      &info);
     assert(info == 0);
   }
   
@@ -147,16 +178,26 @@ namespace lila {
 
     // check / get dimensions
     assert(A.nrows() == A.ncols());
-    const size_type n = A.nrows();
+    size_type n = A.nrows();
 
     std::vector<int> ipiv(n); 
     size_type lwork = n*n;
     std::vector<coeff_t> work(lwork);
     int info = 0;
 
-    blaslapack::getrf(&n, &n, A.data(), &n, ipiv.data(), &info);
+    blaslapack::getrf(&n,
+		      &n,
+		      LILA_BLAS_CAST(coeff_t, A.data()),
+		      &n,
+		      ipiv.data(),
+		      &info);
     assert(info == 0);
-    blaslapack::getri(&n, A.data(), &n, ipiv.data(), work.data(), &lwork, 
+    blaslapack::getri(&n,
+		      LILA_BLAS_CAST(coeff_t ,A.data()),
+		      &n,
+		      ipiv.data(),
+		      LILA_BLAS_CAST(coeff_t, work.data()),
+		      &lwork, 
 		      &info);
     assert(info == 0);
   }
@@ -177,14 +218,26 @@ namespace lila {
     // get optimal work size
     size_type lwork = -1;
     std::vector<coeff_t> work(1);
-    blaslapack::geqrf(&m, &n, A.data(), &lda, tau.data(), work.data(), &lwork, 
+    blaslapack::geqrf(&m,
+		      &n,
+		      LILA_BLAS_CAST(coeff_t,A.data()),
+		      &lda,
+		      LILA_BLAS_CAST(coeff_t,tau.data()),
+		      LILA_BLAS_CAST(coeff_t,work.data()),
+		      &lwork, 
 		      &info);
     assert(info == 0);
     lwork = static_cast<size_type>(real(work[0]));
     work.resize(lwork);
 
     // Run QR Decomposition
-    blaslapack::geqrf(&m, &n, A.data(), &lda, tau.data(), work.data(), &lwork, 
+    blaslapack::geqrf(&m,
+		      &n,
+		      LILA_BLAS_CAST(coeff_t,A.data()),
+		      &lda,
+		      LILA_BLAS_CAST(coeff_t,tau.data()),
+		      LILA_BLAS_CAST(coeff_t,work.data()),
+		      &lwork, 
 		      &info);
     assert(info == 0);
 
@@ -208,15 +261,29 @@ namespace lila {
     // get optimal work size
     int lwork = -1;
     std::vector<coeff_t> work(1);
-    blaslapack::orgqr(&m, &k, &k, Q.data(), &lda, tau.data(), work.data(), 
-		      &lwork, &info);
+    blaslapack::orgqr(&m,
+		      &k,
+		      &k,
+		      LILA_BLAS_CAST(coeff_t,Q.data()),
+		      &lda,
+		      LILA_BLAS_CONST_CAST(coeff_t,tau.data()),
+		      LILA_BLAS_CAST(coeff_t,work.data()), 
+		      &lwork,
+		      &info);
     assert(info == 0);
     lwork = static_cast<size_type>(real(work[0]));
     work.resize(lwork);
 
     // Compute Q
-    blaslapack::orgqr(&m, &k, &k, Q.data(), &lda, tau.data(), work.data(), 
-		      &lwork, &info);
+    blaslapack::orgqr(&m,
+		      &k,
+		      &k,
+		      LILA_BLAS_CAST(coeff_t,Q.data()),
+		      &lda,
+		      LILA_BLAS_CONST_CAST(coeff_t,tau.data()),
+		      LILA_BLAS_CAST(coeff_t,work.data()), 
+		      &lwork,
+		      &info);
 
     Q.resize(m, k);
     assert(info == 0);

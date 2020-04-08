@@ -1,8 +1,9 @@
 CC        = g++
 CCARCH    = -std=c++11
-CCOPT     = -O3 -Wall -Wextra -pedantic
+CCOPT     = -O3 -Wall -Wextra -pedantic -ferror-limit=1
 # LAPACKLIB = -llapack -lblas
 # LAPACKLIB = -lmkl_rt -DLILA_USE_MKL
+LILAD =  -DLILA_USE_ACCELERATE
 LAPACKLIB =  -framework accelerate
 INCLUDE   = -I..
 
@@ -13,7 +14,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CCARCH) $(CCOPT) -o $(EXECUTABLE) $(OBJECTS) $(LAPACKLIB)   
 
 %.o: %.cpp
-	$(CC) $(CCARCH) $(CCOPT) $(LAPACKLIB) $(INCLUDE) -c $< -o $@ 
+	$(CC) $(CCARCH) $(CCOPT) $(LILAD) $(INCLUDE) -c $< -o $@ 
 clean:
 	rm *.o
 

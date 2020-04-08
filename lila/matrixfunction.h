@@ -48,7 +48,10 @@ namespace lila {
 	fun(fun_of_eig);
 
 	// Scale j-th column
-	blaslapack::scal(&n, &fun_of_eig, Bmat.data() + j*n, &incx); 
+	blaslapack::scal(&n,
+			 LILA_BLAS_CAST(coeff_t,&fun_of_eig),
+			 LILA_BLAS_CAST(coeff_t,Bmat.data()) + j*n,
+			 &incx); 
       }
     Zeros(matrix);
     Mult(Bmat, Qmat, matrix, (coeff_t)1., (coeff_t)0., 'N', 'C');

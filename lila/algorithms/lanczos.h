@@ -68,7 +68,7 @@ namespace lila {
       res.vectors.push_back(v0);
 
     // Normalize start vector or return if norm is zero
-    double v1_norm = Norm(v1);
+    real_type v1_norm = Norm(v1);
     if (!close(v1_norm, (real_type)0.)) 
       Normalize(v1);
     else

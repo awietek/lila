@@ -41,7 +41,7 @@ void test_bandlanczos()
 
     REQUIRE(close(A, Herm(A)));
     
-    uint64 dim = A.nrows();
+    size_type dim = A.nrows();
     auto multiply = [&A](const Vector<coeff_t>& v, Vector<coeff_t>& w) {
       w = Mult(A, v);
     };
@@ -71,8 +71,8 @@ void test_bandlanczos()
 
 
 TEST_CASE( "Bandlanczos test", "[Bandlanczos]" ) {
-  test_bandlanczos<float>();
+  // test_bandlanczos<float>();
   test_bandlanczos<double>();
-  test_bandlanczos<std::complex<float>>();
+  // test_bandlanczos<std::complex<float>>();
   test_bandlanczos<std::complex<double>>();
 }

@@ -53,8 +53,8 @@ void test_matrixfunction()
 
 
 TEST_CASE( "Matrix function test", "[matrixfunction]" ) {
-  test_matrixfunction<float>();
+  // test_matrixfunction<float>();
   test_matrixfunction<double>();
-  test_matrixfunction<std::complex<float>>();
+  // test_matrixfunction<std::complex<float>>();
   test_matrixfunction<std::complex<double>>();
 }

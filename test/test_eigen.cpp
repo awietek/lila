@@ -27,7 +27,7 @@ void test_eigen()
   
   // Test Eigen
   for (int seed : range<int>(10)) {
-  
+    std::cout << "seed " << seed << std::endl;
     uniform_dist_t<coeff_t> dist(-1., 1.);
     uniform_gen_t<coeff_t> gen(dist, seed);
     Matrix<coeff_t> A(n, n);
@@ -83,7 +83,10 @@ void test_eigen()
       vecs.push_back(Random<coeff_t>(n, gen));
     for (int i=0; i<n; ++i)
       for (int j=0; j<n; ++j)
-	Ad(i,j) = Dot(vecs[i], vecs[j]);
+    	Ad(i,j) = Dot(vecs[i], vecs[j]);
+
+    for (int k=0; k<n; ++k)
+      LilaPrint(vecs[k]);
 
     auto v4 = EigenGenSymDef(Ah, Ad);
 
@@ -93,10 +96,10 @@ void test_eigen()
     // check if routine computes correct eigenvalues/vectors
     for (int i=0; i<n-1; ++i) // n-1: Last eigenvector somehow looses precision?
       {
-	auto eval = v4.eigenvalues(i);
-	auto evec = v4.eigenvectors.col(i);
-	// LilaPrint(Mult(Ah, evec) - (coeff_t)eval * Mult(Ad, evec));
-	REQUIRE(close(Mult(Ah, evec), (coeff_t)eval * Mult(Ad, evec)));
+    	auto eval = v4.eigenvalues(i);
+    	auto evec = v4.eigenvectors.col(i);
+    	// LilaPrint(Mult(Ah, evec) - (coeff_t)eval * Mult(Ad, evec));
+    	REQUIRE(close(Mult(Ah, evec), (coeff_t)eval * Mult(Ad, evec)));
       }
 
   }
@@ -104,8 +107,8 @@ void test_eigen()
 
 
 TEST_CASE( "Eigen test", "[Eigen]" ) {
-  test_eigen<float>();
+  // test_eigen<float>();
   test_eigen<double>();
-  test_eigen<std::complex<float>>();
+  // test_eigen<std::complex<float>>();
   test_eigen<std::complex<double>>();
 }

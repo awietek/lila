@@ -65,22 +65,30 @@ namespace lila {
   inline void Copy(const Vector<coeff_t>& X,  Vector<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type dy = Y.size();
+    size_type dx = X.size();
+    size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    blaslapack::copy(&dx, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::copy(&dx,
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc,
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
 
   template <class coeff_t>
   inline void Copy(const Matrix<coeff_t>& X,  Matrix<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type dy = Y.size();
+    size_type dx = X.size();
+    size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    blaslapack::copy(&dx, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::copy(&dx,
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc,
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
 
   /*! @brief Add a scalar multiple of lila::Matrix or lila::Vector to another
@@ -101,11 +109,16 @@ namespace lila {
 		  coeff_t alpha = static_cast<coeff_t>(1.))
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type dy = Y.size();
+    size_type dx = X.size();
+    size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    blaslapack::axpy(&dx, &alpha, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::axpy(&dx,
+		     LILA_BLAS_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc,
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
 
   template <class coeff_t>
@@ -113,11 +126,16 @@ namespace lila {
 		  coeff_t alpha = static_cast<coeff_t>(1.))
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type dy = Y.size();
+    size_type dx = X.size();
+    size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    blaslapack::axpy(&dx, &alpha, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::axpy(&dx,
+		     LILA_BLAS_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc,
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
 
   /*! @brief Multiplies object by a scalar
@@ -136,17 +154,24 @@ namespace lila {
   inline void Scale(const coeff_t& alpha,  Vector<coeff_t>& X)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type inc = 1;
-    blaslapack::scal(&dx, &alpha, X.data(), &inc);
+    size_type dx = X.size();
+    size_type inc = 1;
+    blaslapack::scal(&dx,
+		     LILA_BLAS_CONST_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CAST(coeff_t,X.data()),
+		     &inc);
   }
+  
   template <class coeff_t>
-  inline void Scale(const coeff_t& alpha,  Matrix<coeff_t>& X)
+  inline void Scale(const coeff_t& alpha, Matrix<coeff_t>& X)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type inc = 1;
-    blaslapack::scal(&dx, &alpha, X.data(), &inc);
+    size_type dx = X.size();
+    size_type inc = 1;
+    blaslapack::scal(&dx,
+		     LILA_BLAS_CONST_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CAST(coeff_t,X.data()),
+		     &inc);
   }
 
 
@@ -166,22 +191,34 @@ namespace lila {
   inline coeff_t Dot(const Vector<coeff_t>& X, const Vector<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type dy = Y.size();
+    size_type dx = X.size();
+    size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    return blaslapack::dot(&dx, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::blas_t<coeff_t> result =
+      blaslapack::dot(&dx,
+		      LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		      &inc,
+		      LILA_BLAS_CONST_CAST(coeff_t,Y.data()),
+		      &inc);
+    return blaslapack::blas_to_lila(result);
   }
 
   template <class coeff_t>
   inline coeff_t Dot(const Matrix<coeff_t>& X, const Matrix<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = X.size();
-    const size_type dy = Y.size();
+    size_type dx = X.size();
+    size_type dy = Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    return blaslapack::dot(&dx, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::blas_t<coeff_t> result =
+      blaslapack::dot(&dx,
+		      LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		      &inc,
+		      LILA_BLAS_CONST_CAST(coeff_t,Y.data()),
+		      &inc);
+    return blaslapack::blas_to_lila(result);
   }
 
 

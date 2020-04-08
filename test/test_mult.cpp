@@ -103,8 +103,8 @@ void test_mult()
 
 
 TEST_CASE( "Matrix multiplication test", "[Mult]" ) {
-  test_mult<float>();
+  // test_mult<float>();
   test_mult<double>();
-  test_mult<std::complex<float>>();
+  // test_mult<std::complex<float>>();
   test_mult<std::complex<double>>();
 }

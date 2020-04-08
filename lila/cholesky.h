@@ -39,10 +39,14 @@ namespace lila {
 
     // check / get dimensions
     assert(A.nrows() == A.ncols());
-    const size_type n = A.nrows();
-    const size_type lda = n;
+    size_type n = A.nrows();
+    size_type lda = n;
     int info = 0;
-    blaslapack::potrf(&uplo, &n, A.data(), &lda, &info);
+    blaslapack::potrf(&uplo,
+		      &n,
+		      LILA_BLAS_CAST(coeff_t,A.data()),
+		      &lda,
+		      &info);
   }
 
   /*! @brief Computes Cholesky decomposition
