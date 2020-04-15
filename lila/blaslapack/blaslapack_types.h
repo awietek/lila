@@ -19,6 +19,8 @@
 #include "../common.h"
 
 #ifdef LILA_USE_MKL
+#define MKL_Complex8 std::complex<float>
+#define MKL_Complex16 std::complex<double>
 #include "mkl.h"
 #endif
 #ifdef LILA_USE_ACCELERATE
