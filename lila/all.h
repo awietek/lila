@@ -15,6 +15,10 @@
 #ifndef LILA_ALL_H_
 #define LILA_ALL_H_
 
+#if !defined(LILA_USE_MKL) && !defined(LILA_USE_ACCELERATE) && !defined(LILA_USE_LAPACK)
+#error No BLAS/LAPACK backend defined for lila!
+#endif
+
 #include "logger.h"
 #include "add.h"
 #include "common.h"
