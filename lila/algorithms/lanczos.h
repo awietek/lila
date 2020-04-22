@@ -47,7 +47,8 @@ namespace lila {
   LanczosResults<vector_t>
   Lanczos(multiply_f A, vector_t& v0, convergence_f converged, 
 	  const std::vector<Vector<typename vector_t::coeff_type>>& 
-	  linear_combinations = {}, int max_iterations=1000)
+	  linear_combinations = {}, int max_iterations=1000,
+	  double deflation_tol=1e-7)
   {
     using coeff_type = typename vector_t::coeff_type;
     using real_type = real_t<coeff_type>;
@@ -109,7 +110,7 @@ namespace lila {
 	beta = Norm(v1);
 
 	// Finish if Lanczos sequence is exhausted
-	if (!close(beta, (real_type)0.)) 
+	if (std::abs(beta) > deflation_tol) 
 	  Normalize(v1);
 	else break;
 
