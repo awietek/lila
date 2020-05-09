@@ -25,9 +25,6 @@
 namespace lila { 
   namespace blaslapack {
 
-    // using blas_size_t = int;
-    // using blas_complex_t = lila::blaslapack::blas_complex_t;
-
     // Copy
     inline void copy(const blas_size_t* N, const blas_float_t* x, 
 		     const blas_size_t* incx, blas_float_t* y, 

@@ -99,11 +99,8 @@ namespace lila {
     template <class T>
     using lila_t = typename lila_ts<T>::type;
     
-    
 #define LILA_BLAS_CAST(COEFFT,PTR) reinterpret_cast<blaslapack::blas_t<COEFFT>*>(PTR)
-
 #define LILA_BLAS_CONST_CAST(COEFFT,PTR) reinterpret_cast<blaslapack::blas_t<COEFFT>*>(const_cast<COEFFT*>(PTR))
-
     
     ///////////////////////////////////////////
     // Convert a blas number to a lila number

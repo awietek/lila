@@ -107,11 +107,15 @@ namespace lila {
   inline void Copy(const VectorMPI<coeff_t>& X,  VectorMPI<coeff_t>& Y)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = (size_type)X.size();
-    const size_type dy = (size_type)Y.size();
+    size_type dx = (size_type)X.size();
+    size_type dy = (size_type)Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    blaslapack::copy(&dx, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::copy(&dx,
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc,
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
 
 
@@ -120,11 +124,16 @@ namespace lila {
 		  coeff_t alpha = static_cast<coeff_t>(1.))
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = (size_type)X.size();
-    const size_type dy = (size_type)Y.size();
+    size_type dx = (size_type)X.size();
+    size_type dy = (size_type)Y.size();
     assert(dx == dy); // Check if valid dimensions
-    const size_type inc = 1;
-    blaslapack::axpy(&dx, &alpha, X.data(), &inc, Y.data(), &inc);
+    size_type inc = 1;
+    blaslapack::axpy(&dx,
+		     LILA_BLAS_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CONST_CAST(coeff_t,X.data()),
+		     &inc,
+		     LILA_BLAS_CAST(coeff_t,Y.data()),
+		     &inc);
   }
 
 
@@ -132,14 +141,18 @@ namespace lila {
   inline void Scale(const coeff_t& alpha,  VectorMPI<coeff_t>& X)
   {
     using size_type = blaslapack::blas_size_t;
-    const size_type dx = (size_type)X.size();
-    const size_type inc = 1;
-    blaslapack::scal(&dx, &alpha, X.data(), &inc);
+    size_type dx = (size_type)X.size();
+    size_type inc = 1;
+    blaslapack::scal(&dx,
+		     LILA_BLAS_CONST_CAST(coeff_t,&alpha),
+		     LILA_BLAS_CAST(coeff_t,X.data()),
+		     &inc);
   }
 
 
   template <class coeff_t>
-  inline coeff_t Dot(const VectorMPI<coeff_t>& X, const VectorMPI<coeff_t>& Y)
+  inline coeff_t Dot(const VectorMPI<coeff_t>& X,
+		     const VectorMPI<coeff_t>& Y)
   {
     const uint64 dx = (uint64)X.size();
     const uint64 dy = (uint64)Y.size();
