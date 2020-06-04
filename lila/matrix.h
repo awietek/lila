@@ -46,11 +46,17 @@ namespace lila {
     Matrix(Matrix&&) = default;
     Matrix& operator=(Matrix&&) = default;
 
+   bool operator==(Matrix const& other)
+    { return ((other.data_ == data_) && (other.size_ == size_) &&
+	      (other.m_ == m_) && (other.n_ == n_)); }
+    
     Matrix(size_type m, size_type n) 
       : m_(m), n_(n), size_(m*n), data_(size_, 0) { }
 
-    coeff_t operator()(size_type i, size_type j) const { return data_[i + j*m_]; }
-    coeff_t& operator()(size_type i, size_type j) { return (data_[i + j*m_]); }
+    coeff_t operator()(size_type i, size_type j) const
+    { return data_[i + j*m_]; }
+    coeff_t& operator()(size_type i, size_type j)
+    { return (data_[i + j*m_]); }
 
     void resize(size_type m, size_type n) {
       std::vector<coeff_t> data_copy = data_;
@@ -131,6 +137,17 @@ namespace lila {
 	mat_t(j, i) = mat(i, j);
     return mat_t;
   }
+
+  template <class coeff_t>
+  Vector<coeff_t> Diag(const Matrix<coeff_t>& mat) 
+  {
+    long size = std::min(mat.nrows(), mat.ncols());
+    Vector<coeff_t> vec_t(size);
+    for (long i=0; i<size; ++i)
+	vec_t(i) = mat(i, i);
+    return vec_t;
+  }
+
 
 
   template <class coeff_t>

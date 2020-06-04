@@ -55,7 +55,10 @@ namespace lila {
       data_ = vec;
       size_ = (int)vec.size();
       return *this;
-    }; 
+    };
+
+    bool operator==(Vector const& other)
+    { return (other.data_ == data_) && (other.size_ == size_); }
 
     
     coeff_t operator()(size_type i) const { return data_[i]; }
