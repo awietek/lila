@@ -46,7 +46,7 @@ namespace lila {
     Matrix(Matrix&&) = default;
     Matrix& operator=(Matrix&&) = default;
 
-   bool operator==(Matrix const& other)
+   bool operator==(Matrix const& other) const
     { return ((other.data_ == data_) && (other.size_ == size_) &&
 	      (other.m_ == m_) && (other.n_ == n_)); }
     

@@ -57,7 +57,7 @@ namespace lila {
       return *this;
     };
 
-    bool operator==(Vector const& other)
+    bool operator==(Vector const& other) const
     { return (other.data_ == data_) && (other.size_ == size_); }
 
     
