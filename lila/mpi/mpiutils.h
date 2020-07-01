@@ -21,29 +21,57 @@
 
 namespace lila {
 
+  template <class TCoeffs> inline MPI_Datatype datatype();
+  template <> inline MPI_Datatype datatype<char>()
+  {return MPI_CHAR;}
+  template <> inline MPI_Datatype datatype<short>()
+  {return MPI_SHORT;}
+  template <> inline MPI_Datatype datatype<int>()
+  {return MPI_INT;}
+  template <> inline MPI_Datatype datatype<long>()
+  {return MPI_LONG;}
+  template <> inline MPI_Datatype datatype<long long>()
+  {return MPI_LONG_LONG;}
+
+
+  template <> inline MPI_Datatype datatype<unsigned char>()
+  {return MPI_UNSIGNED_CHAR;}
+  template <> inline MPI_Datatype datatype<unsigned short>()
+  {return MPI_UNSIGNED_SHORT;}
+  template <> inline MPI_Datatype datatype<unsigned int>()
+  {return MPI_UNSIGNED;}
+  template <> inline MPI_Datatype datatype<unsigned long>()
+  {return MPI_UNSIGNED_LONG;}
+  template <> inline MPI_Datatype datatype<unsigned long long>()
+  {return MPI_UNSIGNED_LONG_LONG;}
+
+  template <> inline MPI_Datatype datatype<float>()
+  {return MPI_FLOAT;}
+  template <> inline MPI_Datatype datatype<double>()
+  {return MPI_DOUBLE;}
+
+
+  template <class TCoeffs>
+  inline int MPI_Alltoall
+  (const TCoeffs *sendbuf, int sendcount, 
+   TCoeffs *recvbuf, int recvcount, MPI_Comm comm)
+  {
+    MPI_Datatype type = datatype<TCoeffs>();
+    return MPI_Alltoall(sendbuf, sendcount, type,
+			 recvbuf, recvcount, type, comm);
+  }
+  
   template <class TCoeffs>
   inline int MPI_Alltoallv
   (const TCoeffs *sendbuf, int *sendcounts, int *sdispls,
-   TCoeffs *recvbuf, int *recvcounts, int *rdispls, MPI_Comm comm);
-  
-  template <>
-  inline int MPI_Alltoallv<float>
-  (const float *sendbuf, int *sendcounts, int *sdispls,
-   float *recvbuf, int *recvcounts, int *rdispls, MPI_Comm comm)
-  { 
-    return MPI_Alltoallv(sendbuf, sendcounts, sdispls, MPI_FLOAT, recvbuf,
-			 recvcounts, rdispls, MPI_FLOAT, comm);
+   TCoeffs *recvbuf, int *recvcounts, int *rdispls, MPI_Comm comm)
+  {
+    MPI_Datatype type = datatype<TCoeffs>();
+    return MPI_Alltoallv(sendbuf, sendcounts, sdispls, type,
+			 recvbuf, recvcounts, rdispls, type, comm);
   }
 
-  template <>
-  inline int MPI_Alltoallv<double>
-  (const double *sendbuf, int *sendcounts, int *sdispls, 
-   double *recvbuf, int *recvcounts, int *rdispls, MPI_Comm comm)
-  { 
-    return MPI_Alltoallv(sendbuf, sendcounts, sdispls, MPI_DOUBLE, recvbuf,
-			 recvcounts, rdispls, MPI_DOUBLE, comm);
-  }
-
+  // Special implementation for complex numbers
   template <>
   inline int MPI_Alltoallv<scomplex>
   (const scomplex *sendbuf, int *sendcounts, int *sdispls, 

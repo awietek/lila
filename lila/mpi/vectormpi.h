@@ -95,6 +95,12 @@ namespace lila {
   inline void Zeros(VectorMPI<coeff_t>& vec)
   { std::fill(vec.begin(), vec.end(), 0.); }
 
+
+  template <class coeff_t>
+  inline void Ones(VectorMPI<coeff_t>& vec)
+  { std::fill(vec.begin(), vec.end(), 1.); }
+
+  
   template <class coeff_t, class function_t>
   inline VectorMPI<coeff_t> Map(const VectorMPI<coeff_t>& X, function_t func)
   { 
