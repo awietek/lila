@@ -50,7 +50,34 @@ namespace lila {
   template <> inline MPI_Datatype datatype<double>()
   {return MPI_DOUBLE;}
 
+  // Allreduce
+  template <class TCoeffs>
+  inline int MPI_Allreduce
+  (const TCoeffs *sendbuf, TCoeffs *recvbuf, int count,
+   MPI_Op op, MPI_Comm comm)
+  {
+    MPI_Datatype type = datatype<TCoeffs>();
+    return MPI_Allreduce(sendbuf, recvbuf, count, type, op, comm);
+  }
 
+  // Special implementation for complex numbers
+  template <>
+  inline int MPI_Allreduce<scomplex>
+  (const scomplex *sendbuf, scomplex *recvbuf, int count, 
+   MPI_Op op, MPI_Comm comm)
+  {
+    return MPI_Allreduce(sendbuf, recvbuf, count << 1, MPI_FLOAT, op, comm);
+  }
+
+  template <>
+  inline int MPI_Allreduce<complex>
+  (const complex *sendbuf, complex *recvbuf, int count, 
+   MPI_Op op, MPI_Comm comm)
+  {
+    return MPI_Allreduce(sendbuf, recvbuf, count << 1, MPI_DOUBLE, op, comm);
+  }
+
+  // Alltoall
   template <class TCoeffs>
   inline int MPI_Alltoall
   (const TCoeffs *sendbuf, int sendcount, 
