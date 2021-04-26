@@ -48,7 +48,7 @@ namespace lila {
   template <class coeff_t>
   inline Matrix<real_t<coeff_t>> Real(const Matrix<coeff_t>& X)
   {
-    Matrix<real_t<coeff_t>> Y(X.nrows(), Y.ncols());
+    Matrix<real_t<coeff_t>> Y(X.nrows(), X.ncols());
     for (auto i : X.rows())
       for (auto j : X.cols())
 	Y(i, j) = lila::real(X(i, j));
@@ -67,7 +67,7 @@ namespace lila {
   template <class coeff_t>
   inline Matrix<real_t<coeff_t>> Imag(const Matrix<coeff_t>& X)
   {
-    Matrix<real_t<coeff_t>> Y(X.nrows(), Y.ncols());
+    Matrix<real_t<coeff_t>> Y(X.nrows(), X.ncols());
     for (auto i : X.rows())
       for (auto j : X.cols())
 	Y(i, j) = lila::imag(X(i, j));

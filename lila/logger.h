@@ -16,6 +16,7 @@
 #define LILA_LOGGER_H_
 
 #include <iostream>
+#include <cstdlib>
 
 #define FMT_HEADER_ONLY
 #include <lila/external/fmt/format.h>
@@ -43,6 +44,7 @@ namespace lila {
     template <typename... Args>
     void err(const std::string &format, const Args &... args) {
       std::cerr << fmt::format(format, args...) << std::flush;
+      exit(EXIT_FAILURE);
     }
 
     template <typename... Args>
@@ -61,6 +63,7 @@ namespace lila {
     void err(int level, const std::string &format, const Args &... args) {
       if (level <= verbosity_)
 	std::cerr << fmt::format(format, args...) << std::flush;
+      exit(EXIT_FAILURE);
     }
     
   private:
