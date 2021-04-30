@@ -44,13 +44,11 @@ public:
   Vector(Vector &&) = default;
   Vector &operator=(Vector &&) = default;
 
-  explicit Vector(size_type size) : size_(size), data_(size, 0) {}
+  explicit Vector(size_type size) : size_(size), data_(size_, 0) {}
   explicit Vector(const vector_type &vec) : size_(vec.size()), data_(vec) {}
   Vector(std::initializer_list<coeff_t> list)
       : size_((size_type)list.size()), data_(size_, 0) {
-    for (int i = 0; i < size_; i++) {
-      data_[i] = list[i];
-    }
+    std::copy(list.begin(), list.end(), data_.begin());
   }
 
   Vector &operator=(std::vector<coeff_t> &vec) {
