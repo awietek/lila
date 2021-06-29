@@ -1,6 +1,7 @@
-test/test_vector.o: test/test_vector.cpp test/catch.hpp lila/all.h \
-  lila/common.h lila/vector.h lila/utils/strings.h lila/matrix.h \
-  lila/numeric/compare.h lila/numeric/complex.h \
+test/eigen/test_eigen_sym_tridiag.o: \
+  test/eigen/test_eigen_sym_tridiag.cpp test/eigen/../catch.hpp \
+  lila/all.h lila/common.h lila/vector.h lila/utils/strings.h \
+  lila/matrix.h lila/numeric/compare.h lila/numeric/complex.h \
   lila/detail/complex_detail.h lila/numeric/precision.h \
   lila/arithmetic/matrixfunction.h lila/arithmetic/add.h \
   lila/blaslapack/blaslapack.h lila/blaslapack/blaslapack_types.h \
@@ -48,7 +49,7 @@ test/test_vector.o: test/test_vector.cpp test/catch.hpp lila/all.h \
   lila/external/fmt/core.h lila/external/fmt/format-inl.h \
   lila/utils/timing.h lila/utils/print.h
 
-test/catch.hpp:
+test/eigen/../catch.hpp:
 
 lila/all.h:
 

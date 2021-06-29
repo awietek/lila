@@ -1,9 +1,10 @@
 test/test_resize.o: test/test_resize.cpp test/catch.hpp lila/all.h \
-  lila/logger.h lila/external/fmt/format.h lila/external/fmt/core.h \
-  lila/external/fmt/format-inl.h lila/add.h lila/complex.h lila/matrix.h \
-  lila/common.h lila/range.h lila/vector.h lila/strings.h \
-  lila/detail/complex_detail.h lila/blaslapack/blaslapack.h \
-  lila/blaslapack/blaslapack_types.h lila/blaslapack/../common.h \
+  lila/common.h lila/vector.h lila/utils/strings.h lila/matrix.h \
+  lila/numeric/compare.h lila/numeric/complex.h \
+  lila/detail/complex_detail.h lila/numeric/precision.h \
+  lila/arithmetic/matrixfunction.h lila/arithmetic/add.h \
+  lila/blaslapack/blaslapack.h lila/blaslapack/blaslapack_types.h \
+  lila/blaslapack/../common.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_version.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_types.h \
@@ -38,40 +39,38 @@ test/test_resize.o: test/test_resize.cpp test/catch.hpp lila/all.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_compact.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_graph.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_sparse_qr.h \
-  lila/blaslapack/blaslapack_extern.h lila/compare.h lila/precision.h \
-  lila/eigen/eigen.h lila/print.h lila/eigen/eigen_sym.h \
+  lila/blaslapack/blaslapack_extern.h lila/arithmetic/mult.h \
+  lila/special/special.h lila/decomp/solve.h lila/eigen/eigen_sym.h \
+  lila/special/random.h lila/detail/random_detail.h \
+  lila/decomp/cholesky.h lila/eigen/eigen.h \
   lila/eigen/eigen_sym_tridiag.h lila/eigen/eigen_gen_sym.h \
-  lila/matrixfunction.h lila/mult.h lila/special.h lila/solve.h \
-  lila/random.h lila/detail/random_detail.h lila/cholesky.h \
-  lila/timing.h
+  lila/utils/range.h lila/utils/logger.h lila/external/fmt/format.h \
+  lila/external/fmt/core.h lila/external/fmt/format-inl.h \
+  lila/utils/timing.h lila/utils/print.h
 
 test/catch.hpp:
 
 lila/all.h:
 
-lila/logger.h:
-
-lila/external/fmt/format.h:
-
-lila/external/fmt/core.h:
-
-lila/external/fmt/format-inl.h:
-
-lila/add.h:
-
-lila/complex.h:
-
-lila/matrix.h:
-
 lila/common.h:
-
-lila/range.h:
 
 lila/vector.h:
 
-lila/strings.h:
+lila/utils/strings.h:
+
+lila/matrix.h:
+
+lila/numeric/compare.h:
+
+lila/numeric/complex.h:
 
 lila/detail/complex_detail.h:
+
+lila/numeric/precision.h:
+
+lila/arithmetic/matrixfunction.h:
+
+lila/arithmetic/add.h:
 
 lila/blaslapack/blaslapack.h:
 
@@ -149,32 +148,36 @@ lila/blaslapack/../common.h:
 
 lila/blaslapack/blaslapack_extern.h:
 
-lila/compare.h:
+lila/arithmetic/mult.h:
 
-lila/precision.h:
+lila/special/special.h:
 
-lila/eigen/eigen.h:
-
-lila/print.h:
+lila/decomp/solve.h:
 
 lila/eigen/eigen_sym.h:
+
+lila/special/random.h:
+
+lila/detail/random_detail.h:
+
+lila/decomp/cholesky.h:
+
+lila/eigen/eigen.h:
 
 lila/eigen/eigen_sym_tridiag.h:
 
 lila/eigen/eigen_gen_sym.h:
 
-lila/matrixfunction.h:
+lila/utils/range.h:
 
-lila/mult.h:
+lila/utils/logger.h:
 
-lila/special.h:
+lila/external/fmt/format.h:
 
-lila/solve.h:
+lila/external/fmt/core.h:
 
-lila/random.h:
+lila/external/fmt/format-inl.h:
 
-lila/detail/random_detail.h:
+lila/utils/timing.h:
 
-lila/cholesky.h:
-
-lila/timing.h:
+lila/utils/print.h:

@@ -4,25 +4,30 @@
 #error No BLAS/LAPACK backend defined for lila!
 #endif
 
-#include "logger.h"
-#include "add.h"
 #include "common.h"
-#include "compare.h"
-#include "complex.h"
+#include "vector.h"
+#include "matrix.h"
+
+#include "numeric/compare.h"
+#include "numeric/complex.h"
+#include "numeric/precision.h"
+
+#include "arithmetic/matrixfunction.h"
+#include "arithmetic/add.h"
+#include "arithmetic/mult.h"
+
+#include "special/random.h"
+#include "special/special.h"
+
+#include "decomp/solve.h"
+#include "decomp/cholesky.h"
+
 #include "eigen/eigen.h"
 #include "eigen/eigen_sym.h"
 #include "eigen/eigen_sym_tridiag.h"
 #include "eigen/eigen_gen_sym.h"
-#include "matrix.h"
-#include "matrixfunction.h"
-#include "mult.h"
-#include "precision.h"
-#include "print.h"
-#include "random.h"
-#include "range.h"
-#include "solve.h"
-#include "cholesky.h"
-#include "special.h"
-#include "vector.h"
-#include "timing.h"
 
+#include "utils/range.h"
+#include "utils/logger.h"
+#include "utils/timing.h"
+#include "utils/print.h"

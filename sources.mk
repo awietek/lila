@@ -1,15 +1,19 @@
 sources+= test/tests.cpp
 sources+= test/test_matrix.cpp
-sources+= test/test_special.cpp
-sources+= test/test_random.cpp
-sources+= test/test_mult.cpp
 sources+= test/test_vector.cpp
-sources+= test/test_solve.cpp
-sources+= test/test_qr.cpp
-sources+= test/test_eigen.cpp
-sources+= test/test_matrixfunction.cpp
-sources+= test/test_dot.cpp
 sources+= test/test_resize.cpp
-sources+= test/test_expm.cpp
-sources+= test/test_cholesky.cpp
-sources+= test/test_eigen_sym_tridiag.cpp
+
+sources+= test/special/test_special.cpp
+sources+= test/special/test_random.cpp
+
+sources+= test/arithmetic/test_mult.cpp
+sources+= test/arithmetic/test_matrixfunction.cpp
+sources+= test/arithmetic/test_dot.cpp
+sources+= test/arithmetic/test_expm.cpp
+
+sources+= test/decomp/test_solve.cpp
+sources+= test/decomp/test_qr.cpp
+sources+= test/decomp/test_cholesky.cpp
+
+sources+= test/eigen/test_eigen.cpp
+sources+= test/eigen/test_eigen_sym_tridiag.cpp

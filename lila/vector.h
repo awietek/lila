@@ -1,19 +1,4 @@
-// Copyright 2018 Alexander Wietek - All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-#ifndef LILA_VECTOR_H_
-#define LILA_VECTOR_H_
+#pragma once
 
 #include <fstream>
 #include <iomanip>
@@ -22,11 +7,12 @@
 #include <sstream>
 #include <vector>
 
-#include "common.h"
-#include "range.h"
-#include "strings.h"
+#include <lila/common.h>
+#include <lila/utils/strings.h>
 
 namespace lila {
+
+template <class coeff_t> class VectorView;
 
 template <class coeff_t> class Vector {
 public:
@@ -57,6 +43,16 @@ public:
     return *this;
   };
 
+  Vector(VectorView<coeff_t> const &view) : data_(view.N()), size_(view.N()) {
+    Copy(view, *this);
+  };
+
+  Vector &operator=(VectorView<coeff_t> const &view) {
+    size_ = view.N();
+    data_.resize(size_);
+    Copy(view, *this);
+  };
+
   bool operator==(Vector const &other) const {
     return (other.data_ == data_) && (other.size_ == size_);
   }
@@ -77,7 +73,6 @@ public:
   }
   void shrink_to_fit() { data_.shrink_to_fit(); }
 
-  range<size_type> rows() const { return range<size_type>(size_); }
   size_type nrows() const { return size_; }
   int nblocks() const { return 1; }
   size_type size() const { return size_; }
@@ -119,7 +114,7 @@ std::string Vector2String(const Vector<coeff_t> &vector, bool vertical = true) {
   char whitespace = vertical ? '\n' : ' ';
   std::stringstream ss;
   ss << std::setprecision(16);
-  for (auto i : vector.rows())
+  for (int i=0; i<vector.nrows(); ++i)
     ss << vector(i) << whitespace;
   return ss.str();
 }
@@ -157,5 +152,3 @@ void WriteVector(const Vector<coeff_t> &vector, std::string filename,
   t.close();
 }
 } // namespace lila
-
-#endif

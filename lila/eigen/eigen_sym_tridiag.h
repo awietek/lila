@@ -2,6 +2,10 @@
 
 #include <utility>
 
+#include <lila/vector.h>
+#include <lila/blaslapack/blaslapack.h>
+
+
 namespace lila {
 
 template <class coeff_t>

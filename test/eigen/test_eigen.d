@@ -1,10 +1,10 @@
-test/test_vector.o: test/test_vector.cpp test/catch.hpp lila/all.h \
-  lila/common.h lila/vector.h lila/utils/strings.h lila/matrix.h \
-  lila/numeric/compare.h lila/numeric/complex.h \
-  lila/detail/complex_detail.h lila/numeric/precision.h \
-  lila/arithmetic/matrixfunction.h lila/arithmetic/add.h \
-  lila/blaslapack/blaslapack.h lila/blaslapack/blaslapack_types.h \
-  lila/blaslapack/../common.h \
+test/eigen/test_eigen.o: test/eigen/test_eigen.cpp \
+  test/eigen/../catch.hpp lila/all.h lila/common.h lila/vector.h \
+  lila/utils/strings.h lila/matrix.h lila/numeric/compare.h \
+  lila/numeric/complex.h lila/detail/complex_detail.h \
+  lila/numeric/precision.h lila/arithmetic/matrixfunction.h \
+  lila/arithmetic/add.h lila/blaslapack/blaslapack.h \
+  lila/blaslapack/blaslapack_types.h lila/blaslapack/../common.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_version.h \
   /cm/shared/sw/pkg/vendor/intel-pstudio/2020-4/compilers_and_libraries_2020.4.304/linux/mkl/include/mkl_types.h \
@@ -48,7 +48,7 @@ test/test_vector.o: test/test_vector.cpp test/catch.hpp lila/all.h \
   lila/external/fmt/core.h lila/external/fmt/format-inl.h \
   lila/utils/timing.h lila/utils/print.h
 
-test/catch.hpp:
+test/eigen/../catch.hpp:
 
 lila/all.h:
 

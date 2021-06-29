@@ -2,8 +2,9 @@
 
 #include <utility>
 
-#include <lila/complex.h>
-#include <lila/print.h>
+#include <lila/matrix.h>
+#include <lila/vector.h>
+#include <lila/numeric/complex.h>
 
 namespace lila {
 
