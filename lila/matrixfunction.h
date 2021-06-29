@@ -1,19 +1,4 @@
-// Copyright 2018 Alexander Wietek - All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-#ifndef LILA_MATRIX_FUNCTION_H_
-#define LILA_MATRIX_FUNCTION_H_
+#pragma once
 
 #include <math.h>
 
@@ -21,7 +6,7 @@
 #include <lila/matrix.h>
 #include <lila/mult.h>
 #include <lila/vector.h>
-#include <lila/eigen.h>
+#include <lila/eigen/eigen_sym.h>
 #include <lila/complex.h>
 #include <lila/blaslapack/blaslapack.h>
 #include <lila/special.h>
@@ -196,5 +181,3 @@ namespace lila {
   }
 
 }
-
-#endif

@@ -1,27 +1,6 @@
-// Copyright 2018 Alexander Wietek - All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 #include "catch.hpp"
 
-#include <lila/matrix.h>
-#include <lila/random.h>
-#include <lila/special.h>
-#include <lila/mult.h>
-#include <lila/solve.h>
-#include <lila/print.h>
-#include <lila/compare.h>
-#include <lila/range.h>
+#include <lila/all.h>
 
 template <class coeff_t>
 void test_qr(int m, int n)
@@ -77,17 +56,17 @@ void test_qr(int m, int n)
 }
 
 
-TEST_CASE( "QR Decomposition test", "[QR]" ) {
-  // test_qr<float>(6,5);
+TEST_CASE( "qr", "[decomp]" ) {
+  test_qr<float>(6,5);
   test_qr<double>(6,5);
-  // test_qr<std::complex<float>>(6,5);
+  test_qr<std::complex<float>>(6,5);
   test_qr<std::complex<double>>(6,5);
-  // test_qr<float>(6,6);
+  test_qr<float>(6,6);
   test_qr<double>(6,6);
-  // test_qr<std::complex<float>>(6,6);
+  test_qr<std::complex<float>>(6,6);
   test_qr<std::complex<double>>(6,6);
-  // test_qr<float>(5,6);
+  test_qr<float>(5,6);
   test_qr<double>(5,6);
-  // test_qr<std::complex<float>>(5,6);
+  test_qr<std::complex<float>>(5,6);
   test_qr<std::complex<double>>(5,6);
 }

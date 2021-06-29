@@ -164,8 +164,8 @@ template <class coeff_t> Matrix<coeff_t> ParseMatrix(const std::string &str) {
   size_type m = std::stoi(dimstring.substr(open + 1, comma - open));
   size_type n = std::stoi(dimstring.substr(comma + 1, close - comma));
 
-  unsigned dim = static_cast<unsigned>(m * n);
-  assert(split.size() == dim + 1);
+  // unsigned dim = static_cast<unsigned>(m * n);
+  // assert(split.size() == dim + 1);
 
   Matrix<coeff_t> matrix(m, n);
   for (auto i : range<size_type>(m))

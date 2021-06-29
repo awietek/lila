@@ -1,17 +1,3 @@
-// Copyright 2019 Alexander Wietek - All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 #include "catch.hpp"
 
 #include <iostream>
@@ -27,7 +13,6 @@ void test_eigen()
   
   // Test Eigen
   for (int seed : range<int>(10)) {
-    std::cout << "seed " << seed << std::endl;
     uniform_dist_t<coeff_t> dist(-1., 1.);
     uniform_gen_t<coeff_t> gen(dist, seed);
     Matrix<coeff_t> A(n, n);
@@ -38,15 +23,15 @@ void test_eigen()
     // routines give same eigenvalues
     auto A1 = A;
     Add(Herm(A1), A1);
-    auto v1 = Eigen(A1);
+    auto [evals1, evecs1l, evecs1r] = Eigen(A1);
     auto A2 = A;
     Add(Herm(A2), A2);
-    auto v2 = EigenSym(A2);
+    auto [evals2, evecs2] = EigenSym(A2);
 
-    auto e1r = Real(v1.eigenvalues);
-    auto e1i = Imag(v1.eigenvalues);    
+    auto e1r = Real(evals1);
+    auto e1i = Imag(evals1);    
     std::sort(e1r.data(), e1r.data() + e1r.size());
-    REQUIRE(close(e1r, v2.eigenvalues));
+    REQUIRE(close(e1r, evals2));
     REQUIRE(close(e1i, (real_t<coeff_t>)0.));
 
 
@@ -58,16 +43,16 @@ void test_eigen()
     auto Ah = A;
     Add(Herm(Ah), Ah);
 
-    auto v3 = EigenSym(Ah);
+    auto [evals3, evecs3] = EigenSym(Ah);
 
     // Check whether EigenvaluesSym and EigenSym give same eigenvalues
-    REQUIRE(close(v3.eigenvalues, EigenvaluesSym(Ah)));
+    REQUIRE(close(evals3, EigenvaluesSym(Ah)));
 
     // check if routine computes correct eigenvalues/vectors
     for (int i=0; i<n; ++i) 
       {
-	auto eval = v3.eigenvalues(i);
-	auto evec = v3.eigenvectors.col(i);
+	auto eval = evals3(i);
+	auto evec = evecs3.col(i);
 	// LilaPrint(Mult(Ah, evec) - (coeff_t)eval * Mult(Ad, evec));
 	REQUIRE(close(Mult(Ah, evec), (coeff_t)eval * evec));
       }
@@ -85,19 +70,19 @@ void test_eigen()
       for (int j=0; j<n; ++j)
     	Ad(i,j) = Dot(vecs[i], vecs[j]);
 
-    for (int k=0; k<n; ++k)
-      LilaPrint(vecs[k]);
+    // for (int k=0; k<n; ++k)
+    //   LilaPrint(vecs[k]);
 
-    auto v4 = EigenGenSymDef(Ah, Ad);
+    auto [evals4, evecs4] = EigenGenSymDef(Ah, Ad);
 
     // Check whether EigenvaluesSym and EigenSym give same eigenvalues
-    REQUIRE(close(v4.eigenvalues, EigenvaluesGenSymDef(Ah, Ad)));
+    REQUIRE(close(evals4, EigenvaluesGenSymDef(Ah, Ad)));
 
     // check if routine computes correct eigenvalues/vectors
     for (int i=0; i<n-1; ++i) // n-1: Last eigenvector somehow looses precision?
       {
-    	auto eval = v4.eigenvalues(i);
-    	auto evec = v4.eigenvectors.col(i);
+    	auto eval = evals4(i);
+    	auto evec = evecs4.col(i);
     	// LilaPrint(Mult(Ah, evec) - (coeff_t)eval * Mult(Ad, evec));
     	REQUIRE(close(Mult(Ah, evec), (coeff_t)eval * Mult(Ad, evec)));
       }
@@ -106,9 +91,9 @@ void test_eigen()
 }
 
 
-TEST_CASE( "Eigen test", "[Eigen]" ) {
-  // test_eigen<float>();
+TEST_CASE( "eigen", "[decomp]" ) {
+  test_eigen<float>();
   test_eigen<double>();
-  // test_eigen<std::complex<float>>();
+  test_eigen<std::complex<float>>();
   test_eigen<std::complex<double>>();
 }
