@@ -40,9 +40,9 @@ test/test_matrix.o: test/test_matrix.cpp test/catch.hpp lila/all.h \
   lila/views/matrix_view.h lila/views/slice.h lila/views/vector_view.h \
   lila/utils/strings.h lila/numeric/compare.h lila/numeric/complex.h \
   lila/detail/complex_detail.h lila/numeric/precision.h \
-  lila/arithmetic/matrixfunction.h lila/arithmetic/add.h \
-  lila/arithmetic/mult.h lila/special/special.h lila/decomp/solve.h \
-  lila/eigen/eigen_sym.h lila/special/random.h \
+  lila/arithmetic/assign.h lila/arithmetic/matrixfunction.h \
+  lila/arithmetic/add.h lila/arithmetic/mult.h lila/special/special.h \
+  lila/decomp/solve.h lila/eigen/eigen_sym.h lila/special/random.h \
   lila/detail/random_detail.h lila/decomp/cholesky.h lila/eigen/eigen.h \
   lila/eigen/eigen_sym_tridiag.h lila/eigen/eigen_gen_sym.h \
   lila/utils/range.h lila/utils/logger.h lila/external/fmt/format.h \
@@ -152,6 +152,8 @@ lila/numeric/complex.h:
 lila/detail/complex_detail.h:
 
 lila/numeric/precision.h:
+
+lila/arithmetic/assign.h:
 
 lila/arithmetic/matrixfunction.h:
 

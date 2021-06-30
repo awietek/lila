@@ -16,9 +16,8 @@ template <class coeff_t> class VectorView;
 template <class coeff_t> class MatrixView;
 
 template <class coeff_t>
-inline void Copy(VectorView<coeff_t> &&X, VectorView<coeff_t> &&Y) {
+inline void Copy(VectorView<coeff_t> const &X, VectorView<coeff_t> const &Y) {
   using size_type = blaslapack::blas_size_t;
-
   assert(X.N() == Y.N()); // Check if valid dimensions
   size_type N = X.N();
   size_type incx = X.inc();
@@ -39,9 +38,8 @@ inline void Copy(Matrix<coeff_t> const &X, Matrix<coeff_t> &Y) {
 }
 
 template <class coeff_t>
-inline void Copy(MatrixView<coeff_t> && X, MatrixView<coeff_t> && Y) {
+inline void Copy(MatrixView<coeff_t> const &X, MatrixView<coeff_t> const &Y) {
   using size_type = blaslapack::blas_size_t;
-  std::cout << X.M() << " " << Y.M() << "\n";
   assert(X.M() == Y.M());
   assert(X.N() == Y.N());
   size_type M = X.M();

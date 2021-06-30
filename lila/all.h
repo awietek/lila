@@ -12,6 +12,8 @@
 #include "numeric/complex.h"
 #include "numeric/precision.h"
 
+#include "arithmetic/copy.h"
+#include "arithmetic/assign.h"
 #include "arithmetic/matrixfunction.h"
 #include "arithmetic/add.h"
 #include "arithmetic/mult.h"

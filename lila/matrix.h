@@ -16,6 +16,7 @@
 namespace lila {
 
 template <class coeff_t> class Vector;
+template <class coeff_t> class VectorView;
 template <class coeff_t> class MatrixView;
 
 template <class coeff_t> class Matrix {
@@ -52,7 +53,7 @@ public:
     }
   }
 
-  Matrix(MatrixView<coeff_t> &&view)
+  Matrix(MatrixView<coeff_t> const &view)
       : m_(view.M()), n_(view.N()), size_(m_ * n_), data_(size_) {
     Copy(std::move(view), MatrixView<coeff_t>(*this));
   };
@@ -67,10 +68,26 @@ public:
   }
   coeff_t &operator()(size_type i, size_type j) { return (data_[i + j * m_]); }
 
-  Matrix<coeff_t> operator()(Slice &&slice_row, Slice &&slice_col) {
-    return MatrixView<coeff_t>(*this, std::move(slice_row),
-                               std::move(slice_col));
+  MatrixView<coeff_t> operator()(Slice const &slice_row, Slice const &slice_col) {
+    return MatrixView<coeff_t>(*this, slice_row, slice_col);
   }
+
+  VectorView<coeff_t> operator()(size_type i, Slice const &slice_col) {
+    auto end = (slice_col.end == END) ? n_ : slice_col.end; 
+    coeff_t *vdata = data_.data() + i + slice_col.begin * m_;
+    size_type vN = (end - slice_col.begin) / slice_col.step;
+    size_type vinc = slice_col.step * m_;
+    return VectorView<coeff_t>{vdata, vN, vinc};
+  }
+
+  VectorView<coeff_t> operator()(Slice const &slice_row, size_type j) {
+    auto end = (slice_row.end == END) ? m_ : slice_row.end; 
+    coeff_t *vdata = data_.data() + slice_row.begin + j * m_;
+    size_type vN = (end - slice_row.begin) / slice_row.step;
+    size_type vinc = slice_row.step;
+    return VectorView<coeff_t>{vdata, vN, vinc};
+  }
+
 
   void resize(size_type m, size_type n) {
     std::vector<coeff_t> data_copy = data_;

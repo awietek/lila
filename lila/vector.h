@@ -46,8 +46,8 @@ public:
     return *this;
   };
 
-  Vector(VectorView<coeff_t> && view) : size_(view.N()), data_(size_) {
-    Copy(std::move(view), VectorView<coeff_t>(*this));
+  Vector(VectorView<coeff_t> const &view) : size_(view.N()), data_(size_) {
+    Copy(view, VectorView<coeff_t>(*this));
   };
 
   Vector &operator=(VectorView<coeff_t> const &view) {
@@ -63,8 +63,8 @@ public:
   coeff_t operator()(size_type i) const { return data_[i]; }
   coeff_t &operator()(size_type i) { return data_[i]; }
 
-  Vector<coeff_t> operator()(Slice && slice) {
-    return VectorView<coeff_t>(*this, std::move(slice));
+  VectorView<coeff_t> operator()(Slice const& slice) {
+    return VectorView<coeff_t>(*this, slice);
   }
 
   operator std::vector<coeff_t> &() { return data_; }
