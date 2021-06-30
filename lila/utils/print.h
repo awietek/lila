@@ -67,6 +67,7 @@ namespace lila {
     for (int i=0; i<mat.nrows(); ++i)
       {
 	for (int j=0; j<mat.ncols(); ++j)
+	  printf("%10.8g ", mat(i,j));
 	printf("\n");
       }
     printf("\n");

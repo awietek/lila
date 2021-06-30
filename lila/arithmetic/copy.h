@@ -2,17 +2,29 @@
 
 #include <cassert>
 
+#include <lila/blaslapack/blaslapack.h>
+#include <lila/matrix.h>
+#include <lila/vector.h>
+#include <lila/views/matrix_view.h>
+#include <lila/views/vector_view.h>
+
 namespace lila {
 
+template <class coeff_t> class Vector;
+template <class coeff_t> class Matrix;
+template <class coeff_t> class VectorView;
+template <class coeff_t> class MatrixView;
+
 template <class coeff_t>
-inline void Copy(VectorView<coeff_t> const &X, VectorView<coeff_t> const &Y) {
+inline void Copy(VectorView<coeff_t> &&X, VectorView<coeff_t> &&Y) {
   using size_type = blaslapack::blas_size_t;
 
   assert(X.N() == Y.N()); // Check if valid dimensions
   size_type N = X.N();
-  size_type inc = X.inc();
-  blaslapack::copy(&dx, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &inc);
+  size_type incx = X.inc();
+  size_type incy = Y.inc();
+  blaslapack::copy(&N, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &incx,
+                   LILA_BLAS_CAST(coeff_t, Y.data()), &incy);
 }
 
 template <class coeff_t>
@@ -27,9 +39,9 @@ inline void Copy(Matrix<coeff_t> const &X, Matrix<coeff_t> &Y) {
 }
 
 template <class coeff_t>
-inline void Copy(MatrixView<coeff_t> const &X, MatrixView<coeff_t> const &Y) {
+inline void Copy(MatrixView<coeff_t> && X, MatrixView<coeff_t> && Y) {
   using size_type = blaslapack::blas_size_t;
-
+  std::cout << X.M() << " " << Y.M() << "\n";
   assert(X.M() == Y.M());
   assert(X.N() == Y.N());
   size_type M = X.M();

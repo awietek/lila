@@ -15,28 +15,6 @@
 namespace lila {
 
 template <class coeff_t>
-inline void Copy(const Vector<coeff_t> &X, Vector<coeff_t> &Y) {
-  using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
-  size_type inc = 1;
-  blaslapack::copy(&dx, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &inc);
-}
-
-template <class coeff_t>
-inline void Copy(const Matrix<coeff_t> &X, Matrix<coeff_t> &Y) {
-  using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
-  size_type inc = 1;
-  blaslapack::copy(&dx, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &inc);
-}
-
-template <class coeff_t>
 inline void Add(const Vector<coeff_t> &X, Vector<coeff_t> &Y,
                 coeff_t alpha = static_cast<coeff_t>(1.)) {
   using size_type = blaslapack::blas_size_t;

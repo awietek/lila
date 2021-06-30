@@ -3,6 +3,8 @@ sources+= test/test_matrix.cpp
 sources+= test/test_vector.cpp
 sources+= test/test_resize.cpp
 
+sources+= test/views/test_views.cpp
+
 sources+= test/special/test_special.cpp
 sources+= test/special/test_random.cpp
 

@@ -10,8 +10,13 @@
 
 #include <lila/common.h>
 #include <lila/vector.h>
+#include <lila/views/matrix_view.h>
+#include <lila/views/slice.h>
 
 namespace lila {
+
+template <class coeff_t> class Vector;
+template <class coeff_t> class MatrixView;
 
 template <class coeff_t> class Matrix {
 public:
@@ -47,10 +52,25 @@ public:
     }
   }
 
+  Matrix(MatrixView<coeff_t> &&view)
+      : m_(view.M()), n_(view.N()), size_(m_ * n_), data_(size_) {
+    Copy(std::move(view), MatrixView<coeff_t>(*this));
+  };
+  Matrix &operator=(MatrixView<coeff_t> const &view) {
+    size_ = view.M() * view.N();
+    data_.resize(size_);
+    Copy(view, *this);
+  };
+
   coeff_t operator()(size_type i, size_type j) const {
     return data_[i + j * m_];
   }
   coeff_t &operator()(size_type i, size_type j) { return (data_[i + j * m_]); }
+
+  Matrix<coeff_t> operator()(Slice &&slice_row, Slice &&slice_col) {
+    return MatrixView<coeff_t>(*this, std::move(slice_row),
+                               std::move(slice_col));
+  }
 
   void resize(size_type m, size_type n) {
     std::vector<coeff_t> data_copy = data_;

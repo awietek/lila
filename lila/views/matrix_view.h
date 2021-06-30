@@ -1,13 +1,18 @@
 #pragma once
 
+#include <lila/matrix.h>
+#include <lila/views/slice.h>
+
 namespace lila {
+
+template <class coeff_t> class Matrix;
 
 template <class coeff_t> class MatrixView {
 public:
-  MatrixView(Matrix const &mat)
+  MatrixView(Matrix<coeff_t> &mat)
       : ld_(mat.nrows()), M_(mat.nrows()), N_(mat.ncols()), data_(mat.data()) {}
 
-  MatrixView(Matrix const &mat, Slice const &slice_row, Slice const &slice_col)
+  MatrixView(Matrix<coeff_t> &mat, Slice &&slice_row, Slice &&slice_col)
       : ld_(mat.nrows()) {
     int begin = slice_row.begin + ld_ * slice_col.begin;
     int end = slice_row.end + ld_ * slice_col.end;
@@ -38,9 +43,9 @@ public:
   inline int ld() const { return ld_; }
 
 private:
-  coeff_t *data_;
-  int M_, N_;
   int ld_;
-}
+  int M_, N_;
+  coeff_t *data_;
+};
 
 } // namespace lila

@@ -7,8 +7,11 @@
 #include <sstream>
 #include <vector>
 
+#include <lila/arithmetic/copy.h>
 #include <lila/common.h>
 #include <lila/utils/strings.h>
+#include <lila/views/slice.h>
+#include <lila/views/vector_view.h>
 
 namespace lila {
 
@@ -43,8 +46,8 @@ public:
     return *this;
   };
 
-  Vector(VectorView<coeff_t> const &view) : data_(view.N()), size_(view.N()) {
-    Copy(view, *this);
+  Vector(VectorView<coeff_t> && view) : size_(view.N()), data_(size_) {
+    Copy(std::move(view), VectorView<coeff_t>(*this));
   };
 
   Vector &operator=(VectorView<coeff_t> const &view) {
@@ -59,6 +62,10 @@ public:
 
   coeff_t operator()(size_type i) const { return data_[i]; }
   coeff_t &operator()(size_type i) { return data_[i]; }
+
+  Vector<coeff_t> operator()(Slice && slice) {
+    return VectorView<coeff_t>(*this, std::move(slice));
+  }
 
   operator std::vector<coeff_t> &() { return data_; }
 
@@ -114,7 +121,7 @@ std::string Vector2String(const Vector<coeff_t> &vector, bool vertical = true) {
   char whitespace = vertical ? '\n' : ' ';
   std::stringstream ss;
   ss << std::setprecision(16);
-  for (int i=0; i<vector.nrows(); ++i)
+  for (int i = 0; i < vector.nrows(); ++i)
     ss << vector(i) << whitespace;
   return ss.str();
 }
