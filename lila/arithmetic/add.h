@@ -1,13 +1,8 @@
 #pragma once
 
-#include <algorithm>
 #include <cassert>
-#include <limits>
-#include <numeric>
 
 #include <lila/matrix.h>
-#include <lila/numeric/compare.h>
-#include <lila/numeric/complex.h>
 #include <lila/vector.h>
 
 #include <lila/blaslapack/blaslapack.h>
@@ -15,293 +10,314 @@
 namespace lila {
 
 template <class coeff_t>
-inline void Add(const Vector<coeff_t> &X, Vector<coeff_t> &Y,
+inline void Add(Vector<coeff_t> const &v, Vector<coeff_t> &w,
                 coeff_t alpha = static_cast<coeff_t>(1.)) {
   using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
+  assert(v.n() == w.n());
+  size_type n = v.n();
   size_type inc = 1;
-  blaslapack::axpy(&dx, LILA_BLAS_CAST(coeff_t, &alpha),
-                   LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &inc);
+  blaslapack::axpy(&n, LILA_BLAS_CAST(coeff_t, &alpha),
+                   LILA_BLAS_CONST_CAST(coeff_t, v.data()), &inc,
+                   LILA_BLAS_CAST(coeff_t, w.data()), &inc);
 }
 
 template <class coeff_t>
-inline void Add(const Matrix<coeff_t> &X, Matrix<coeff_t> &Y,
+inline void Add(VectorView<coeff_t> v, VectorView<coeff_t> w,
                 coeff_t alpha = static_cast<coeff_t>(1.)) {
   using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
-  size_type inc = 1;
-  blaslapack::axpy(&dx, LILA_BLAS_CAST(coeff_t, &alpha),
-                   LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &inc);
+  assert(v.n() == w.n());
+  size_type n = v.n();
+  size_type v_inc = v.inc();
+  size_type w_inc = w.inc();
+  blaslapack::axpy(&n, LILA_BLAS_CAST(coeff_t, &alpha),
+                   LILA_BLAS_CONST_CAST(coeff_t, v.data()), &v_inc,
+                   LILA_BLAS_CAST(coeff_t, w.data()), &w_inc);
 }
 
 template <class coeff_t>
-inline void Scale(const coeff_t &alpha, Vector<coeff_t> &X) {
+inline void Add(Matrix<coeff_t> const &A, Matrix<coeff_t> &B,
+                coeff_t alpha = static_cast<coeff_t>(1.)) {
   using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
+  assert(A.m() == B.m());
+  assert(A.n() == B.n());
+  size_type size = A.size();
   size_type inc = 1;
-  blaslapack::scal(&dx, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
-                   LILA_BLAS_CAST(coeff_t, X.data()), &inc);
+  blaslapack::axpy(&size, LILA_BLAS_CAST(coeff_t, &alpha),
+                   LILA_BLAS_CONST_CAST(coeff_t, A.data()), &inc,
+                   LILA_BLAS_CAST(coeff_t, B.data()), &inc);
 }
 
 template <class coeff_t>
-inline void Scale(const coeff_t &alpha, Matrix<coeff_t> &X) {
+inline void Add(MatrixView<coeff_t> A, MatrixView<coeff_t> B,
+                coeff_t alpha = static_cast<coeff_t>(1.)) {
   using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type inc = 1;
-  blaslapack::scal(&dx, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
-                   LILA_BLAS_CAST(coeff_t, X.data()), &inc);
-}
+  assert(A.m() == B.m());
+  assert(A.n() == B.n());
 
-template <class coeff_t>
-inline coeff_t Dot(const Vector<coeff_t> &X, const Vector<coeff_t> &Y) {
-  using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
-  size_type inc = 1;
-  blaslapack::blas_t<coeff_t> result =
-      blaslapack::dot(&dx, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                      LILA_BLAS_CONST_CAST(coeff_t, Y.data()), &inc);
-  return blaslapack::blas_to_lila(result);
-}
+  size_type A_incm = A.incm();
+  size_type A_incn = A.incn();
+  size_type B_incm = B.incm();
+  size_type B_incn = B.incn();
 
-template <class coeff_t>
-inline coeff_t Dot(const Matrix<coeff_t> &X, const Matrix<coeff_t> &Y) {
-  using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
-  size_type inc = 1;
-  blaslapack::blas_t<coeff_t> result =
-      blaslapack::dot(&dx, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                      LILA_BLAS_CONST_CAST(coeff_t, Y.data()), &inc);
-  return blaslapack::blas_to_lila(result);
-}
+  size_type m = A.m();
+  size_type n = A.n();
+  size_type A_ld = A.ld();
+  size_type B_ld = B.ld();
 
-template <class coeff_t> inline real_t<coeff_t> Norm(const Vector<coeff_t> &X) {
-  // TODO: use proper LAPACK function here
-  return sqrt(real(Dot(X, X)));
-}
-
-template <class coeff_t> inline real_t<coeff_t> Norm(const Matrix<coeff_t> &X) {
-  // TODO: use proper LAPACK function here
-  return sqrt(real(Dot(X, X)));
-}
-
-template <class coeff_t> inline void Normalize(Vector<coeff_t> &X) {
-  coeff_t nrm = Norm(X);
-  Scale((coeff_t)1. / nrm, X);
-}
-
-template <class coeff_t> inline void Normalize(Matrix<coeff_t> &X) {
-  coeff_t nrm = Norm(X);
-  Scale((coeff_t)1. / nrm, X);
-}
-
-template <class coeff_t>
-inline real_t<coeff_t> NormLi(const Matrix<coeff_t> &X) {
-  real_t<coeff_t> value = 0.0;
-  for (int i = 0; i < X.nrows(); i++) {
-    real_t<coeff_t> row_sum = 0.0;
-    for (int j = 0; j < X.ncols(); j++) {
-      row_sum += std::abs(X(i, j));
-    }
-    value = std::max(value, row_sum);
+  // Perform a column-wise axpy
+  for (int col = 0; col < n; ++col) {
+    blaslapack::axpy(
+        &m, LILA_BLAS_CAST(coeff_t, &alpha),
+        LILA_BLAS_CONST_CAST(coeff_t, A.data() + col * A_incn * A_ld), &A_incm,
+        LILA_BLAS_CAST(coeff_t, B.data() + col * B_incn * B_ld), &B_incm);
   }
-  return value;
-}
-
-template <class coeff_t> inline real_t<coeff_t> log2abs(const coeff_t &x) {
-  real_t<coeff_t> value;
-
-  if (x == 0.0) {
-    value = -1e30;
-  } else {
-    value = log(std::abs(x)) / log(2.0);
-  }
-
-  return value;
-}
-
-template <class coeff_t> inline coeff_t Sum(const Vector<coeff_t> &X) {
-  return std::accumulate(X.begin(), X.end(), 0.);
-}
-template <class coeff_t> inline coeff_t Sum(const Matrix<coeff_t> &X) {
-  return std::accumulate(X.begin(), X.end(), 0.);
 }
 
 template <class coeff_t>
-inline Vector<coeff_t> operator+(const Vector<coeff_t> &X,
-                                 const Vector<coeff_t> &Y) {
-  Vector<coeff_t> res(Y);
-  Add(X, res);
+inline Vector<coeff_t> operator+(Vector<coeff_t> const &v,
+                                 Vector<coeff_t> const &w) {
+  Vector<coeff_t> res(w); // Creates a new Vector
+  Add(v, res);
   return res;
 }
 
 template <class coeff_t>
-inline Vector<coeff_t> operator-(const Vector<coeff_t> &X,
-                                 const Vector<coeff_t> &Y) {
-  Vector<coeff_t> res(X);
-  Add(Y, res, static_cast<coeff_t>(-1.));
+inline Vector<coeff_t> operator+(VectorView<coeff_t> v, VectorView<coeff_t> w) {
+  Vector<coeff_t> res(w); // Creates a new Vector
+  Add(v, res);
   return res;
 }
 
 template <class coeff_t>
-inline Vector<coeff_t> operator+(const Vector<coeff_t> &X, const coeff_t &c) {
-  Vector<coeff_t> res(X);
+inline Vector<coeff_t> operator-(Vector<coeff_t> const &v,
+                                 Vector<coeff_t> const &w) {
+  Vector<coeff_t> res(v); // Creates a new Vector
+  Add(w, res, static_cast<coeff_t>(-1.));
+  return res;
+}
+
+template <class coeff_t>
+inline Vector<coeff_t> operator-(VectorView<coeff_t> v, VectorView<coeff_t> w) {
+  Vector<coeff_t> res(v); // Creates a new Vector
+  Add(w, res, static_cast<coeff_t>(-1.));
+  return res;
+}
+
+template <class coeff_t>
+inline Vector<coeff_t> operator+(Vector<coeff_t> const &v, coeff_t c) {
+  Vector<coeff_t> res(v); // Creates a new Vector
   Map(res, [&c](coeff_t &x) { x = x + c; });
   return res;
 }
 
 template <class coeff_t>
-inline Vector<coeff_t> &operator+=(Vector<coeff_t> &a,
-                                   const Vector<coeff_t> &b) {
-  a = a + b;
-  return a;
-}
-template <class coeff_t>
-inline Vector<coeff_t> &operator-=(Vector<coeff_t> &a,
-                                   const Vector<coeff_t> &b) {
-  a = a - b;
-  return a;
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator-(const Vector<coeff_t> &X, const coeff_t &c) {
-  Vector<coeff_t> res(X);
-  Map(res, [&c](coeff_t &x) { x = x - c; });
-  return res;
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator-(const Vector<coeff_t> &X) {
-  Vector<coeff_t> res(X);
-  Scale(static_cast<coeff_t>(-1.), res);
-  return res;
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator*(const coeff_t &alpha,
-                                 const Vector<coeff_t> &X) {
-  Vector<coeff_t> res(X);
-  Scale(alpha, res);
-  return res;
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator*=(Vector<coeff_t> &X, const coeff_t &alpha) {
-  X = alpha * X;
-  return X;
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator/=(Vector<coeff_t> &X, const coeff_t &alpha) {
-  X = X / alpha;
-  return X;
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator*(const Vector<coeff_t> &X,
-                                 const coeff_t &alpha) {
-  return operator*(alpha, X);
-}
-
-template <class coeff_t>
-inline Vector<coeff_t> operator/(const Vector<coeff_t> &X,
-                                 const coeff_t &alpha) {
-  assert(!close(alpha, static_cast<coeff_t>(0.)));
-  coeff_t invalpha = static_cast<coeff_t>(1.) / alpha;
-  return operator*(invalpha, X);
-}
-
-template <class coeff_t>
-inline Matrix<coeff_t> operator+(const Matrix<coeff_t> &X,
-                                 const Matrix<coeff_t> &Y) {
-  Matrix<coeff_t> res(Y);
-  Add(X, res);
-  return res;
-}
-
-template <class coeff_t>
-inline Matrix<coeff_t> operator-(const Matrix<coeff_t> &X,
-                                 const Matrix<coeff_t> &Y) {
-  Matrix<coeff_t> res(X);
-  Add(Y, res, static_cast<coeff_t>(-1.));
-  return res;
-}
-
-template <class coeff_t>
-inline Matrix<coeff_t> operator+(const Matrix<coeff_t> &X, const coeff_t &c) {
-  Matrix<coeff_t> res(X);
+inline Vector<coeff_t> operator+(VectorView<coeff_t> v, coeff_t c) {
+  Vector<coeff_t> res(v); // Creates a new Vector
   Map(res, [&c](coeff_t &x) { x = x + c; });
   return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> &operator+=(Matrix<coeff_t> &a,
-                                   const Matrix<coeff_t> &b) {
-  a = a + b;
-  return a;
-}
-template <class coeff_t>
-inline Matrix<coeff_t> &operator-=(Matrix<coeff_t> &a,
-                                   const Matrix<coeff_t> &b) {
-  a = a - b;
-  return a;
-}
-
-template <class coeff_t>
-inline Matrix<coeff_t> operator-(const Matrix<coeff_t> &X, const coeff_t &c) {
-  Matrix<coeff_t> res(X);
+inline Vector<coeff_t> operator-(Vector<coeff_t> const &v, coeff_t c) {
+  Vector<coeff_t> res(v); // Creates a new Vector
   Map(res, [&c](coeff_t &x) { x = x - c; });
   return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> operator-(const Matrix<coeff_t> &X) {
-  Matrix<coeff_t> res(X);
-  Scale(static_cast<coeff_t>(-1.), res);
+inline Vector<coeff_t> operator-(VectorView<coeff_t> v, coeff_t c) {
+  Vector<coeff_t> res(v); // Creates a new Vector
+  Map(res, [&c](coeff_t &x) { x = x - c; });
   return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> operator*(const coeff_t &alpha,
-                                 const Matrix<coeff_t> &X) {
-  Matrix<coeff_t> res(X);
-  Scale(alpha, res);
+inline Vector<coeff_t> &operator+=(Vector<coeff_t> &v,
+                                   Vector<coeff_t> const &w) {
+  Add(w, v);
+  return v;
+}
+
+template <class coeff_t>
+inline VectorView<coeff_t> operator+=(VectorView<coeff_t> v,
+                                      VectorView<coeff_t> w) {
+  Add(w, v);
+  return v;
+}
+
+template <class coeff_t>
+inline Vector<coeff_t> &operator+=(Vector<coeff_t> &v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x + c; });
+  return v;
+}
+
+template <class coeff_t>
+inline VectorView<coeff_t> operator+=(VectorView<coeff_t> v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x + c; });
+  return v;
+}
+
+template <class coeff_t>
+inline Vector<coeff_t> &operator-=(Vector<coeff_t> &v,
+                                   Vector<coeff_t> const &w) {
+  Add(w, v, static_cast<coeff_t>(-1.));
+  return v;
+}
+
+template <class coeff_t>
+inline VectorView<coeff_t> operator-=(VectorView<coeff_t> v,
+                                      VectorView<coeff_t> w) {
+  Add(w, v, static_cast<coeff_t>(-1.));
+  return v;
+}
+
+template <class coeff_t>
+inline Vector<coeff_t> &operator-=(Vector<coeff_t> &v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x - c; });
+  return v;
+}
+
+template <class coeff_t>
+inline VectorView<coeff_t> operator-=(VectorView<coeff_t> v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x - c; });
+  return v;
+}
+
+template <class coeff_t>
+inline Vector<coeff_t> operator-(Vector<coeff_t> const &v) {
+  Vector<coeff_t> res(v);
+  Map(res, [](coeff_t &x) { x = -x; });
   return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> operator*=(Matrix<coeff_t> &X, const coeff_t &alpha) {
-  X = alpha * X;
-  return X;
+inline Vector<coeff_t> operator-(VectorView<coeff_t> v) {
+  Vector<coeff_t> res(v);
+  Map(res, [](coeff_t &x) { x = -x; });
+  return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> operator/=(Matrix<coeff_t> &X, const coeff_t &alpha) {
-  X = X / alpha;
-  return X;
+inline Matrix<coeff_t> operator+(Matrix<coeff_t> const &v,
+                                 Matrix<coeff_t> const &w) {
+  Matrix<coeff_t> res(w); // Creates a new Matrix
+  Add(v, res);
+  return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> operator*(const Matrix<coeff_t> &X,
-                                 const coeff_t &alpha) {
-  return operator*(alpha, X);
+inline Matrix<coeff_t> operator+(MatrixView<coeff_t> v, MatrixView<coeff_t> w) {
+  Matrix<coeff_t> res(w); // Creates a new Matrix
+  Add(v, res);
+  return res;
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> operator/(const Matrix<coeff_t> &X,
-                                 const coeff_t &alpha) {
-  assert(!close(alpha, static_cast<coeff_t>(0.)));
-  coeff_t invalpha = static_cast<coeff_t>(1.) / alpha;
-  return operator*(invalpha, X);
+inline Matrix<coeff_t> operator-(Matrix<coeff_t> const &v,
+                                 Matrix<coeff_t> const &w) {
+  Matrix<coeff_t> res(v); // Creates a new Matrix
+  Add(w, res, static_cast<coeff_t>(-1.));
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator-(MatrixView<coeff_t> v, MatrixView<coeff_t> w) {
+  Matrix<coeff_t> res(v); // Creates a new Matrix
+  Add(w, res, static_cast<coeff_t>(-1.));
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator+(Matrix<coeff_t> const &A, coeff_t c) {
+  Matrix<coeff_t> res(A); // Creates a new Matrix
+  Map(res, [&c](coeff_t &x) { x = x + c; });
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator+(MatrixView<coeff_t> A, coeff_t c) {
+  Matrix<coeff_t> res(A); // Creates a new Matrix
+  Map(res, [&c](coeff_t &x) { x = x + c; });
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator-(Matrix<coeff_t> const &A, coeff_t c) {
+  Matrix<coeff_t> res(A); // Creates a new Matrix
+  Map(res, [&c](coeff_t &x) { x = x - c; });
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator-(MatrixView<coeff_t> A, coeff_t c) {
+  Matrix<coeff_t> res(A); // Creates a new Matrix
+  Map(res, [&c](coeff_t &x) { x = x - c; });
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> &operator+=(Matrix<coeff_t> &A,
+                                   Matrix<coeff_t> const &B) {
+  Add(B, A);
+  return A;
+}
+
+template <class coeff_t>
+inline MatrixView<coeff_t> operator+=(MatrixView<coeff_t> A,
+                                      MatrixView<coeff_t> B) {
+  Add(B, A);
+  return A;
+}
+template <class coeff_t>
+inline Matrix<coeff_t> &operator+=(Matrix<coeff_t> &v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x + c; });
+  return v;
+}
+
+template <class coeff_t>
+inline MatrixView<coeff_t> operator+=(MatrixView<coeff_t> v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x + c; });
+  return v;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> &operator-=(Matrix<coeff_t> &A,
+                                   Matrix<coeff_t> const &B) {
+  Add(B, A, static_cast<coeff_t>(-1.));
+  return A;
+}
+
+template <class coeff_t>
+inline MatrixView<coeff_t> operator-=(MatrixView<coeff_t> A,
+                                      MatrixView<coeff_t> B) {
+  Add(B, A, static_cast<coeff_t>(-1.));
+  return A;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> &operator-=(Matrix<coeff_t> &v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x - c; });
+  return v;
+}
+
+template <class coeff_t>
+inline MatrixView<coeff_t> operator-=(MatrixView<coeff_t> v, coeff_t c) {
+  Map(v, [&c](coeff_t &x) { x = x - c; });
+  return v;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator-(Matrix<coeff_t> const &v) {
+  Matrix<coeff_t> res(v);
+  Map(res, [](coeff_t &x) { x = -x; });
+  return res;
+}
+
+template <class coeff_t>
+inline Matrix<coeff_t> operator-(MatrixView<coeff_t> v) {
+  Matrix<coeff_t> res(v);
+  Map(res, [](coeff_t &x) { x = -x; });
+  return res;
 }
 
 } // namespace lila

@@ -10,16 +10,14 @@ void test_cholesky()
   int n=10;
   
   // Test Cholesky
-  for (int seed : range<int>(10)) 
+  for (int seed=0; seed<10; ++seed) 
     {
       Matrix<coeff_t> A(n, n);
     
       // Create positive definite Matrix
-      uniform_dist_t<coeff_t> dist(-1., 1.);
-      uniform_gen_t<coeff_t> gen(dist, seed);
       std::vector<lila::Vector<coeff_t>> vecs; 
       for (int k=0; k<n; ++k)
-	vecs.push_back(Random<coeff_t>(n, gen));
+	vecs.push_back(Random<coeff_t>(n));
       for (int i=0; i<n; ++i)
 	for (int j=0; j<n; ++j)
 	  A(i,j) = Dot(vecs[i], vecs[j]);

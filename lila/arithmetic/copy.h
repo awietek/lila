@@ -10,48 +10,60 @@
 
 namespace lila {
 
-template <class coeff_t> class Vector;
-template <class coeff_t> class Matrix;
-template <class coeff_t> class VectorView;
-template <class coeff_t> class MatrixView;
-
 template <class coeff_t>
-inline void Copy(VectorView<coeff_t> const &X, VectorView<coeff_t> const &Y) {
+inline void Copy(Vector<coeff_t> const &v, Vector<coeff_t> &w) {
   using size_type = blaslapack::blas_size_t;
-  assert(X.N() == Y.N()); // Check if valid dimensions
-  size_type N = X.N();
-  size_type incx = X.inc();
-  size_type incy = Y.inc();
-  blaslapack::copy(&N, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &incx,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &incy);
+  assert(v.n() == w.n());
+  size_type n = v.n();
+  size_type inc = 1;
+  blaslapack::copy(&n, LILA_BLAS_CONST_CAST(coeff_t, v.data()), &inc,
+                   LILA_BLAS_CAST(coeff_t, w.data()), &inc);
 }
 
 template <class coeff_t>
-inline void Copy(Matrix<coeff_t> const &X, Matrix<coeff_t> &Y) {
+inline void Copy(VectorView<coeff_t> v, VectorView<coeff_t> w) {
   using size_type = blaslapack::blas_size_t;
-  size_type dx = X.size();
-  size_type dy = Y.size();
-  assert(dx == dy); // Check if valid dimensions
-  size_type inc = 1;
-  blaslapack::copy(&dx, LILA_BLAS_CONST_CAST(coeff_t, X.data()), &inc,
-                   LILA_BLAS_CAST(coeff_t, Y.data()), &inc);
+  assert(v.n() == w.n());
+  size_type n = v.n();
+  size_type v_inc = v.inc();
+  size_type w_inc = w.inc();
+  blaslapack::copy(&n, LILA_BLAS_CONST_CAST(coeff_t, v.data()), &v_inc,
+                   LILA_BLAS_CAST(coeff_t, w.data()), &w_inc);
 }
 
 template <class coeff_t>
-inline void Copy(MatrixView<coeff_t> const &X, MatrixView<coeff_t> const &Y) {
+inline void Copy(Matrix<coeff_t> const &A, Matrix<coeff_t> &B) {
   using size_type = blaslapack::blas_size_t;
-  assert(X.M() == Y.M());
-  assert(X.N() == Y.N());
-  size_type M = X.M();
-  size_type N = X.N();
-  size_type ldX = X.ld();
-  size_type ldY = Y.ld();
+  assert(A.m() == B.m());
+  assert(A.n() == B.n());
+  size_type size = A.size();
   size_type inc = 1;
+  blaslapack::copy(&size, LILA_BLAS_CONST_CAST(coeff_t, A.data()), &inc,
+                   LILA_BLAS_CAST(coeff_t, B.data()), &inc);
+}
+
+template <class coeff_t>
+inline void Copy(MatrixView<coeff_t> A, MatrixView<coeff_t> B) {
+  using size_type = blaslapack::blas_size_t;
+  assert(A.m() == B.m());
+  assert(A.n() == B.n());
+
+  size_type A_incm = A.incm();
+  size_type A_incn = A.incn();
+  size_type B_incm = B.incm();
+  size_type B_incn = B.incn();
+
+  size_type m = A.m();
+  size_type n = A.n();
+  size_type A_ld = A.ld();
+  size_type B_ld = B.ld();
 
   // Perform a column-wise copy
-  for (int col = 0; col < N; ++col) {
-    blaslapack::copy(&M, LILA_BLAS_CONST_CAST(coeff_t, X.data() + col * ldX),
-                     &inc, LILA_BLAS_CAST(coeff_t, Y.data() + col * ldY), &inc);
+  for (int col = 0; col < n; ++col) {
+    blaslapack::copy(
+        &m, LILA_BLAS_CONST_CAST(coeff_t, A.data() + col * A_incn * A_ld),
+        &A_incm, LILA_BLAS_CAST(coeff_t, B.data() + col * B_incn * B_ld),
+        &B_incm);
   }
 }
 

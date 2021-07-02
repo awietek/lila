@@ -52,7 +52,7 @@ void test_eigen()
     for (int i=0; i<n; ++i) 
       {
 	auto eval = evals3(i);
-	auto evec = evecs3.col(i);
+	Vector<coeff_t> evec = evecs3(ALL, i);
 	// LilaPrint(Mult(Ah, evec) - (coeff_t)eval * Mult(Ad, evec));
 	REQUIRE(close(Mult(Ah, evec), (coeff_t)eval * evec));
       }
@@ -65,7 +65,7 @@ void test_eigen()
     Matrix<coeff_t> Ad(n, n);
     std::vector<lila::Vector<coeff_t>> vecs; 
     for (int k=0; k<n; ++k)
-      vecs.push_back(Random<coeff_t>(n, gen));
+      vecs.push_back(Random(n, gen));
     for (int i=0; i<n; ++i)
       for (int j=0; j<n; ++j)
     	Ad(i,j) = Dot(vecs[i], vecs[j]);
@@ -82,7 +82,7 @@ void test_eigen()
     for (int i=0; i<n-1; ++i) // n-1: Last eigenvector somehow looses precision?
       {
     	auto eval = evals4(i);
-    	auto evec = evecs4.col(i);
+    	Vector<coeff_t> evec = evecs4(ALL, i);
     	// LilaPrint(Mult(Ah, evec) - (coeff_t)eval * Mult(Ad, evec));
     	REQUIRE(close(Mult(Ah, evec), (coeff_t)eval * Mult(Ad, evec)));
       }

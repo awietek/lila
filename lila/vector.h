@@ -1,15 +1,10 @@
 #pragma once
 
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <iterator>
-#include <sstream>
+#include <memory>
 #include <vector>
 
 #include <lila/arithmetic/copy.h>
 #include <lila/common.h>
-#include <lila/utils/strings.h>
 #include <lila/views/slice.h>
 #include <lila/views/vector_view.h>
 
@@ -26,136 +21,87 @@ public:
   using iterator_t = typename vector_type::iterator;
   using const_iterator_t = typename vector_type::const_iterator;
 
-  Vector() : size_(0), data_(){};
-  ~Vector() = default;
-  Vector(const Vector &) = default;
-  Vector &operator=(const Vector &) = default;
-  Vector(Vector &&) = default;
-  Vector &operator=(Vector &&) = default;
+  friend class VectorView<coeff_t>;
 
-  explicit Vector(size_type size) : size_(size), data_(size_, 0) {}
-  explicit Vector(const vector_type &vec) : size_(vec.size()), data_(vec) {}
+  Vector() : storage_(std::make_shared<vector_type>()){};
+  ~Vector() = default;
+
+  Vector(Vector const &v)
+      : storage_(std::make_shared<vector_type>(v.vector())){};
+  Vector &operator=(Vector v) {
+    swap(*this, v);
+    return *this;
+  }
+  friend void swap(Vector &v, Vector &w) { std::swap(v.storage_, w.storage_); }
+  Vector(Vector &&) = default;
+
+  explicit Vector(size_type size)
+      : storage_(std::make_shared<vector_type>(size, 0)) {}
+
+  explicit Vector(vector_type const &vec)
+      : storage_(std::make_shared<vector_type>(vec)) {}
+
   Vector(std::initializer_list<coeff_t> list)
-      : size_((size_type)list.size()), data_(size_, 0) {
-    std::copy(list.begin(), list.end(), data_.begin());
+      : storage_(std::make_shared<vector_type>(list.size(), 0)) {
+    std::copy(list.begin(), list.end(), storage_->begin());
   }
 
-  Vector &operator=(std::vector<coeff_t> &vec) {
-    data_ = vec;
-    size_ = (int)vec.size();
+  Vector &operator=(vector_type const &vec) {
+    *storage_ = vec;
     return *this;
   };
 
-  Vector(VectorView<coeff_t> const &view) : size_(view.N()), data_(size_) {
+  Vector(VectorView<coeff_t> const &view)
+      : storage_(std::make_shared<vector_type>(view.size(), 0)) {
     Copy(view, VectorView<coeff_t>(*this));
   };
 
   Vector &operator=(VectorView<coeff_t> const &view) {
-    size_ = view.N();
-    data_.resize(size_);
-    Copy(view, *this);
+    storage_->resize(view.n());
+    Copy(view, VectorView<coeff_t>(*this));
+  };
+
+  Vector &operator=(coeff_t c) {
+    std::fill(storage_->begin(), storage_->end(), c);
   };
 
   bool operator==(Vector const &other) const {
-    return (other.data_ == data_) && (other.size_ == size_);
+    return *other.storage_ == *storage_;
   }
 
-  coeff_t operator()(size_type i) const { return data_[i]; }
-  coeff_t &operator()(size_type i) { return data_[i]; }
+  coeff_t operator()(size_type i) const { return (*storage_)[i]; }
+  coeff_t &operator()(size_type i) { return (*storage_)[i]; }
 
-  VectorView<coeff_t> operator()(Slice const& slice) {
+  VectorView<coeff_t> operator()(Slice const &slice) {
     return VectorView<coeff_t>(*this, slice);
   }
 
-  operator std::vector<coeff_t> &() { return data_; }
+  operator vector_type &() { return *storage_; }
 
-  void resize(size_type size) {
-    size_ = size;
-    data_.resize(size);
-  }
+  size_type size() const { return storage_->size(); }
+  size_type n() const { return storage_->size(); }
+  void resize(size_type size) { storage_->resize(size); }
+  void clear() { storage_->clear(); }
+  void push_back(coeff_t c) { storage_->push_back(c); }
+  void shrink_to_fit() { storage_->shrink_to_fit(); }
+  long use_count() const { return storage_.use_count(); }
 
-  void clear() {
-    size_ = 0;
-    data_.clear();
-  }
-  void shrink_to_fit() { data_.shrink_to_fit(); }
+  iterator_t begin() { return storage_->begin(); }
+  iterator_t end() { return storage_->end(); }
+  const_iterator_t begin() const { return storage_->begin(); }
+  const_iterator_t end() const { return storage_->end(); }
+  const_iterator_t cbegin() const { return storage_->cbegin(); }
+  const_iterator_t cend() const { return storage_->cend(); }
 
-  size_type nrows() const { return size_; }
-  int nblocks() const { return 1; }
-  size_type size() const { return size_; }
-
-  coeff_t *data() { return data_.data(); }
-  const coeff_t *data() const { return data_.data(); }
-
-  iterator_t begin() { return data_.begin(); }
-  iterator_t end() { return data_.end(); }
-  const_iterator_t begin() const { return data_.begin(); }
-  const_iterator_t end() const { return data_.end(); }
-  const_iterator_t cbegin() const { return data_.cbegin(); }
-  const_iterator_t cend() const { return data_.cend(); }
-
-  void push_back(const coeff_t &c) {
-    ++size_;
-    data_.push_back(c);
-  }
+  // Internal methods, not to be used by user
+  coeff_t *data() { return storage_->data(); }
+  const coeff_t *data() const { return storage_->data(); }
+  std::shared_ptr<vector_type> storage() { return storage_; }
+  vector_type &vector() { return *storage_; }
+  vector_type const &vector() const { return *storage_; }
 
 private:
-  size_type size_;
-  vector_type data_;
-}; // namespace lila
+  std::shared_ptr<vector_type> storage_;
+};
 
-template <class coeff_t> Vector<coeff_t> String2Vector(const std::string &str) {
-  std::istringstream stream(str);
-  std::vector<std::string> split(std::istream_iterator<std::string>{stream},
-                                 std::istream_iterator<std::string>());
-
-  Vector<coeff_t> vector(split.size());
-  int i = 0;
-  for (auto str : split)
-    vector(i++) = string2number<coeff_t>(str);
-  return vector;
-}
-
-template <class coeff_t>
-std::string Vector2String(const Vector<coeff_t> &vector, bool vertical = true) {
-  char whitespace = vertical ? '\n' : ' ';
-  std::stringstream ss;
-  ss << std::setprecision(16);
-  for (int i = 0; i < vector.nrows(); ++i)
-    ss << vector(i) << whitespace;
-  return ss.str();
-}
-
-template <class coeff_t>
-Vector<coeff_t> ReadVector(const std::string &filename) {
-  std::ifstream t(filename);
-
-  if (t.fail()) {
-    std::cerr << "Lila, Error in ReadVector: "
-              << "Could not open file with filename [" << filename
-              << "] given. Abort." << std::endl;
-    exit(EXIT_FAILURE);
-  }
-
-  std::string str((std::istreambuf_iterator<char>(t)),
-                  std::istreambuf_iterator<char>());
-  return String2Vector<coeff_t>(str);
-}
-
-template <class coeff_t>
-void WriteVector(const Vector<coeff_t> &vector, std::string filename,
-                 bool vertical = true) {
-  std::ofstream t;
-  t.open(filename);
-
-  if (t.fail()) {
-    std::cerr << "Lila, Error in WriteVector: "
-              << "Could not open file with filename [" << filename
-              << "] given. Abort." << std::endl;
-    exit(EXIT_FAILURE);
-  }
-
-  t << Vector2String(vector, vertical);
-  t.close();
-}
 } // namespace lila

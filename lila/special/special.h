@@ -5,9 +5,7 @@
 #include <lila/common.h>
 #include <lila/matrix.h>
 #include <lila/vector.h>
-#include <lila/numeric/compare.h>
 #include <lila/numeric/complex.h>
-#include <lila/arithmetic/mult.h>
 
 namespace lila {
 

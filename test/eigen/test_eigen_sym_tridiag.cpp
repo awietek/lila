@@ -31,7 +31,8 @@ template <class coeff_t> void test_eigen_sym_tridiag() {
 
     // Check if indeed eigenvalues
     for (int i=0; i<evecs.ncols(); ++i) {
-      coeff_t test = Dot(evecs.col(i), Mult(fullmat, evecs.col(i)));
+      Vector<coeff_t> evec = evecs(ALL, i);
+      coeff_t test = Dot(evec, Mult(fullmat, evec));
       REQUIRE(close(eigs(i), test));
     }
   }

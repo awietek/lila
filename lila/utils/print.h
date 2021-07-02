@@ -101,14 +101,14 @@ namespace lila {
   
   inline void PrintPretty(const char* identifier, const Vector<float>& vec) {
     printf("%s:\n", identifier);
-    for (int i=0; i<vec.nrows(); ++i)
+    for (int i=0; i<vec.size(); ++i)
       printf("%10.8g ", vec(i));
     printf("\n");
   }
 
   inline void PrintPretty(const char* identifier, const Vector<double>& vec) {
     printf("%s:\n", identifier);
-    for (int i=0; i<vec.nrows(); ++i)
+    for (int i=0; i<vec.size(); ++i)
       printf("%10.8g ", vec(i));
     printf("\n");
   }
@@ -116,7 +116,7 @@ namespace lila {
   inline void PrintPretty(const char* identifier, 
   			  const Vector<std::complex<float>>& vec) {
     printf("%s:\n", identifier);
-    for (int i=0; i<vec.nrows(); ++i)
+    for (int i=0; i<vec.size(); ++i)
       printf("%10.8g%-+8.8gj ", vec(i).real(), vec(i).imag());
     printf("\n");
   }
@@ -125,7 +125,7 @@ namespace lila {
   inline void PrintPretty(const char* identifier, 
   			  const Vector<std::complex<double>>& vec) {
     printf("%s:\n", identifier);
-    for (int i=0; i<vec.nrows(); ++i)
+    for (int i=0; i<vec.size(); ++i)
       printf("%10.8g%-+8.8gj ", vec(i).real(), vec(i).imag());
     printf("\n");
   }

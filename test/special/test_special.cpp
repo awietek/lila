@@ -64,14 +64,5 @@ TEST_CASE( "special", "[core]" ) {
     Ones(zmat);
     REQUIRE(all_one(zmat));
   }
-  
-  // Unitary
-  int N = 3;
-  lila::Vector<double> params(N*N);
-  for (int i =0; i<N*N; ++i)
-    params(i) = 0.1 * (i+1);
-  auto unitary = lila::Unitary<std::complex<double>>(N, params);
-  // LilaPrint(unitary);
-  REQUIRE(IsUnitary(unitary));
 
 }

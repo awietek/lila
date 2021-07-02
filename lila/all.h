@@ -12,14 +12,21 @@
 #include "numeric/complex.h"
 #include "numeric/precision.h"
 
-#include "arithmetic/copy.h"
-#include "arithmetic/assign.h"
-#include "arithmetic/matrixfunction.h"
 #include "arithmetic/add.h"
-#include "arithmetic/mult.h"
+//#include "arithmetic/assign.h"
+#include "arithmetic/copy.h"
+#include "arithmetic/dot.h"
+#include "arithmetic/map.h"
+#include "arithmetic/norm.h"
+#include "arithmetic/scale.h"
+
+#include "algebra/mult.h"
+#include "algebra/expm.h"
+#include "algebra/matrixfunction.h"
 
 #include "special/random.h"
 #include "special/special.h"
+#include "special/matrix_ops.h"
 
 #include "decomp/solve.h"
 #include "decomp/cholesky.h"

@@ -3,8 +3,8 @@
 #include <random>
 
 #include <lila/matrix.h>
-#include <lila/vector.h>
 #include <lila/numeric/complex.h>
+#include <lila/vector.h>
 
 #include <lila/decomp/solve.h>
 #include <lila/detail/random_detail.h>
@@ -20,6 +20,8 @@ using normal_dist_t = std::normal_distribution<real_t<coeff_t>>;
 template <class random_engine_t, class distribution_t, class coeff_t>
 class random_generator {
 public:
+  using coeff_type = coeff_t;
+
   random_generator(distribution_t &distribution, int seed)
       : distribution_(distribution) {
     engine_.seed(seed);
@@ -75,16 +77,18 @@ template <class coeff_t> void Random(Matrix<coeff_t> &mat) {
   Random(mat, gen);
 }
 
-template <class coeff_t, class gen_t>
-Vector<coeff_t> Random(int m, gen_t &gen, bool alter_generator = true) {
-  Vector<coeff_t> vec(m);
+template <class gen_t>
+Vector<typename gen_t::coeff_type> Random(int m, gen_t &gen,
+                                          bool alter_generator = true) {
+  Vector<typename gen_t::coeff_type> vec(m);
   Random(vec, gen, alter_generator);
   return vec;
 }
 
-template <class coeff_t, class gen_t>
-Matrix<coeff_t> Random(int m, int n, gen_t &gen, bool alter_generator = true) {
-  Matrix<coeff_t> mat(m, n);
+template <class gen_t>
+Matrix<typename gen_t::coeff_type> Random(int m, int n, gen_t &gen,
+                                          bool alter_generator = true) {
+  Matrix<typename gen_t::coeff_type> mat(m, n);
   Random(mat, gen, alter_generator);
   return mat;
 }

@@ -9,40 +9,59 @@ namespace lila {
 template <class coeff_t> class Vector;
 template <class coeff_t> class VectorView {
 public:
-  VectorView(Vector<coeff_t> &vec) {
-    data_ = vec.data();
-    N_ = vec.size();
-    inc_ = 1;
+  using vector_type = std::vector<coeff_t>;
+
+  VectorView() : storage_(std::make_shared<vector_type>()){};
+  ~VectorView() = default;
+  VectorView(VectorView const&) = default;
+  VectorView(VectorView &&) = default;
+  VectorView& operator=(VectorView const& other) {
+    Copy(other, *this);
+    return *this;
+  }
+  VectorView & operator=( VectorView && other) {
+    Copy(other, *this);
+    return *this;
   }
 
-  VectorView(Vector<coeff_t> &vec, Slice const &slice) {
-    auto end = (slice.end == END) ? vec.size() : slice.end; 
-    assert(slice.begin < vec.size());
-    assert(end <= vec.size());
+  VectorView &operator=(coeff_t c) {
+    Map(*this, [&c](coeff_t &x) { x = c; });
+    return *this;
+  }
+
+  VectorView(Vector<coeff_t> const &v)
+      : storage_(v.storage_), begin_(0), n_(v.size()), inc_(1) {}
+
+  VectorView(Vector<coeff_t> &v, Slice const &slice) : storage_(v.storage_) {
+    auto end = (slice.end == END) ? v.size() : slice.end;
+    assert(slice.begin < v.size());
+    assert(end <= v.size());
     assert(slice.begin <= slice.end);
 
-    data_ = vec.data() + slice.begin;
-    N_ = (end - slice.begin) / slice.step;
+    begin_ = slice.begin;
+    n_ = (end - slice.begin) / slice.step;
     inc_ = slice.step;
   }
 
-  VectorView(coeff_t *data, size_type N, size_type inc)
-      : data_(data), N_(N), inc_(inc) {}
+  VectorView(std::shared_ptr<vector_type> const &storage, size_type begin,
+             size_type n, size_type inc)
+      : storage_(storage), begin_(begin), n_(n), inc_(inc) {}
 
-  VectorView() = delete;
-  ~VectorView() = default;
-  VectorView(VectorView const &) = delete;
-  VectorView(VectorView &&) = delete;
-  VectorView &operator=(VectorView const &v) = delete;
-  VectorView &operator=(VectorView &&v) = delete;
 
-  inline coeff_t *data() const { return data_; }
-  inline size_type N() const { return N_; }
-  inline size_type inc() const { return inc_; }
+  size_type size() const { return n_; }
+  size_type n() const { return n_; }
+  size_type inc() const { return inc_; }
+  long use_count() const { return storage_.use_count(); }
+
+
+  std::shared_ptr<vector_type> storage() { return storage_; }
+  coeff_t *data() { return storage_->data() + begin_; }
+  const coeff_t *data() const { return storage_->data() + begin_; }
 
 private:
-  coeff_t *data_;
-  size_type N_;
+  std::shared_ptr<vector_type> storage_;
+  size_type begin_;
+  size_type n_;
   size_type inc_;
 };
 

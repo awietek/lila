@@ -1,26 +1,41 @@
-// Copyright 2018 Alexander Wietek - All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-#ifndef LILA_TIMING_H_
-#define LILA_TIMING_H_
-
+#pragma once
 #include <chrono>
+#include <lila/utils/logger.h>
+#include <string>
 
-#define LILA_CLK(t) t=std::chrono::high_resolution_clock::now()
-#define LILA_TIME(label, t1, t2) std::cout<<label<<" "<<std::chrono::duration_cast<std::chrono::seconds>(t2-t1).count()<<"\n"
-#define LILA_TIME_MILLI(label, t1, t2) std::cout<<label<<" "<<std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count()<<"\n"
-#define LILA_TIME_MICRO(label, t1, t2) std::cout<<label<<" "<<std::chrono::duration_cast<std::chrono::microseconds>(t2-t1).count()<<"\n"
-#define LILA_TIME_NANO(label, t1, t2) std::cout<<label<<" "<<std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1).count()<<"\n"
+namespace lila {
+using namespace std::chrono;
+using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
 
-#endif
+auto inline rightnow() -> decltype(high_resolution_clock::now()) {
+  return high_resolution_clock::now();
+}
+
+template <class Clock,
+          class Duration = typename Clock::duration> // Uff, that's awful, Fuck C++
+void timing(time_point<Clock, Duration> const &t0, 
+	    time_point<Clock, Duration> const &t1, std::string msg = "",
+            int verbosity = 1) {
+  auto td = duration_cast<milliseconds>(t1 - t0).count();
+  if (msg != "")
+    Log.out(verbosity, "{}: {}.{} secs", msg, td / 1000, td % 1000);
+  else
+    Log.out(verbosity, "{}.{} secs", td / 1000, td % 1000);
+}
+
+inline void tic(bool begin = true, std::string msg = "", int verbosity = 1) {
+  static auto t0 = rightnow();
+  if (begin) {
+    t0 = rightnow();
+  } else {
+    auto t1 = rightnow();
+    timing(t0, t1, msg, verbosity);
+  }
+}
+
+inline void toc(std::string msg = "", int verbosity = 1) {
+  tic(false, msg, verbosity);
+}
+
+} // namespace lila

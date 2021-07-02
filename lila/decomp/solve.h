@@ -39,7 +39,7 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // check / get dimensions
-    assert(A.nrows() == X.nrows());
+    assert(A.nrows() == X.n());
     size_type n = A.nrows();
     size_type n_rhs = 1;
     size_type lda = n;
@@ -117,7 +117,7 @@ namespace lila {
     using size_type = blaslapack::blas_size_t;
 
     // check / get dimensions
-    assert(A.nrows() == X.nrows());
+    assert(A.nrows() == X.n());
     size_type n = A.nrows();
     size_type n_rhs = 1;
     size_type lda = n;

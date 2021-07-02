@@ -8,10 +8,12 @@ sources+= test/views/test_views.cpp
 sources+= test/special/test_special.cpp
 sources+= test/special/test_random.cpp
 
-sources+= test/arithmetic/test_mult.cpp
-sources+= test/arithmetic/test_matrixfunction.cpp
+sources+= test/algebra/test_mult.cpp
+sources+= test/algebra/test_matrixfunction.cpp
+sources+= test/algebra/test_expm.cpp
+
 sources+= test/arithmetic/test_dot.cpp
-sources+= test/arithmetic/test_expm.cpp
+sources+= test/arithmetic/test_copy.cpp
 
 sources+= test/decomp/test_solve.cpp
 sources+= test/decomp/test_qr.cpp
