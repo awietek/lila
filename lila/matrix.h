@@ -74,7 +74,8 @@ public:
   Matrix &operator=(MatrixView<coeff_t> const &A) {
     assert(m_ == A.m());
     assert(n_ == A.n());
-    Copy(A, *this);
+    Copy(A, MatrixView<coeff_t>(*this));
+    return *this;
   };
 
   Matrix &operator=(coeff_t c) {
@@ -103,7 +104,7 @@ public:
 
   VectorView<coeff_t> operator()(Slice const &slice_row, size_type j) {
     size_type end = (slice_row.end == END) ? m_ : slice_row.end;
-    size_type begin =  slice_row.begin + j * m_;
+    size_type begin = slice_row.begin + j * m_;
     size_type n = (end - slice_row.begin) / slice_row.step;
     size_type inc = slice_row.step;
     return VectorView<coeff_t>(storage_, begin, n, inc);
@@ -115,12 +116,13 @@ public:
   size_type nrows() const { return m_; }
   size_type ncols() const { return n_; }
   void resize(size_type m, size_type n) {
-    auto copy = (*this);
+    Matrix<coeff_t> copy = (*this);
     storage_->resize(m * n);
-    (*this)({0, std::min(m_, m)}, {0, std::min(n_, n)}) =
-        copy({0, std::min(m_, m)}, {0, std::min(n_, n)});
     m_ = m;
     n_ = n;
+    for (int i = 0; i < m; ++i)
+      for (int j = 0; j < n; ++j)
+        (*this)(i, j) = copy(i, j);
   }
   void clear() {
     m_ = 0;

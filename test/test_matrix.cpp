@@ -13,7 +13,7 @@ TEST_CASE( "matrix", "[core]" ) {
   fmat(1,0) = 6.54;
   fmat(1,1) = 4.56;
   fmat(1,2) = 7.89;     
-  LilaPrint(fmat);  
+  // LilaPrint(fmat);  
   // LilaPrint(Transpose(fmat));  
   // LilaPrint(Conj(fmat));  
   // LilaPrint(Herm(fmat));  
@@ -29,7 +29,7 @@ TEST_CASE( "matrix", "[core]" ) {
   dmat(1,0) = 6.54;
   dmat(1,1) = 4.56;
   dmat(1,2) = 7.89;     
-  LilaPrint(dmat);  
+  // LilaPrint(dmat);  
   // LilaPrint(Transpose(dmat));  
   // LilaPrint(Conj(dmat));  
   // LilaPrint(Herm(dmat));  
@@ -46,7 +46,7 @@ TEST_CASE( "matrix", "[core]" ) {
   cmat(1,0) = {6.54, 4.65};
   cmat(1,1) = {4.56, 6.45};
   cmat(1,2) = {7.89, 9.78};     
-  LilaPrint(cmat);  
+  // LilaPrint(cmat);  
   // LilaPrint(Transpose(cmat));  
   // LilaPrint(Conj(cmat));  
   // LilaPrint(Herm(cmat));   
@@ -63,7 +63,7 @@ TEST_CASE( "matrix", "[core]" ) {
   zmat(1,0) = {6.54, 4.65};
   zmat(1,1) = {4.56, 6.45};
   zmat(1,2) = {7.89, 9.78};     
-  LilaPrint(zmat);  
+  // LilaPrint(zmat);  
   // LilaPrint(Transpose(zmat));  
   // LilaPrint(Conj(zmat));  
   // LilaPrint(Herm(zmat));  

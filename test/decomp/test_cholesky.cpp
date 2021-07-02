@@ -18,6 +18,7 @@ void test_cholesky()
       std::vector<lila::Vector<coeff_t>> vecs; 
       for (int k=0; k<n; ++k)
 	vecs.push_back(Random<coeff_t>(n));
+
       for (int i=0; i<n; ++i)
 	for (int j=0; j<n; ++j)
 	  A(i,j) = Dot(vecs[i], vecs[j]);

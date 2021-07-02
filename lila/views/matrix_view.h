@@ -20,17 +20,13 @@ public:
   MatrixView(MatrixView const&) = default;
   MatrixView(MatrixView &&) = default;
   MatrixView& operator=(MatrixView const& other) {
-    printf("mv copy assing\n");
     Copy(other, *this);
     return *this;
   }
   MatrixView & operator=( MatrixView && other) {
-    printf("mv move assing\n");
     Copy(other, *this);
     return *this;
   }
-
-
 
   MatrixView &operator=(coeff_t c) {
     Map(*this, [&c](coeff_t &x) { x = c; });
@@ -43,24 +39,17 @@ public:
 
   MatrixView(Matrix<coeff_t> &A, Slice const &slice_row, Slice const &slice_col)
       : storage_(A.storage_), ld_(A.m()) {
-    auto end_row = (slice_row.end == END) ? A.nrows() : slice_row.end;
-    auto end_col = (slice_col.end == END) ? A.ncols() : slice_col.end;
+    assert(slice_row.step != 0);
+    assert(slice_col.step != 0);
 
-    size_type begin = slice_row.begin + ld_ * slice_col.begin;
-    size_type end = end_row + ld_ * end_col;
+    auto [aslice_row, am] = adjusted_slice_length(slice_row, A.m());
+    auto [aslice_col, an] = adjusted_slice_length(slice_col, A.n());
 
-    assert(begin < A.size());
-    assert(end < A.size());
-    assert(begin <= end);
-
-    assert(end_row >= slice_row.begin);
-    assert(end_col >= slice_col.begin);
-
-    begin_ = begin;
-    m_ = (end_row - slice_row.begin) / slice_row.step;
-    n_ = (end_col - slice_col.begin) / slice_col.step;
-    incm_ = slice_row.step;
-    incn_ = slice_col.step;
+    begin_ = aslice_row.begin + ld_ * aslice_col.begin;
+    m_ = am;
+    n_ = an;
+    incm_ = (slice_row.step > 0) ? slice_row.step : -slice_row.step;
+    incn_ = (slice_col.step > 0) ? slice_col.step : -slice_col.step;
   }
 
   size_type m() const { return m_; }

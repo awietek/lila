@@ -11,8 +11,8 @@ void test_resize()
   int n=5;
 
   // Test Resize
-  for (int m_new=0; m_new < 10; ++m_new)
-    for (int n_new=0; n_new < 10; ++n_new)
+  for (int m_new=1; m_new < 10; ++m_new)
+    for (int n_new=1; n_new < 10; ++n_new)
       {
 	for (int seed : lila::range<int>(3)) 
 	  {
