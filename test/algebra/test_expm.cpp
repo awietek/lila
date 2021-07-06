@@ -15,16 +15,23 @@ void test_expm()
   
     Matrix<coeff_t> A(n, n);
     Random(A, fgen);
+    // LilaPrint(A);
+
     auto Aexp = ExpM(A, alpha);
+    // LilaPrint(Aexp);
+
 
     // Check whether hermitian gives same result
     auto A1 = A;
     Add(Herm(A1), A1);
+    // LilaPrint(A1);
 
     // auto LILA_CLK(t1);
     Aexp = ExpM(A1, alpha);
     // auto LILA_CLK(t2);
     // LILA_TIME_MICRO("pade", t1, t2);
+    // LilaPrint(Aexp);
+
 
     auto Aexp2 = A1;
     // LILA_CLK(t1);

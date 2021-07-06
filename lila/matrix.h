@@ -117,12 +117,13 @@ public:
   size_type ncols() const { return n_; }
   void resize(size_type m, size_type n) {
     Matrix<coeff_t> copy = (*this);
-    storage_->resize(m * n);
+    storage_->resize(m * n, 0);
+    std::fill(storage_->begin(), storage_->end(), 0);
+    for (int j = 0; j < std::min(n, n_); ++j)
+      for (int i = 0; i < std::min(m, m_); ++i)
+        (*storage_)[i + j * m] = copy(i, j);
     m_ = m;
     n_ = n;
-    for (int i = 0; i < m; ++i)
-      for (int j = 0; j < n; ++j)
-        (*this)(i, j) = copy(i, j);
   }
   void clear() {
     m_ = 0;

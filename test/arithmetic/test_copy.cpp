@@ -19,8 +19,8 @@ template <class coeff_t> void test_copy() {
   v1 = Random<coeff_t>(n);
   v2 = ZerosLike(v1);
   Copy(v1({1, n - 1}), v2({1, n - 1}));
-  LilaPrint(v1);
-  LilaPrint(v2);
+  // LilaPrint(v1);
+  // LilaPrint(v2);
   for (int i = 1; i < n - 1; ++i)
     REQUIRE(v1(i) == v2(i));
 
@@ -28,9 +28,8 @@ template <class coeff_t> void test_copy() {
   v1 = Random<coeff_t>(n);
   v2 = ZerosLike(v1);
   Copy(v1({1, n - 1, step}), v2({1, n - 1, step}));
-
-  LilaPrint(v1);
-  LilaPrint(v2);
+  // LilaPrint(v1);
+  // LilaPrint(v2);
   for (int i = 1; i < n - 1; i += step)
     REQUIRE(v1(i) == v2(i));
 
@@ -47,8 +46,8 @@ template <class coeff_t> void test_copy() {
   A2 = ZerosLike(A1);
   Copy(A1({1, m - 1}, {1, n - 1}), A2({1, m - 1}, {1, n - 1}));
 
-  LilaPrint(A1);
-  LilaPrint(A2);
+  // LilaPrint(A1);
+  // LilaPrint(A2);
   for (int i = 1; i < m - 1; ++i)
     for (int j = 1; j < n - 1; ++j)
       REQUIRE(A1(i, j) == A2(i, j));

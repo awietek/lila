@@ -9,7 +9,7 @@
 namespace lila {
 
 template <class coeff_t>
-inline void Mult(const Matrix<coeff_t> &A, const Matrix<coeff_t> &B,
+inline void Mult(Matrix<coeff_t> const &A, Matrix<coeff_t> const &B,
                  Matrix<coeff_t> &C, coeff_t alpha = 1., coeff_t beta = 0.,
                  char transa = 'N', char transb = 'N') {
   using size_type = blaslapack::blas_size_t;
@@ -21,9 +21,8 @@ inline void Mult(const Matrix<coeff_t> &A, const Matrix<coeff_t> &B,
   size_type kb = (transb == 'N') ? B.nrows() : B.ncols();
 
   assert(ka == kb); // Check if valid multiplication dimensions
-
-  if ((C.nrows() != m) || (C.ncols() != n))
-    C.resize(m, n);
+  if (((C.m() == 0) && (C.n() == 0)))
+    C = Zeros<coeff_t>(m, n);
 
   // leading dimensions
   size_type lda = (transa == 'N') ? m : ka;
@@ -38,15 +37,15 @@ inline void Mult(const Matrix<coeff_t> &A, const Matrix<coeff_t> &B,
 }
 
 template <class coeff_t>
-inline Matrix<coeff_t> Mult(const Matrix<coeff_t> &A,
-                            const Matrix<coeff_t> &B) {
+inline Matrix<coeff_t> Mult(Matrix<coeff_t> const &A,
+                            Matrix<coeff_t> const &B) {
   Matrix<coeff_t> C;
   Mult(A, B, C);
   return C;
 }
 
 template <class coeff_t>
-inline void Mult(const Matrix<coeff_t> &A, const Vector<coeff_t> &X,
+inline void Mult(Matrix<coeff_t> const &A, Vector<coeff_t> const &X,
                  Vector<coeff_t> &Y, coeff_t alpha = 1., coeff_t beta = 0.,
                  char trans = 'N') {
   using size_type = blaslapack::blas_size_t;
@@ -57,8 +56,8 @@ inline void Mult(const Matrix<coeff_t> &A, const Vector<coeff_t> &X,
 
   assert(n == X.size()); // Check if valid multiplication dimensions
 
-  if (Y.size() != m)
-    Y.resize(n);
+  if (Y.size() == 0)
+    Y = Zeros<coeff_t>(n);
 
   // leading dimensions
   size_type lda = A.nrows();
@@ -71,8 +70,8 @@ inline void Mult(const Matrix<coeff_t> &A, const Vector<coeff_t> &X,
 }
 
 template <class coeff_t>
-inline Vector<coeff_t> Mult(const Matrix<coeff_t> &A,
-                            const Vector<coeff_t> &X) {
+inline Vector<coeff_t> Mult(Matrix<coeff_t> const &A,
+                            Vector<coeff_t> const &X) {
   Vector<coeff_t> Y;
   Mult(A, X, Y);
   return Y;

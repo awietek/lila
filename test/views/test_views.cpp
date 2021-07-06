@@ -23,16 +23,19 @@ template <class coeff_t> void test_views() {
 
   // Check reference counting
   auto mat = Random<coeff_t>(5, 5);
-  LilaPrint(mat.use_count());
+  // LilaPrint(mat.use_count());
   {
     auto submat = mat({2, 4}, {2, 4});
-    LilaPrint(mat.use_count());
-    LilaPrint(submat.use_count());
-    LilaPrint(mat);
-    LilaPrint(submat);
+    REQUIRE(submat.use_count() == 2);
+    // LilaPrint(mat.use_count());
+    // LilaPrint(submat.use_count());
+    // LilaPrint(mat);
+    // LilaPrint(submat);
   }
-  LilaPrint(mat.use_count());
-  printf("\n\n\n");
+  REQUIRE(mat.use_count() == 1);
+
+  // LilaPrint(mat.use_count());
+  // printf("\n\n\n");
 
 
   // // check deletion of creating Matrix doesn't delete storage
@@ -40,41 +43,41 @@ template <class coeff_t> void test_views() {
   // LilaPrint(view);
   // LilaPrint(view.use_count());
 
-  printf("Setting submatrix to one\n");
+  // printf("Setting submatrix to one\n");
   mat({2,4}, {2,4}) = (coeff_t)1.;
   REQUIRE(mat.use_count() == 1);
-  LilaPrint(mat);
-  LilaPrint(mat.use_count());
-  printf("\n\n\n");
+  // LilaPrint(mat);
+  // LilaPrint(mat.use_count());
+  // printf("\n\n\n");
 
-  printf("Adding two to submatrix \n");
-  mat({2,4}, {2,4}) += (coeff_t)2.;
+  // printf("Adding two to submatrix \n");
+  // mat({2,4}, {2,4}) += (coeff_t)2.;
   REQUIRE(mat.use_count() == 1);
-  LilaPrint(mat);
-  LilaPrint(mat.use_count());
-  printf("\n\n\n");
+  // LilaPrint(mat);
+  // LilaPrint(mat.use_count());
+  // printf("\n\n\n");
 
-  printf("subtracting five from submatrix \n");
-  mat({2,4}, {2,4}) -= (coeff_t)5.;
-  REQUIRE(mat.use_count() == 1);
-  LilaPrint(mat);
-  LilaPrint(mat.use_count());
-  printf("\n\n\n");
+  // printf("subtracting five from submatrix \n");
+  // mat({2,4}, {2,4}) -= (coeff_t)5.;
+  // REQUIRE(mat.use_count() == 1);
+  // LilaPrint(mat);
+  // LilaPrint(mat.use_count());
+  // printf("\n\n\n");
 
 
 
-  printf("setting first column equal to second column \n");
-  mat(ALL, 1) = mat(ALL, 0);
-  REQUIRE(mat.use_count() == 1);
-  LilaPrint(mat);
-  LilaPrint(mat.use_count());
-  printf("\n\n\n");
+  // printf("setting first column equal to second column \n");
+  // mat(ALL, 1) = mat(ALL, 0);
+  // REQUIRE(mat.use_count() == 1);
+  // LilaPrint(mat);
+  // LilaPrint(mat.use_count());
+  // printf("\n\n\n");
 
-  printf("setting first row to 0 \n");
-  mat(0, ALL) = Zeros<coeff_t>(5);
-  LilaPrint(mat);
-  LilaPrint(mat.use_count());
-  printf("\n\n\n");
+  // printf("setting first row to 0 \n");
+  // mat(0, ALL) = Zeros<coeff_t>(5);
+  // LilaPrint(mat);
+  // LilaPrint(mat.use_count());
+  // printf("\n\n\n");
 
 
   // // Check if storage isn't copied for views and 
@@ -95,7 +98,7 @@ template <class coeff_t> void test_views() {
   // sleep(10);
 
 
-  printf("---------------------------\n\n\n");
+  // printf("---------------------------\n\n\n");
 
 }
 

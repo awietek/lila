@@ -4,6 +4,8 @@
 
 #include <lila/matrix.h>
 #include <lila/vector.h>
+#include <lila/views/matrix_view.h>
+#include <lila/views/vector_view.h>
 
 #include <lila/blaslapack/blaslapack.h>
 
@@ -32,6 +34,18 @@ inline void Add(VectorView<coeff_t> v, VectorView<coeff_t> w,
   blaslapack::axpy(&n, LILA_BLAS_CAST(coeff_t, &alpha),
                    LILA_BLAS_CONST_CAST(coeff_t, v.data()), &v_inc,
                    LILA_BLAS_CAST(coeff_t, w.data()), &w_inc);
+}
+
+template <class coeff_t>
+inline void Add(Vector<coeff_t> const &v, VectorView<coeff_t> w,
+                coeff_t alpha = static_cast<coeff_t>(1.)) {
+  Add(VectorView<coeff_t>(v), w, alpha);
+}
+
+template <class coeff_t>
+inline void Add(VectorView<coeff_t> v, Vector<coeff_t> &w,
+                coeff_t alpha = static_cast<coeff_t>(1.)) {
+  Add(v, VectorView<coeff_t>(w), alpha);
 }
 
 template <class coeff_t>
@@ -71,6 +85,18 @@ inline void Add(MatrixView<coeff_t> A, MatrixView<coeff_t> B,
         LILA_BLAS_CONST_CAST(coeff_t, A.data() + col * A_incn * A_ld), &A_incm,
         LILA_BLAS_CAST(coeff_t, B.data() + col * B_incn * B_ld), &B_incm);
   }
+}
+
+template <class coeff_t>
+inline void Add(Matrix<coeff_t> const &A, MatrixView<coeff_t> B,
+                coeff_t alpha = static_cast<coeff_t>(1.)) {
+  Add(MatrixView<coeff_t>(A), B, alpha);
+}
+
+template <class coeff_t>
+inline void Add(MatrixView<coeff_t> A, Matrix<coeff_t> &B,
+                coeff_t alpha = static_cast<coeff_t>(1.)) {
+  Add(A, MatrixView<coeff_t>(B), alpha);
 }
 
 template <class coeff_t>

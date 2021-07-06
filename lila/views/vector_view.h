@@ -47,11 +47,11 @@ public:
     assert(aslice.end <= v.size());
     assert(aslice.begin <= aslice.end);
 
-    printf("slice: b: %ld, e: %ld, s: %ld, l: %ld\n", slice.begin, slice.end,
-           slice.step, slice.end - slice.begin);
-    printf("alice: b: %ld, e: %ld, s: %ld, l: %ld\n", aslice.begin, aslice.end,
-           aslice.step, alength);
-    printf("b: %ld, n: %ld, i: %ld\n\n", begin_, n_, inc_);
+    // printf("slice: b: %ld, e: %ld, s: %ld, l: %ld\n", slice.begin, slice.end,
+    //        slice.step, slice.end - slice.begin);
+    // printf("alice: b: %ld, e: %ld, s: %ld, l: %ld\n", aslice.begin, aslice.end,
+    //        aslice.step, alength);
+    // printf("b: %ld, n: %ld, i: %ld\n\n", begin_, n_, inc_);
   }
 
   VectorView(std::shared_ptr<vector_type> const &storage, size_type begin,

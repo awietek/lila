@@ -78,7 +78,7 @@ template <class coeff_t> void test_mult() {
   // Print(C);
 }
 
-TEST_CASE("matrix_multiplication", "[core]") {
+TEST_CASE("mult", "[algebra]") {
   test_mult<float>();
   test_mult<double>();
   test_mult<std::complex<float>>();

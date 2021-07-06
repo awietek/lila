@@ -30,7 +30,7 @@ void test_dot()
 }
 
 
-TEST_CASE( "dot", "[core]" ) {
+TEST_CASE( "dot", "[arithmetic]" ) {
   test_dot<float>();
   test_dot<double>();
   test_dot<std::complex<float>>();

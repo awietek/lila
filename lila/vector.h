@@ -80,7 +80,7 @@ public:
 
   size_type size() const { return storage_->size(); }
   size_type n() const { return storage_->size(); }
-  void resize(size_type size) { storage_->resize(size); }
+  void resize(size_type size) { storage_->resize(size, 0); }
   void clear() { storage_->clear(); }
   void push_back(coeff_t c) { storage_->push_back(c); }
   void shrink_to_fit() { storage_->shrink_to_fit(); }

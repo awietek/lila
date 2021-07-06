@@ -24,6 +24,7 @@ void test_resize()
 	    Random(A, gen);
 	    auto A_res = A;
 	    A_res.resize(m_new, n_new);
+
 	    for (int i=0; i < m_new; ++i)
 	      for (int j=0; j < n_new; ++j)
 		{
@@ -42,3 +43,4 @@ TEST_CASE( "resize", "[core]" ) {
   test_resize<std::complex<float>>();
   test_resize<std::complex<double>>();
 }
+
