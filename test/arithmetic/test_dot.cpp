@@ -19,7 +19,7 @@ void test_dot()
    
     lila::Vector<coeff_t> v2(n);
     Random(v2, fgen);
-
+    
     coeff_t dot_lila = Dot(v1, v2);
     coeff_t dot_test = 0;
     for (int i = 0; i < n; ++i)
@@ -31,7 +31,7 @@ void test_dot()
 
 
 TEST_CASE( "dot", "[arithmetic]" ) {
-  test_dot<float>();
+  // test_dot<float>();
   test_dot<double>();
   test_dot<std::complex<float>>();
   test_dot<std::complex<double>>();

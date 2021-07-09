@@ -77,31 +77,31 @@ extern "C" blas_complex_t zdotc_(const blas_size_t *N, const blas_complex_t *x,
 extern "C" blas_float_t snrm2_(const blas_size_t *N, const blas_float_t *x,
                                const blas_size_t *incx);
 extern "C" blas_double_t dnrm2_(const blas_size_t *N, const blas_double_t *x,
-                                const blas_double_t *incx);
+                                const blas_size_t *incx);
 extern "C" blas_float_t scnrm2_(const blas_size_t *N, const blas_scomplex_t *x,
                                 const blas_size_t *incx);
 extern "C" blas_double_t dznrm2_(const blas_size_t *N, const blas_complex_t *x,
-                                 const blas_double_t *incx);
+                                 const blas_size_t *incx);
 
 // Asum
 extern "C" blas_float_t sasum_(const blas_size_t *N, const blas_float_t *x,
                                const blas_size_t *incx);
 extern "C" blas_double_t dasum_(const blas_size_t *N, const blas_double_t *x,
-                                const blas_double_t *incx);
+                                const blas_size_t *incx);
 extern "C" blas_float_t scasum_(const blas_size_t *N, const blas_scomplex_t *x,
                                 const blas_size_t *incx);
 extern "C" blas_double_t dzasum_(const blas_size_t *N, const blas_complex_t *x,
-                                 const blas_double_t *incx);
+                                 const blas_size_t *incx);
 
 // IAmax
 extern "C" blas_size_t isamax_(const blas_size_t *N, const blas_float_t *x,
                                const blas_size_t *incx);
 extern "C" blas_size_t idamax_(const blas_size_t *N, const blas_double_t *x,
-                                const blas_double_t *incx);
+                                const blas_size_t *incx);
 extern "C" blas_size_t icamax_(const blas_size_t *N, const blas_scomplex_t *x,
                                 const blas_size_t *incx);
 extern "C" blas_size_t izamax_(const blas_size_t *N, const blas_complex_t *x,
-                                 const blas_double_t *incx);
+                                 const blas_size_t *incx);
 
 // Gemv
 extern "C" void sgemv_(const char *trans, const blas_size_t *m,
