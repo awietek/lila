@@ -20,6 +20,7 @@ sources+= test/arithmetic/test_scale.cpp
 sources+= test/decomp/test_solve.cpp
 sources+= test/decomp/test_qr.cpp
 sources+= test/decomp/test_cholesky.cpp
+sources+= test/decomp/test_determinant.cpp
 
 sources+= test/eigen/test_eigen.cpp
 sources+= test/eigen/test_eigen_sym_tridiag.cpp

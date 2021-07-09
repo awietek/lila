@@ -41,7 +41,6 @@ inline void Copy(Vector<coeff_t> const &v, VectorView<coeff_t> w) {
   Copy(VectorView<coeff_t>(v), w);
 }
 
-
 template <class coeff_t>
 inline void Copy(Matrix<coeff_t> const &A, Matrix<coeff_t> &B) {
   using size_type = blaslapack::blas_size_t;
@@ -87,6 +86,5 @@ template <class coeff_t>
 inline void Copy(Matrix<coeff_t> const &v, MatrixView<coeff_t> w) {
   Copy(MatrixView<coeff_t>(v), w);
 }
-
 
 } // namespace lila

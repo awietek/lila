@@ -51,6 +51,12 @@ public:
     return *this;
   };
 
+  Vector &operator=(std::initializer_list<coeff_t> list) {
+    storage_->resize(list.size());
+    std::copy(list.begin(), list.end(), storage_->begin());
+    return *this;
+  }
+
   Vector(VectorView<coeff_t> const &view)
       : storage_(std::make_shared<vector_type>(view.size(), 0)) {
     Copy(view, VectorView<coeff_t>(*this));

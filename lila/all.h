@@ -13,7 +13,6 @@
 #include "numeric/precision.h"
 
 #include "arithmetic/add.h"
-//#include "arithmetic/assign.h"
 #include "arithmetic/copy.h"
 #include "arithmetic/dot.h"
 #include "arithmetic/map.h"
@@ -30,6 +29,7 @@
 
 #include "decomp/solve.h"
 #include "decomp/cholesky.h"
+#include "decomp/determinant.h"
 
 #include "eigen/eigen.h"
 #include "eigen/eigen_sym.h"

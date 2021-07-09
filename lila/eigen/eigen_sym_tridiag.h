@@ -12,10 +12,9 @@ template <class coeff_t>
 inline void EigenvaluesSymTridiagInplace(Vector<coeff_t> &diag,
                                          Vector<coeff_t> &offdiag) {
   assert(diag.size() <= offdiag.size() + 1);
-
   char job = 'N';
   int N = diag.size();
-  int ldz = N;
+  int ldz = 1;
   int info = 0;
   blaslapack::stev(&job, &N, diag.data(), offdiag.data(), NULL, &ldz, NULL,
                    &info);
