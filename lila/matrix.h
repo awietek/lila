@@ -70,10 +70,13 @@ public:
         storage_(std::make_shared<vector_type>(m_ * n_, 0)) {
     Copy(view, MatrixView<coeff_t>(*this));
   };
-
+  
   Matrix &operator=(MatrixView<coeff_t> const &A) {
-    assert(m_ == A.m());
-    assert(n_ == A.n());
+    if ( (m_ != A.m()) || (n_!= A.n()) ) {
+      storage_->resize(A.m() * A.n());
+      m_ = A.m();
+      n_ = A.n();
+    }
     Copy(A, MatrixView<coeff_t>(*this));
     return *this;
   };

@@ -63,7 +63,8 @@ public:
   };
 
   Vector &operator=(VectorView<coeff_t> const &view) {
-    storage_->resize(view.n());
+    if (storage_->size() != view.n())
+      storage_->resize(view.n());
     Copy(view, VectorView<coeff_t>(*this));
   };
 
