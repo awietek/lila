@@ -30,4 +30,16 @@ inline coeff_t Dot(VectorView<coeff_t> const &v, VectorView<coeff_t> const &w) {
   return blaslapack::blas_to_lila(result);
 }
 
+template <class coeff_t>
+inline coeff_t Dot(Vector<coeff_t> const &v, VectorView<coeff_t> const &w) {
+  return Dot(VectorView<coeff_t>(v), w);
+}
+
+
+template <class coeff_t>
+inline coeff_t Dot(VectorView<coeff_t> const &v, Vector<coeff_t> const &w) {
+  return Dot(v, VectorView<coeff_t>(w));
+}
+
+
 } // namespace lila

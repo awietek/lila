@@ -16,6 +16,7 @@ sources+= test/arithmetic/test_dot.cpp
 sources+= test/arithmetic/test_copy.cpp
 sources+= test/arithmetic/test_add.cpp
 sources+= test/arithmetic/test_scale.cpp
+sources+= test/arithmetic/test_norm.cpp
 
 sources+= test/decomp/test_solve.cpp
 sources+= test/decomp/test_qr.cpp

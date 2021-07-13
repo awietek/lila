@@ -78,7 +78,9 @@ namespace lila {
 		      &lda,
 		      ipiv.data(),
 		      &info);
-    assert(info == 0);
+    // assert(info == 0);
+    // if (info != 0)
+    //   printf("info %d\n", info);
 
     return ipiv;
   }
