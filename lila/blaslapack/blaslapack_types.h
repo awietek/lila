@@ -44,7 +44,6 @@ using blas_double_t = double;
 using blas_scomplex_t = __CLPK_complex;
 using blas_complex_t = __CLPK_doublecomplex;
 using lapack_ret_t = int;
-
 #define LAPACK_CONST
 #define __LAPACK_ROUTINE_NAME(x) x##_
 #endif

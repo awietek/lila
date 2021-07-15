@@ -119,7 +119,6 @@ inline blas_float_t nrm2(const blas_size_t *N, const blas_scomplex_t *x,
                          const blas_size_t *incx) {
   return __LAPACK_ROUTINE_NAME(scnrm2)(N, x, incx);
 }
-
 inline blas_double_t nrm2(const blas_size_t *N, const blas_complex_t *x,
                           const blas_size_t *incx) {
   return __LAPACK_ROUTINE_NAME(dznrm2)(N, x, incx);
