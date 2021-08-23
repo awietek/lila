@@ -66,6 +66,7 @@ inline Vector<real_t<coeff_t>> Imag(Vector<coeff_t> const &X) {
   return Y;
 }
 
+
 template <class coeff_t> Matrix<coeff_t> Conj(Matrix<coeff_t> const &X) {
   Matrix<coeff_t> X_c(X.nrows(), X.ncols());
   for (int j = 0; j < X.ncols(); ++j)

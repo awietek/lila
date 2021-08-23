@@ -33,6 +33,11 @@ public:
   Matrix(Matrix const &A)
       : m_(A.m_), n_(A.n_),
         storage_(std::make_shared<vector_type>(A.vector())){};
+
+  explicit Matrix(Vector<coeff_t> const &v)
+      : m_(v.size()), n_(1),
+        storage_(std::make_shared<vector_type>(v.vector())){};
+
   Matrix &operator=(Matrix A) {
     swap(*this, A);
     return *this;
@@ -70,9 +75,9 @@ public:
         storage_(std::make_shared<vector_type>(m_ * n_, 0)) {
     Copy(view, MatrixView<coeff_t>(*this));
   };
-  
+
   Matrix &operator=(MatrixView<coeff_t> const &A) {
-    if ( (m_ != A.m()) || (n_!= A.n()) ) {
+    if ((m_ != A.m()) || (n_ != A.n())) {
       storage_->resize(A.m() * A.n());
       m_ = A.m();
       n_ = A.n();
@@ -111,6 +116,13 @@ public:
     size_type n = (end - slice_row.begin) / slice_row.step;
     size_type inc = slice_row.step;
     return VectorView<coeff_t>(storage_, begin, n, inc);
+  }
+
+  Vector<coeff_t> row(size_type i) {
+    return Vector<coeff_t>(operator()(i, {0, n_}));
+  }
+  Vector<coeff_t> col(size_type j) {
+    return Vector<coeff_t>(operator()({0, m_}, j));
   }
 
   size_type size() const { return storage_->size(); }

@@ -4,8 +4,8 @@
 
 #include <lila/common.h>
 #include <lila/matrix.h>
-#include <lila/vector.h>
 #include <lila/numeric/complex.h>
+#include <lila/vector.h>
 
 namespace lila {
 
@@ -58,18 +58,18 @@ template <class coeff_t> inline Matrix<coeff_t> Identity(size_type m) {
 }
 
 template <class coeff_t>
-inline Vector<complex_t<coeff_t>> Complex(Vector<coeff_t> &vec) {
-  auto complex_vec = Zeros<complex_t<coeff_t>>(vec.nrows());
-  for (auto j : vec.rows())
+inline Vector<complex_t<coeff_t>> Complex(Vector<coeff_t> const &vec) {
+  auto complex_vec = Zeros<complex_t<coeff_t>>(vec.n());
+  for (size_type j = 0; j < vec.n(); ++j)
     complex_vec(j) = (complex_t<coeff_t>)vec(j);
   return complex_vec;
 }
 
 template <class coeff_t>
-inline Matrix<complex_t<coeff_t>> Complex(Matrix<coeff_t> &mat) {
-  auto complex_mat = Zeros<complex_t<coeff_t>>(mat.nrows(), mat.ncols());
-  for (auto i : mat.rows())
-    for (auto j : mat.cols())
+inline Matrix<complex_t<coeff_t>> Complex(Matrix<coeff_t> const &mat) {
+  auto complex_mat = Zeros<complex_t<coeff_t>>(mat.m(), mat.n());
+  for (size_type i = 0; i < mat.m(); ++i)
+    for (size_type j = 0; j < mat.n(); ++j)
       complex_mat(i, j) = (complex_t<coeff_t>)mat(i, j);
   return complex_mat;
 }
