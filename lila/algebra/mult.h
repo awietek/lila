@@ -24,6 +24,9 @@ inline void Mult(Matrix<coeff_t> const &A, Matrix<coeff_t> const &B,
   if (((C.m() == 0) && (C.n() == 0)))
     C = Zeros<coeff_t>(m, n);
 
+  if ((C.m() != m) || (C.n() != n))
+    C.resize(m, n);
+
   // leading dimensions
   size_type lda = (transa == 'N') ? m : ka;
   size_type ldb = (transb == 'N') ? ka : n;
