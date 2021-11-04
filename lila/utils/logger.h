@@ -56,6 +56,7 @@ namespace lila {
       out(format, args...);
     }
 
+    template <typename... Args>
     void operator()(int level, const std::string &format, const Args &... args) {
       out(level, format, args...);
     }
