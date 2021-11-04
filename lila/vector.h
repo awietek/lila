@@ -90,6 +90,7 @@ public:
   void resize(size_type size) { storage_->resize(size, 0); }
   void clear() { storage_->clear(); }
   void push_back(coeff_t c) { storage_->push_back(c); }
+  void pop_back() { storage_->pop_back(); }
   void shrink_to_fit() { storage_->shrink_to_fit(); }
   long use_count() const { return storage_.use_count(); }
 

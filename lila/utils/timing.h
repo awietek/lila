@@ -18,10 +18,11 @@ void timing(time_point<Clock, Duration> const &t0,
 	    time_point<Clock, Duration> const &t1, std::string msg = "",
             int verbosity = 1) {
   auto td = duration_cast<milliseconds>(t1 - t0).count();
+  double tds = (double)td / 1000;
   if (msg != "")
-    Log.out(verbosity, "{}: {}.{} secs", msg, td / 1000, td % 1000);
+    Log.out(verbosity, "{}: {:.4f} secs", msg, tds);
   else
-    Log.out(verbosity, "{}.{} secs", td / 1000, td % 1000);
+    Log.out(verbosity, "{:.4f} secs", tds);
 }
 
 inline void tic(bool begin = true, std::string msg = "", int verbosity = 1) {

@@ -50,6 +50,16 @@ namespace lila {
 	std::cerr << fmt::format(format, args...) << "\n" << std::flush;
       exit(EXIT_FAILURE);
     }
+
+    template <typename... Args>
+    void operator()(const std::string &format, const Args &... args) {
+      out(format, args...);
+    }
+
+    void operator()(int level, const std::string &format, const Args &... args) {
+      out(level, format, args...);
+    }
+
     
   private:
     int verbosity_;
