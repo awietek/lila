@@ -12,6 +12,9 @@ template <class coeff_t>
 inline Vector<real_t<coeff_t>> EigenSymInplace(Matrix<coeff_t> &A,
                                                bool do_eigenvectors = true,
                                                char uplo = 'U') {
+  if ((A.m() == 0) || (A.n() == 0))
+    return Vector<real_t<coeff_t>>();
+  
   using size_type = blaslapack::blas_size_t;
   assert(A.nrows() == A.ncols());
 
