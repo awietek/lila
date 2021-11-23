@@ -12,7 +12,7 @@ template <class coeff_t> coeff_t DeterminantInplace(Matrix<coeff_t> &A) {
 
   coeff_t det = 1.0;
   int sign = 0;
-  for (int i = 0; i < A.m(); ++i) {
+  for (lila_size_t i = 0; i < A.m(); ++i) {
 
     if (ipiv[i] != i + 1) {
       sign ^= 1;

@@ -2,12 +2,12 @@
 
 #include "blaslapack_types.h"
 
-using blas_size_t = lila::blaslapack::blas_size_t;
-using blas_float_t = lila::blaslapack::blas_float_t;
-using blas_double_t = lila::blaslapack::blas_double_t;
-using blas_scomplex_t = lila::blaslapack::blas_scomplex_t;
-using blas_complex_t = lila::blaslapack::blas_complex_t;
-using lapack_ret_t = lila::blaslapack::lapack_ret_t;
+using blas_size_t = lila::blas_size_t;
+using blas_float_t = lila::blas_float_t;
+using blas_double_t = lila::blas_double_t;
+using blas_scomplex_t = lila::blas_scomplex_t;
+using blas_complex_t = lila::blas_complex_t;
+using lapack_ret_t = lila::lapack_ret_t;
 
 #if defined(LILA_USE_LAPACK) or defined(LILA_USE_ACCELERATE)
 
@@ -97,11 +97,11 @@ extern "C" blas_double_t dzasum_(const blas_size_t *N, const blas_complex_t *x,
 extern "C" blas_size_t isamax_(const blas_size_t *N, const blas_float_t *x,
                                const blas_size_t *incx);
 extern "C" blas_size_t idamax_(const blas_size_t *N, const blas_double_t *x,
-                                const blas_size_t *incx);
+                               const blas_size_t *incx);
 extern "C" blas_size_t icamax_(const blas_size_t *N, const blas_scomplex_t *x,
-                                const blas_size_t *incx);
+                               const blas_size_t *incx);
 extern "C" blas_size_t izamax_(const blas_size_t *N, const blas_complex_t *x,
-                                 const blas_size_t *incx);
+                               const blas_size_t *incx);
 
 // Gemv
 extern "C" void sgemv_(const char *trans, const blas_size_t *m,

@@ -1,7 +1,8 @@
-arch = osx
-
 include options.mk
 include sources.mk
+
+rm     := rm -f
+mkdir  := mkdir -p
 
 objects = $(subst .cpp,.o,$(sources))
 depends = $(subst .cpp,.d,$(sources))

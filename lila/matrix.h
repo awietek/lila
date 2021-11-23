@@ -17,7 +17,6 @@ template <class coeff_t> class MatrixView;
 
 template <class coeff_t> class Matrix {
 public:
-  using size_type = lila::size_type;
   using coeff_type = coeff_t;
   using value_type = coeff_t;
   using vector_type = std::vector<coeff_t>;
@@ -55,12 +54,12 @@ public:
             (*other.storage_ == *storage_));
   }
 
-  Matrix(size_type m, size_type n)
+  Matrix(lila_size_t m, lila_size_t n)
       : m_(m), n_(n), storage_(std::make_shared<vector_type>(m * n, 0)) {}
 
   Matrix(std::initializer_list<std::initializer_list<coeff_t>> listlist)
-      : m_((size_type)(listlist.begin())->size()),
-        n_((size_type)listlist.size()),
+      : m_((lila_size_t)(listlist.begin())->size()),
+        n_((lila_size_t)listlist.size()),
         storage_(std::make_shared<vector_type>(m_ * n_, 0)) {
 
     for (int j = 0; j < n_; j++) {
@@ -90,10 +89,10 @@ public:
     std::fill(storage_->begin(), storage_->end(), c);
   };
 
-  coeff_t operator()(size_type i, size_type j) const {
+  coeff_t operator()(lila_size_t i, lila_size_t j) const {
     return (*storage_)[i + j * m_];
   }
-  coeff_t &operator()(size_type i, size_type j) {
+  coeff_t &operator()(lila_size_t i, lila_size_t j) {
     return (*storage_)[i + j * m_];
   }
 
@@ -102,35 +101,35 @@ public:
     return MatrixView<coeff_t>(*this, slice_row, slice_col);
   }
 
-  VectorView<coeff_t> operator()(size_type i, Slice const &slice_col) {
-    size_type end = (slice_col.end == END) ? n_ : slice_col.end;
-    size_type begin = i + slice_col.begin * m_;
-    size_type n = (end - slice_col.begin) / slice_col.step;
-    size_type inc = slice_col.step * m_;
+  VectorView<coeff_t> operator()(lila_size_t i, Slice const &slice_col) {
+    lila_size_t end = (slice_col.end == END) ? n_ : slice_col.end;
+    lila_size_t begin = i + slice_col.begin * m_;
+    lila_size_t n = (end - slice_col.begin) / slice_col.step;
+    lila_size_t inc = slice_col.step * m_;
     return VectorView<coeff_t>(storage_, begin, n, inc);
   }
 
-  VectorView<coeff_t> operator()(Slice const &slice_row, size_type j) {
-    size_type end = (slice_row.end == END) ? m_ : slice_row.end;
-    size_type begin = slice_row.begin + j * m_;
-    size_type n = (end - slice_row.begin) / slice_row.step;
-    size_type inc = slice_row.step;
+  VectorView<coeff_t> operator()(Slice const &slice_row, lila_size_t j) {
+    lila_size_t end = (slice_row.end == END) ? m_ : slice_row.end;
+    lila_size_t begin = slice_row.begin + j * m_;
+    lila_size_t n = (end - slice_row.begin) / slice_row.step;
+    lila_size_t inc = slice_row.step;
     return VectorView<coeff_t>(storage_, begin, n, inc);
   }
 
-  Vector<coeff_t> row(size_type i) {
+  Vector<coeff_t> row(lila_size_t i) {
     return Vector<coeff_t>(operator()(i, {0, n_}));
   }
-  Vector<coeff_t> col(size_type j) {
+  Vector<coeff_t> col(lila_size_t j) {
     return Vector<coeff_t>(operator()({0, m_}, j));
   }
 
-  size_type size() const { return storage_->size(); }
-  size_type m() const { return m_; }
-  size_type n() const { return n_; }
-  size_type nrows() const { return m_; }
-  size_type ncols() const { return n_; }
-  void resize(size_type m, size_type n) {
+  lila_size_t size() const { return storage_->size(); }
+  lila_size_t m() const { return m_; }
+  lila_size_t n() const { return n_; }
+  lila_size_t nrows() const { return m_; }
+  lila_size_t ncols() const { return n_; }
+  void resize(lila_size_t m, lila_size_t n) {
     Matrix<coeff_t> copy = (*this);
     storage_->resize(m * n, 0);
     std::fill(storage_->begin(), storage_->end(), 0);
@@ -162,8 +161,8 @@ public:
   vector_type const &vector() const { return *storage_; }
 
 private:
-  size_type m_;
-  size_type n_;
+  lila_size_t m_;
+  lila_size_t n_;
   std::shared_ptr<vector_type> storage_;
 };
 

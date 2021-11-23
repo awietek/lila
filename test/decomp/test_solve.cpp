@@ -78,6 +78,8 @@ void test_solve()
 
 
 TEST_CASE( "solve", "[decomp]" ) {
+  lila::Log("Test solve");
+
   test_solve<float>();
   test_solve<double>();
   test_solve<std::complex<float>>();

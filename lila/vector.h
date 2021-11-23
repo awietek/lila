@@ -14,7 +14,6 @@ template <class coeff_t> class VectorView;
 
 template <class coeff_t> class Vector {
 public:
-  using size_type = lila::size_type;
   using coeff_type = coeff_t;
   using value_type = coeff_t;
   using vector_type = std::vector<coeff_t>;
@@ -35,7 +34,7 @@ public:
   friend void swap(Vector &v, Vector &w) { std::swap(v.storage_, w.storage_); }
   Vector(Vector &&) = default;
 
-  explicit Vector(size_type size)
+  explicit Vector(lila_size_t size)
       : storage_(std::make_shared<vector_type>(size, 0)) {}
 
   explicit Vector(vector_type const &vec)
@@ -76,8 +75,8 @@ public:
     return *other.storage_ == *storage_;
   }
 
-  coeff_t operator()(size_type i) const { return (*storage_)[i]; }
-  coeff_t &operator()(size_type i) { return (*storage_)[i]; }
+  coeff_t operator()(lila_size_t i) const { return (*storage_)[i]; }
+  coeff_t &operator()(lila_size_t i) { return (*storage_)[i]; }
 
   VectorView<coeff_t> operator()(Slice const &slice) {
     return VectorView<coeff_t>(*this, slice);
@@ -85,9 +84,9 @@ public:
 
   operator vector_type &() { return *storage_; }
 
-  size_type size() const { return storage_->size(); }
-  size_type n() const { return storage_->size(); }
-  void resize(size_type size) { storage_->resize(size, 0); }
+  lila_size_t size() const { return storage_->size(); }
+  lila_size_t n() const { return storage_->size(); }
+  void resize(lila_size_t size) { storage_->resize(size, 0); }
   void clear() { storage_->clear(); }
   void push_back(coeff_t c) { storage_->push_back(c); }
   void pop_back() { storage_->pop_back(); }

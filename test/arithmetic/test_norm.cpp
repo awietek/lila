@@ -22,14 +22,16 @@ void test_norm()
     for (int i = 0; i < n; ++i)
       norm_test += lila::conj(v1(i)) * v1(i);
 
-    LilaPrint(norm_lila);
-    LilaPrint(std::sqrt(norm_test));
+    // LilaPrint(norm_lila);
+    // LilaPrint(std::sqrt(norm_test));
     REQUIRE(close(norm_lila, std::sqrt(norm_test)));
   }
 }
 
 
 TEST_CASE( "norm", "[arithmetic]" ) {
+  lila::Log("Test norm");
+
   test_norm<float>();
   test_norm<double>();
   test_norm<std::complex<float>>();

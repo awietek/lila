@@ -7,9 +7,9 @@ namespace lila {
 template <class coeff_t>
 inline real_t<coeff_t> NormLi(Matrix<coeff_t> const &X) {
   real_t<coeff_t> value = 0.0;
-  for (int i = 0; i < X.nrows(); i++) {
+  for (lila_size_t i = 0; i < X.nrows(); i++) {
     real_t<coeff_t> row_sum = 0.0;
-    for (int j = 0; j < X.ncols(); j++) {
+    for (lila_size_t j = 0; j < X.ncols(); j++) {
       row_sum += std::abs(X(i, j));
     }
     value = std::max(value, row_sum);
@@ -31,7 +31,7 @@ template <class coeff_t> inline real_t<coeff_t> log2abs(coeff_t x) {
 
 template <class coeff_t>
 inline Matrix<coeff_t> ExpM(Matrix<coeff_t> const &A, coeff_t alpha = 1.) {
-  int n = A.nrows();
+  lila_size_t n = A.nrows();
   assert(n == A.ncols());
   const int q = 6;
   Matrix<coeff_t> a2 = alpha * A;

@@ -39,6 +39,8 @@ template <class coeff_t> void test_eigen_sym_tridiag() {
 }
 
 TEST_CASE("eigen_sym_tridiag", "[decomp]") {
+  lila::Log("Test eigen_sym_tridiag");
+
   test_eigen_sym_tridiag<float>();
   test_eigen_sym_tridiag<double>();
 }

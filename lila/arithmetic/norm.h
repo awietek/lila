@@ -8,35 +8,31 @@
 namespace lila {
 
 template <class coeff_t> inline real_t<coeff_t> Norm(Vector<coeff_t> const &v) {
-  using size_type = blaslapack::blas_size_t;
-  size_type n = v.n();
-  size_type inc = 1;
+  blas_size_t n = v.n();
+  blas_size_t inc = 1;
   return blaslapack::nrm2(&n, LILA_BLAS_CONST_CAST(coeff_t, v.data()), &inc);
 }
 
 template <class coeff_t>
 inline real_t<coeff_t> Norm(VectorView<coeff_t> const &v) {
-  using size_type = blaslapack::blas_size_t;
-  size_type n = v.n();
-  size_type inc = v.inc();
+  blas_size_t n = v.n();
+  blas_size_t inc = v.inc();
   return blaslapack::nrm2(&n, LILA_BLAS_CONST_CAST(coeff_t, v.data()), &inc);
 }
 
 template <class coeff_t> inline real_t<coeff_t> Norm(Matrix<coeff_t> const &A) {
-  using size_type = blaslapack::blas_size_t;
-  size_type size = A.size();
-  size_type inc = 1;
+  blas_size_t size = A.size();
+  blas_size_t inc = 1;
   return blaslapack::nrm2(&size, LILA_BLAS_CONST_CAST(coeff_t, A.data()), &inc);
 }
 
 template <class coeff_t>
 inline real_t<coeff_t> Norm(MatrixView<coeff_t> const &A) {
-
-  size_type ld = A.ld();
-  size_type m = A.m();
-  size_type n = A.n();
-  size_type incm = A.incm();
-  size_type incn = A.incn();
+  blas_size_t ld = A.ld();
+  blas_size_t m = A.m();
+  blas_size_t n = A.n();
+  blas_size_t incm = A.incm();
+  blas_size_t incn = A.incn();
 
   // Compute norm column-wise
   real_t<coeff_t> norm = 0;

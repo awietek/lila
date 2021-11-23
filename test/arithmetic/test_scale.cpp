@@ -76,6 +76,8 @@ template <class coeff_t> void test_add() {
 }
 
 TEST_CASE("scale", "[arithmetic]") {
+  lila::Log("Test norm");
+
   test_add<float>();
   test_add<double>();
   test_add<std::complex<float>>();

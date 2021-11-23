@@ -22,7 +22,7 @@ inline void FunctionSym(Matrix<coeff_t> &matrix, function_t fun,
   auto Bmat = Qmat;
 
   // Multiply with diagonal matrix, where function has been applied
-  for (int j = 0; j < eigs.n(); ++j) {
+  for (lila_size_t j = 0; j < eigs.n(); ++j) {
     coeff_t fun_of_eig = static_cast<coeff_t>(eigs(j));
     fun(fun_of_eig);
 

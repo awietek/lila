@@ -3,6 +3,8 @@
 #include <lila/all.h>
 
 TEST_CASE( "matrix", "[core]" ) {
+  lila::Log("Test matrix");
+
   int m=4;
   int n=5;
 

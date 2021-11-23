@@ -92,6 +92,8 @@ void test_eigen()
 
 
 TEST_CASE( "eigen", "[decomp]" ) {
+  lila::Log("Test eigen");
+
   test_eigen<float>();
   test_eigen<double>();
   test_eigen<std::complex<float>>();

@@ -17,25 +17,25 @@ template <class coeff_t> inline void Zeros(Matrix<coeff_t> &mat) {
   std::fill(mat.begin(), mat.end(), 0.);
 }
 
-template <class coeff_t> Vector<coeff_t> Zeros(size_type m) {
+template <class coeff_t> Vector<coeff_t> Zeros(lila_size_t m) {
   Vector<coeff_t> vec(m);
   Zeros(vec);
   return vec;
 }
 
-template <class coeff_t> Vector<coeff_t> ZerosLike(const Vector<coeff_t> &vec) {
+template <class coeff_t> Vector<coeff_t> ZerosLike(Vector<coeff_t> const &vec) {
   Vector<coeff_t> res(vec.size());
   Zeros(res);
   return res;
 }
 
-template <class coeff_t> Matrix<coeff_t> Zeros(size_type m, size_type n) {
+template <class coeff_t> Matrix<coeff_t> Zeros(lila_size_t m, lila_size_t n) {
   Matrix<coeff_t> mat(m, n);
   Zeros(mat);
   return mat;
 }
 
-template <class coeff_t> Matrix<coeff_t> ZerosLike(const Matrix<coeff_t> &mat) {
+template <class coeff_t> Matrix<coeff_t> ZerosLike(Matrix<coeff_t> const &mat) {
   Matrix<coeff_t> res(mat.nrows(), mat.ncols());
   Zeros(res);
   return res;
@@ -51,7 +51,7 @@ template <class coeff_t> inline void Identity(Matrix<coeff_t> &mat) {
     mat(i, i) = 1.;
 }
 
-template <class coeff_t> inline Matrix<coeff_t> Identity(size_type m) {
+template <class coeff_t> inline Matrix<coeff_t> Identity(lila_size_t m) {
   auto id = Zeros<coeff_t>(m, m);
   Identity(id);
   return id;
@@ -60,7 +60,7 @@ template <class coeff_t> inline Matrix<coeff_t> Identity(size_type m) {
 template <class coeff_t>
 inline Vector<complex_t<coeff_t>> Complex(Vector<coeff_t> const &vec) {
   auto complex_vec = Zeros<complex_t<coeff_t>>(vec.n());
-  for (size_type j = 0; j < vec.n(); ++j)
+  for (lila_size_t j = 0; j < vec.n(); ++j)
     complex_vec(j) = (complex_t<coeff_t>)vec(j);
   return complex_vec;
 }
@@ -68,8 +68,8 @@ inline Vector<complex_t<coeff_t>> Complex(Vector<coeff_t> const &vec) {
 template <class coeff_t>
 inline Matrix<complex_t<coeff_t>> Complex(Matrix<coeff_t> const &mat) {
   auto complex_mat = Zeros<complex_t<coeff_t>>(mat.m(), mat.n());
-  for (size_type i = 0; i < mat.m(); ++i)
-    for (size_type j = 0; j < mat.n(); ++j)
+  for (lila_size_t i = 0; i < mat.m(); ++i)
+    for (lila_size_t j = 0; j < mat.n(); ++j)
       complex_mat(i, j) = (complex_t<coeff_t>)mat(i, j);
   return complex_mat;
 }

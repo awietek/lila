@@ -63,6 +63,8 @@ template <class coeff_t> void test_copy() {
 }
 
 TEST_CASE("copy", "[arithmetic]") {
+  lila::Log("Test copy");
+
   test_copy<float>();
   test_copy<double>();
   test_copy<std::complex<float>>();

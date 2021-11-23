@@ -3,8 +3,8 @@
 #include <tuple>
 
 #include <lila/matrix.h>
-#include <lila/vector.h>
 #include <lila/numeric/complex.h>
+#include <lila/vector.h>
 
 namespace lila {
 
@@ -13,17 +13,16 @@ inline std::tuple<Vector<complex_t<coeff_t>>, Matrix<complex_t<coeff_t>>,
                   Matrix<complex_t<coeff_t>>>
 EigenInplace(Matrix<coeff_t> &A, bool do_right_eigenvectors = true,
              bool do_left_eigenvectors = true) {
-  using size_type = blaslapack::blas_size_t;
   using complex_type = complex_t<coeff_t>;
   assert(A.nrows() == A.ncols());
 
   char jobvl = do_left_eigenvectors ? 'V' : 'N';
   char jobvr = do_right_eigenvectors ? 'V' : 'N';
-  size_type n = A.nrows();
-  size_type lda = n;
+  blas_size_t n = A.nrows();
+  blas_size_t lda = n;
 
-  size_type ldvl = do_left_eigenvectors ? n : 1;
-  size_type ldvr = do_right_eigenvectors ? n : 1;
+  blas_size_t ldvl = do_left_eigenvectors ? n : 1;
+  blas_size_t ldvr = do_right_eigenvectors ? n : 1;
 
   auto eigenvalues = Vector<complex_type>(n);
   auto left_eigenvectors = Matrix<complex_type>();
@@ -35,16 +34,16 @@ EigenInplace(Matrix<coeff_t> &A, bool do_right_eigenvectors = true,
     right_eigenvectors.resize(ldvr, n);
 
   // get optimal work size
-  size_type lwork = -1;
+  blas_size_t lwork = -1;
   std::vector<coeff_t> work(1);
-  int info = 0;
+  blas_size_t info = 0;
   blaslapack::geev(&jobvl, &jobvr, &n, LILA_BLAS_CAST(coeff_t, A.data()), &lda,
                    LILA_BLAS_CAST(complex_type, eigenvalues.data()),
                    LILA_BLAS_CAST(coeff_t, left_eigenvectors.data()), &ldvl,
                    LILA_BLAS_CAST(coeff_t, right_eigenvectors.data()), &ldvr,
                    LILA_BLAS_CAST(coeff_t, work.data()), &lwork, &info);
   assert(info == 0);
-  lwork = static_cast<size_type>(real(work[0]));
+  lwork = static_cast<blas_size_t>(real(work[0]));
   work.resize(lwork);
 
   // Run eigenvalue computation

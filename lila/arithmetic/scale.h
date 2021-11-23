@@ -11,42 +11,37 @@
 namespace lila {
 
 template <class coeff_t> inline void Scale(coeff_t alpha, Vector<coeff_t> &v) {
-  using size_type = blaslapack::blas_size_t;
-  size_type size = v.size();
-  size_type inc = 1;
+  blas_size_t size = v.size();
+  blas_size_t inc = 1;
   blaslapack::scal(&size, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
                    LILA_BLAS_CAST(coeff_t, v.data()), &inc);
 }
 
 template <class coeff_t>
 inline void Scale(coeff_t alpha, VectorView<coeff_t> v) {
-  using size_type = blaslapack::blas_size_t;
-  size_type size = v.size();
-  size_type inc = v.inc();
+  blas_size_t size = v.size();
+  blas_size_t inc = v.inc();
   blaslapack::scal(&size, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
                    LILA_BLAS_CAST(coeff_t, v.data()), &inc);
 }
 
 template <class coeff_t> inline void Scale(coeff_t alpha, Matrix<coeff_t> &A) {
-  using size_type = blaslapack::blas_size_t;
-  size_type dx = A.size();
-  size_type inc = 1;
+  blas_size_t dx = A.size();
+  blas_size_t inc = 1;
   blaslapack::scal(&dx, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
                    LILA_BLAS_CAST(coeff_t, A.data()), &inc);
 }
 
 template <class coeff_t>
 inline void Scale(coeff_t alpha, MatrixView<coeff_t> A) {
-  using size_type = blaslapack::blas_size_t;
-
-  size_type ld = A.ld();
-  size_type m = A.m();
-  size_type n = A.n();
-  size_type incm = A.incm();
-  size_type incn = A.incn();
+  blas_size_t ld = A.ld();
+  blas_size_t m = A.m();
+  blas_size_t n = A.n();
+  blas_size_t incm = A.incm();
+  blas_size_t incn = A.incn();
 
   // Perform a column-wise scale
-  for (int col = 0; col < n; ++col) {
+  for (blas_size_t col = 0; col < n; ++col) {
     blaslapack::scal(&m, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
                      LILA_BLAS_CAST(coeff_t, A.data() + col * incn * ld),
                      &incm);

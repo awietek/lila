@@ -92,6 +92,10 @@ inline blas_scomplex_t dot(const blas_size_t *N, const blas_scomplex_t *x,
 #else
   return __LAPACK_ROUTINE_NAME(cdotc)(N, x, incx, y, incy);
 #endif
+  // blas_scomplex_t res = 0;
+  // for (blas_size_t i=0; i < *N; ++i)
+  //   res += std::conj(x[i* (*incx)]) * y[i* (*incy)];
+  // return res;
 }
 
 inline blas_complex_t dot(const blas_size_t *N, const blas_complex_t *x,
@@ -104,6 +108,10 @@ inline blas_complex_t dot(const blas_size_t *N, const blas_complex_t *x,
 #else
   return __LAPACK_ROUTINE_NAME(zdotc)(N, x, incx, y, incy);
 #endif
+  // blas_complex_t res = 0;
+  // for (blas_size_t i = 0; i < *N; ++i)
+  //   res += std::conj(x[i * (*incx)]) * y[i * (*incy)];
+  // return res;
 }
 
 // Nrm2
@@ -238,25 +246,25 @@ inline void gemm(const char *transa, const char *transb, const blas_size_t *m,
 inline void gesv(LAPACK_CONST blas_size_t *n, LAPACK_CONST blas_size_t *n_rhs,
                  blas_float_t *A, LAPACK_CONST blas_size_t *lda,
                  blas_size_t *ipiv, blas_float_t *B,
-                 LAPACK_CONST blas_size_t *ldb, int *info) {
+                 LAPACK_CONST blas_size_t *ldb, blas_size_t *info) {
   __LAPACK_ROUTINE_NAME(sgesv)(n, n_rhs, A, lda, ipiv, B, ldb, info);
 }
 inline void gesv(LAPACK_CONST blas_size_t *n, LAPACK_CONST blas_size_t *n_rhs,
                  blas_double_t *A, LAPACK_CONST blas_size_t *lda,
                  blas_size_t *ipiv, blas_double_t *B,
-                 LAPACK_CONST blas_size_t *ldb, int *info) {
+                 LAPACK_CONST blas_size_t *ldb, blas_size_t *info) {
   __LAPACK_ROUTINE_NAME(dgesv)(n, n_rhs, A, lda, ipiv, B, ldb, info);
 }
 inline void gesv(LAPACK_CONST blas_size_t *n, LAPACK_CONST blas_size_t *n_rhs,
                  blas_scomplex_t *A, LAPACK_CONST blas_size_t *lda,
                  blas_size_t *ipiv, blas_scomplex_t *B,
-                 LAPACK_CONST blas_size_t *ldb, int *info) {
+                 LAPACK_CONST blas_size_t *ldb, blas_size_t *info) {
   __LAPACK_ROUTINE_NAME(cgesv)(n, n_rhs, A, lda, ipiv, B, ldb, info);
 }
 inline void gesv(LAPACK_CONST blas_size_t *n, LAPACK_CONST blas_size_t *n_rhs,
                  blas_complex_t *A, LAPACK_CONST blas_size_t *lda,
                  blas_size_t *ipiv, blas_complex_t *B,
-                 LAPACK_CONST blas_size_t *ldb, int *info) {
+                 LAPACK_CONST blas_size_t *ldb, blas_size_t *info) {
   __LAPACK_ROUTINE_NAME(zgesv)(n, n_rhs, A, lda, ipiv, B, ldb, info);
 }
 
@@ -547,7 +555,7 @@ inline void geev(LAPACK_CONST char *jobvl, LAPACK_CONST char *jobvr,
                  blas_scomplex_t *vr, LAPACK_CONST blas_size_t *ldvr,
                  blas_scomplex_t *work, LAPACK_CONST blas_size_t *lwork,
                  blas_size_t *info) {
-  std::vector<blas_float_t> rwork(std::max(1, *n * 2));
+  std::vector<blas_float_t> rwork(std::max((blas_size_t)1, (*n) * 2));
   __LAPACK_ROUTINE_NAME(cgeev)
   (jobvl, jobvr, n, a, lda, w, vl, ldvl, vr, ldvr, work, lwork, rwork.data(),
    info);
@@ -560,7 +568,7 @@ inline void geev(LAPACK_CONST char *jobvl, LAPACK_CONST char *jobvr,
                  blas_complex_t *vr, LAPACK_CONST blas_size_t *ldvr,
                  blas_complex_t *work, LAPACK_CONST blas_size_t *lwork,
                  blas_size_t *info) {
-  std::vector<blas_double_t> rwork(std::max(1, *n * 2));
+  std::vector<blas_double_t> rwork(std::max((blas_size_t)1, (*n) * 2));
   __LAPACK_ROUTINE_NAME(zgeev)
   (jobvl, jobvr, n, a, lda, w, vl, ldvl, vr, ldvr, work, lwork, rwork.data(),
    info);
@@ -610,7 +618,7 @@ inline void sygv(LAPACK_CONST blas_size_t *itype, LAPACK_CONST char *jobz,
                  blas_scomplex_t *B, LAPACK_CONST blas_size_t *ldb,
                  blas_float_t *W, blas_scomplex_t *work,
                  LAPACK_CONST blas_size_t *lwork, blas_size_t *info) {
-  std::vector<blas_float_t> rwork(std::max(1, *N * 3 - 2));
+  std::vector<blas_float_t> rwork(std::max((blas_size_t)1, (*N) * 3 - 2));
   __LAPACK_ROUTINE_NAME(chegv)
   (itype, jobz, uplo, N, A, lda, B, ldb, W, work, lwork, rwork.data(), info);
 }
@@ -621,7 +629,7 @@ inline void sygv(LAPACK_CONST blas_size_t *itype, LAPACK_CONST char *jobz,
                  blas_complex_t *B, LAPACK_CONST blas_size_t *ldb,
                  blas_double_t *W, blas_complex_t *work,
                  LAPACK_CONST blas_size_t *lwork, blas_size_t *info) {
-  std::vector<blas_double_t> rwork(std::max(1, *N * 3 - 2));
+  std::vector<blas_double_t> rwork(std::max((blas_size_t)1, (*N) * 3 - 2));
   __LAPACK_ROUTINE_NAME(zhegv)
   (itype, jobz, uplo, N, A, lda, B, ldb, W, work, lwork, rwork.data(), info);
 }

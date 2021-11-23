@@ -3,6 +3,8 @@
 #include <lila/all.h>
 
 TEST_CASE( "vector", "[core]" ) {
+  lila::Log("Test vector");
+
   int m=5;
 
   lila::Vector<float> fvec(m);

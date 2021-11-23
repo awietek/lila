@@ -35,8 +35,8 @@ inline std::complex<double> conj(std::complex<double> x) {
 template <class coeff_t>
 inline Matrix<real_t<coeff_t>> Real(Matrix<coeff_t> const &X) {
   Matrix<real_t<coeff_t>> Y(X.nrows(), X.ncols());
-  for (int j = 0; j < X.ncols(); ++j)
-    for (int i = 0; i < X.nrows(); ++i)
+  for (lila_size_t j = 0; j < X.ncols(); ++j)
+    for (lila_size_t i = 0; i < X.nrows(); ++i)
       Y(i, j) = lila::real(X(i, j));
   return Y;
 }
@@ -44,7 +44,7 @@ inline Matrix<real_t<coeff_t>> Real(Matrix<coeff_t> const &X) {
 template <class coeff_t>
 inline Vector<real_t<coeff_t>> Real(Vector<coeff_t> const &X) {
   Vector<real_t<coeff_t>> Y(X.n());
-  for (int i = 0; i < X.n(); ++i)
+  for (lila_size_t i = 0; i < X.n(); ++i)
     Y(i) = lila::real(X(i));
   return Y;
 }
@@ -52,8 +52,8 @@ inline Vector<real_t<coeff_t>> Real(Vector<coeff_t> const &X) {
 template <class coeff_t>
 inline Matrix<real_t<coeff_t>> Imag(Matrix<coeff_t> const &X) {
   Matrix<real_t<coeff_t>> Y(X.nrows(), X.ncols());
-  for (int j = 0; j < X.ncols(); ++j)
-    for (int i = 0; i < X.nrows(); ++i)
+  for (lila_size_t j = 0; j < X.ncols(); ++j)
+    for (lila_size_t i = 0; i < X.nrows(); ++i)
       Y(i, j) = lila::imag(X(i, j));
   return Y;
 }
@@ -61,16 +61,15 @@ inline Matrix<real_t<coeff_t>> Imag(Matrix<coeff_t> const &X) {
 template <class coeff_t>
 inline Vector<real_t<coeff_t>> Imag(Vector<coeff_t> const &X) {
   Vector<real_t<coeff_t>> Y(X.n());
-  for (int i = 0; i < X.n(); ++i)
+  for (lila_size_t i = 0; i < X.n(); ++i)
     Y(i) = lila::imag(X(i));
   return Y;
 }
 
-
 template <class coeff_t> Matrix<coeff_t> Conj(Matrix<coeff_t> const &X) {
   Matrix<coeff_t> X_c(X.nrows(), X.ncols());
-  for (int j = 0; j < X.ncols(); ++j)
-    for (int i = 0; i < X.nrows(); ++i)
+  for (lila_size_t j = 0; j < X.ncols(); ++j)
+    for (lila_size_t i = 0; i < X.nrows(); ++i)
       X_c(i, j) = lila::conj(X(i, j));
   return X_c;
 }

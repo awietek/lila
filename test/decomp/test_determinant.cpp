@@ -21,6 +21,8 @@ template <class coeff_t> void test_determinant(int m) {
 }
 
 TEST_CASE("determinant", "[decomp]") {
+  lila::Log("Test determinant");
+
   for (int m = 1; m < 8; ++m) {
     test_determinant<float>(m);
     test_determinant<double>(m);

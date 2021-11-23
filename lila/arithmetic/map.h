@@ -2,10 +2,10 @@
 
 #include <algorithm>
 
-#include <lila/vector.h>
 #include <lila/matrix.h>
-#include <lila/views/vector_view.h>
+#include <lila/vector.h>
 #include <lila/views/matrix_view.h>
+#include <lila/views/vector_view.h>
 
 namespace lila {
 
@@ -22,10 +22,10 @@ inline void Map(Vector<coeff_t> &v, function_t func) {
 template <class coeff_t, class function_t>
 inline void Map(VectorView<coeff_t> v, function_t func) {
   coeff_t *data = v.data();
-  size_type inc = v.inc();
-  size_type size = v.n() * inc;
+  lila_size_t inc = v.inc();
+  lila_size_t size = v.n() * inc;
 
-  for (size_type i = 0; i < size; i += inc)
+  for (lila_size_t i = 0; i < size; i += inc)
     func(data[i]);
 }
 
@@ -36,15 +36,15 @@ inline void Map(Matrix<coeff_t> &A, function_t func) {
 
 template <class coeff_t, class function_t>
 inline void Map(MatrixView<coeff_t> A, function_t func) {
-  size_type ld = A.ld();
-  size_type incm = A.incm();
-  size_type incn = A.incn();
-  size_type sizem = A.m() * incm;
-  size_type sizen = A.n() * incn;
+  lila_size_t ld = A.ld();
+  lila_size_t incm = A.incm();
+  lila_size_t incn = A.incn();
+  lila_size_t sizem = A.m() * incm;
+  lila_size_t sizen = A.n() * incn;
 
-  for (size_type idxn = 0; idxn < sizen; idxn += incn) {
+  for (lila_size_t idxn = 0; idxn < sizen; idxn += incn) {
     coeff_t *data = A.data() + idxn * ld;
-    for (size_type idxm = 0; idxm < sizem; idxm += incm)
+    for (lila_size_t idxm = 0; idxm < sizem; idxm += incm)
       func(data[idxm]);
   }
 }

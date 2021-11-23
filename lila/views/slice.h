@@ -6,16 +6,16 @@
 namespace lila {
 
 struct Slice {
-  size_type begin;
-  size_type end;
-  size_type step = 1;
+  lila_size_t begin;
+  lila_size_t end;
+  lila_size_t step = 1;
 };
 
-inline constexpr size_type END = -1;
+inline constexpr lila_size_t END = -1;
 inline constexpr Slice ALL = {0, END, 1};
 
-inline std::pair<Slice, size_type> adjusted_slice_length(Slice slice,
-                                                         size_type length) {
+inline std::pair<Slice, lila_size_t> adjusted_slice_length(Slice slice,
+                                                           lila_size_t length) {
 
   assert(slice.step != 0);
 

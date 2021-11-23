@@ -33,22 +33,22 @@ inline void PrintPretty(const char *identifier,
   printf("%18.16g%-+18.16gj\n", number.real(), number.imag());
 }
 
-inline void PrintPretty(const char *identifier, const int32 &number) {
+inline void PrintPretty(const char *identifier, const int32_t &number) {
   printf("%s:\n", identifier);
   printf("%d\n", number);
 }
 
-inline void PrintPretty(const char *identifier, const uint32 &number) {
+inline void PrintPretty(const char *identifier, const uint32_t &number) {
   printf("%s:\n", identifier);
   printf("%d\n", number);
 }
 
-inline void PrintPretty(const char *identifier, const int64 &number) {
+inline void PrintPretty(const char *identifier, const int64_t &number) {
   printf("%s:\n", identifier);
   printf("%ld\n", number);
 }
 
-inline void PrintPretty(const char *identifier, const uint64 &number) {
+inline void PrintPretty(const char *identifier, const uint64_t &number) {
   printf("%s:\n", identifier);
   printf("%ld\n", number);
 }

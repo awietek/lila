@@ -38,6 +38,8 @@ void test_resize()
 
 
 TEST_CASE( "resize", "[core]" ) {
+  lila::Log("Test resize");
+
   test_resize<float>();
   test_resize<double>();
   test_resize<std::complex<float>>();

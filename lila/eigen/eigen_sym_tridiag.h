@@ -2,9 +2,8 @@
 
 #include <utility>
 
-#include <lila/vector.h>
 #include <lila/blaslapack/blaslapack.h>
-
+#include <lila/vector.h>
 
 namespace lila {
 
@@ -13,9 +12,9 @@ inline void EigenvaluesSymTridiagInplace(Vector<coeff_t> &diag,
                                          Vector<coeff_t> &offdiag) {
   assert(diag.size() <= offdiag.size() + 1);
   char job = 'N';
-  int N = diag.size();
-  int ldz = 1;
-  int info = 0;
+  blas_size_t N = diag.size();
+  blas_size_t ldz = 1;
+  blas_size_t info = 0;
   blaslapack::stev(&job, &N, diag.data(), offdiag.data(), NULL, &ldz, NULL,
                    &info);
 }
@@ -35,15 +34,15 @@ inline Matrix<coeff_t> EigenSymTridiagInplace(Vector<coeff_t> &diag,
   assert(diag.size() <= offdiag.size() + 1);
 
   char job = 'V';
-  int N = diag.size();
-  int ldz = N;
-  int info = 0;
+  blas_size_t N = diag.size();
+  blas_size_t ldz = N;
+  blas_size_t info = 0;
 
   auto eigenvectors = Matrix<coeff_t>(N, N);
 
   Vector<coeff_t> work(2 * N - 2);
-  blaslapack::stev(&job, &N, diag.data(), offdiag.data(),
-                   eigenvectors.data(), &ldz, work.data(), &info);
+  blaslapack::stev(&job, &N, diag.data(), offdiag.data(), eigenvectors.data(),
+                   &ldz, work.data(), &info);
   return eigenvectors;
 }
 

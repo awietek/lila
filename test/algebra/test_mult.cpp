@@ -79,6 +79,8 @@ template <class coeff_t> void test_mult() {
 }
 
 TEST_CASE("mult", "[algebra]") {
+  lila::Log("Test mult");
+
   test_mult<float>();
   test_mult<double>();
   test_mult<std::complex<float>>();

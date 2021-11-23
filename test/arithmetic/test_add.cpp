@@ -80,6 +80,8 @@ template <class coeff_t> void test_add() {
 }
 
 TEST_CASE("add", "[arithmetic]") {
+  lila::Log("Test add");
+
   test_add<float>();
   test_add<double>();
   test_add<std::complex<float>>();

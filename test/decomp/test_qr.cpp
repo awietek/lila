@@ -57,6 +57,8 @@ void test_qr(int m, int n)
 
 
 TEST_CASE( "qr", "[decomp]" ) {
+  lila::Log("Test qr");
+
   test_qr<float>(6,5);
   test_qr<double>(6,5);
   test_qr<std::complex<float>>(6,5);

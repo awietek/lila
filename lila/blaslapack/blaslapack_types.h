@@ -13,10 +13,9 @@
 #endif
 
 namespace lila {
-namespace blaslapack {
 
 #ifdef LILA_USE_MKL // Using the Intel MKL
-using blas_size_t = int;
+using blas_size_t = MKL_INT;
 using blas_float_t = float;
 using blas_double_t = double;
 using blas_scomplex_t = MKL_Complex8;
@@ -48,10 +47,15 @@ using lapack_ret_t = int;
 #define __LAPACK_ROUTINE_NAME(x) x##_
 #endif
 
+} // namespace lila
+
+namespace lila::blaslapack {
+
 // Define template alias to convert lila
 // types to blas types
 template <class T> struct blas_ts;
 template <> struct blas_ts<int> { using type = blas_size_t; };
+template <> struct blas_ts<long long> { using type = blas_size_t; };
 template <> struct blas_ts<float> { using type = blas_float_t; };
 template <> struct blas_ts<double> { using type = blas_double_t; };
 template <> struct blas_ts<std::complex<float>> {
@@ -66,7 +70,7 @@ template <class T> using blas_t = typename blas_ts<T>::type;
 // Define template alias to convert blas
 // types to lila types
 template <class T> struct lila_ts;
-template <> struct lila_ts<blas_size_t> { using type = int; };
+template <> struct lila_ts<blas_size_t> { using type = long long; };
 template <> struct lila_ts<blas_float_t> { using type = float; };
 template <> struct lila_ts<blas_double_t> { using type = double; };
 template <> struct lila_ts<blas_scomplex_t> {
@@ -126,5 +130,4 @@ inline lila_t<blas_complex_t> blas_to_lila(blas_complex_t const &x) {
 }
 #endif
 
-} // namespace blaslapack
-} // namespace lila
+} // namespace lila::blaslapack

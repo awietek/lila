@@ -35,13 +35,12 @@ public:
   VectorView(Vector<coeff_t> &v, Slice const &slice) : storage_(v.storage_) {
 
     assert(slice.step != 0);
-    size_type length = v.size();
+    lila_size_t length = v.size();
     auto [aslice, alength] = adjusted_slice_length(slice, length);
 
     begin_ = aslice.begin;
     n_ = alength;
     inc_ = (slice.step > 0) ? slice.step : -slice.step;
-
 
     assert(aslice.begin < v.size());
     assert(aslice.end <= v.size());
@@ -49,18 +48,19 @@ public:
 
     // printf("slice: b: %ld, e: %ld, s: %ld, l: %ld\n", slice.begin, slice.end,
     //        slice.step, slice.end - slice.begin);
-    // printf("alice: b: %ld, e: %ld, s: %ld, l: %ld\n", aslice.begin, aslice.end,
+    // printf("alice: b: %ld, e: %ld, s: %ld, l: %ld\n", aslice.begin,
+    // aslice.end,
     //        aslice.step, alength);
     // printf("b: %ld, n: %ld, i: %ld\n\n", begin_, n_, inc_);
   }
 
-  VectorView(std::shared_ptr<vector_type> const &storage, size_type begin,
-             size_type n, size_type inc)
+  VectorView(std::shared_ptr<vector_type> const &storage, lila_size_t begin,
+             lila_size_t n, lila_size_t inc)
       : storage_(storage), begin_(begin), n_(n), inc_(inc) {}
 
-  size_type size() const { return n_; }
-  size_type n() const { return n_; }
-  size_type inc() const { return inc_; }
+  lila_size_t size() const { return n_; }
+  lila_size_t n() const { return n_; }
+  lila_size_t inc() const { return inc_; }
   long use_count() const { return storage_.use_count(); }
 
   std::shared_ptr<vector_type> storage() { return storage_; }
@@ -69,9 +69,9 @@ public:
 
 private:
   std::shared_ptr<vector_type> storage_;
-  size_type begin_;
-  size_type n_;
-  size_type inc_;
+  lila_size_t begin_;
+  lila_size_t n_;
+  lila_size_t inc_;
 };
 
 } // namespace lila

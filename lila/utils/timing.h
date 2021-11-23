@@ -12,10 +12,11 @@ auto inline rightnow() -> decltype(high_resolution_clock::now()) {
   return high_resolution_clock::now();
 }
 
-template <class Clock,
-          class Duration = typename Clock::duration> // Uff, that's awful, Fuck C++
-void timing(time_point<Clock, Duration> const &t0, 
-	    time_point<Clock, Duration> const &t1, std::string msg = "",
+template <
+    class Clock,
+    class Duration = typename Clock::duration> // Uff, that's awful, Fuck C++
+void timing(time_point<Clock, Duration> const &t0,
+            time_point<Clock, Duration> const &t1, std::string msg = "",
             int verbosity = 1) {
   auto td = duration_cast<milliseconds>(t1 - t0).count();
   double tds = (double)td / 1000;

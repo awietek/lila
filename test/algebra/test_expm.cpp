@@ -49,6 +49,8 @@ void test_expm()
 
 
 TEST_CASE( "expm", "[functions]" ) {
+  lila::Log("Test expm");
+
   test_expm<float>();
   test_expm<double>();
   test_expm<std::complex<float>>();
