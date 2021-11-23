@@ -14,6 +14,9 @@ inline Vector<real_t<coeff_t>> EigenSymInplace(Matrix<coeff_t> &A,
                                                char uplo = 'U') {
   assert(A.nrows() == A.ncols());
 
+  if ((A.m() == 0) || (A.n() == 0))
+    return Vector<real_t<coeff_t>>();
+
   char jobz = do_eigenvectors ? 'V' : 'N';
   blas_size_t n = A.nrows();
   blas_size_t lda = n;

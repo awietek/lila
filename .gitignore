@@ -2,3 +2,4 @@
 *.o
 *.d
 options.mk
+test/tests
