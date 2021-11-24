@@ -18,6 +18,22 @@ inline bool close(coeff_t const &x, coeff_t const &y,
 }
 
 template <class coeff_t>
+inline bool close(coeff_t const &x, real_t<coeff_t> const &y,
+                  real_t<coeff_t> atol = lila::atol<coeff_t>::val(),
+                  real_t<coeff_t> rtol = lila::rtol<coeff_t>::val()) {
+  bool real_close = (std::abs(real(x) - y) <= (atol + rtol * std::abs(y)));
+  bool imag_close = (std::abs(imag(x)) <= (atol + rtol * std::abs(y)));
+  return real_close && imag_close;
+}
+
+template <class coeff_t>
+inline bool close(real_t<coeff_t> const &x, coeff_t const &y,
+                  real_t<coeff_t> atol = lila::atol<coeff_t>::val(),
+                  real_t<coeff_t> rtol = lila::rtol<coeff_t>::val()) {
+  return close(y, x);
+}
+
+template <class coeff_t>
 inline bool close(Vector<coeff_t> const &vec1, Vector<coeff_t> const &vec2,
                   real_t<coeff_t> atol = lila::atol<coeff_t>::val(),
                   real_t<coeff_t> rtol = lila::rtol<coeff_t>::val()) {
