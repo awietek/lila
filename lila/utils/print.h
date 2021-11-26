@@ -45,12 +45,12 @@ inline void PrintPretty(const char *identifier, const uint32_t &number) {
 
 inline void PrintPretty(const char *identifier, const int64_t &number) {
   printf("%s:\n", identifier);
-  printf("%ld\n", number);
+  printf("%lld\n", number);
 }
 
 inline void PrintPretty(const char *identifier, const uint64_t &number) {
   printf("%s:\n", identifier);
-  printf("%ld\n", number);
+  printf("%llu\n", number);
 }
 
 inline void PrintPretty(const char *identifier, const Matrix<float> &mat) {

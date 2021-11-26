@@ -33,8 +33,8 @@ void test_dot()
 TEST_CASE( "dot", "[arithmetic]" ) {
   lila::Log("Test dot");
 
-  test_dot<float>();
+  // test_dot<float>();
   test_dot<double>();
-  test_dot<std::complex<float>>();
+  // test_dot<std::complex<float>>();
   test_dot<std::complex<double>>();
 }
