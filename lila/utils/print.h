@@ -43,12 +43,22 @@ inline void PrintPretty(const char *identifier, const uint32_t &number) {
   printf("%d\n", number);
 }
 
-inline void PrintPretty(const char *identifier, const int64_t &number) {
+inline void PrintPretty(const char *identifier, const long &number) {
+  printf("%s:\n", identifier);
+  printf("%ld\n", number);
+}
+
+inline void PrintPretty(const char *identifier, const unsigned long &number) {
+  printf("%s:\n", identifier);
+  printf("%lu\n", number);
+}
+
+inline void PrintPretty(const char *identifier, const long long &number) {
   printf("%s:\n", identifier);
   printf("%lld\n", number);
 }
 
-inline void PrintPretty(const char *identifier, const uint64_t &number) {
+inline void PrintPretty(const char *identifier, const unsigned long long &number) {
   printf("%s:\n", identifier);
   printf("%llu\n", number);
 }

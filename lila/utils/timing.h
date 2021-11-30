@@ -26,7 +26,7 @@ void timing(time_point<Clock, Duration> const &t0,
     Log.out(verbosity, "{:.4f} secs", tds);
 }
 
-inline void tic(bool begin = true, std::string msg = "", int verbosity = 1) {
+inline void tic(bool begin = true, std::string msg = "", int verbosity = 0) {
   static auto t0 = rightnow();
   if (begin) {
     t0 = rightnow();
@@ -36,7 +36,7 @@ inline void tic(bool begin = true, std::string msg = "", int verbosity = 1) {
   }
 }
 
-inline void toc(std::string msg = "", int verbosity = 1) {
+inline void toc(std::string msg = "", int verbosity = 0) {
   tic(false, msg, verbosity);
 }
 
