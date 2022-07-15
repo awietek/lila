@@ -64,6 +64,6 @@ private:
   int verbosity_;
 };
 
-inline Logger Log;
+inline Logger LogSerial;
 
 } // namespace lila

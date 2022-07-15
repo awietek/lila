@@ -21,9 +21,9 @@ void timing(time_point<Clock, Duration> const &t0,
   auto td = duration_cast<milliseconds>(t1 - t0).count();
   double tds = (double)td / 1000;
   if (msg != "")
-    Log.out(verbosity, "{}: {:.4f} secs", msg, tds);
+    LogSerial.out(verbosity, "{}: {:.4f} secs", msg, tds);
   else
-    Log.out(verbosity, "{:.4f} secs", tds);
+    LogSerial.out(verbosity, "{:.4f} secs", tds);
 }
 
 inline void tic(bool begin = true, std::string msg = "", int verbosity = 0) {
