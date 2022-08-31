@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <complex>
+#include <iostream>
 
 #include <lila/matrix.h>
 #include <lila/vector.h>
@@ -21,6 +22,7 @@ template <class coeff_t>
 inline void Scale(coeff_t alpha, VectorView<coeff_t> v) {
   blas_size_t size = v.size();
   blas_size_t inc = v.inc();
+
   blaslapack::scal(&size, LILA_BLAS_CONST_CAST(coeff_t, &alpha),
                    LILA_BLAS_CAST(coeff_t, v.data()), &inc);
 }

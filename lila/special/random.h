@@ -78,7 +78,7 @@ template <class coeff_t> void Random(Matrix<coeff_t> &mat) {
 }
 
 template <class gen_t>
-Vector<typename gen_t::coeff_type> Random(int m, gen_t &gen,
+Vector<typename gen_t::coeff_type> Random(lila_size_t m, gen_t &gen,
                                           bool alter_generator = true) {
   Vector<typename gen_t::coeff_type> vec(m);
   Random(vec, gen, alter_generator);
@@ -86,20 +86,20 @@ Vector<typename gen_t::coeff_type> Random(int m, gen_t &gen,
 }
 
 template <class gen_t>
-Matrix<typename gen_t::coeff_type> Random(int m, int n, gen_t &gen,
+Matrix<typename gen_t::coeff_type> Random(lila_size_t m, lila_size_t n, gen_t &gen,
                                           bool alter_generator = true) {
   Matrix<typename gen_t::coeff_type> mat(m, n);
   Random(mat, gen, alter_generator);
   return mat;
 }
 
-template <class coeff_t> Vector<coeff_t> Random(int m) {
+template <class coeff_t> Vector<coeff_t> Random(lila_size_t m) {
   Vector<coeff_t> vec(m);
   Random(vec);
   return vec;
 }
 
-template <class coeff_t> Matrix<coeff_t> Random(int m, int n) {
+template <class coeff_t> Matrix<coeff_t> Random(lila_size_t m, lila_size_t n) {
   Matrix<coeff_t> mat(m, n);
   Random(mat);
   return mat;
